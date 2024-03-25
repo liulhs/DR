@@ -1,0 +1,439 @@
+Question: for the VyOS in Step 3, I should set up the VyOS as a DHCP server, not a static IP server right?
+Answer: Yes.
+
+Question: Hi, I am using VM for ubuntu. Could you please let me know if I need to follow the step of installing virtualbox guest addition or not? Thank you
+Answer: No, that's not necessary.
+
+Question: What should we submit as the report for the lab assignment since the demo video has its own submission?
+Answer: You can put what you have done step by step like the command you used, and some screenshots of the outputs of your operation in your lab reports.
+
+Question: for step 3, I have successfully setup the VyOS and two networks with DHCP. Each PC host can connect its assigned DHCP server. However, when I try to ping from one host to another host, the terminal returns "Destination Host Unreachable". It seems the ethernets are not connected by the VyOS device.May I have any insight on how to resolve this problem?
+Answer: I had the same issue and this is what worked for me, I don't know if this is how we are supposed to do it.Assuming your devices are in the following networks:192.168.1.0/24 (PC1 and R1)192.168.2.0/24 (R1 and PC2)All packets generated from PC1 with the destination address belonging to 192.168.1.0/24 will go through to the interface on PC1 connected to R1 (because PC1 knows that this network is connected to this interface and the default router can be reached through this interface) but PC1 has no idea on where to send packets belonging to 192.168.2.0/24 which is where you are pinging to reach PC2, So I ran PC1 script with only the routing information present (you need to find the specific lines in script containing the routing path and to restart networking, I am not sure if I am allowed to copy paste it here), after I did this I am able to run traceroute and ping to both the PCs
+Answer: Remeber the DHCP should provide you a default gateway.
+
+Question: On running this on Ubuntu 18.04:Error msg is:Anyone else facing a similar error? I deleted the extra space after the EOF line but the same error is seen.Thanks in advance.
+Answer: copying from the tutorial, then editing according to the lab instr. helped me solve this problem.
+Answer: Ingore the lines containing EOF/EOF2. Execute line by line.
+
+Question: hi everyone, I just have problem with creating new ethernet in vyos. I use the following command to create a new ethernet named eth1 and give address to it, but it doesn't work.My vyos version is 1.2.9-S1set interfaces ethernet eth1 address '192.168.2.1/24'error: vyos interface ethernet eth1 does not exist.
+Answer: LMK if it's not solved yet.
+
+Question: for step 4, can we run client and server on one PC, or these two files must be run on the network just constructed in step 3
+Answer: The two files shoud run on the network you created in step 3
+
+Question: Hey Yude!
+
+I followed your advice to use UTM to follow Assignment 1. I was able to get my Ubuntu Server 18.04 installations to work, but I am having trouble setting up the network topology.
+
+The "Internal Network" in Virtualbox does not seem to have an equivalent in UTM? My google searches point me to using UTM's "Host Only" option, but their is no option to make the Point to Point connections.
+
+Do you know how we can set up these Point to Point connections in UTM?
+
+Thanks!
+Answer: Use the default settings -- shared network.
+
+Question: Are the hyperlinks for the U_server.c and U_Client.c active in the document? Or are we supposed to write the code ourselves
+Answer: Don't write code. Just download the files from **[here](https://www.linuxhowtos.org/C_C++/socket.htm)** and run them.
+
+![image.png](/redirect/s3?bucket=uploads&prefix=paste%2Fkyd81nfqg5f76c%2F270a9287db7e7414f586a766729178d226ee718c3a0aff921e53e5183d56d1e1%2Fimage.png)
+
+Question: Hello Mr. Yude Wei,I am doing my lab assignment-1 on Mac using UTM for that purpose. I was successfully able to run the programs (client.c and server.c) on my machine. However, I am unsure if I am supposed to follow step 2 and step 3 for that, as I can run the program without doing those changes. Could you please guide me and let me know if I am doing something wrong? (I am able to run the programs and get the output required without following step 2 and 3 as I don't have VirtualBox)Also, could you please give some idea on what we are supposed to submit in the powerpoint presentation?Thank you.
+Answer: Yes, you should.
+
+The socket communication has 3 parts.
+
+1. original TCP client and original TCP server.
+2. original TCP client and enhanced TCP server.
+3. UDP client and UDP server.
+
+everything is here: [https://www.linuxhowtos.org/C_C++/socket.htm](https://www.linuxhowtos.org/C_C++/socket.htm)
+
+Just follow the instructions to run everything.
+
+Question: When I try to use ssh command on my windows terminal, this message prompts.
+Answer: I was having trouble with the terminal, so I used Putty (https://putty.org/) to SSH into the network devices.
+Answer: Another possible reason might be you are actually using a wrong format (and it's very likely to happen). It will be helpfult if you could post what you typed and the error message within a screenshot as well. See @6.
+
+Question: Hi class,Does anyone know why I cannot successfully excute this in conguration mode in vyos : "set service dhcp-server shared-network-name enp0s8 subnet 192.168.1.0/24 dns-server 192.168.1.254", the cli error for this : "configuration path : service dhcp-server shared-network-name enp0s8 subnet 192.168.1.0/24 [dns-server] is not valid", but i can successfully use this one : "set service dhcp-server shared-network-name enp0s8 subnet 192.168.1.0/24 default-router 192.168.1.254", so I think it is probably the problem of dns-server? Thanks!
+Answer: The new versions of VyOS has renamed this api to name-server instead of dns-server.
+
+Question: For submission the Lab, it says that we need to submit a Archive of the lab results, and says we should submit internet accessible link to the archive of all.I am assuming we can upload the code and the zip file to github. Is my understanding correct?
+Answer: We don't have very strict restrictions on the format of assignment submissions, and you just need to do your best to submit your output and experimental steps (what you have done) according to the submission requirements.
+
+Question: 6FB60C80-E1B0-4AAC-A499-EAEA017CD1C2.heic
+Answer: @13
+
+Question: The error message is
+Answer: The `auto enp0s8` is not a command you should type in the terminal. You need to put the interface settings in the file `/etc/network/interfaces`. See @13.
+
+Question: Hello, could you please help me know how I can establish connection between the two VMs on UTM on Mac. Is there any guide which I can refer to similar as given for the virtualBox? Would be really happy to get my query resolved. Thanks!
+Answer: Hi. They are already connected via the Hypervisor based on your settings. Please remember to use the default settings -- "shared network" for the adapters on your VMs.
+
+Question: Even after I set the SSH terminal with root access, I still encounter similar issue when I try to simply copy paste example commands.
+Answer: You may want so search the error on Google.
+
+FYI, [https://www.errorsolutions.tech/error/job-for-network-service-failed-because-the-control-process-exited-with-error-code/](https://www.errorsolutions.tech/error/job-for-network-service-failed-because-the-control-process-exited-with-error-code/)
+
+Have you tried the tips in your error message? I guess you are having duplicate settings for the network interface now.
+
+Question: Hi,May I know when will the lab2 released? I have already done the reading and demo video assignment and get ready for the following labs. It would be really nice if I can start soon.
+Answer: Hopefully by tomorrow.
+
+Question: Hello guys,I would like to know if there is any exams like midterm or final of this course? If there is, could you please describe the outline of those exams? Thank you.
+Answer: No exams. But there are some pop quizzes that will make sure you should attend the lectures. The pop quizzes are rather easy and will not take a huge part in your final grade.
+
+Question: For the reading due tomorrow, do we need to submit a video as well, or just a PPT summarizing the paper is enough?
+Answer: No video needed. Just a report pdf or ppt file.
+
+Question: Hello I just want to make sure that I turn in the lab by the correct due date, the assignment says that the lab2 due September 1 just before midnight, but the lab instructions say that the lab is due on September 2 just before midnight. I was wondering which of these is correct?
+Answer: I confirm this with the professor. The correct due date is Sept 2.
+
+Question: I am trying to select the VyOS free (HVM) AMI for the EC2 instance but don't see that image listed in the community AMIs. I am not sure which image to use that would be free, if you could let me know how to find if an option is free or not for AWS that would be appreciated.
+Answer: I think the instruction is out-of-date. And I am using VyOS (HVM) 1.3-rolling-202208231231. It should offer you a 30-day free trial.
+
+Question: Hi TA and class,where is the subnet 16.0.1.0/24 and 16.0.2.0/24? should they be 10.0.1.0/24 and 10.0.2.0/24? Because we only created 4 subnet 10.0.1.0/24 to 10.0.4.0/24, there are no 16.0.1.0/24.
+Answer: Yes, you are correct. These are the typos in Lab2 instructions. Please use 10.0.x.0/24 instead.
+
+Question: As this lab does not require us to write any code, do we have to submit a README or source code?
+Answer: No.
+
+Question: Hi class,did anyone meet this problem when use ssh to connect instance before ping ip? Thanks.
+Answer: You may try directly copying the ssh command from the aws ec2 instance webpage to make sure your command is correct.
+
+Question: Hi Class,I have create all the instances needed for lab2 and have use ssh to connect to the vyos instance which works well on my computer. However, when I tried to use ssh to connect to the other ubuntu instance, it will show error: "ssh: connect to host ip port 22: Connection timed out". I have checked the security rules and the routes of the route table which should be fine. But for ubuntu instance I still cannot connect them using ssh. What should I do to deal with this problem?
+Answer: Can you provide more information? First, you should test whether you can ping this IP.
+
+Question: What is a dhclient in the following question: "What can be used in vyos Vm to start dhclient in Vyos VM?"
+Answer: dhclient is a command to configure dhcp
+
+Question: Hi everyone,I am trying to set elastic ip for client/server/vyos. For Ubuntu, it works. I can ping the ip and use ssh connection. However, when I try to do the same for vyos, it doesn't work.I use the same security rule , so I think it is not the problem. I can also see the public ip I set in instance's detail. So I am just wondering is there some special settings for vyos when trying to ping its ip and get ssh connection? Thanks.
+Answer: Here are a few suggestions:1. You should check if the router table of your VPC is set to "main" (create a new route table, adding 0.0.0.0, and in "actions", click set main route table).2. If you change your configuration anytime, you might need to try re-binding the elastic IP to another n/i on vyOS.3. If you want to ssh vyOS, you should use "vyos" as the username instead of "root" (e.g., ssh -i *.perm vyos@x.x.x.x).
+
+Question: Hey class,I have been trying to get my elastic IP address to work on eth1 for my ubuntu server and client VMs. I've been able to associate the elastic IP with eth0 and SSH to it from there. I then statically assigned eth1 the local IP address given by the AWS instance. However, when I associate the the elastic IP with eth1 I am not able to ping or SSH it. Do I have to edit the routing/gateway for eth1? Has anyone else ran into a similar issue?
+Answer: Here are a few suggestions:1. You should check if the router table of your VPC is set to "main" (create a new route table, adding 0.0.0.0, and in "actions", click set main route table).2. If you change your configuration anytime, you might need to try re-binding the elastic IP to another n/i on vyOS.3. If you want to ssh vyOS, you should use "vyos" as the username instead of "root" (e.g., ssh -i *.permvyos@x.x.x.x).4. You do not need to set the statical/primary IP when you create your network interface.
+
+Question: Hi Yude,When I use ssh to connect vyos system from host, this error message pops up:Where I have make sure the private key is correct because I use the same for client and server, and I am not sure why this happened.However, I find another way to connect to it by using putty. Since we all know the default usrname and password of vyos system is "vyos". I just wonder am I going to be deduct points if I continue my lab by using putty remote login.Thank you,Xiaofeng
+Answer: Try vyos@ instead of root@ may help?
+
+Question: I found some mistakes in my previous submissions, can I resubmit it? If so, is there any limitation on the submission time?
+
+Thank you for answering.
+Answer: Yes, you can add another submission.
+
+Question: Dear instructors and class,I can't ping/SSH router and client but can SSH vyos server.if I do ping, it showsRequest timeout for icmp_seq 0if I do SSH, it showsssh: connect to host 35.160.243.240 port 22: Operation timed outHere is my configurationsame security rules for client, server, and vyos router.Ubuntu 20 and the VyOS rolling versionroute table is set to “main” and the target is set to “any (0.0.0.0/0)”correct topologythe Elastic IP is correctly associated with the intended interface.no problem with SSH key because I can SSH vyos routerthe connection method is copied from the “Connect” page, like "ssh -I "./Desktop/lab2.pem" ubuntu@35.160.243.240"I've stuck for the SSH problem for several hours and appreciate your help!
+Answer: I wasn't able to connect to the router with everything configured correctly. Sometimes shutting down the instance and starting it again helps
+Answer: And wait for some time after the instances are up.
+
+Question: Hey guys,I just found something interesting about iperf3. when I change the bandwidth iperf3 -u -c 10.0.1.31 -b 1000000 to iperf3 -u -c 10.0.1.31 -b 1000, the outcome become 0 bits/sec. I thought that would due to the way iperf3 measure bandwidth between client and server. If the bandwidth is too small, client would not be able to send packet to the server. So the result turned out to be 0.In addition, if we add delay to the interface, there will be smaller speed. That is because additional delay on the interface speed down returning bandwidth.
+
+If there is anything wrong above, please correct me.
+Answer: No answers yet
+
+Question: I know professor had mentioned a board that we needed to buy for the class but had said the the slides were the wrong version. What exact version do we need to buy of the xdot kit?
+Answer: This is the one we used before in this class:
+
+See **[here](https://www.mouser.com/ProductDetail/MultiTech/MTMDK-XDOT-NA1-A00?qs=7MVldsJ5Uaz6qXKUrPbj1A%3D%3D&countryCode=US&currencyCode=USD)**.
+
+But the professor also told me very recently that he has updated the whole design and I thus am not sure if we will use something other than that this year. Anyway, it's not urgent as we will not start to use it until week 10, probably. You could buy it later after some weeks.
+
+Question: Hi Prof/TAs,I submitted the Lab2 on time, but it says late submission, can you please help.Thanks!Mithun,USC ID: 2862112962.
+Answer: The assignment on blackboard has an incorrect due date of Sept 1, so anything submitted today was marked as late. @31 The TA says that Sept 2 is the actual due date so it should be fine,
+
+Question: Hi,I would like to know if the due dates of the lab 2 demo video and reading assignment have been shifted to Tuesday and Wednesday instead of Monday and Tuesday as I see it on Blackboard.Thank you!
+Answer: Yes.
+
+Question: The lab instructions say that there is no video for this lab, but there is a assignment in blackboard for a video. What should we turn in for that video assignment?
+Answer: No video demo needed. This is a rather easy lab that will get you prepared for Lab4.
+
+No need to submit any video for Lab3 on Blackboard.
+
+Question: The measurement is tested under the condition where both interfaces of the router have been added a 10Mbps link rate limitation.  The result of TCP test through iperf3 seems to measure the bandwidth correctly, which is approximately 10 Mbps.  However, the measurement of UDP is 1.7 Gbps, which is similar as the maximum bandwidth when there's no changes made to the interface.I am wondering whether the wrong measurement of bandwidth has anything to do with the parameter "-u 10G"?  How can iperf3 tool accurately measure the real bandwidth in UDP mode ?
+Answer: Based on your context, you use 'tc' to put traffic limitations on the router, which will only limit the incoming data rate of the router. But you are measuring the sending rate on your client side, which will still be sending data at full speed (UDP mode).
+
+Question: The lab says to "Set the send/receive window values to something too small (i.e. about the value calculated in (2)."But I calculated the the bandwidth-delay product using: (UDP bandwidth) * (ping RTT) = bandwidth-delay product. I am confused as this is larger than the following command output values:sudo cat /proc/sys/net/core/rmem_maxsudo cat /proc/sys/net/core/wmem_maxDid I miscalculate the bandwidth-delay product or is the value supposed to be larger?
+Answer: It's fine to just use a rather small window size for rmem and wmem based on what you have got in (2).
+
+Question: Hi, if anyone is looking to join a team, please reply as we are a team of two looking for the third member.
+Answer: No answers yet
+
+Question: Hi all,I am looking for a team to join. Please let me know if someone is in search of a teammate.Thanks!
+Answer: .
+
+Question: I am unable to access both of the links provided for reading 3 is there another link I could try, or another way to access the reading?
+Answer: See here: [https://piazza.com/usc/fall2023/20233ee542/resources](https://piazza.com/usc/fall2023/20233ee542/resources)
+
+Under General Resources.
+
+Question: We are supposed to set delay and add network speed limit at multiple places, often together, for example:But it is also mentioned in the document that:We use netem to set delay and tbf to set the speed. Does anyone know how we are supposed to do it ?
+Answer: The best I could find was using netem with the delay and rate modifiers to set delay and speed, although this misses out on the burst capabilities from using tbf.
+Answer: TBF (token bucket filter. For token bucket, go for 555) is for emulating data rate.
+NETEM is for delay, loss rate or jitter.
+
+You have to chain the rules together to emulate a data rate with some other parameters. =P
+
+The reason why the professor said you have to delete 'one' to add 'the other' is that the two rules in the provided command are both added to the **'root'** position of the chain and they are conflicted.
+
+But of course you should add them both in some way, namely in this way:
+
+```shell
+rules chain (parent -> handle):
+root -> rule 1 -> rule 2 -> ...
+```
+
+You may want to understand this:
+
+```shell
+# see: root -> rule 1 -> rule 2
+
+sudo tc qdisc add dev eth0 root handle 1: netem delay 100ms
+sudo tc qdisc add dev eth0 parent 1: handle 2: tbf rate 10mbit latency 1ms burst 90155 limit 2000000
+```
+
+Question: When I am running "sudo cat /proc/sys/net/core/rmem_max". I am getting error as "cat: /proc/sys/net/core/rmex_max: No such file or directory".Since I am using Ubuntu on MacOS, is this issue due to this fact?Please let me know how I can resolve this issue.Thanks in advance.
+Answer: Yes, that's probably the reason. Please use AWS EC2 to do the Lab.
+
+Question: For this lab, can we write three case-specific programs that implement different algorithms, or we should write a generic program that should be used across different cases?
+Answer: Two programs for all the cases. One for server (in all situations), the other for client ( in all situations).
+
+Question: For Lab4, can we use instance with larger memory or better CPU?
+Answer: Yes. Make sure the bottom neck of your network will not be your virtual machines.
+
+Question: Hi guys,
+I met a problem hard to understand while deploying topology network on aws vpc.
+the environment configuration
+1)client located in 10.0.1.0/24 and 10.0.2.0/24 with its primary interface 10.0.1.0/24
+2)router located in 10.0.2.0/24 and 10.0.3.0/24 with its primary interface 10.0.3.0/24
+3)server located in 10.0.3.0/24 and 10.0.4.0/24 with its primary interface 10.0.4.0/24
+4)all subnets are connected to the default router with one internet gateway and one for all the local address
+the problem is that I can ping from client to 10.0.3.56 while 10.0.3.0/24 does not appear either in client's ARP nor routing table 
+in addition, after I add sudo ip route 10.0.3.0/24 via 10.0.2.60(interface on the router), the traffic from client to server will pass 10.0.2.60
+Does anyone know why this problem happens?
+Answer: > the problem is that I can ping from client to 10.0.3.56 while 10.0.3.0/24 does not appear either in client's ARP nor routing table
+
+I am not sure if you are asking since your laptop and Google's servers are on different networks, you should not be able to ping Google?
+
+Question: for Lab 4, should the start time be the moment the sender open the file, or should it be the moment the sender start to send file through the internet?For the end time, should it be the moment the file is fully written to the disk, or should it be the moment the entire file is received and ordered, but writting file is not finished yet?
+Answer: Measure the time from `start to send` to `finish sending`. And also check md5sum. Maybe you want to read the whole file before start sending instead of reading and sending at the same time.
+
+Question: Hi everyone, I am wondering for the submission of lab 4 report and video, is it enough for one person in the group to submit? Or does everyone in the group need to submit? Thanks.
+Answer: One submission each team.
+
+Question: Please give information on what kit and products needed to be purchased for this class. Direct link will be great. And those things should be purchased for a personal or as a team?
+Answer: I will confirm with the professor and get back to you.
+
+Question: I currently have aws ubuntu desktop20.04 Focalinstalled on my ec2 instance VM.  However, the linux kernal version is shown as 5.15.0-1044, which seems to belong to "Jammy Jellyfish" version.  Which kernel version should I download in the following case ?
+Answer: I don't know. You should try to download a version that is the closest to the Linux version you are using (And that is what I did). Hopefully, you should successfully compile it. Maybe 25.25?
+Answer: Solved:https://code.launchpad.net/~canonical-kernel/ubuntu/+source/linux-aws/+git/focalThey do provide 5.15 kernel for 20.04 Ubuntu
+
+Question: I am currently having Ubuntu 16.04 armd64 pro server installed from Community AMI, and I have assigned two subnets to the instance. However, ifconfig only displays eth0. When I try to start eth1, terminal output Operation not permitted. In this case, which Ubuntu image should I use? must it be 16.04?Command for Trying to start eth1ubuntu@ip-10-0-4-94:~$ ip link set dev eth1 upRTNETLINK answers: Operation not permittedCommunity AMI used:amazon/ubuntu-pro-server/images/hvm-ssd/ubuntu-xenial-16.04-amd64-pro-server-20230912
+Answer: As mentioned before, you should not use Ubuntu 16 in any labs to avoid miscellaneous issues, it will work in some labs though. Please use Ubuntu 18 instead, again.
+
+Question: For Lab 5, as I was going through the tutorial of installing the kernel, I cannot find /boot/grub/menu.lt in my local virtualbox instance. The Ubuntu version is 16.04 LTS
+Answer: I should use Ubuntu 18 instead. Duplicated to Q69
+Answer: See @69
+
+Question: I am a little confused on where to start with Lab 5 I know that we can use AWS or VirtualBx to build the kernel but how do we know which version to download? Also is it recommended to use AWS or Virtualbox to build? If we choose VirtualBox to build how to do we know that the kernel version the correct version for the EC2 instance?
+Answer: Both are fine. I was using Virtualbox Locally last year. If you choose to use the Virtualbox, then forget about EC2.
+
+Question: I allocated 60GB of virtual memory to the VM on virtualbox but I am getting this error when I run sudo make -j4 buildeb-pkg
+Answer: you can open another console and use the command 'watch -n 0.1 -d df -h' to monitor your storage usage to check if you really run out of memory.
+
+Question: I tried to comment out the 'key ... .pem' line in the .config file, and I ran `sudo make bindeb-pkg`, `sudo make deb-pk`. The same error appeared as below:
+
+![image.png](/redirect/s3?bucket=uploads&prefix=paste%2Fl7dlqs1firl1vh%2Fa78f6490f3ed32f5af8e335acf45e74af8e5afd1df7a05d58f62533548dec068%2Fimage.png)
+
+It seems like the makefile is looking for something not exist... Does anyone meet with the same issue or have some ideas?
+
+Thanks guys.
+Answer: I found a way to solve by googling: 
+
+`ln -s /usr/src/linux-headers-4.x.x/scripts/ubuntu-retpoline-extract-one scripts/`
+
+- for 4.x.x you need to look it up in the dictionary for your version of kernel
+
+However, now I met with a new problem:
+
+![image.png](/redirect/s3?bucket=uploads&prefix=paste%2Fl7dlqs1firl1vh%2F7e3ad31ac3d6eecd5623af1ee13658fc85623c8f16de6d4109b1b492338e59ad%2Fimage.png)
+Answer: Sorry, I did not have this problem before and don't know how to solve it. But since you're using the same distribution as everyone else, you should encounter the exact same situation as everyone else I guess? Have you installed the autoconf already?
+
+Question: I am confused which TCP congestion algorithm the kernel is using, how do I find version that my kernel version defaults to?
+Answer: I haven't verified it, butcat /proc/sys/net/ipv4/tcp_congestion_controlShould display the Congestion control algorithm currently in use(And you can change it - in superuser mode)echo "westwood" > /proc/sys/net/ipv4/tcp_congestion_control
+Answer: This post may help you:
+
+[https://www.linuxbabe.com/ubuntu/enable-google-tcp-bbr-ubuntu](https://www.linuxbabe.com/ubuntu/enable-google-tcp-bbr-ubuntu)
+
+```
+sysctl net.ipv4.tcp_congestion_control
+```
+
+Question: Hello, I am curious on how to make sure I install the tcp* files I edited are installed. When I run my kernel and look at sysctl net.ipv4.tcp_available_congestion_control the version of TCP congestion control I edited is not there. How do i make it available?
+Answer: You may just change the TCP code in one of the original version. Or if you want to create your own, this post may help you: [https://www.linuxbabe.com/ubuntu/enable-google-tcp-bbr-ubuntu](https://www.linuxbabe.com/ubuntu/enable-google-tcp-bbr-ubuntu).
+
+Question: How do you compile and use after TCP changes are made to files like bionic/include/net/tcp.h and bionic/net/ipv4/tcp.c?
+Answer: Still, use make  -j$(nproc) bindeb-pkg as you did before you made the changes. And use dpkg -i to install the deb s.
+
+Question: Has anyone had this problem and found a fix? My scp keeps dropping the connection after sending 10-30% of the 1GB file, with the error "packet_write_wait: Connection to 192.168.2.57 port 22: Broken pipe   lost connection". I have looked online and have already tried adding a ServerAliveInterval and ServerTimeout options to the scp command. This is on virtualbox running Ubuntu 18.04.
+Answer: That happens when the network situation is poor...
+
+Question: Will we get a lab assignment during the week of fall recess?
+Answer: No answers yet
+
+Question: We have installed Ubuntu server LTS 20.04, is there a different version of hadoop that we should be installing instead?As the following link as it says it no longer exists to wget.Link that no longer exists: https://mirrors.koehn.com/apache/hadoop/common/hadoop-2.10.1/hadoop-2.10.1.tar.gz
+Answer: Can we just use this? @instructorshttps://archive.apache.org/dist/hadoop/common/hadoop-2.10.1/hadoop-2.10.1.tar.gz
+
+Question: Is there any mistake with the deadline of lab7? It shows Oct 2 on Blackboard, which is the same as the lab6.
+Answer: Solved
+Answer: Yes, the professor has updated it.
+
+Question: I was reading through the lab this week and was curious when it says optimize the code do we just use the code provided or do we have to edit the code? Do we have to edit any code this lab?
+Answer: No, you don't need to change the code. In the previous example, you are using the plain for loop. The followed example is the optimized version using generators. Please just run it.
+
+Question: I am trying to copy the 1GB file to the hadoop hdfs, and it is really slow and don't know if the messages that I am receiving are normal. If anyone has the same messages when transfering the file to the hadoop hdfs and knows why this is happening, or how to make it go faster that would be appreciated.
+Answer: No answers yet
+
+Question: Hi Teaching Assistant,Previously you said we can buy the device together in big group to get a cheaper price? Could you let us know if there is any group buying coupon or do you prepare to get all the people who want to buy it together?  Thank you so much.
+Answer: It's just they will charge you high mailing fee if you buy a single one. I don't know if there is any coupon for it.
+
+Question: Hi,The UCI dataset link provided in the lab PDF is invalid. I found this link instead:https://archive.ics.uci.edu/dataset/341/smartphone+based+recognition+of+human+activities+and+postural+transitionsIs this the identical dataset that the lab PDF mentioned?Thanks!
+Answer: Yes
+
+Question: When the instructions says create a ML model using an algorithm not used in the tutorial, does that refer to the logistic regression library we used in pyspark to create the linear model? So we need to replace the logistic regression with another algorithm from pyspark?
+Answer: You can just make some minor midifications based on the one in the tutorial.
+
+Question: I am having trouble with creating a studio to create a notebook in AWS, I get the error shown below in the picture. I am also having trouble getting a cluster running and getting a notebook attached to the cluster. If anyone can give me advice or tutorials on how to use these AWS services correctly that would be appreciated.
+Answer: No answers yet
+
+Question: After the cluster is attached to the workspace. All the kernel options disappear, is there any possible solution for this problem?Thank you!
+Answer: AWS does not like clusters and workspaces created as root user for some reason. This was solved for me when I created an IAM user and logged in as the IAM user to do the whole AWS process again. The IAM user has the following permissions. (PFA) Permissions solution given by @adriana, Kudos!
+
+Question: Hello my team and I have been trying to run the word counting pyspark program on a AWS cluster and when we try to read the text file it returns an error that access is denied. Is there any settings that we should have in particular for the cluster to access the s3 bucket?
+Answer: The method I use is to use:data =spark.read.text("s3://bucket_name/path_to_yor_file").rdd.map(lambda r: r[0])to get access to it. For example in my case:
+
+Question: Hi Yude,Do you have this that we can borrow(the audio jack adapter)? Thank you~
+Answer: I don't have any.
+
+Question: Hi, I followed the lab instructions and successfully connected to the xDot debug port via Putty. However, there is nothing shown on the terminal. Did anyone face a similar situation or have methods to deal with this? Thank you!
+Answer: Could you try using this bin file to figure out what might be the issue:
+
+[@94_f2](https://piazza.com/class/llqyd5tpdcq34o/post/94_f2)
+
+Also, have you installed the driver on you Windows?
+
+[@94_f1](https://piazza.com/class/llqyd5tpdcq34o/post/94_f1)
+
+Or you can come to my OHs to solve it.
+
+Question: Hi,
+I would like to know are we required to use xDot to collect data from real world? Or we can use digital data get from internet or local computer.
+Answer: Real world I think... Please ask the professor to confirm it.
+
+Question: Hi, I followed the instruction to read the data from the sensor. When I tried to print the temperature, the terminal only shows %f rather than the number. It seems that all the double and float can't be printed in my Mbed Studio.
+Answer: By default, Mbed OS set minimal-printf-enable-floating-point to true to disabled %f. In order to make %f works. We can first create a file call "mbed_app.json" under to program's directory with content of:and then we can use %f to print float:Inspired by https://forums.mbed.com/t/float-printf-doesnt-work-in-desktop-version/9164
+Answer: Good solution! I was casting the float to an int previously.
+
+Question: I have a Nexus 5 android and I was going to install Termux on it but I can't access the play store and get the following error, if anyone knows how to fix this error please let me know. I have already done a factory reset and it did not work so any input on this error is appreciated.
+Answer: I got the same error. However, even though we can find Termux on the Google Play Store, we can't still download Termux directly because of incompatible support for Android 6.Solution: Android can only download Termux version no later than 0.83. So we can go to:https://archive.org/download/termux-repositories-legacyto download the 0.79 version:or you can find other versions no older than 0.83 onhttps://archive.org/?Then maybe watch this:https://www.youtube.com/watch?v=n7iKBlz9KTMto make our old-version termux to use pkg-install to install termux-api
+Answer: Install from F-Droid! You should not download that from Play Store...
+
+Of course the failed connection is caused by your deprecated version of Play Store that is no longer supported by Google.
+
+How to update your Android 6 to Android 7 (required)? I highly recommend you use the TWRP recovery and Resurection Remix (RR) ROM that I was using for 2 years during my undergraduate 🤣 here:
+
+- Link to RR (Android 7.1.2): **[here](https://sourceforge.net/projects/resurrectionremix/files/hammerhead/nougat/RR-N-v5.8.4-20170806-hammerhead-Official.zip/download)**. 
+
+- This ROM is super smooth and beautiful! This is the main page of Hammerhead (The internal symbol of your LG Nexus 5): **[Here](https://sourceforge.net/projects/resurrectionremix/files/hammerhead/nougat/)**.
+
+- This is the main page of the RR project: [https://resurrectionremix.com/](https://resurrectionremix.com/). It's not being maintained anymore. 😥
+
+- This is the device tree of TWRP hammerhard: [https://dl.twrp.me/hammerhead/](https://dl.twrp.me/hammerhead/), please download the `twrp-3.0.2-0-hammerhead.img	14.2M	2016-04-04 20:14:20 UTC` version of it that supports the Android 7.1.2 well. The download link is: [https://dl.twrp.me/hammerhead/twrp-3.0.2-0-hammerhead.img.html](https://dl.twrp.me/hammerhead/twrp-3.0.2-0-hammerhead.img.html)
+
+- You need to use ADB (Android debugging bridge) to unlock your device before you can flash anything.
+
+here are the two commands you need to use to flash the recovery:
+```
+fastboot oem unlock
+fastboot flash recovery recovery.img
+```
+
+If you still need help, please come to my OHs for help after you download the required stuff.
+
+Question: Question 9 in lab 9 says:"More than one phone".Should we show data from 2 phones?
+Answer: One is good.
+
+Question: part 3 and part 4 under step 9, should we write the lambda functions in the node red, or should we write it in aws? Also, for part 5, do we need to analyze the files in the s3 bucket, or we should analyze the data in DynamoDB?
+Answer: Lambda is used on AWS.
+
+You should know both S3 and DynamoDB. I think maybe you will use DynamoDB2 in your final project.
+
+Question: In the instructions it says that once the gateway is connected to your pc you should be able to open 192.168.2.1 and view the GUI, I have tried opening that IP in a browser pinging that IP and the destination is not reachable. How do I know the IP was not changed from the gateway?
+Answer: Check your PC's subnet mask. The gateway is on 192.168.2.1. With 255.255.255.0 mask and your PC usually on a 192.168.1.X subnet, they are on different networks. Change the subnet mask to 255.255.0.0 or the IP of the gateway to a 192.168.1.X or your PC's IP to a 192.168.2.X. Any of those should work, I would recommend changing your PCs IP to a 192.168.2.X .
+
+Question: When we were trying to find Node-red in Apps inside the Multitech UI, there was nothing in it, it shows as below.Therefore, we tried all the versions provided by Multitech, but all of these versions do not include Node-red App.Does that mean we need to install the custom app manually? If it does, we also tried to SSH into the gateway and use the command line to install Nodejs and Node-red, unfortunately, there are more problems like DNS not working even if we config the DNS to include nameserver 8.8.8.8 nameserver 8.8.4.4 nameserver 127.0.0.1.Thank you for your help.
+Answer: No answers yet
+
+Question: After we imported the Dot-AT-Firmware project, added the library to the project, and started to build the project, we encountered this problem:We have checked the mbed_app.json file and are not sure how we can address this problem. Could anyone help with this problem?Thanks for your help.
+Answer: Hi, we met this same problem as you mentioned. We solved it by doing the following:In step 14 of the instruction, when adding the library, use version 4.2.1 instead of choosing the master branch, because the master branch keeps changing.
+Answer: Nice try! We are just required to use the compiled AT firmware to do the lab, but it's a good experience to try to compile it by yourself.
+
+Question: I have successfully installed Node-RED as a custom app on Gateway. However, I cannot reach port 1880 (port of Node-RED) on Gateway. I have been refreshing and waiting for half an hour. 
+
+![IMG_6902.PNG](/redirect/s3?bucket=uploads&prefix=paste%2Fl7dlqs1firl1vh%2Feacf41e9ad8e0d0833d3ad30bbc4e354a02452bb532be43e7eab66aa66486b4a%2FIMG_6902.PNG)
+
+Did anyone meet the same issue?
+
+Thank you fro your reply.
+Answer: You might need to enable Node-red Setting Via LAN under Administration->Access Configuration.
+
+Question: We're using the default antenna mentioned in the xDot Developer Guide:W1063 Pulse ElectronicsThe default RSMA-to-U.FL Coaxial Cable mentioned in thexDot Developer Guide, theCARSMA-UFL-1, is no longer manufactured and not available.I'm wondering if any RSMA-to-U.FL Coaxial Cable will work? The size and type of the port is rarely mentioned anywhere.I'm currently looking at theRN-UFL-SMA6 Microchip Technology, which is described as a RP-SMA Jack male to U.FL (UMCC) Plug female cable.I'm wondering if this is the correct type of cable?
+Answer: are using choosing an antenna for your xdot or gateway? Either can be found on amazon. But they are not necessary.
+
+Question: Hey everyone!
+
+I have tried compiling the Dot-AT-Firmware as well as flashing the prebuilt firmware hinted at @108, but my xDot seems to be stuck at the bootloader
+
+```
+[INFO] MultiTech Bootloader 1.1.0
+```
+
+Has anyone else seen something similar? What would be a potential way to fix this?
+Answer: Are you using a correct baud rate, say 115200bps? and It may be still stuck if so somehow...just type the correct command and it will execute it. It may be just a display issue.
+
+Question: Hi, has anyone encountered this kind of issue when sending data to AWS IoT Core via Node-RED on Gateway?
+![image.png](/redirect/s3?bucket=uploads&prefix=paste%2Fl7dlqs1firl1vh%2Fee8436231d406b4e8046d667933632720f98ab51b05078a61b415c82466efa1c%2Fimage.png)
+
+![image.png](/redirect/s3?bucket=uploads&prefix=paste%2Fl7dlqs1firl1vh%2F2b5160de83665e636955cf79c59e0b48f3f1952405e99f71bf47cbabec6ea048%2Fimage.png)
+
+The http request node in Node-RED cannot read my TLS certification files which I downloaded from AWS. I'm sure they exist in this path, but it just cannot read in. (I've tried changing the slash to '/' or '\\\\')
+
+Thanks for any help.
+Answer: You are able to ssh to the Gateway (where the NodeRed is running) from your laptop. Upload the certicicates to the Gateway and put the paths of the certificates uploaded to the Gateway instead.
+
+Question: Good evening!will we have practice presentation next week?How much time will the final presentation be?
+Answer: Hi, please ask the professor about it. He would talk about this in detail last year during lectures.
+
+Question: Dear professor and TAs,I just ask for curious, why we should use xDot rather than Raspberry Pi or Microcontroller for final project? Thank you.
+Answer: One of the reason is that xDot costs extremely low energy in the long distance( like 10km) wireless transmission.
+Answer: LoRa is a hot topic in academia. You may want to sit in EE550 to learn more about it next semester if you are interested in it.
+
+Question: For the node red, I set up two http request to aws triggered by timestamp. When they are not running consecutively, each http request is working fine. However, when I connect them together, the second one always timeout.May I ask how to solve this problem?
+Answer: Are you sending the get requests? You may add some id to differenciate the requests from different threads if so. Also, you may need two threads on the server side.
+
+Question: For returning the gateway, the professor said that we can drop it to another professor's office. May I ask where and when we can return the gateway?
+Answer: Please send an email to the proefessor to ask about it.
+
+Question: Dear Yude,Our group encountered a problem when we establish UART communication between xDot and Raspberry pi, even we used the inverter.Loopback tests are successfully on both sidexDot can send message to Raspberry pi successfullyRaspberry pi can't send message to xDot but pi received the message sent by itself even tx of pi is connected with rx of xDot and rx of pi connected with tx of xDot(that's wierd)We tried to provide power to inverter from xDot and raspberry pi, but the inverter seems not work normally even we tried several inverters. Should we use an independent power supply for inverter?
+Answer: solved by sharing same GND
+Answer: Of course you need to do that.
+
+Question: It's been days that I'm trying to integrate our BME280 sensor (the I2C version) with Dot-example application. I have BME280 library imported to that app, and I have confirmed that it works when I implement it in a separate app (that doesn't involve sending data with Lora). However, when I use the exact same code in Dot-example, it always outputs numbers that doesn't make sense. The reading doesn't change at all.I'm using this BME280 library:https://os.mbed.com/users/MACRUM/code/BME280/rev/bce5ac62b015/The implementation is basically:DigitalOut vcc(GPIO2); // my vcc is connected to this oneI2C i2c(I2C_SDA, I2C_SCL);BME280 sensor(i2c);// xdot setup codewhile(1):vcc = 1;sensor.initialize();float humidity = sensor.getHumidity();float temperature = sensor.getTemperature();printf("\n\n%.2f\n%.2f\n\n", humidity, temperature); // logging for debugging// preparing the msg to be sentsend_data(tx_data);
+Answer: That's probably because the sda/scl pins for your I2C are already used somewhere else in dot-examples. You have to find them out and comment out those parts. This happened in other teams and please double check.
+
+Question: For submitting the final project materials?for the node-red, can we export the entire flow in json format?for the AWS lambda function I think we can copy them to a py file, but what about the other AWS components such as the API Gateway and the DynamoDB setup? I am not sure how should we explain them in the readme file
+Answer: Please put as much as you can in your slides and video. Taking screenshots is enough.
+
+Question: Hi, I'm wondering if this is the correct place to return the gateway?Or if I want to return the gateway to the University, where do I go to?Much appreciated!
+Answer: The building should be PHE, but Professor Goodney seems not in his office this morning. You can try to return to CS front desk at SAL. But for returning at SAL, you may need to contact Professor Goodney first.
+
+Question: Mario is here for testing.
+Answer: Wonderful!!!
+

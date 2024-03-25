@@ -1,0 +1,353 @@
+Announcement: Please try to make your question clear so that we may be able to help you more quickly. Please tell us what you have done, what environment you are using and what the error message is. I will appreciate it if you would like to post public questions that are visible to other students so that the same questions will not be asked again.
+
+
+Announcement: How to apply for taking a laptop on loan from the university for an entire semester
+-----------------------------------------------------------------------------------
+
+If you want to loan a laptop for an entire semester, please make use of Long Term Laptop Loan Service (Loaner Laptops) provided by SAL Lab. Below are the steps you need for the application:
+
+1.  Get an approval from Prof. Young Cho through mail (There is no fixed template for this, just mention you need an approval for taking a loaner laptop)
+    
+2.  Write a mail to : John Ng [johnng@usc.edu](mailto:johnng@usc.edu) and An Pham [apham011@usc.edu](mailto:apham011@usc.edu) describing the specifications you need in your laptop and mention that you have received an approval from the professor. Also it’s important to attach the approval mail (received from Prof. Young Cho) with this mail.
+    
+3.  They reply pretty quickly so you can expect a reply in 2-3 hrs on a working day with the instructions for collecting the laptop.
+    
+
+They do not charge you anything for this loaner laptop unless you cross the deadline(which is end of semester date) indicated by them in the final mail.
+
+
+Announcement: - Please use Ubuntu 18.04 as everything is tested to work on it. There is no guarantee if you want to try a newer version.
+
+- If you are using MacBook, everthing should be expected still to work (use UTM instead of VBox). But if it's not, you may borrow a Windows laptop from CS department for this semester. See **@8**.
+
+
+Announcement: Professor was right, there is a lot going on for this lab and I definitely don't have the time or bandwidth this semester to be able to do these labs effectively.Class seems super interesting and I am dissapointed to quit, but good luck everyone. You all are beasts.
+
+
+Announcement: **Sorry about my ignorance as I just realized that some of you were just enrolled officially in the class and did not receive the email I sent you via Blackboard on Tuesday. FYI, here is the email:**
+
+
+Hi everyone,
+
+I am Yude Wei. I am privileged to be your course mentor for EE542 in Fall 2023. This is a brief note that may give you some tips on how to succeed in this class.
+
+**Your First Week**
+
+As mentioned in yesterday's lecture, EE542 should be a lab based course and you may have to spend much time on your labs even from the first week.
+
+The lab for the first week is mainly about Network Testing and Simulation between Virtual Machines to help you better understand Network Communication. You need to set up a bunch of Virtual Machine Instances to let them communicate with each other in different situations using Hypervisor. See [https://blackboard.usc.edu/webapps/assignment/uploadAssignment?content\_id=\_9847668\_1&course\_id=\_323861\_1](https://blackboard.usc.edu/webapps/assignment/uploadAssignment?content_id=_9847668_1&course_id=_323861_1) .
+
+This is a quite easy lab where you can just follow the instructions and finish everything, especially if you just took EE450 recently and still remember what we did in the final project to set up the environment. But there may still be many miscellaneous issues while proceeding, and please feel free to reach out to me if so.
+
+Also, as learning how to set up the environment is not quite a negligible part in the first week's lab, I want to remind you that please **choose the command-line version of Linux system to install** instead of the one with GUI (as we don't need the GUI), or else your laptop could be a little stuck or running out of memory.
+
+**My Office Hours**
+
+**My open office hours this week dedicated to EE542 are from 4:00 p.m. to 5:00 p.m. on Tuesday (today), and from 3:00 p.m. to 4:00 p.m. on Wednesday at SSL 208 in person.** FYI, see [https://libraries.usc.edu/locations/science-engineering-library](https://libraries.usc.edu/locations/science-engineering-library) .
+
+Please be noticed that this is just a **tentative** arrangement and it may change based on your other course selection. I should be in the same room from 3:00 p.m. to 5:00 p.m., on Monday, Tuesday and Wednesday, and you can come at any time you want, but I will be mainly focusing on severing the students from EE599 (Monday session) and EE538 during other time slots as I am also working as one of the course staff for those two classes.
+
+If the time above is still conflicted with your other classes, please always feel free to send me emails at **[yudewei@usc.edu](mailto:yudewei@usc.edu)** for any questions or Zoom meeting appointment. But please also understand that I may not be able to reply very soon as I could also need some time to debug your situation, so please **do not wait until the last minute to ask your questions**.
+
+**Miscellaneous**
+
+Though the first lab should be done by your own (without teammates), you may start to find your teammates even from now so that you could know if he/she will suit you well as you will be working together on so many labs through the whole semester and you will get **overwhelmed** if your teammates never do anything.
+
+If you plan to register for 2 classes during this semester, I would like to remind you to select a relatively easier course to be the other one, and what I did is to select **EE555** last year. That is a course mainly talking about the theory in detail like Hypervisor, EGP, Tunneling and Queuing Model, etc. and **very well complements the lab based EE542**. EE538 is also a relatively easier class where you can learn some programming basics that are helpful in EE542. EE599 (by Prof. Arash Saifhashemi) is also a good choice for you to learn about ML. Anyways, EE542 is a rather worth taking class where you should put in enough effort and will learn a lot of things and hopefully you could spend your time well.
+
+I was working as a mentor for EE538 and a grader for EE552 last semester and also working as a DR student under Prof. Young Cho on an IIoT project based on what I learned from EE542 last year. I think I am trained well to work as a course staff and be familiar with the course materials, so please do feel free to come to me if you have any questions even on the final project.
+
+Hope you will enjoy the class and have a fruitful semester.
+
+Best regards,
+
+Yude Wei
+
+
+Announcement: Monday (12/04): 3:00 pm - 5:00 pm (Science and Engineering Library Room 209)
+
+Wednesday (12/06): 8:00 pm - 10:00 pm (Science and Engineering Library Room 209) (Final OHs)
+
+
+Announcement: Dear all,
+
+It appears that many of you are experiencing connectivity issues with instances deployed on AWS. As you may have already guessed, any misconfiguration within the series of complex settings from the creation of your remote instances to the ssh can lead to connection failures. Here are some potential reasons I've identified, including issues that previous students encountered during my office hours, which I hope will assist you:
+
+*   Ensure that you are using Ubuntu 20 and the VyOS rolling version (I used rolling 1.3, but version 1.3.3 should work as well).
+    
+*   Verify that your VPC's route tables are set to "main" and the target is set to "any (0.0.0.0/0)"
+    
+*   Check if your security rules allow TCP requests from any network.
+    
+*   Review the network (subnet) topology to ensure that each instance is configured correctly.
+    
+*   Confirm whether the Elastic IP is correctly associated with the intended interface.
+    
+*   Double-check your SSH key and the connection method (use the connection command copied from the "Connect" page on the website).
+    
+*   **If you suspect that you cannot connect to the remote host due to issues with the remote operating system, there's a way to confirm your suspicion. Instead of using an Elastic IP, assign a public IP directly to a specific port when creating the EC2 instance, and then check if you can SSH/ping into it. If you can, it suggests that the issue is not related to the system.**
+    
+*   **If you cannot SSH into the software router using a public IP, you can try connecting to the software router (10.0.2.x?) using an internal SSH connection from either the client or server side to troubleshoot your connectivity issues. For example, if you cannot ssh vyos@PublicIP from your laptop, then try ssh vyos@PrivateIP from client or server using nested ssh.**
+    
+
+I appreciate your persistence so far. In the first week, we familiarized ourselves with using local virtual machines to simulate network communication with the help of a Hypervisor. This week, we are attempting to deploy the core elements of Experiment 1 onto AWS. AWS's EC2 is an excellent and typical example of Infrastructure as a Service (IaaS) in cloud computing (EE555 will cover related theories). Although we are essentially doing the same thing in these two experiments, the AWS configuration introduces various miscellaneous issues (perhaps the AWS internal software router is similar to VyOS). I'm sorry that I cannot individually review and debug for each person, but all I can do is speculate on potential issues, and I apologize for that. You are encouraged to check your settings with each other.
+
+Due to these challenges, personally, I prefer Oracle Cloud, which is both free and user-friendly. It lacks many features I rarely use and is easier to configure. However, large companies are primarily using AWS now, so perhaps familiarity with AWS is more beneficial for job prospects? In the first two experiments, we learned how to configure virtual machines proficiently (maybe that's all we did?). In the upcoming experiments, we will make the most of them, as AWS can provide much more computational power than local setups. This will allow us to embark on more meaningful projects, with fewer of the miscellaneous issues we encountered in the first two experiments.
+
+
+Announcement: Hello everyone,
+
+I'd like to encourage you to start working on Lab 4 as soon as possible, and make it a priority.
+
+In our previous Lab 3, we have tested network throughput under various conditions, exploring parameters like bandwidth, data loss rate, and latency. **In general, both TCP and UDP perform well when network conditions are ideal or sufficiently good. However, when the network quality deteriorates, TCP's performance takes a significant hit due to various reasons.** Some of these reasons, such as a router favoring UDP IP packets over TCP ones, are discussed in EE555. Others, like "TCP reacting slowly," are analyzed in our readings for weeks 3, 4, and 5.
+
+In response to these challenges, we've identified various solutions. Google's **QUIC** protocol (which you can find in recent reading materials) offers an alternative to the traditional TCP stack. **Infiniband RDMA**, while less known, is a widely-used approach operating at a lower network layer. We've also introduced the so-called "fast reactive TCP" in our reading materials.
+
+Our solution, as presented in Lab 4 (and also in Lab 5), involves emulating the TCP handshake and transmission process using UDP for communication. Since UDP's performance holds up better than TCP in poor network conditions, we aim to build our own **application layer protocol** based on UDP that is **not only fast but also reliable**. While it might sound straightforward, debugging can be a bit time-consuming based on my past experience. Therefore, I strongly recommend starting work on this lab early. 
+
+Last year, it took us two full days to complete the lab when working together as a team. This lab is undoubtedly worth your time and effort, as large companies highly value the experience gained from it during interviews. But unfortunately, we won't be able to grant extensions beyond the deadline, even though the deadline extensions should be worthwhile. It's essential to finish Lab 4 on time to ensure you have ample time to start Lab 5, which is equally or even more important. 
+
+To start the Lab 4, we need what we have built from Lab 1, Lab 2 and Lab 3. Here are some goals step by step (Just for reference, you may also want to do it in some other way):
+
+-	Modify the UDP server and UDP client from Lab 1 so that they can send and receive message with each other via socket locally (within your VBox Virtual machines).
+-	Build the protocol.
+-	Check the integrity. (shell command: md5sum \) Debug it.
+-	Move everything to AWS.
+-	Check the integrity. Debug it.
+
+While doing this Lab before, we met some bugs that were hard to fix. So, we came up with using the payload with the pattern of “a123456789b123456789c123456789…” in UDP datagram. While it might seem stupid, it did help us to trace which part of the data is not successfully transmitted and pinpoint the bugs. We highly encourage you to share your experiences here and engage in cross-team discussions.
+
+Of course, you are highly encouraged to do everything from the scratch on your own, but you may also want to learn as much as possible from the Internet and put a beautiful experience on your resume especially if this is your last semester. Anyway, let's get started early and make the most of this learning opportunity within the limited time.
+
+
+Announcement: Hi everyone,
+
+Your Lab1 and Lab2 are graded. Please post your questions here or email me if any.
+
+
+Announcement: Hello everyone,
+
+As Week 5 approaches, it's time to begin working on Lab 5. It's important to note that this lab may carry weight on your resume.
+
+In this lab, we will explore an alternative method to enhance TCP communication speed: manipulating the Linux kernel and adjusting TCP parameters while using your custom-compiled kernel to operate the system. TCP remains a fundamental protocol in various scenarios, and we aim to modify TCP parameters such as the window size (disabling back-off, for instance). Unfortunately, these parameters reside within the Linux kernel, an integral part of the operating system. Consequently, we must recompile the kernel to make these changes be in effect. This lab can be quite time-consuming. On average, a single compilation may take up to 2 hours on a high-cost AWS EC2 instance (that will charge you a lot), and it took me 3.5 hours to complete it in my VirtualBox. Therefore, I strongly recommend starting on this task as early as possible.
+
+Given the time-intensive nature of this process, I advise a conservative approach. In this case, you will still need to compile the kernel twice. Here are the summarized steps:
+
+- Download the kernel source code and compile it without making any changes. Proceed once you can successfully run Linux using your custom-compiled kernel.
+- Experiment with TCP parameters, adjusting those you believe might constrain the speed. Compile the kernel with your modifications and run Linux using your customized kernel.
+- **If you're constrained by time, focus on altering the parameters (numeric values) within the source code, rather than making extensive logic changes. You may want to watch the videos submitted by previous students before you get started.**
+
+Good luck.
+
+
+Announcement: **1. Dependency Errors:**
+
+If you encounter a dependency error when executing:  
+```  
+sudo apt-get build-dep linux linux-image-$(uname -r)  
+```  
+A possible solution is to install the generic version dependencies. To do so, run:  
+```  
+sudo apt-get build-dep linux generic  
+```
+
+**2. ‘Exit Status 2’ Error:**
+
+When running the command:  
+```  
+sudo make -j1 bindeb-pkg  
+```  
+If you receive an error mentioning ‘Exit Status 2’, the issue might be related to some credential lines in the \`.config\` file.
+
+**Solution:**  
+\- Open the \`.config\` file using a text editor.  
+\- Search for the term ‘key’ to locate the lines containing the extension ‘.pem’.  
+\- Remove or comment out these two lines.  
+\- Save the changes and try running the \`make\` command again.
+
+Credit to my brilliant teammate: Zecheng Wang
+GL&HF!
+
+
+Announcement: Hello everyone,
+
+To grade your homework, we have to know your team members. Please fill your team members in the following spreadsheet so that we can grade your labs from the lab4. You are responsible for this. Please do it soon. Thanks.
+
+[https://docs.google.com/spreadsheets/d/1ovjrKL7SV8YEAuwyerCG0kh_c8wXL2vQXT_zNze5peA/edit?usp=sharing](https://docs.google.com/spreadsheets/d/1ovjrKL7SV8YEAuwyerCG0kh_c8wXL2vQXT_zNze5peA/edit?usp=sharing)
+
+**The grading for Lab4 will start from the following Friday, so please make sure you have filled in the information correctly before that.**
+
+
+Announcement: Hi everyone,
+
+I want to let you know that though the lab report/video is submitted in each team (one submission per team), the reading report should be submitted by everyone.
+
+
+Announcement: Hi everyone,
+
+Your Lab3 and Lab4 are graded. Please post your questions here or email me if any.
+
+
+Announcement: Hello everyone,
+
+We're now stepping into the second half of the EE542 class and will be working on IoT/Cloud technology. I wanted to take a moment to outline what lies ahead for us.
+
+In this next phase of our class, we'll be delving deep into IoT, learning how to connect and work with the entire IoT ecosystem. To make things more accessible, I encourage you to consider purchasing the necessary components, and if possible, collaborate with your fellow classmates. For more details, please refer to @89.
+
+Our upcoming **Lab8** (which will be posted shortly) will kick off our exploration by introducing us to the xDot microcontroller system. We'll start with a straightforward task of emulating a signal sensor to test the xDot, focusing on **local operations**. Of course, this is just the beginning.
+
+Moving on to **Lab9**, you'll have the opportunity to utilize your Android phone to simulate the IoT aspect, saving you time in setting up the system. This will allow you to dedicate most of your efforts to **the cloud component**.
+
+As you become comfortable with both IoT and cloud aspects, **Lab10** will bring it all together as you connect the xDot and your cloud components to create a working system **prototype**.
+
+It's important to note that these labs are closely tied to your final project, where you'll have the chance to use the system to explore your own interests and ideas. Keep in mind that while this is a prototype, the commercialization cost can be quite high. If you're interested in pursuing further research opportunities with our professor after this semester, you'll have the chance to work with barebone chips, which are a more cost-effective alternative to the USB kit (5 dollars vs 65 dollars for the USB kit). We'll also delve into power-saving IoT methods and explore a wide range of exciting possibilities.
+
+Best regards,
+
+Yude Wei
+
+
+Announcement: You have to buy these: (You are encouraged to buy them together to save some mailing fee).
+
+- **At least two for each team:**[![](https://shop.multitech.com/pub/media/catalog/product/cache/ca181686c6c88106109d7d9f130992af/9/4/94558022LF_1696173332_main.jpg)](https://shop.multitech.com/mtmdk-xdot-na1-a00.html).
+- **At least one for each team:**[![](https://cdn-shop.adafruit.com/970x728/372-00.jpg)](https://www.adafruit.com/product/372)
+- **One for each group** An Android phone, [Nexus 5](https://www.amazon.com/LG-Google-Nexus-Unlocked-D821/dp/B00GG63522) is recommended (30 dollars or so). Nexus 4 is hard to support android 7.0/7.1, please don't buy it.
+
+
+Here are the things you probably need later:
+
+- Solder Gun/Solder Wire
+- Bread Board
+- USB Power Supply
+- Jumper Wire
+- Pins
+- Hot Glue Stick/Gun
+
+![image.png](/redirect/s3?bucket=uploads&prefix=paste%2Fkyd81nfqg5f76c%2Fc0acd314e9531281c4ca45e254ca309e4387d2b4d04317a635755abb31ff9ec1%2Fimage.png)
+ 
+**See, you really should consider group buying together, or else you'll end up with a bunch of things like I did (unless you want to continue doing research with the professor).**
+
+![image.png](/redirect/s3?bucket=uploads&prefix=paste%2Fkyd81nfqg5f76c%2F2fa9c9e1f54c504c5d20991448e0a646b8cd5e974bbba0b4b1f65b7b8f816aab%2Fimage.png)
+
+Here are the things I have, please feel free the use/grab anything during my OHs on **Tuesdays**, when I will bring them.  (Not Wednesdays).
+ 
+![d84db704f79435ff496dcc432c9e4af.jpg](/redirect/s3?bucket=uploads&prefix=paste%2Fkyd81nfqg5f76c%2Fc2317cf2408ea965b46f99a0b3bec78968f867f21614728866db629e616c56f5%2Fd84db704f79435ff496dcc432c9e4af.jpg)
+
+![29dc34ea3ef82e620b3ed8a7e429fb8.jpg](/redirect/s3?bucket=uploads&prefix=paste%2Fkyd81nfqg5f76c%2Ff4f291097be05c9c3ea193db8d9aa8e3ae4052ed7359baa10dc8cd095422aa1d%2F29dc34ea3ef82e620b3ed8a7e429fb8.jpg)
+
+
+Announcement: See @33.
+
+Please do come and make sure your xDot is working. Or you cannot even finish the final project.
+
+
+Announcement: 1. Keil studio is an alternative IDE you can use, it's online, no need for complex local installations and configurations. Keep in mind that the registration process may take a few days for approval, so start early if you plan to use it.2. When soldering components, consider using male header pins to create a row of pins. This makes it easier to connect and disconnect various components, simplifying your setup.3. If you're using a Mac for your lab work, debugging messages will automatically appear in the "mbed" output tag.4. On a Mac, when you click the triangle icon next to the hammer icon on the left, your program will be uploaded to the xDot device. Even if you disconnect it and switch to a different power source, your program will still run. No need to manually drag and drop the .bin file into the xDot files (if you've tried and failed).5. Start Kit Shopping Early
+
+
+Announcement: Hi everyone,
+
+Your Lab5 and Lab6 are graded. Please post your questions here or email me if an
+
+
+Announcement: Hello everyone,
+
+While choosing your own sensors, I recommend you to start with a simple sensor that is popular or you know before. If you still don't know which to choose here are some recommendations from my side.
+
+Before that, please know the xDot will support 5 kinds of sensors (protocols): 
+- Emulated (10K thermomether resistor for example), this kind of sensors are the easiest ones to use, but usually have limited functionalities. It's just reading the data by the input voltage ranged from 0v to 3.3v. We have used this sensor in our Lab8 to test the xDot.
+- UART (**[Soil Sensor](https://www.adafruit.com/product/5587)** for example) We were measuring the temperature and the humidity of the soil with a sensor similar to this. UART is also rather easy to use. But you may also need some [Double Inverters](https://www.digikey.com/en/products/detail/texas-instruments/CD74AC14E/1691756?utm_adgroup=General&utm_source=google&utm_medium=cpc&utm_campaign=PMax%20Shopping_Product_Zombie%20SKUs&utm_term=&utm_content=General&utm_id=go_cmp-17815035045_adg-_ad-__dev-c_ext-_prd-1691756_sig-CjwKCAjwyY6pBhA9EiwAMzmfwdd0I7X5YbdpfruKEANJ72TIDK0IQxv36qwbZ3tCJjGuXnqdSFweARoCjx0QAvD_BwE&gclid=CjwKCAjwyY6pBhA9EiwAMzmfwdd0I7X5YbdpfruKEANJ72TIDK0IQxv36qwbZ3tCJjGuXnqdSFweARoCjx0QAvD_BwE) to increase the signals.
+- I2C (**[BME280](https://www.adafruit.com/product/2652)**, measuring temperature, humidity and air pressure) Here is an example with xDot: [https://os.mbed.com/users/MACRUM/code/IFTTT_BME280_demo/](https://os.mbed.com/users/MACRUM/code/IFTTT_BME280_demo/)
+
+- SPI (BME280 for example) the BME280 sensor supports both protocols. Please remember that I2C and SPI sensors are relatively harder to code unless you can find the library code for your sensors on GitHub or Mbed, but it will usually support more functionalities. The reason I can recommend you to try it is because there are already examples of such a sensor on Mbed. BME280 is quite popular and is well supported.
+
+- DigitalInOut (DHT series for example, **[DHT11](https://www.amazon.com/HiLetgo-Temperature-Humidity-Digital-3-3V-5V/dp/B01DKC2GQ0/ref=asc_df_B01DKC2GQ0/?tag=hyprod-20&linkCode=df0&hvadid=642064455999&hvpos=&hvnetw=g&hvrand=13134764441109561462&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=1013962&hvtargid=pla-841969737094&psc=1&gclid=CjwKCAjwyY6pBhA9EiwAMzmfwWMBjTFpEKjYdJwep2CSEZle9yCjfBAmDcsF18OBiswNc7Mp-7pSHBoCKFMQAvD_BwE)**, DHT22, etc.) The example is **[here](https://os.mbed.com/teams/WIZnet/code/DHT11-HelloWorld//file/aedc2645d841/main.cpp/)**.
+
+Where to buy: Adafruit, Mouser, DigiKey, Amazon.
+
+We were measuring those stuff last year so the sensors I am familiar with are mostly on that... An advice is before you buy your sensors, please check **[here](https://os.mbed.com/components/)** to see if there are already some examples on that sensor previously from others so that you can hand on the sensors faster. Take BME280 or DHT11 for example, if you search it there, you can find the exmaple including the code I posted above. So search for it on Mbed for some example code before you decide to buy it, as probably you will not be interested in doing everthing by yourselves.
+
+
+Announcement: The link'https://www.multitech.net/developer/downloads/#xdot-US915-mbed-os-6.8.0.bin 'from the lab 10 pdf is broken. I used this instead:https://webfiles.multitech.com/wireless/mtdot/dot-v4.1.5The file 'xdot-firmware-4.1.5-US915-mbed-os-6.8.0.bin' (last) is the one you are looking for.Thanks @Yude
+
+
+Announcement: see @33.
+
+
+Announcement: Hi everyone,
+
+Your Lab7, Lab8 and Lab9 are graded. Please post your questions here or email me if any.
+
+
+Announcement: I found I still have a Pi left. It's a LePotato that will give similar performace to Raspberry Pi 3B. If anyone needs it for you final project, just feel free to take it during my OHs this week. This is the last thing I have.
+
+This thing: [https://www.amazon.com/Libre-Computer-Potato-Single-Heatsink/dp/B0BQG668P6/ref=sr_1_3?crid=14OKKP1DRFLGP&keywords=lepotato&qid=1698697521&sprefix=lepotato%2Caps%2C237&sr=8-3&th=1](https://www.amazon.com/Libre-Computer-Potato-Single-Heatsink/dp/B0BQG668P6/ref=sr_1_3?crid=14OKKP1DRFLGP&keywords=lepotato&qid=1698697521&sprefix=lepotato%2Caps%2C237&sr=8-3&th=1)
+
+It can run Debian, Ubuntu, Android, Emuelec, Lakka/Retroarch. It's currently installed with Emuelec. It has Wifi and Bluetooth.
+
+
+Announcement: Dear EE542 Class,
+
+Since we have finished all the Labs and start to work on the final project, I want to express my gratitude for studying alongside you in this semester's EE542. As your mentor, I am honored to have been part of this journey. Just like you, I've learned a lot during this semester.
+
+EE542 is undoubtedly the best firmware courses in our EE program. If you are considering a career with network companies such as Palo Alto Networks, Arista Networks, or Hughe Networks, they will highly value the projects you've undertaken in this course.
+
+Concerning Course Selection for the Upcoming Semester:
+My only and strongest recommendation is to enroll in EE533—this is a course that is often underrated in our program but is the natural progression from EE542. Many major companies like AMD are engaged in work that closely mirrors the experiments we've conducted in this course. EE533 focuses on developing a complete pipeline processor using NetFPGA for SmartNICs. I encourage you to choose this course unless you are certain of what valuable content you would be missing out on. EE533 is a key to success in EE department. Even if you haven't taken EE457 before, consider signing up for the placement exam and joining EE533. It offers similar knowledge and comprehensive content to EE577B without requiring extensive prerequisites. Moreover, it emphasizes hands-on experience and provides excellent support through NetFPGA, making it a high-value course. Additionally, other network courses may be comparatively easier than EE542. In my opinion, specializing solely in networking can limit the breadth of your expertise within our EE department. Therefore, I also recommend exploring EE533.
+
+About Directed Research (DR) opportunities:
+The benefit of Professor Cho's courses, including Directed Research, is that the level of commitment is entirely up to the individual. He is kind and generous, and if you are willing, you can gain a wealth of knowledge without being overly concerned about credits. The same applies to his Directed Research opportunities. Professor Cho has an unbelievable extensive network in the industry from small startups to huge companies, and if you are looking for job recommendations in hardware, software, or firmware in the future, consider collaborating with him for Directed Research. If the DR experience itself may be not so helpful, 'working as a DR student with him' will literally, finally help you find a job. I would rather not say more; those who understand the advantages will appreciate them a lot. If you are an International student and about to graduate this semester but plan to do more research before you get into the industry here, you are also eligible to work with him as an OPT student if you want for some time within a year. Please talk with the professor early about it if you are interested. And please let me know if there is something I can help with before that. Also, please apply to work as a mentor for EE542 next year if possible.
+
+
+Sincerely,
+
+Yude
+
+
+Announcement: Hi everyone,
+
+Your Lab10 are graded. Please post your questions here or email me if any.
+
+
+Announcement: Dear all,
+
+I am sorry that I have to change my OHs today again from the previous time to 7:30 to 9:30 pm due to some other deadline. I am so sorry for the convenience. The OHs today will be on Zoom Only. Here is my Zoom link:
+
+[https://usc.zoom.us/my/yudewei](https://usc.zoom.us/my/yudewei)
+
+
+Announcement: Dear all,
+
+I will be holding OHs in person from 3:00 pm to 5:00 pm at SSL 209 as well as from 7:30 to 9:30 pm on Zoom today. Here is my Zoom link:
+
+[https://usc.zoom.us/my/yudewei](https://usc.zoom.us/my/yudewei)
+
+
+Announcement: https://usc.zoom.us/my/yudewei
+
+
+Announcement: Hi all,
+
+All of your submissions about the progress of your final projects have been graded. Please come to my OHs if you have any questions. Also, please treat the submission of your final project presentation video and slides carefully.
+
+
+Announcement: Dear all,
+
+All of your submissions of labs, assignments and final projects have been graded on Blackboard. Please let me know if you have any concern as soon as possible before your final letter grades can be posted. Thanks!
+
+Best regards,Yude
+
+
+Announcement: Dear all,
+
+Just FYI, if you have taken EE457/EE533 or relevant classes before, or if you are interested in compiler or applications, you could be interested in joining the USC **acorn** team that is hiring students. Here is their website: [https://sites.usc.edu/acorn-research/join/](https://sites.usc.edu/acorn-research/join/)
+
+Best regards,Yude
+
+
+Announcement: Dear all,
+
+All the final projects grades are withdrawn. Please stay tuned for regrading. Thanks.
+
+Best regards,Yude
+
+

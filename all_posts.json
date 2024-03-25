@@ -1,0 +1,689 @@
+[
+    {
+        "detail": {
+            "content": "Dear class:Welcome to the Fall semester of EE 641. I am looking forward to a fantastic term!\u00a0 Piazza will be our primary mode of contact outside the class this term. You will find the syllabus, schedule, projects, and other handouts on the canvas course website.Piazza link:https://piazza.com/usc/fall2023/ee641Canvas link:https://canvas.usc-ece.com#pin",
+            "subject": "Welcome to EE 641"
+        },
+        "folders": [
+            "announcement"
+        ],
+        "id": "llp12fj6wcn2gd",
+        "id_c": 6,
+        "time": "2023-08-24T10:35:22Z",
+        "type": "note",
+        "vote": 0
+    },
+    {
+        "detail": {
+            "content": "Dear class,You should (or should shortly) receive an invitation to signup for the canvas website -- https://canvas.usc-ece.com. \u00a0Your login is your *USC* email address. \u00a0Canvas will prompt you to create a password when registering. \u00a0Please confirm that you have access. \u00a0If not please ensure you are in fact registered for the course (the roster pulls directly from the university registration system).If you have any trouble with canvas it is best to create a short Piazza post first detailing the issue. That way I can triage the issue and post resolution steps once complete.If you don't receive an invitation email you can sign-up directly:Canvas defaults to a complex random string. \u00a0Use the \"Forgot password\" link to initiate a reset. \u00a0Use your USC email address as your login.#pin",
+            "subject": "Canvas invitation"
+        },
+        "folders": [
+            "canvas"
+        ],
+        "id": "llp12sammf32tn",
+        "id_c": 7,
+        "time": "2023-08-24T10:35:39Z",
+        "type": "note",
+        "vote": 0
+    },
+    {
+        "detail": {
+            "content": "Post code snippets (text) and not screenshots (images). This will make it easier to troubleshoot/reproduce your error.Use a Piazza code block for posting code.Post only the section(s) of the code relevant to your question. Add comments to the code. Note: you should already being this to keep your grader happy.You MUST include specific questions about your code. \"My code is not working, fix it!\u201d - is not a good question. Include details about what you tried, what worked, and what didn\u2019t.How to ask a good question?We will post other guidelines here as necessary.Follow-up: ALL, please read (and re-read) the above.\u00a0 Perhaps the most important Piazza post of the term.Stay active on Piazza! \u270c\ufe0f#pin",
+            "subject": "Guidelines for code related questions"
+        },
+        "folders": [
+            "coding"
+        ],
+        "id": "llp135iyobr30x",
+        "id_c": 8,
+        "time": "2023-08-24T10:35:56Z",
+        "type": "note",
+        "vote": 0
+    },
+    {
+        "detail": {
+            "content": "Office hours today (Wednesday, 30 Aug) start 30 minutes late -- at 14:00.\u00a0 I am attending a short master program meeting.",
+            "subject": "[Wed, 30 Aug] Office hours, start 14:00"
+        },
+        "folders": [
+            "other"
+        ],
+        "id": "llxp6f2f5yh5as",
+        "id_c": 10,
+        "time": "2023-08-30T12:12:28Z",
+        "type": "note",
+        "vote": 0
+    },
+    {
+        "answers": [
+            {
+                "content": "Close to 68%, say > 60%, is good.\u00a0 Try to push to 62%.",
+                "type": "i_answer",
+                "vote": 0
+            }
+        ],
+        "detail": {
+            "content": "My best hyperparameter gives training accuracy of 67% and validation accuracy upto 51%. I am still fine tuning and trying for better accuracy.Is the current accuracy acceptable?",
+            "subject": "HW0 Accuracy"
+        },
+        "folders": [
+            "homework",
+            "homework\u2215hw0"
+        ],
+        "id": "llzlhxptftg4fj",
+        "id_c": 11,
+        "time": "2023-08-31T20:05:00Z",
+        "type": "question",
+        "vote": 0
+    },
+    {
+        "detail": {
+            "content": "Office hours today (Wednesday, 06 Sep) start 30 minutes late -- at 14:00.\u00a0 I am attending the monthly EFC meeting.",
+            "subject": "[Wed, 06 Sep] Office hours, start 14:00"
+        },
+        "folders": [
+            "other"
+        ],
+        "id": "lm74mikbx5f125",
+        "id_c": 14,
+        "time": "2023-09-06T02:34:49Z",
+        "type": "note",
+        "vote": 0
+    },
+    {
+        "answers": [
+            {
+                "content": "Posted now, thanks!",
+                "type": "i_answer",
+                "vote": 1
+            }
+        ],
+        "detail": {
+            "content": "Hello Professor! I'm curious about when the GAN slides will be made available for everyone to access on Canvas. Thank you!",
+            "subject": "Week 03 Slides"
+        },
+        "folders": [
+            "lecture"
+        ],
+        "id": "lmb7mia7f861kq",
+        "id_c": 16,
+        "time": "2023-09-08T23:09:52Z",
+        "type": "question",
+        "vote": 0
+    },
+    {
+        "answers": [
+            {
+                "content": "What NVidia GPU do you have?It should be independent of your editor.\u00a0 What is important is that you select the correct virtual environment -- assuming you have the corect packages installed.Did you install the proper packages?\u00a0 I recommend deleting your environment and recreating:# delete prev environment\n\nconda create --name ee641_work python=3.11\nconda activate ee641_work\n\nconda install pytorch torchvision torchaudio pytorch-cuda -c pytorch -c nvidia",
+                "type": "i_answer",
+                "vote": 0
+            }
+        ],
+        "detail": {
+            "content": "Hello All,Anyone here who recently configured GPU to work with visual studio?Thank you",
+            "subject": "Nvidia GPU setup"
+        },
+        "folders": [
+            "homework",
+            "homework\u2215hw1"
+        ],
+        "id": "lmcfhpafwfd2a2",
+        "id_c": 17,
+        "time": "2023-09-09T19:37:51Z",
+        "type": "question",
+        "vote": 0
+    },
+    {
+        "answers": [
+            {
+                "content": "* closed",
+                "type": "i_answer",
+                "vote": 0
+            }
+        ],
+        "detail": {
+            "content": "Hello,In function __getitem__, if an image has several anns and bbox, how could we organize the target(bounding-box [list])?should it be a list of list like:[[1, 2, 3, 4],[5, 6, 7, 8]]or just one list like:[1, 2, 3, 4, 5, 6, 7, 8]or some other way to return?Thank you.",
+            "subject": "HW1 CocoDataset class"
+        },
+        "folders": [
+            "homework",
+            "homework\u2215hw1"
+        ],
+        "id": "lmd1x52kean6p4",
+        "id_c": 18,
+        "time": "2023-09-10T06:05:43Z",
+        "type": "question",
+        "vote": 0
+    },
+    {
+        "answers": [
+            {
+                "content": "Which target are you referring to... an individual bounding box (that is, $$0..N$$ targets per-image) or an image?Thecategoryin the datafile provides meta information about each bounding box that you probably wont need.\u00a0 But you may use it for analysis -- such as accuracy by category --i.e., is machine-printed easier to identify than illegible?",
+                "type": "i_answer",
+                "vote": 0
+            }
+        ],
+        "detail": {
+            "content": "Hello All,Is the target supposed to have labels corresponding to each category?As in whether the category is present or not in each annotation? (asking for __getitem__ method)Thank you",
+            "subject": "HW1"
+        },
+        "folders": [
+            "homework",
+            "homework\u2215hw0"
+        ],
+        "id": "lmdtammk8dz3nv",
+        "id_c": 19,
+        "time": "2023-09-10T18:52:02Z",
+        "type": "question",
+        "vote": 0
+    },
+    {
+        "answers": [
+            {
+                "content": "No I understood, the annotations file has different segments where each image can have multiple bounding boxes and those bounding boxes can be present at the same location in multiple images.",
+                "type": "s_answer",
+                "vote": 0
+            },
+            {
+                "content": "Don'tdouble-postwith email.\u00a0 It doubles the work and defeats the purpose of Piazza.\u00a0 Piazza is the best place to start for HW / coding advice.***> in this assignment according to the annotation file provided, each image> has only - (1) width, (2) filename, (3) set, (4) id, (5) height specified,Do you have the correct data file?\u00a0 The JSON data file has key \u201canns\u201d with a very long list (145862 in fact) of annotations:\"1134665\": {\n \u00a0\u00a0 \"polygon\": [\n \u00a0\u00a0\u00a0\u00a0 195.6081081081081,\n \u00a0\u00a0\u00a0\u00a0 147.44303797468353,\n \u00a0\u00a0\u00a0\u00a0 241.01351351351352,\n \u00a0\u00a0\u00a0\u00a0 147.44303797468353,\n \u00a0\u00a0\u00a0\u00a0 241.01351351351352,\n \u00a0\u00a0\u00a0\u00a0 178.22784810126575,\n \u00a0\u00a0\u00a0\u00a0 195.6081081081081,\n \u00a0\u00a0\u00a0\u00a0 178.22784810126575\n \u00a0\u00a0 ],\n \u00a0\u00a0 \"language\": \"na\",\n \u00a0\u00a0 \"area\": 1397.7967841258962,\n \u00a0\u00a0 \"class\": \"machine printed\",\n \u00a0\u00a0 \"image_id\": 23096,\n \u00a0\u00a0 \"bbox\": [\n \u00a0\u00a0\u00a0\u00a0 195.6081081081081,\n \u00a0\u00a0\u00a0\u00a0 147.44303797468353,\n \u00a0\u00a0\u00a0\u00a0 45.40540540540542,\n \u00a0\u00a0\u00a0\u00a0 30.78481012658223\n \u00a0\u00a0 ],\n \u00a0\u00a0 \"legibility\": \"illegible\",\n \u00a0\u00a0 \"id\": 1134665\n\u00a0 },```> the '__getitem__' method should return image (actual image) and target, here is the> target supposed to have only : (1) image and (2) bounding box (resized coords) as> it's two fields?Per the comments:> # TODO: return image / bounding-box [list] pair for self.imgIds[idx]> # resize the image to conform to your model input and transformed> # bounding box coordinates>> # see COCO_Text helper (i.e., self.ct)> # return image, targetFor more on the collate function (which is complete):https://pytorch.org/docs/stable/data.html#working-with-collate-fn",
+                "type": "i_answer",
+                "vote": 0
+            }
+        ],
+        "detail": {
+            "content": "Hello All,I am confused here with this assignment. According to the paper given in the notebook, this Dataset can identify and place bounding boxes around all the regions where text is present and it can also give tags to what it has identified(which are categories) : 1) Machine-printed or Handwritten, 2) Legible or Illegible, 3) English script and non-English script.But in this assignment according to the annotation file provided, each image has only - (1) width, (2) filename, (3) set, (4) id, (5) height specified, does it mean each image has only one part of the image where text is detected/present? (as opposed to what is given in the original paper where it can identify multiple regions/bounding boxes)?Next thing, the '__getitem__' method should return image (actual image) and target, here is the target supposed to have only : (1) image and (2) bounding box (resized coords) as it's two fields? Is this what the '__collate_fn' is also supposed to catch in images and targets?Can someone clarify this part?Thank you",
+            "subject": "Categories for HW1"
+        },
+        "folders": [
+            "homework",
+            "homework\u2215hw0",
+            "homework\u2215hw1"
+        ],
+        "id": "lmdu15ghvmm6wi",
+        "id_c": 20,
+        "time": "2023-09-10T19:12:39Z",
+        "type": "question",
+        "vote": 0
+    },
+    {
+        "answers": [
+            {
+                "content": "collate_fnreturns a 2-element tuple:(images, targets).torch.stackshould do the work of convertingimagestoTensor, so in your training loop:for idx, data in enumerate(dataloader):\n  # ...\n  data[0].to(device)",
+                "type": "i_answer",
+                "vote": 0
+            }
+        ],
+        "detail": {
+            "content": "Hello,For function:def collate_fn(batch):\n    images = []\n    targets = []\n    for item in batch:\n        images.append(item[0])\n        targets.append(item[1])\n    images = torch.stack(images, 0)\n    return images, targetsFor a batch, targets have the type of list. Does this mean when we want to make it \".to(device)\", we should use:targets = [t.to(device) for t in targets]Thank you.",
+            "subject": "HW1 coalate_fn"
+        },
+        "folders": [
+            "homework",
+            "homework\u2215hw1"
+        ],
+        "id": "lmei1wc390i6ow",
+        "id_c": 21,
+        "time": "2023-09-11T06:25:05Z",
+        "type": "question",
+        "vote": 0
+    },
+    {
+        "answers": [
+            {
+                "content": "Dont address Piazza questions to me.\u00a0 The intent is that any can (and should) aide in the answer and asking a question of me discourages that.\u00a0 And never end your question with \"Waiting for your reply\", it should be \"I will continue to investigate\".***From the handout (notebook):# TODO: checkpoint model weights, optimizer state, and other as needed to resume# TODO: plot each of the 4 RCNN loss components vs epoch-numberCheckpoint state and then load to resume.",
+                "type": "i_answer",
+                "vote": 0
+            }
+        ],
+        "detail": {
+            "content": "Hello Professor,Is it ok if I train the model for 3/4 epochs and then submit the results? Reason being, google colab is getting disconnected multiple times as it is taking a lot of time to train this model.Waiting for your reply...Thank you",
+            "subject": "Epochs"
+        },
+        "folders": [
+            "homework",
+            "homework\u2215hw1"
+        ],
+        "id": "lmf8bzpdmlo77j",
+        "id_c": 22,
+        "time": "2023-09-11T18:40:46Z",
+        "type": "question",
+        "vote": 0
+    },
+    {
+        "answers": [
+            {
+                "content": "Just 4 images one time, not the entire dataset.\u00a0 This is just demonstrating your models inference.",
+                "type": "i_answer",
+                "vote": 0
+            }
+        ],
+        "detail": {
+            "content": "Hello,It says \"Load four images and predict regions using model\". So should we load only 4 images in a plot from the chosen epoch to plot them, or should we load every 4 images in a plot from dataloader to plot all images in dataloader?Thank you.",
+            "subject": "HW1 Evaluate"
+        },
+        "folders": [
+            "homework",
+            "homework\u2215hw1"
+        ],
+        "id": "lmf9s07pwzu71c",
+        "id_c": 23,
+        "time": "2023-09-11T19:21:13Z",
+        "type": "question",
+        "vote": 0
+    },
+    {
+        "answers": [
+            {
+                "content": "Only what is asked for in the notebook.",
+                "type": "i_answer",
+                "vote": 0
+            }
+        ],
+        "detail": {
+            "content": "Hello All,Do we need to write down any inferences from the plots of the 4RCNN components vs epochs for this rubric?Thank you",
+            "subject": "Rubric for homework1"
+        },
+        "folders": [
+            "homework",
+            "homework\u2215hw1"
+        ],
+        "id": "lmfg4nz5hse649",
+        "id_c": 24,
+        "time": "2023-09-11T22:19:01Z",
+        "type": "question",
+        "vote": 0
+    },
+    {
+        "answers": [
+            {
+                "content": "> Because I can not run the script on Jupyter notebook due to some CUDA issues?Would you elaborate?\u00a0 The notebook runs within the same kernel and environment so I would like to know what specific issues you are having.\u00a0 What \"CUDA issues\" are you experiencing ... please be specific.In the meantime you should submit the completed Jupyter notebook (as pdf) to Canvas.",
+                "type": "i_answer",
+                "vote": 0
+            }
+        ],
+        "detail": {
+            "content": "Hi Professor,I wander if we can submit a .py file and provide the figures separately instead of a .ipynb file. Because I can not run the script on Jupyter notebook due to some CUDA issues. However, when I directly copy all of the code to a .py file and under same conda environment, the script can run normally.Thank you.",
+            "subject": "HW1 Jupyter"
+        },
+        "folders": [
+            "homework",
+            "homework\u2215hw1"
+        ],
+        "id": "lmfus2zmlddse",
+        "id_c": 25,
+        "time": "2023-09-12T05:09:08Z",
+        "type": "question",
+        "vote": 0
+    },
+    {
+        "answers": [
+            {
+                "content": "You should submit the modified Jupyter notebook -- but export to PDF.",
+                "type": "i_answer",
+                "vote": 0
+            }
+        ],
+        "detail": {
+            "content": "I am getting an error saying \"invalid format\" when I am trying to upload jupyter notebook on canvas, how to go about this?Thank you",
+            "subject": "Homework submission"
+        },
+        "folders": [
+            "homework",
+            "homework\u2215hw1"
+        ],
+        "id": "lmg2m733aq12gb",
+        "id_c": 26,
+        "time": "2023-09-12T08:48:31Z",
+        "type": "question",
+        "vote": 0
+    },
+    {
+        "answers": [
+            {
+                "content": "The grader will check both your output and your code for correctness.evaluate() is your code, validation figures/bounding boxes is your result.",
+                "type": "i_answer",
+                "vote": 0
+            }
+        ],
+        "detail": {
+            "content": "The rubric on canvas has two fields: \"evaluate()\" and \"Validation figures / Bounding boxes\" of 4 pts and 8 pts respectively. From what I understood from the instructions, the evaluate method needs to have 4 randomly selected images with true and predicted bounding boxes for 3 different epochs (start, mid, end). Validation errors not required.\n\nDoes \"Validation figures / Bounding boxes\" refer to the \"evaluate()\" method in this regard? If yes, is there a reason why they're given separately in canvas? If no, what exactly is required of us?\n\nThanks a lot",
+            "subject": "Rubric clarification"
+        },
+        "folders": [
+            "homework",
+            "homework\u2215hw1"
+        ],
+        "id": "lmgs60s884l3aa",
+        "id_c": 27,
+        "time": "2023-09-12T20:43:46Z",
+        "type": "question",
+        "vote": 0
+    },
+    {
+        "answers": [
+            {
+                "content": "Yes, @26",
+                "type": "i_answer",
+                "vote": 0
+            }
+        ],
+        "detail": {
+            "content": "Hello,In \"SUBMISSION INSTRUCTIONS\" it says \"submit the modified Jupyter notebook\". But it only allows PDF.Does this mean we should export a PDF file fron the Jupyter notebook and submit rather than submit .ipynb file directly?Thank you.",
+            "subject": "HW1 Submit"
+        },
+        "folders": [
+            "homework",
+            "homework\u2215hw1"
+        ],
+        "id": "lmgtxnyyjlp19p",
+        "id_c": 29,
+        "time": "2023-09-12T21:33:15Z",
+        "type": "question",
+        "vote": 0
+    },
+    {
+        "answers": [
+            {
+                "content": "Groups of three.\u00a0 But no need to plan quite yet.",
+                "type": "i_answer",
+                "vote": 0
+            }
+        ],
+        "detail": {
+            "content": "Hello All,How many people are required to work together for the Group project?Thank you",
+            "subject": "Project group"
+        },
+        "folders": [
+            "project"
+        ],
+        "id": "lmsg8xk3zrq161",
+        "id_c": 30,
+        "time": "2023-09-21T00:43:20Z",
+        "type": "question",
+        "vote": 0
+    },
+    {
+        "answers": [
+            {
+                "content": "I do not distribute old exams for this course.",
+                "type": "i_answer",
+                "vote": 0
+            }
+        ],
+        "detail": {
+            "content": "Hello Prof. Brandon,Can you please share sample exam paper with us?Thank you!",
+            "subject": "Sample Exam Papers"
+        },
+        "folders": [
+            "other"
+        ],
+        "id": "lmzmlbpob4q3zb",
+        "id_c": 32,
+        "time": "2023-09-26T01:15:20Z",
+        "type": "question",
+        "vote": 0
+    },
+    {
+        "answers": [
+            {
+                "content": "I think padding needs to be 1 across all blocks, since at the end of each block, maxpooling downsample the feature map from the previous convolution layer to 1/4 of its size. The dimension only matches up with the plot if Same Padding was used.",
+                "type": "s_answer",
+                "vote": 0
+            }
+        ],
+        "detail": {
+            "content": "Hello All,I am trying to understand size calculations for CNNs. One of the examples in the slides - VGG16 network :Here, my calculations work correctly if i assume padding to be '1' on both sides for blocks 1,2,3 but for the 4th and 5th block the sizes of the output match only if I take padding to be '0' in this case how do we understand in exam whether we have to take padding to be 0 or 1 (or will it be stated in the question) also normally also why isn't padding size specified in such network diagrams?Please share your understanding on this!Thank you",
+            "subject": "Doubt in understanding CNNs"
+        },
+        "folders": [
+            "lecture"
+        ],
+        "id": "ln9utsgwjdt4v3",
+        "id_c": 33,
+        "time": "2023-10-03T05:03:33Z",
+        "type": "question",
+        "vote": 0
+    },
+    {
+        "detail": {
+            "content": "Office hours today (Wednesday, 04 Oct) cancelled.\u00a0 I am attending the monthly EFC meeting.I will be availableby appointmentfor extended meeting on Thursday, 05 October, from 15:30 - 16:30.",
+            "subject": "[Wed, 04 Oct] Office hours, rescheduled"
+        },
+        "folders": [
+            "other"
+        ],
+        "id": "lnbnfuks3dc7gd",
+        "id_c": 34,
+        "time": "2023-10-04T11:12:18Z",
+        "type": "note",
+        "vote": 0
+    },
+    {
+        "detail": {
+            "content": "Dear class:I am giving you the day off from tomorrow's usual lecture.\u00a0 You just completed the exam and a short respite before we start final projects will benefit you.Next week's lecture will be very important though -- I introduce/assign the final project and then start Reinforcement Learning (RL).Enjoy the extended break!",
+            "subject": "No lecture tomorrow - Wed, 11 October"
+        },
+        "folders": [
+            "lecture"
+        ],
+        "id": "lnkuzrhr6i12dh",
+        "id_c": 35,
+        "time": "2023-10-10T21:53:40Z",
+        "type": "note",
+        "vote": 1
+    },
+    {
+        "detail": {
+            "content": "Office hours today (Wednesday, 11 Oct) cancelled due to Fall holiday.\u00a0\u00a0Office hours resume as normal next week.\u00a0\u00a0Have a wonderful break!",
+            "subject": "[Wed, 11 Oct] Office hours, cancelled"
+        },
+        "folders": [
+            "other"
+        ],
+        "id": "lnllzxwos6q74w",
+        "id_c": 36,
+        "time": "2023-10-11T10:29:38Z",
+        "type": "note",
+        "vote": 0
+    },
+    {
+        "detail": {
+            "content": "Dear class: office hours ran long. \u00a0I am on my way to the room now.",
+            "subject": "Office hours ran long"
+        },
+        "folders": [
+            "lecture",
+            "logistics"
+        ],
+        "id": "lnwax2vgtvn7p0",
+        "id_c": 37,
+        "time": "2023-10-18T22:04:56Z",
+        "type": "note",
+        "vote": 0
+    },
+    {
+        "answers": [
+            {
+                "content": "See new: @42",
+                "type": "i_answer",
+                "vote": 0
+            }
+        ],
+        "detail": {
+            "content": "Hello everyone,Myself and Christopher Conroy are looking for one more person to partner with us for the final project. If you are looking for a group to join, please feel free to reach out to us. Kindly do it so ASAP as we need to come up with the proposal ideas soon.My email: anikar@usc.eduChris's email: cconroy@usc.eduThanks,Dheeraj",
+            "subject": "Need one more project partner"
+        },
+        "folders": [
+            "project"
+        ],
+        "id": "lnxeb7v8yn04gy",
+        "id_c": 38,
+        "time": "2023-10-19T16:27:41Z",
+        "type": "question",
+        "vote": 0
+    },
+    {
+        "answers": [
+            {
+                "content": "Not assigned yet.\u00a0 I didnt want to drop it on you around the Exam.\u00a0 We are moving into projects now so it may be postponed indefinitely -- But Ill let you know.",
+                "type": "i_answer",
+                "vote": 0
+            }
+        ],
+        "detail": {
+            "content": "I didn't see the homework requirements for homework3 on canvas and wanted to ask what the topic is and what kind of homework I need to submit.",
+            "subject": "HW3 question"
+        },
+        "folders": [
+            "homework",
+            "homework\u2215hw2",
+            "homework\u2215hw3"
+        ],
+        "id": "lnxk1e27j1n7ce",
+        "id_c": 39,
+        "time": "2023-10-19T19:08:00Z",
+        "type": "question",
+        "vote": 0
+    },
+    {
+        "answers": [
+            {
+                "content": "See new: @42",
+                "type": "i_answer",
+                "vote": 1
+            }
+        ],
+        "detail": {
+            "content": "Hello All!Louis Wen and I are looking for one more person to join our group for the project component of this group. If you are not a part of any group, please feel free to email me or Louis and join the group soon since we will be brainstorming over the next few days and appreciate your input, preferably something to do with CNNs.My email -stewatia@usc.eduLouis's email -zongdaow@usc.eduThanks,Sanskar Tewatia",
+            "subject": "Need 3rd project partner"
+        },
+        "folders": [
+            "project"
+        ],
+        "id": "lnzb1ja6zco5pl",
+        "id_c": 40,
+        "time": "2023-10-21T00:31:43Z",
+        "type": "question",
+        "vote": 1
+    },
+    {
+        "detail": {
+            "content": "Dear class:I created the following spreadsheet to organize project groups and assist those still looking for partners(use your @usc.edu email address):EE 641 - Fall 2023 - Project groupsIf you have a group:Reminder: groups should bethreestudents unless I give prior approval.Go to Canvas: \"People > Groups\".\u00a0\u00a0Choose a UNIQUE group number (i.e., one that no other group is already using) and \"Join\" the same for each group member (maximum 3 members).\u00a0 This allows me track students with groups.If you are looking for a group:Fill in the \"topic of interest\" field on the spreadsheet.\u00a0 Post to @42 to reach out to specific individuals.\u00a0 I will also help coordinate students who may have similar interests (monitor @42).Goal: all students are grouped by Monday (23 October) afternoon.",
+            "subject": "Project groups - Join on canvas"
+        },
+        "folders": [
+            "project"
+        ],
+        "id": "lnzwq5u1cgd7dr",
+        "id_c": 41,
+        "time": "2023-10-21T10:38:44Z",
+        "type": "note",
+        "vote": 0
+    },
+    {
+        "detail": {
+            "content": "Use this post to contact individuals with similar interests that you may be interested in working with.Use \"@\" followed by name to ensure individual users see your post.\u00a0 Once you form a group follow up with instructions in (@41).Reach out here (or create a private post if appropriate) with any specific questions.",
+            "subject": "Project groups - connection hub"
+        },
+        "folders": [
+            "project"
+        ],
+        "id": "lnzwq82ybjj7hm",
+        "id_c": 42,
+        "time": "2023-10-21T10:38:47Z",
+        "type": "note",
+        "vote": 0
+    },
+    {
+        "answers": [
+            {
+                "content": "Canvas answers: drafts due 27 Oct @ 23:59.",
+                "type": "i_answer",
+                "vote": 0
+            }
+        ],
+        "detail": {
+            "content": "Hello All,Quick question:Are we supposed to get drafts tomorrow or just list of ideas and research done of those ideas so as to discuss with the professor which one seems good?Thank you!",
+            "subject": "Project Task"
+        },
+        "folders": [
+            "project"
+        ],
+        "id": "lo56mqbxrlf3q2",
+        "id_c": 43,
+        "time": "2023-10-25T03:14:51Z",
+        "type": "question",
+        "vote": 0
+    },
+    {
+        "detail": {
+            "content": "Office hours today (Wednesday, 01 Nov) start 30 minutes later today, start at 14:00 due to the monthly (final) EFC meeting.",
+            "subject": "[Wed, 01 Nov] Office hours, start 14:00"
+        },
+        "folders": [
+            "other"
+        ],
+        "id": "lofkh3t12o62ec",
+        "id_c": 44,
+        "time": "2023-11-01T09:40:05Z",
+        "type": "note",
+        "vote": 0
+    },
+    {
+        "detail": {
+            "content": "Dear class:Feedback from your Fall courses is important. Please take a few moments to complete an evaluation for EE 641 (how-to below). Your feedback is anonymous and is an important signal that describeswhat worked(i.e., the good) andwhat didn't work(i.e., the bad). Even neutral feedback is a useful signal.\u00a0 These evaluations comprise an important element of the faculty review process so please take time to answer the questions thoughtfully.Your voice matters.I extended the course evaluation window toThursday, 07 December.\u00a0 It should take only a few minutes.A high response rate is important.\u00a0 It is essential for unbiased statistical sampling and ensures that reported experiences and outcomes are inclusive.\u00a0 I set a goal of reaching aresponse rate of 80%(currently, 28%).\u00a0 I can't/won't assign a bonus for submitting an individual evaluation (obviously, bias and anonymity).\u00a0 But reaching an 80% response rate would suggest a universally high level of class-engagement that I can incentivize.\u00a0 \u00a0So I will include a1.5% class-wide\u00a0extra creditshould we hit 80% to recognize high-participation and class-engagement this term.Please take this request seriously. Detailed and truthful responses are one of the most important signals that I have to improve or reinforce my teaching as well as EE 641 (e.g., aspects to improve, elements that worked well).\u00a0 \u00a0And ultimately to allow me to deliver the very best curriculum that I possibly can. Your comments will be valuable as I plan for future terms.--Dr. FranzkeHow to access the evaluations:You may receive a personalized email if you have not already completed the evaluation, orLogin to Blackboard (https://blackboard.usc.edu).Select \"Course Evaluations\" from the header menu.Please report back to this post if you have trouble accessing the Evaluation.",
+            "subject": "[Extra Credit], EE 641 course evaluation response rate (%)."
+        },
+        "folders": [
+            "announcement",
+            "other"
+        ],
+        "id": "lppk2y61kke7gn",
+        "id_c": 45,
+        "time": "2023-12-03T14:06:28Z",
+        "type": "note",
+        "vote": 0
+    },
+    {
+        "answers": [
+            {
+                "content": "No, I am also confused about this.",
+                "type": "s_answer",
+                "vote": 0
+            },
+            {
+                "content": "I made a scheduling mistake, see @47.",
+                "type": "i_answer",
+                "vote": 0
+            }
+        ],
+        "detail": {
+            "content": "Hello All,Did anyone receive slots for presentation? Or any link?Thank you!",
+            "subject": "Slots for presentation"
+        },
+        "folders": [
+            "project"
+        ],
+        "id": "lpvjgi82m6q5eq",
+        "id_c": 46,
+        "time": "2023-12-07T18:35:38Z",
+        "type": "question",
+        "vote": 5
+    },
+    {
+        "detail": {
+            "content": "Dear class:Thank you for your poll feedback.\u00a0 Availability is clustered Friday and Tuesday.\u00a0 I will proceed with two presentation sessions:* Session 1Friday, 08 December @ 12:00 - 14:00* Session 2Tuesday, 12 December @ 14:00 - 16:00Istrongly encourageattending session #1 if you can.\u00a0 This will get this important milestone out of the way as well as give you an opportunity to get feedback.\u00a0 It might also give you suggestions that you may be able to incorporate into final tweaks or suggestions.\u00a0 Butthere will be no penalty or scoring preference to either session.Use the same zoom meeting below for both sessions.I apologize again for the scheduling mix-up.\u00a0 Please reach out (as a group) with a private post if you have any concerns or questions.Brandon Franzke is inviting you to a scheduled Zoom meeting.\n\nTopic: EE 641 - Project presentations\nTime: Dec 8, 2023 12:00 Pacific Time (US and Canada)\n      Dec 12, 2023 14:00 Pacific Time (US and Canada)\n\nJoin Zoom Meeting\nhttps://usc.zoom.us/j/98905185226?pwd=MU45N25MTDA5aTMxc0x6YnJQbFhhZz09\n\nMeeting ID: 989 0518 5226\nPasscode: 216874",
+            "subject": "Project presentations (2)"
+        },
+        "folders": [
+            "logistics",
+            "project"
+        ],
+        "id": "lpw4s10gnty27t",
+        "id_c": 48,
+        "time": "2023-12-08T04:32:28Z",
+        "type": "note",
+        "vote": 0
+    }
+]
