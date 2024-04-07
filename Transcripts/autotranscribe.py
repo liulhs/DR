@@ -1,69 +1,71 @@
-import json
-from pydub import AudioSegment
-import whisper
+import os
 from pathlib import Path
+from pydub import AudioSegment
+from openai import OpenAI
+import re
 
-def transcribe_to_json_and_txt(mp4_file_path, json_output_path, txt_output_path, chunk_length_ms=60000):
-    # Load the video file and convert it to audio
-    video = AudioSegment.from_file(mp4_file_path, format="mp4")
+def transcribe_to_file(input_file_path, output_folder_path, model_name="whisper-1", chunk_length_ms=60000):
+    # Ensure output folder exists
+    output_folder = Path(output_folder_path)
+    output_folder.mkdir(parents=True, exist_ok=True)
+    
+    # Load and convert the video file to audio
+    video = AudioSegment.from_file(str(input_file_path), format="mp4")
     audio = video.set_channels(1).set_frame_rate(16000).set_sample_width(2)
-    audio.export("audio.mp3", format="mp3")
+    temp_audio_path = output_folder / "temp_audio.mp3"
+    audio.export(str(temp_audio_path), format="mp3")
+    
+    # Initialize OpenAI client
+    client = OpenAI()
 
-    # Define helper functions
-    def chunk_audio(file_path, chunk_length_ms=60000):
-        audio = AudioSegment.from_file(file_path, format="mp3")
+    def chunk_audio(file_path):
+        audio = AudioSegment.from_file(str(file_path), format="mp3")
         length_audio = len(audio)
-        chunks = []
         for i in range(0, length_audio, chunk_length_ms):
-            chunks.append(audio[i:i+chunk_length_ms])
-        return chunks
+            yield audio[i:i+chunk_length_ms]
 
     def format_timestamp(seconds):
         hours, remainder = divmod(int(seconds), 3600)
         minutes, seconds = divmod(remainder, 60)
-        return f"[{hours:02d}:{minutes:02d}:{seconds:02d}]"
+        return f"{hours:02d}:{minutes:02d}:{seconds:02d}"
+    
+    json_output = []
+    txt_output_path = output_folder / "transcription_output.txt"
+    
+    start_time = 0
+    with txt_output_path.open('w') as txt_file:
+        for i, chunk in enumerate(chunk_audio(temp_audio_path)):
+            temp_chunk_path = output_folder / f"temp_chunk_{i}.mp3"
+            chunk.export(str(temp_chunk_path), format="mp3")
 
-    def transcribe_chunk(chunk, model, start_time):
-        temp_file = Path("temp_chunk.mp3")
-        chunk.export(temp_file, format="mp3")
-        result = model.transcribe(temp_file)
-        temp_file.unlink()  # Removes the file
+            with open(temp_chunk_path, "rb") as audio_file:
+                print(f"Transcribing chunk {i+1}...")
+                transcript = client.audio.transcriptions.create(
+                    model=model_name, 
+                    file=audio_file
+                )
 
-        transcriptions = []
-        for segment in result['segments']:
-            timestamp = format_timestamp(start_time + segment['start'])
-            transcriptions.append(f"{timestamp} {segment['text']}")
+            temp_chunk_path.unlink()  # Remove temp chunk file
+            
+            sentences = re.split(r'(?<!\w\.\w.)(?<![A-Z][a-z]\.)(?<=\.|\?)\s', transcript.text)
+            chunk_duration = len(chunk) / 1000  # Duration in seconds
+            sentence_duration = chunk_duration / len(sentences)
 
-        return '\n'.join(transcriptions), start_time + result['duration']
+            for sentence in sentences:
+                timestamp = format_timestamp(start_time)
+                txt_file.write(f"{timestamp} {sentence}\n")
+                json_output.append({"timestamp": timestamp, "text": sentence})
+                start_time += sentence_duration
+    
+    # Export JSON transcription
+    json_output_path = output_folder / "transcription_output.json"
+    with json_output_path.open('w') as json_file:
+        import json
+        json.dump(json_output, json_file, indent=4)
+    
+    # Clean up temp audio file
+    temp_audio_path.unlink()
 
-    def transcribe_audio(file_path, chunk_length_ms=60000):
-        model = whisper.load_model("base")  # or any other model size
-        audio_chunks = chunk_audio(file_path, chunk_length_ms)
-
-        file_path = Path(file_path)
-        output_file = file_path.parent / "transcription_output.txt"
-
-        start_time = 0
-        with output_file.open('w') as f:
-            for i, chunk in enumerate(audio_chunks):
-                try:
-                    print(f"Transcribing chunk {i+1}/{len(audio_chunks)}...")
-                    transcription, start_time = transcribe_chunk(chunk, model, start_time)
-                    f.write(transcription + '\n')
-                except Exception as e:
-                    print(f"Error transcribing chunk {i+1}: {e}")
-
-    # Transcribe audio and save to JSON and TXT
-    transcribe_audio("audio.mp3", chunk_length_ms)
-
-    # Save transcription to JSON
-    with open(json_output_path, 'w') as json_file:
-        json.dump({"transcription": "transcription_output.txt"}, json_file)
-
-    # Copy TXT transcription to specified output path
-    txt_output_path = Path(txt_output_path)
-    output_txt_path = txt_output_path.parent / "transcription_output.txt"
-    output_txt_path.rename(txt_output_path)
 
 # Usage example
-transcribe_to_json_and_txt("F:\Study\Github_Repos\DR\Transcripts\Discussion_Week8.mp4", "output/transcription.json", "output/transcription.txt")
+transcribe_to_file("/home/jason/Desktop/Study/DR/Transcripts/Discussion_Week8.mp4", "/home/jason/Desktop/Study/DR/Transcripts/output")
