@@ -1,3 +1,5 @@
+At the start of every line, there's a timestamp that represents the time the line is in the video.
+
 00:00:00 Hello, and welcome to Introduction to Generative AI.
 00:00:07 My name is Dr. Gwendolyn Stripling, and I am the Artificial Intelligence Technical Curriculum Developer here at Google Cloud.
 00:00:15 In this course, you learn to define generative AI, explain how generative AI works, describe generative AI model types, and describe generative AI applications.
