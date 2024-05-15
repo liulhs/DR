@@ -1,0 +1,418 @@
+[
+    {
+        "timestamp": "00:00:00",
+        "text": "We've now seen both the primal and dual forms of the support vector machine classifier."
+    },
+    {
+        "timestamp": "00:00:10",
+        "text": "In this part of the lecture, we'll look at one of the ideas that makes support vector machines so popular, called the kernel trick."
+    },
+    {
+        "timestamp": "00:00:20",
+        "text": "Up until now, we've looked at linear SVMs, meaning that the classifier was effectively a simple perceptron, in other words, linear weights W on the input features, resulting in a linear decision boundary."
+    },
+    {
+        "timestamp": "00:00:30",
+        "text": "We developed the Lagrangian optimization form, which led us to an equivalent dual formation of the learning process, in which the objective function depended on the matrix of dot products between each pair of data points, xi and xj, called the Gram matrix."
+    },
+    {
+        "timestamp": "00:00:40",
+        "text": "This value can be viewed as measuring a form of angular similarity between xi and xj, in the sense that it's zero if xi and xj are orthogonal directions, and large if they're in the same direction."
+    },
+    {
+        "timestamp": "00:00:50",
+        "text": "Now, recall what we did for linear..."
+    },
+    {
+        "timestamp": "00:01:00",
+        "text": "classifiers when we wanted to increase their representational complexity."
+    },
+    {
+        "timestamp": "00:01:08",
+        "text": "If our data were not linearly separable in the original feature, x1, we could add additional deterministic features, for example, going from one feature x1 to two features x1 and x2, equaling x1 squared, so that the data all lie on this curve."
+    },
+    {
+        "timestamp": "00:01:17",
+        "text": "Then in our new higher dimensional space, the data were more likely to be linearly separable."
+    },
+    {
+        "timestamp": "00:01:25",
+        "text": "Let's see how this affects the dual form of the SVM."
+    },
+    {
+        "timestamp": "00:01:34",
+        "text": "Now using a feature transform phi, we transform xi and xj to find their new feature vectors."
+    },
+    {
+        "timestamp": "00:01:42",
+        "text": "Then the dual form involves a dot product between these transformed vectors."
+    },
+    {
+        "timestamp": "00:01:51",
+        "text": "As an illustrative example, let's consider the polynomial features given here, so 1, x1, x2, x1 squared, x2 squared."
+    },
+    {
+        "timestamp": "00:01:59",
+        "text": "squared, cross products, and so on."
+    },
+    {
+        "timestamp": "00:02:10",
+        "text": "We'll see the purpose of these scaling root 2 terms shortly."
+    },
+    {
+        "timestamp": "00:02:20",
+        "text": "So for the dual form, we need to compute the inner product of two expanded feature vectors, phi of xi and phi of xj."
+    },
+    {
+        "timestamp": "00:02:30",
+        "text": "Let's denote xi and xj as just a and b for convenience."
+    },
+    {
+        "timestamp": "00:02:40",
+        "text": "And listing out our features for both points, we can compute them here."
+    },
+    {
+        "timestamp": "00:02:50",
+        "text": "And we find that the dot product is the sum 1 from the product of 1's, plus the sum of 2 times a1 b1 here, plus 2 a2 b2 here, and so on, forming this term, plus a1 squared b1 squared here, a2 squared b2 squared, forming this term, plus 2 a1 a2 b1 b2, and so on for all pairs here."
+    },
+    {
+        "timestamp": "00:03:00",
+        "text": "If we then manipulate this sum algebraically, we find that it's equivalent to a much simpler computation."
+    },
+    {
+        "timestamp": "00:03:10",
+        "text": "1 plus the sum of ajbj squared."
+    },
+    {
+        "timestamp": "00:03:20",
+        "text": "Or, take the dot product of the original feature vectors a and b, add 1, and then square the whole thing."
+    },
+    {
+        "timestamp": "00:03:30",
+        "text": "This is straightforward to verify with a bit of effort, and a similar relationship holds for higher degrees as well."
+    },
+    {
+        "timestamp": "00:03:40",
+        "text": "Denoting this value k of ab, instead of actually taking our higher dimensional feature transform, and then computing the inner products of those vectors, we could instead just take this very simple nonlinear function of similarity, also called a kernel, and compute it in time linear in only the original number of features of a and b, regardless of how many features our expansion phi has."
+    },
+    {
+        "timestamp": "00:03:50",
+        "text": "So, for example, for quadratic features,"
+    },
+    {
+        "timestamp": "00:04:00",
+        "text": "Phi of a and phi of b have O of n squared features, and computing their dot product takes O of n squared time, but computing it this way instead takes only O of n computations."
+    },
+    {
+        "timestamp": "00:04:08",
+        "text": "In fact, it turns out that this concept can be made quite general."
+    },
+    {
+        "timestamp": "00:04:17",
+        "text": "Any non-linear function k of x, x prime, which satisfies a particular condition called Mercer's condition, can be viewed as corresponding to the dot product between transformed vectors phi of x, for some transformation phi."
+    },
+    {
+        "timestamp": "00:04:25",
+        "text": "Then the similarity function k is referred to as a kernel or a Mercer kernel."
+    },
+    {
+        "timestamp": "00:04:34",
+        "text": "As a side note, Mercer's condition is effectively asserting that the gram matrix k has a positive semi-definite structure for any possible data sets."
+    },
+    {
+        "timestamp": "00:04:42",
+        "text": "For polynomial features, we saw there was a direct correspondence between a particular k, which we showed, and a particular feature vector phi."
+    },
+    {
+        "timestamp": "00:04:51",
+        "text": "However, for an arbitrary..."
+    },
+    {
+        "timestamp": "00:04:59",
+        "text": "function k, it may be quite hard to find exactly what feature vector phi corresponds to that k."
+    },
+    {
+        "timestamp": "00:05:06",
+        "text": "In fact, many useful kernel functions correspond to infinite dimensional phi vectors."
+    },
+    {
+        "timestamp": "00:05:13",
+        "text": "So, using such a kernel is equivalent to a linear classifier with an infinite number of constructed features."
+    },
+    {
+        "timestamp": "00:05:20",
+        "text": "Yet, it's not computationally harder, as long as k itself is easy to compute."
+    },
+    {
+        "timestamp": "00:05:26",
+        "text": "Then, we can compute the gram matrix in O of m squared time and space, and solve the resulting quadratic program in quadratic to cubic time."
+    },
+    {
+        "timestamp": "00:05:33",
+        "text": "This is really an extreme of the n much much greater than m, number of features much much greater than the number of data domain."
+    },
+    {
+        "timestamp": "00:05:40",
+        "text": "Our computation no longer depends on the number of features n, and so making n go to infinity is not a problem."
+    },
+    {
+        "timestamp": "00:05:46",
+        "text": "There are a number of common kernel choices."
+    },
+    {
+        "timestamp": "00:05:53",
+        "text": "Here, I'll show a few examples and plot an example of the kernel function value for a single scalar input feature x."
+    },
+    {
+        "timestamp": "00:06:00",
+        "text": "to show how the kernel measures similarity in the original space."
+    },
+    {
+        "timestamp": "00:06:05",
+        "text": "We saw the polynomial kernel."
+    },
+    {
+        "timestamp": "00:06:10",
+        "text": "For degree d, it corresponds to a particular degree d expansion of the features."
+    },
+    {
+        "timestamp": "00:06:16",
+        "text": "Looking at the kernel value here for d equals 3, we can see that data are in the direction of x from the origin get larger values."
+    },
+    {
+        "timestamp": "00:06:21",
+        "text": "So here I have data point x equals 1."
+    },
+    {
+        "timestamp": "00:06:27",
+        "text": "This is the similarity to that point."
+    },
+    {
+        "timestamp": "00:06:32",
+        "text": "Data that are in the same direction as x, this way, get larger values."
+    },
+    {
+        "timestamp": "00:06:38",
+        "text": "And the further they are in that direction, the more positive the values are."
+    },
+    {
+        "timestamp": "00:06:43",
+        "text": "Perhaps the most common kernel function is the radial basis function, or Gaussian similarity kernel."
+    },
+    {
+        "timestamp": "00:06:49",
+        "text": "This kernel results in high values near the point x, falling off as a Gaussian with some spread, sigma, as we move away from that point."
+    },
+    {
+        "timestamp": "00:06:54",
+        "text": "Here, the parameter sigma can be used to control over and underfitting."
+    },
+    {
+        "timestamp": "00:06:59",
+        "text": "chosen very large, all data will look similar to the kernel."
+    },
+    {
+        "timestamp": "00:07:08",
+        "text": "For sigma small, only a few points will look similar to any particular test point."
+    },
+    {
+        "timestamp": "00:07:17",
+        "text": "This is in addition to the value R in the dual optimization we discussed before, which effectively controls the severeness of the penalty for misclassified points."
+    },
+    {
+        "timestamp": "00:07:25",
+        "text": "One can also use hyperbolic tangent-like similarity functions which transition from 0 to 1 as they move in the direction of the point x, so that data that are sufficiently in the direction of x, however far in that direction, all get equivalently high similarity values."
+    },
+    {
+        "timestamp": "00:07:34",
+        "text": "Kernels are a major strength of support vector machines and systems with small to moderate numbers of data."
+    },
+    {
+        "timestamp": "00:07:42",
+        "text": "While radial basis functions are probably the most common choice, a powerful feature of support vector machines is that we can design similarity functions based on the task at hand."
+    },
+    {
+        "timestamp": "00:07:51",
+        "text": "So, for example, we can develop"
+    },
+    {
+        "timestamp": "00:07:59",
+        "text": "similarity measures for, say, string-like data, such as text or DNA sequences, that work by performing string matching and measuring a sequence-like similarity that includes the potential for insertions, deletions, and so on."
+    },
+    {
+        "timestamp": "00:08:08",
+        "text": "In practice, such functions may not actually be Mercer kernels."
+    },
+    {
+        "timestamp": "00:08:17",
+        "text": "So they may not correspond to any particular feature transform, but often still seem to perform very well empirically."
+    },
+    {
+        "timestamp": "00:08:25",
+        "text": "For extremely large data sets, however, kernel forms of support vector machines are less common, and linear SVMs with explicit features are more typical."
+    },
+    {
+        "timestamp": "00:08:34",
+        "text": "For these data sets, the O of M squared cost of working in a dual may be too much, and the primal form, optimizing the hinge loss directly, using, for example, stochastic gradient descent, is preferred."
+    },
+    {
+        "timestamp": "00:08:42",
+        "text": "A quick comment on the memory behavior of linear and kernel SVMs as well."
+    },
+    {
+        "timestamp": "00:08:51",
+        "text": "For linear SVMs, we typically remember the actual linear parameters, in other words, the weight."
+    },
+    {
+        "timestamp": "00:08:59",
+        "text": "and the bias term, so we have n plus 1 parameters, no matter how many data we have."
+    },
+    {
+        "timestamp": "00:09:09",
+        "text": "Alternatively, as we saw, we could simply store the support vectors, the data points that contribute to the decision boundary, since, as we show, the decision is also computable using the dot products between the test point and the support vectors."
+    },
+    {
+        "timestamp": "00:09:19",
+        "text": "For kernelized SVMs, on the other hand, the kernel function may correspond to a high or even infinite dimensional feature transform."
+    },
+    {
+        "timestamp": "00:09:29",
+        "text": "We have no choice but to store the actual support vector data and compute their similarity to new test points using the kernel function."
+    },
+    {
+        "timestamp": "00:09:39",
+        "text": "Thus, the kernelized SVM is usually more of an instance-based learner, which memorizes certain instances of the training data to make a decision, so think like nearest neighbors, rather than a parametric one that saves some fixed length vector of parameters, like a standard perceptron."
+    },
+    {
+        "timestamp": "00:09:49",
+        "text": "In fact, the kernel trick can be applied in many linear systems."
+    },
+    {
+        "timestamp": "00:09:59",
+        "text": "leading to powerful nonlinear prediction methods."
+    },
+    {
+        "timestamp": "00:10:08",
+        "text": "Here, I'll show how to use the kernel trick in least squares regression to increase its representational power."
+    },
+    {
+        "timestamp": "00:10:17",
+        "text": "First, recall the standard L2 regularized linear regression solution theta equals yx x transpose x plus alpha i inverse where alpha i is the regularization term."
+    },
+    {
+        "timestamp": "00:10:25",
+        "text": "We'll manipulate this form to show how it can be expressed in terms of the gram matrix K which allows us to substitute an arbitrary kernel function in the computation of the elements of K."
+    },
+    {
+        "timestamp": "00:10:34",
+        "text": "Note that non-zero regularization is critical to this trick since for complex kernels, the effective number of features n may be much larger than m."
+    },
+    {
+        "timestamp": "00:10:42",
+        "text": "So, alpha is critical in making the solution well-posed."
+    },
+    {
+        "timestamp": "00:10:51",
+        "text": "First, we'll rearrange by moving the inverse over to the left-hand side."
+    },
+    {
+        "timestamp": "00:10:59",
+        "text": "Now, distribute the product, move theta x transpose x back to the right-hand side, and factor out the matrix x."
+    },
+    {
+        "timestamp": "00:11:08",
+        "text": "Let's define an intermediate vector r."
+    },
+    {
+        "timestamp": "00:11:17",
+        "text": "This is just the residual vector, r minus our prediction, theta x transpose, scaled by 1 over alpha."
+    },
+    {
+        "timestamp": "00:11:25",
+        "text": "Just by definition, theta equals r times x, from here."
+    },
+    {
+        "timestamp": "00:11:34",
+        "text": "Also by definition, alpha r equals the residual, y minus theta x transpose."
+    },
+    {
+        "timestamp": "00:11:42",
+        "text": "Plugging in theta equals r x to this equation, we get alpha r equals y minus r x transpose x."
+    },
+    {
+        "timestamp": "00:11:51",
+        "text": "We can then rearrange and solve for..."
+    },
+    {
+        "timestamp": "00:11:59",
+        "text": "R, which gives a form similar to before, but it's now in terms of X X transpose, the M by M gram matrix of dot product similarities between each pair of data points."
+    },
+    {
+        "timestamp": "00:12:11",
+        "text": "So denoting X X transpose by K, K is an M by M matrix made up of ijth entry is Xi dot Xj. Then our prediction at a new test point, say X tilled, is just the dot product between theta and X tilled."
+    },
+    {
+        "timestamp": "00:12:23",
+        "text": "We know that theta equals R X."
+    },
+    {
+        "timestamp": "00:12:35",
+        "text": "So that's R X times X tilled, which is a sum over data points J of RJ times the dot product of data point J with X tilled or a sum of RK times the similarity between X, J and X tilled in this dot product form."
+    },
+    {
+        "timestamp": "00:12:47",
+        "text": "If we replace K with a nonlinear similar"
+    },
+    {
+        "timestamp": "00:12:59",
+        "text": "similarity kernel, we can solve for r in the same way, so r is a vector with one entry per data point, and then use it and the training data to predict a new point using this form."
+    },
+    {
+        "timestamp": "00:13:09",
+        "text": "As one side note, unlike the alpha before, here r will not be sparse, it will be non-zero for all the data."
+    },
+    {
+        "timestamp": "00:13:19",
+        "text": "Another common support vector regression method uses a hinge-like regression loss that's 0 up to some amount of error, and this allows some of the r values to be 0 as well."
+    },
+    {
+        "timestamp": "00:13:29",
+        "text": "Another point worth mentioning is the similarity of this prediction rule to methods like locally-weighted regression."
+    },
+    {
+        "timestamp": "00:13:39",
+        "text": "In summary, support vector machines are a variant of linear classifier that adheres to the large margin principle, that we should prefer a classifier that's as far from the data as possible."
+    },
+    {
+        "timestamp": "00:13:49",
+        "text": "In linearly separable"
+    },
+    {
+        "timestamp": "00:13:59",
+        "text": "data, we saw how to formulate this as a standard quadratic program, we saw how to optimize it using its Lagrangian, and we saw the form of the dual quadratic program, which involves only dot product similarity between each pair of data points."
+    },
+    {
+        "timestamp": "00:14:09",
+        "text": "The soft margin variant for non separable data includes a penalty for margin violations or slack term."
+    },
+    {
+        "timestamp": "00:14:19",
+        "text": "We saw that this is equivalent to using a simple surrogate loss called the hinge loss and applying a form of L2 regularization."
+    },
+    {
+        "timestamp": "00:14:29",
+        "text": "Again, the optimization has a dual form that involves only pairwise similarity between the data."
+    },
+    {
+        "timestamp": "00:14:39",
+        "text": "Finally, we saw how we could exploit these dual forms to create classifiers that work implicitly in very high dimensional feature spaces by defining nonlinear similarity kernels that measure the dot product in those spaces."
+    },
+    {
+        "timestamp": "00:14:49",
+        "text": "This makes our classifier independent of the implicit feature dimension, but computationally quadratic to cubic in the amount of training"
+    },
+    {
+        "timestamp": "00:14:59",
+        "text": "data, so it's most useful for small to moderate datasets."
+    }
+]

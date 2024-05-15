@@ -1,0 +1,44 @@
+00:00:00 Linear regression is a simple and useful technique for prediction that will also help us illustrate many important principles of machine learning.
+00:00:06 Recall our supervised learning paradigm.
+00:00:13 We have some observed features, X, which we would like to use to predict a target value, Y.
+00:00:20 We create a flexible function called a learner, whose input-output relationship can be adjusted through some parameters, theta.
+00:00:26 Then, a collection of training examples are used to fit the parameters until the learner is able to make good predictions on those examples.
+00:00:33 In linear regression, our learner consists of an explicit functional form.
+00:00:40 In other words, we define a family of functions parameterized by theta, and any particular value of theta defines a member of that family.
+00:00:46 So, for example, we would compute theta0 plus theta1 x1 to produce an explicit linear relationship between the feature X and our target Y.
+00:00:53 Then, learning finds a good member within that family.
+00:00:59 meaning a good value for the thetas, using the training data set D, so that our predictions match those points.
+00:01:06 Some quick notation.
+00:01:13 Our prediction Y hat is a linear function.
+00:01:20 Theta zero plus theta one times feature one plus theta two times feature two, and so on.
+00:01:26 And for notational compactness, we'll define a feature zero, X zero for every data point, that always takes on value one.
+00:01:33 Then Y hat is simply the vector product between a parameter vector theta, consisting of theta zero through theta N, and a feature vector X, consisting of this new feature zero, the constant one, concatenated with our N features.
+00:01:40 We also need to define what it means to predict well.
+00:01:46 Define the error residual to be the signed error between the true or desired target Y and our predicted value Y hat.
+00:01:53 If our prediction is good, these values shown here is.
+00:02:00 blue bars from our prediction, the black line to the true value y, will be small on average.
+00:02:07 We can measure their average squared magnitude, for example, the mean squared error.
+00:02:15 So 1 over m times the sum of the differences between the true values in our predictions.
+00:02:22 We'll define our cost function, J of theta, that measures how good of a fit any particular setting of theta is by summing up the squared error residuals over the training data.
+00:02:30 Well, we could easily choose a different cost function, J, and we'll discuss some at another lecture.
+00:02:37 Mean squared error is a common choice since it's computationally convenient, and it corresponds to a Gaussian model on the noise that we're unable to predict.
+00:02:45 If this noise is the sum of many small influences, then the central limit theorem suggests that such a Gaussian model might be a good choice.
+00:02:52 Since we're using MATLAB and its vector and matrix operations, let's rewrite this function J in a more.
+00:03:00 a convenient vector and matrix form, where we use the parameter vector, theta, and a vector of our targets, a column vector of the target values, and a data matrix, X, where each row corresponds to a data example, so example one through example N, and each column corresponds to a different feature, so the constant feature, and then feature one through N.
+00:03:15 Then our cost function is just the inner product of the error residuals, so the error residual vector is Y minus our prediction vector, theta times X transpose, and taking the dot product, we get the sum over all the data points.
+00:03:30 In MATLAB, this is very convenient.
+00:03:45 We can just compute the error residual E as the difference between the vector Y and the vector theta times X transpose, and then we compute its total average magnitude by, say, E.
+00:04:00 times e transpose divided by M.
+00:04:07 So now that we've chosen a form for the learner and a cost function, learning for linear regression just comes down to selecting a value for theta that scores well.
+00:04:15 The cost function J of theta is a function of the parameter values theta, so we can plot it in a parameter space.
+00:04:22 Suppose we have a linear function, theta 0 plus theta 1 X, so we have two parameters.
+00:04:30 So we plot two dimensions for that and one dimension for J, so it's a 3D plot.
+00:04:37 The 3D is a little difficult to look at, so we can plot the value of J as a color with blue being small values and red large, and we get the following color map.
+00:04:45 Even this is often inconvenient to draw, so we'll often just visualize the contours or isosurfaces of J.
+00:04:52 So for any value of J, there's a surface that's formed by the
+00:05:00 values of J of theta that take on that particular setting.
+00:05:07 And if we just find that set of points, we can plot that with a red line.
+00:05:15 And then plot those contours on a space where just theta zero and theta one are expressed, showing a sort of topological map of the function J, where here the minimum is in this place and increases happen with the contour lines.
+00:05:23 Given a representation of the cost function J of theta, the problem of learning is converted into a basic optimization problem.
+00:05:30 How can we find the values of theta that minimize J of theta?
+00:05:38 In the next segments, we'll explore several methods of doing so.

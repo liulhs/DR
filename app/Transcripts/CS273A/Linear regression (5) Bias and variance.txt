@@ -1,0 +1,38 @@
+00:00:00 A useful way of understanding underfitting and overfitting is as a balance between bias and variance.
+00:00:10 The term inductive bias refers to the set of assumptions that let us extrapolate from examples we have seen to similar examples that we have not.
+00:00:20 Bias is what makes us prefer one model over another, usually framed as types of functions that we think might be likely, like polynomial functions, or assumptions about functions, like smoothness.
+00:00:30 Some notion of bias is intrinsically necessary for learning, since there are many possible perfectly valid explanations of the data.
+00:00:40 For example, these data points might be explained equally well by a simple function that uses noise to explain the errors in its predictions, or as a complex function that needs no noise to explain them.
+00:00:50 Inductive bias is what lets us select between these equally valid explanations for the thing we think is most likely.
+00:01:00 The principle of Occam's razor leads us to prove the simpler of these two models typically.
+00:01:05 The variance of an estimator is another important effect.
+00:01:10 Imagine we had several draws of data sets, perhaps made in different universes, keeping everything else the same.
+00:01:16 So we'd go out to collect our data, and in these different universes, we happened to pull a different set of people or other examples.
+00:01:21 So the system that gave rise to these data is exactly the same, but the measurement set is a little bit different.
+00:01:27 So in Universe 1, we get red points.
+00:01:32 In Universe 2, we get these green points.
+00:01:38 In Universe 3, we get these blue points, but all of them from the same data-generating system.
+00:01:43 In each universe, we go out and we learn a model for these data, and the question is, how different are they?
+00:01:49 For simple models, we'll find that they're close to the same.
+00:01:54 So if we learn a constant model, we find the blue line, green line, and red line are all quite close to one another.
+00:01:59 In this case, the prediction is the average of the data, and the averages are all quite similar.
+00:02:10 A more complex model, however, will fit the training data more closely, and as a result, they'll tend to differ more and more across the data sets.
+00:02:20 So, for example, these lines, red, green, and blue, are slightly more different, and by the time we learn cubics or higher-order functions, we find that the shapes of the functions we learn are quite different across the data sets.
+00:02:30 Since we could just as easily have ended up with any of these sets, if our predictions vary too wildly, that suggests that our performance on new data will also be poor, since, for example, the green curve is not close to the red curve, and hence, it's also not close to the red points, which we could easily have gotten for test data in the future.
+00:02:40 High variance is exactly the overfitting effect.
+00:02:50 We do better on the data that we see than we will on future data.
+00:03:00 future data, alternative samples.
+00:03:06 To balance these effects, we need to choose the right model complexity.
+00:03:13 As we've seen, one approach is to use holdout data.
+00:03:19 So we split the data into a validation or test set that's not seen by the model and then use it to estimate the model's future performance.
+00:03:26 We can then compare several different models and complexities and choose the one that performs the best.
+00:03:33 All good competitions use this formulation, often with multiple splits.
+00:03:39 For example, one test set may be used to give feedback, like a leaderboard, but since this can then be optimized, since the predictors can see its value and select models that will do well on it, another test set needs to be held out for the final scoring.
+00:03:46 Furthermore, even within the training set, you may want to split the data one or more times to do your own model selection and evaluation as well.
+00:03:53 So what can we do about under and overfitting?
+00:03:59 If we believe our model is underfitting, we can reduce the underfitting by increasing the complexity of the model.
+00:04:08 For example, we could add extra features and hence increase the number of parameters.
+00:04:16 To reduce overfitting, we need to decrease the complexity of the model, often by increasing our bias, say, reducing the number of features, for example, feature selection, or even just forcing our model to underperform and hence fail to memorize the data.
+00:04:24 One trivial historical way of doing this is a technique called early stopping.
+00:04:32 During optimization, we simply don't fully optimize the function, but we stop after a fixed number of iterations, say.
+00:04:40 But a more principled and common way is to add a regularization penalty, which we'll discuss in the next module.

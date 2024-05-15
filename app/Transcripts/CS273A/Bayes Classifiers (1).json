@@ -1,0 +1,374 @@
+[
+    {
+        "timestamp": "00:00:00",
+        "text": "Next, we'll look at a technique for classification with a more functional form and with motivation rooted in probability theory called Bayes classifiers."
+    },
+    {
+        "timestamp": "00:00:06",
+        "text": "Let's start by considering a basic classifier, where we'd like to predict a discrete-valued Y, let's say binary, using some feature X."
+    },
+    {
+        "timestamp": "00:00:13",
+        "text": "And here we'll assume that the feature X is a discrete variable."
+    },
+    {
+        "timestamp": "00:00:20",
+        "text": "We have a collection of training data consisting of joint observations of that feature and the outcome Y that we'd like to predict."
+    },
+    {
+        "timestamp": "00:00:26",
+        "text": "And the classifier is just a mapping from observed values of X into predicted values of Y."
+    },
+    {
+        "timestamp": "00:00:33",
+        "text": "So, in this case, we can think of this function, our classifier, as being a contingency table."
+    },
+    {
+        "timestamp": "00:00:40",
+        "text": "For every value of X, we're going to have some prediction Y."
+    },
+    {
+        "timestamp": "00:00:46",
+        "text": "So, here's an example, maybe."
+    },
+    {
+        "timestamp": "00:00:53",
+        "text": "Next, we'll have a credit rating problem, where we'd like to predict the credit quality or the risk of..."
+    },
+    {
+        "timestamp": "00:00:59",
+        "text": "some user as being either bad or good, so 0 or 1."
+    },
+    {
+        "timestamp": "00:01:10",
+        "text": "And we'll just get a simple discrete measurement X that's a discretized version of their income into just categories low, medium, or high."
+    },
+    {
+        "timestamp": "00:01:20",
+        "text": "So we might have a collection of data which we can simply assemble in a table right here where we have 42 observations of people in the low income whose credit turned bad, meaning they defaulted, and 15 people in that group who did not default, so they should have good credit."
+    },
+    {
+        "timestamp": "00:01:30",
+        "text": "If we just list all of our data points, we get entries in that table for every value of X and the outcome of Y that's associated with each data point."
+    },
+    {
+        "timestamp": "00:01:40",
+        "text": "So this is the number of entries in our data set that matched condition income low and poor risk."
+    },
+    {
+        "timestamp": "00:01:50",
+        "text": "So how can we use this to make the most"
+    },
+    {
+        "timestamp": "00:02:00",
+        "text": "number of correct predictions."
+    },
+    {
+        "timestamp": "00:02:08",
+        "text": "It's pretty clear that if we were to just choose the outcome that has more data associated with it, that would minimize the number of incorrect predictions we would have on the training data."
+    },
+    {
+        "timestamp": "00:02:17",
+        "text": "So, for instance, for X equals zero, low income, we had 42 examples where we'd like to predict not to make a loan, and 15 examples where we would have liked to predict to make a loan."
+    },
+    {
+        "timestamp": "00:02:25",
+        "text": "So if we want to minimize the number of errors we make, we should predict bad, because we'll get 42 of our training data correct and 15 of our training data incorrect."
+    },
+    {
+        "timestamp": "00:02:34",
+        "text": "Similarly, for each line of this table, X equals one, we could choose the one with the most examples, most training examples, and X equals two, we could choose the outcome with the most training examples."
+    },
+    {
+        "timestamp": "00:02:42",
+        "text": "Instead of considering the number of training examples, it's often useful to think of this in terms of probability."
+    },
+    {
+        "timestamp": "00:02:51",
+        "text": "So if we"
+    },
+    {
+        "timestamp": "00:03:00",
+        "text": "normalize each row, we have then the probability that Y equals bad given that we observe X equals 0 empirically in the data."
+    },
+    {
+        "timestamp": "00:03:07",
+        "text": "So within the data 73.7 percent of the time when we observe X equals 0, we have that Y equals bad."
+    },
+    {
+        "timestamp": "00:03:15",
+        "text": "And 26 percent of the time when we observe X equals 1, we have Y equals good."
+    },
+    {
+        "timestamp": "00:03:22",
+        "text": "So this is a table of entries whose probability is the probability of that outcome Y given our observation X."
+    },
+    {
+        "timestamp": "00:03:30",
+        "text": "And again our decision, our actual classifier, is just choosing the most likely of these Y's."
+    },
+    {
+        "timestamp": "00:03:37",
+        "text": "So we'll use this to generalize beyond discrete features in a form called the Bayes classifier."
+    },
+    {
+        "timestamp": "00:03:45",
+        "text": "To start let me describe Bayes rule, which is a rule from probability theory that tells us how to combine the probabilities of different events to calculate conditional probabilities."
+    },
+    {
+        "timestamp": "00:03:52",
+        "text": "So suppose we have two events were"
+    },
+    {
+        "timestamp": "00:04:00",
+        "text": "One is that I wake up with a headache, and the other is that I have the flu."
+    },
+    {
+        "timestamp": "00:04:05",
+        "text": "And we have probabilities associated with this."
+    },
+    {
+        "timestamp": "00:04:10",
+        "text": "So we know that about a tenth of the time, I have a headache."
+    },
+    {
+        "timestamp": "00:04:15",
+        "text": "More rarely, about one time in 40, I actually have the flu."
+    },
+    {
+        "timestamp": "00:04:20",
+        "text": "But we know that when I have the flu, I often have a headache."
+    },
+    {
+        "timestamp": "00:04:25",
+        "text": "So the probability of having a headache given that I am sick with the flu is a half."
+    },
+    {
+        "timestamp": "00:04:30",
+        "text": "What we're really interested in is computing the inverse probability."
+    },
+    {
+        "timestamp": "00:04:35",
+        "text": "So given that I observe a syndrome, like I have a headache, what's the probability of my underlying cause, that I have the flu?"
+    },
+    {
+        "timestamp": "00:04:40",
+        "text": "We can calculate this in two steps."
+    },
+    {
+        "timestamp": "00:04:45",
+        "text": "First, we'll calculate the probability of having both a headache and the flu."
+    },
+    {
+        "timestamp": "00:04:50",
+        "text": "And then we'll use that to calculate the probability of having the flu, given that we observe that I have a headache."
+    },
+    {
+        "timestamp": "00:04:55",
+        "text": "By the chain rule of probability, the probability of the outcome, headache and flu."
+    },
+    {
+        "timestamp": "00:05:00",
+        "text": "It's just the probability that I have a flu times the probability that I have a headache given the flu."
+    },
+    {
+        "timestamp": "00:05:08",
+        "text": "And both of these numbers were given in the problem set up, so the probability of having the flu is 1 in 40, and the probability of a headache given a flu is a half, so I can compute this joint probability as 1 in 80."
+    },
+    {
+        "timestamp": "00:05:17",
+        "text": "Then, I can use a similar representation to calculate the probability of having the flu given the headache."
+    },
+    {
+        "timestamp": "00:05:25",
+        "text": "So, that is the probability that I have both, normalized by the probability of having a headache."
+    },
+    {
+        "timestamp": "00:05:34",
+        "text": "So, we just plug in the probability of a headache and flu, and divide by probability of headache, and we find that it's 1 eighth."
+    },
+    {
+        "timestamp": "00:05:42",
+        "text": "In other words, while I relatively rarely have the flu, 1 in 40th, once I observe my symptom of a headache, it becomes more likely, up to 1 eighth."
+    },
+    {
+        "timestamp": "00:05:51",
+        "text": "In other words, given a model of how flus cause headaches, and some background probabilities, I can..."
+    },
+    {
+        "timestamp": "00:06:00",
+        "text": "compute, given an observation like a headache, what's the probability of some underlying unobservable cause that I have the flu?"
+    },
+    {
+        "timestamp": "00:06:06",
+        "text": "So how do we use this for classification?"
+    },
+    {
+        "timestamp": "00:06:13",
+        "text": "Well, we can simply assume that the class is the underlying cause of interest."
+    },
+    {
+        "timestamp": "00:06:20",
+        "text": "So we can learn a probability of each possible class outcome given no observations at all."
+    },
+    {
+        "timestamp": "00:06:26",
+        "text": "So this is, for instance, the fraction of the applicants that have good or bad credit."
+    },
+    {
+        "timestamp": "00:06:33",
+        "text": "And then, for each of these classes, for good credit and for bad credit, we can learn a model for our observations X."
+    },
+    {
+        "timestamp": "00:06:40",
+        "text": "So how likely are we to see this particular feature outcome in users with good credit, and similarly, how likely are we in users with bad credit?"
+    },
+    {
+        "timestamp": "00:06:46",
+        "text": "Then, just using the chain rule of probability, we can expand the joint probability of X and Y in two different ways."
+    },
+    {
+        "timestamp": "00:06:53",
+        "text": "And since we're interested..."
+    },
+    {
+        "timestamp": "00:07:00",
+        "text": "estimating the probability of our class given our observation, we can move P of X over to this side, and this is precisely Bayes' rule."
+    },
+    {
+        "timestamp": "00:07:10",
+        "text": "So the probability of our class given our observation can be expressed as the probability of the observation given the class times the probability overall of each class outcome divided by the probability of that measurement."
+    },
+    {
+        "timestamp": "00:07:20",
+        "text": "And P of X, it's often convenient to expand using the law of complete probability."
+    },
+    {
+        "timestamp": "00:07:30",
+        "text": "So P of X is simply the probability of X and Y jointly having summed over all possible outcomes Y, and the probability of P of X and Y jointly we can write in terms of P of X given Y and P of Y again."
+    },
+    {
+        "timestamp": "00:07:40",
+        "text": "So we'll get the denominator will be a sum over all possible outcomes Y of the product of those two terms."
+    },
+    {
+        "timestamp": "00:07:50",
+        "text": "So the standard way of learning a Bayes classifier is to..."
+    },
+    {
+        "timestamp": "00:08:00",
+        "text": "do these steps."
+    },
+    {
+        "timestamp": "00:08:08",
+        "text": "So, we first learn a model of P of Y, the probability of each class outcome, and then within each class, we estimate a separate probability model, P of X given Y for that particular class."
+    },
+    {
+        "timestamp": "00:08:17",
+        "text": "And we can do that just by splitting up the training data into all the data in which that class occurs, and then learning the model of the feature."
+    },
+    {
+        "timestamp": "00:08:25",
+        "text": "So, if we do this for this example training set, we just look over all the examples where we saw bad and good credit."
+    },
+    {
+        "timestamp": "00:08:34",
+        "text": "We see that P of Y is the fraction of those outcomes with bad credit or the fraction of good credit."
+    },
+    {
+        "timestamp": "00:08:42",
+        "text": "And we can also calculate for each of those conditioned on outcome Y equals 0 or outcome Y equals 1, what's the fraction of times we saw each outcome X."
+    },
+    {
+        "timestamp": "00:08:51",
+        "text": "And then following Bayes' rule, we get exactly the same table we saw before where we've now computed the probability of each class given that observation."
+    },
+    {
+        "timestamp": "00:09:00",
+        "text": "So for discrete measurements x, this is essentially producing the same table we saw before."
+    },
+    {
+        "timestamp": "00:09:06",
+        "text": "The advantage now is that we can use this on non-discrete variables and in other cases as well using generalizations of the model."
+    },
+    {
+        "timestamp": "00:09:12",
+        "text": "So we don't need to restrict ourselves to tabular models of p of x given y."
+    },
+    {
+        "timestamp": "00:09:18",
+        "text": "We can learn any kind of model we'd like."
+    },
+    {
+        "timestamp": "00:09:24",
+        "text": "So if our x is, say, continuous, we can use any density estimate we'd like for p of x given y."
+    },
+    {
+        "timestamp": "00:09:30",
+        "text": "For instance, we might learn a histogram model."
+    },
+    {
+        "timestamp": "00:09:36",
+        "text": "So given the blue class, we might learn some histogram distribution of x's."
+    },
+    {
+        "timestamp": "00:09:42",
+        "text": "Given the red class, we might learn a different histogram model."
+    },
+    {
+        "timestamp": "00:09:48",
+        "text": "We might also learn Gaussian models for each class simply by estimating the parameters of that Gaussian using the training data."
+    },
+    {
+        "timestamp": "00:09:54",
+        "text": "So for instance, here we might estimate the probability of each class by using the fraction of..."
+    },
+    {
+        "timestamp": "00:10:00",
+        "text": "data in which we saw a class one divided by the total number of data."
+    },
+    {
+        "timestamp": "00:10:08",
+        "text": "And for each class, we would then estimate the parameters of, say, a Gaussian model."
+    },
+    {
+        "timestamp": "00:10:17",
+        "text": "So we take all the data with class zero, here the red class, and use it to estimate the mean and variance of those data."
+    },
+    {
+        "timestamp": "00:10:25",
+        "text": "And then separately, we would take all the data where class one occurred."
+    },
+    {
+        "timestamp": "00:10:34",
+        "text": "We would use those to estimate the mean and variance of the class one data."
+    },
+    {
+        "timestamp": "00:10:42",
+        "text": "And this would give us two models for P of X given class zero, P of X given class one, and we can apply Bayes' rule to calculate P of each class given X."
+    },
+    {
+        "timestamp": "00:10:51",
+        "text": "For multivariate continuous features X, we can use a similar Gaussian approach where we, instead of learning a single scalar Gaussian distribution, we learn a multivariate distribution for X, which will then be parameterized by a vector mean and a."
+    },
+    {
+        "timestamp": "00:11:00",
+        "text": "matrix."
+    },
+    {
+        "timestamp": "00:11:10",
+        "text": "So, the mean will be of the same size as the number of features that we have, and the covariance matrix sigma will be n by n, where n is the number of features."
+    },
+    {
+        "timestamp": "00:11:20",
+        "text": "Again, we'll tend to estimate these parameters just using a standard maximum likelihood estimate, which in this case is just the empirical estimate."
+    },
+    {
+        "timestamp": "00:11:30",
+        "text": "So, we can take all the data associated with that class and compute its empirical mean vector that will be the center of our multivariate Gaussian, and we can compute its empirical covariance matrix, and that will tell us the spread and shape of the Gaussian in those dimensions."
+    },
+    {
+        "timestamp": "00:11:40",
+        "text": "For more information on Gaussian and multivariate Gaussian models, please see my background slides on Gaussian models."
+    }
+]

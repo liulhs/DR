@@ -1,0 +1,189 @@
+00:00:00 In these slides, we'll discuss some background on random variables and probability.
+00:00:07 In computer science, it's often tempting to think of everything as very predictable, with binary outcomes in every condition either true or false.
+00:00:15 But in machine learning, we're interfacing computers into data and the real world.
+00:00:22 And in that case, these things may become much more complicated.
+00:00:30 In fact, real world systems contain quite a bit of uncertainty.
+00:00:37 This uncertainty may be due to true inherent randomness, such as games of chance, or it might be due to overwhelming complexity in the system, or even just a lack of knowledge about how that complexity operates.
+00:00:45 Think of understanding traffic patterns in a large urban region.
+00:00:52 It might be that if we had perfect knowledge of everyone in the system, where they live, where they work, when they leave for work, how fast and how aggressively they drive, it might be that the traffic patterns would be no surprise at all and not be...
+00:01:00 random at all, but in fact that kind of information is impossible, and so it's far easier to sweep that kind of thing under the rug and simply call it random.
+00:01:08 When making predictions and decisions we simply can't get by without representing and reasoning about uncertainty.
+00:01:17 For example, consider trying to decide when to leave for the airport.
+00:01:25 There's a high cost to being late and a low cost to being early, so it's no good to just know the average amount of time it takes to get there.
+00:01:34 Instead we need to know the distribution of times so that we can select something that will accurately balance our need to not be late with our desire to not be too early.
+00:01:42 Systems tend to be like this.
+00:01:51 Unless we reason and represent and communicate uncertainty from one subsystem to the next, it'll be very easy for a later subsystem to make a bad decision because it's operating without complete knowledge of the
+00:01:59 uncertainty in the estimates of some other part.
+00:02:10 So given that we need to represent uncertainty in some way, why should we use probability?
+00:02:20 It turns out that there's a result from 1946 that under fairly mild conditions, any system that expresses a degree of belief can be mapped into probability space.
+00:02:30 In fact, the Bayesian viewpoint of probability explicitly takes this notion of degree of belief.
+00:02:40 Moreover, another classic result from De Finetti tells us that if we try to make bets with probabilities that do not follow the laws of probability, there's always a way to construct bets such that one is always beaten.
+00:02:50 So in particular, probability will give us a natural way to try to describe our assumptions about the system in concrete mathematical terms and give us rules for how to combine information and make predictions.
+00:03:00 in a concise and clear way.
+00:03:05 In probability, we'll think about an event A and some event space S.
+00:03:10 And the event A can be anything which might or might not happen.
+00:03:15 So for example, the statement, I'll have a hangover tomorrow, might or might not be true.
+00:03:20 That's an event.
+00:03:25 The statement, I have a hangover, might or might not be true, at least as far as you know.
+00:03:30 The statement, I have hantavirus, might or might not be true.
+00:03:35 These are all events and they live in some space of possibilities.
+00:03:40 The probability of some event, PR of A, essentially counts what the chance that A is true is.
+00:03:45 So you can think of this as perhaps being something like the number of universes or the number of worlds in which A would happen.
+00:03:50 This is essentially a measure, kind of like area.
+00:03:55 If you think of perhaps listing out every possible outcome that could possibly happen.
+00:04:00 this would be counting the number of such outcomes.
+00:04:08 You can sort of think of it in that term, and I'll draw things over here that indicate that kind of intuition.
+00:04:17 So the space S of everything that can possibly happen, and the space in which the outcome A is true is some subset of that space.
+00:04:25 Probability is defined by a relatively few number of axioms.
+00:04:34 The first axiom tells us that the probability of any event A must be greater than zero, greater than or equal to zero, and that just tells us that the size of this set in which A is true cannot get any smaller than size zero, in which case there are no worlds or universes in which A is true.
+00:04:42 Similarly, the probability of an event A cannot get any larger than one.
+00:04:51 We define the size of the entire space.
+00:04:59 S to be 1.
+00:05:07 And the set in which A is true can't get any larger than the set of all possible worlds.
+00:05:14 And so 100% of those might have A true, in which case the probability of A would be at most 1.
+00:05:22 The last axiom tells us how to compute the probability of overlaps or unions of regions.
+00:05:29 Particular, it says that the probability of the union of two events, A union B, is the sum of their individual probabilities minus the sum of their intersection.
+00:05:37 Again, an intuition resorting to area will help us out here.
+00:05:44 Considering the set A here of worlds in which event A is true, another set B of worlds in which B is true, then the area of A union B is simply the area of A plus the area of B minus the area of their intersection.
+00:05:52 For the most part, we'll be focusing on random variables.
+00:05:59 which are a particularly useful representation of events.
+00:06:08 A random variable X you can think of as taking on a finite set of values, say S, partitioning into A1 through AD.
+00:06:17 The outcomes of X partition the space S into a disjoint and exhaustive set.
+00:06:25 What this means is that X will take on one and exactly one of these possible outcomes.
+00:06:34 So over here I have a diagram of our entire event space S and it's been partitioned into the set in which X takes on value 1, value 2, and value 3.
+00:06:42 We can then define a probability mass function or PMF that defines a measure on this subset of S and in particular we can do that simply by defining the probability that random variable X takes on each value for each of these values.
+00:06:51 And then because these sets are disjoint, the probability...
+00:06:59 probability that X takes on a value in any subset will simply be the sum of the probabilities of its individual possible values.
+00:07:06 So this tells us that we can define the probability mass function on a variable X simply by defining the probabilities associated with each one of its possible outcomes.
+00:07:13 And these things have a few constraints.
+00:07:19 So the probability of any given outcome must be greater than or equal to zero for the same reason as before.
+00:07:26 They must be less than or equal to one.
+00:07:33 And the sum over all possible outcomes must be equal to one.
+00:07:39 So this tells us the probability of all outcomes totally must be one and all of them must be positive.
+00:07:46 It will also be useful to think about more than one variable at a time.
+00:07:53 So first of all, we'll typically abbreviate the probability that random variable to X takes on value little x.
+00:08:00 as just P of X.
+00:08:07 This is a slight abusive notation, but it should be fairly clear from the notation.
+00:08:15 So each variable represents a partitioning of the entire event space.
+00:08:22 So random variable X partitions the space into the outcomes where it takes on value one, value two, or value three.
+00:08:30 A different random variable Y might partition the space into areas where it takes on values B1, B2, and B3.
+00:08:37 And so then the joint distribution is a probability distribution over X and Y together.
+00:08:45 And by P of XY, we mean the probability that random variable X takes on value little x and random variable Y takes on value little y.
+00:08:52 And since each of these are partitionings of the space S, X equals X and Y equals Y together is some finer partitioning of S in which some.
+00:09:00 region of the graph has X1 equal to A and Y1 equal to B.
+00:09:07 Another region of the graph might have X1 equal to A and Y equal to B, too, and so forth.
+00:09:15 So the joint configuration of several variables can itself be thought of as a partitioning of S.
+00:09:22 Similarly, we can write a probability mass function for X and Y together.
+00:09:30 In this case, we call it the joint distribution over X and Y.
+00:09:37 We can express it as a table of joint probability values where each entry of that table corresponds to the probability that X takes on value X and Y takes on value Y.
+00:09:45 Similarly to before, each of these entries will be positive, and the sum over the entire table must be 1.
+00:09:52 The law of total probability tells us how to relate
+00:10:00 the probability of just one variable P of X to this joint probability distribution table.
+00:10:12 In particular, the probability that X takes on value little x will be the sum over all possible values of Y of the joint probability.
+00:10:24 The intuition here is that some value of Y must occur, and if we don't know which one, we can simply sum over them since their events are disjoint.
+00:10:36 So the probability of this outcome, the probability associated with set little x, will simply be the probability that X and Y equals 0 happen, or that X and Y equals 1 happen, or so on and so forth.
+00:10:48 So in particular, if some point in this table is the joint probability of X and Y, then the entire column here summed together will be P of X, and the entire row summed together will be P of Y.
+00:11:00 A useful concept is that two variables might be independent.
+00:11:12 Independent variables have this table P of x, y is in fact equal to a product of a function only of x and a function only of y.
+00:11:24 Similarly, we can define a conditional probability via a chain rule that the joint probability of x and y together is the marginal probability of x times the conditional probability of y given x.
+00:11:36 So this says that we can decompose the probability of x and y both occurring into the probability that x occurs and any y times the probability that y occurs given that x.
+00:11:48 More generally, the chain rule can be expressed in a repeated fashion, so the probability of say three variables together, x, y, z, will be the probability of one, say x, times the probability of y.
+00:12:00 of y given x times the probability of z given everything up to that point, so x and y.
+00:12:07 Or the probability of four variables could be expressed in a similar expansive way.
+00:12:15 P of x, P of y given x, P of z given x and y, P of w given x, y, and z.
+00:12:22 So each term involves conditioning on everything that's come before.
+00:12:30 So think of this intuition here, that the probability that x occurs times the probability that y occurs given what we've accepted so far times the probability that z occurs given that we've accepted so far.
+00:12:37 A few simple examples of classic probability mass functions.
+00:12:45 A Bernoulli random variable is just a binary outcome like a coin toss.
+00:12:52 So a random variable x might take on values say 0 and 1 or heads and tails.
+00:13:00 case, since the probability mass function has only two possible values and they sum to one, it's parameterized by just one number.
+00:13:07 So we usually write that the probability that X takes on value one is, say, P, and then the probability that X takes on its other value, zero, is just one minus P.
+00:13:15 So we'll assure this that they're both positive and sum to one.
+00:13:22 Another common example is the binomial distribution.
+00:13:30 So binomial distribution corresponds to a collection of Bernoulli random variables summed together.
+00:13:37 So, for example, if we were to flip the coin multiple times, we could ask, say, how many outcomes came up heads, rather than whether a single outcome did.
+00:13:45 An extension of Bernoulli to multivariate outcomes, for example, dice, is the discrete or categorical distribution with, say, d outcomes.
+00:13:52 And here, instead of
+00:14:00 If x being only 0 and 1, it can be 0 through, say, d minus 1, so that there are d possible outcomes.
+00:14:07 And in that case, instead of having one value, we typically write it down as a vector of probabilities, p0 through pd minus 1, with the constraint that those numbers all sum to 1.
+00:14:15 There's similarly a generalization of binomial called the multinomial, which is like rolling a die multiple times and counting how many times it came up with each value.
+00:14:22 Of course, in any machine learning class, we're primarily interested in estimating quantities from data.
+00:14:30 So what do we do if we get a couple of observations?
+00:14:37 How do we estimate these probabilities?
+00:14:45 Typical way is to use something called the likelihood function and to find a maximum likelihood estimator.
+00:14:52 So the likelihood of written p of x parameterized by theta, some parameter.
+00:15:00 It's very much like a probability distribution, except that the data, the outcome x, is fixed, and the parameter theta is what's varied.
+00:15:10 So consider, for example, the Bernoulli outcome.
+00:15:20 If we saw, if we had a single coin flip, and we observed that it was equal to zero, then the probability of that outcome is simply one minus theta, where theta is the probability of it getting, coming up heads.
+00:15:30 So rather than regarding this as a function of x, where x could be zero and one, and they sum to one, we now regard it explicitly as a function of theta, and we fix the outcome that the first, that the coin flip came up tails.
+00:15:40 If we plot this as a function of theta, it's just the one minus theta line, so it's just this red descending line.
+00:15:50 Now imagine that we got, say, two observations.
+00:16:00 So, our first coin flip came up tails, and our second coin flip came up heads.
+00:16:10 And suppose these are independent coin flips, then the probability of these two outcomes is 1 minus theta for the tails times theta for the heads.
+00:16:20 If we plot this function as a function of theta, we get this blue curve here.
+00:16:30 Similarly, if we observed another heads, we would now have 2, the product of 2 theta terms times 1, 1 minus theta term, and so we get theta squared times 1 minus theta, and that would be this green curve here as you trace out theta between 0 and 1.
+00:16:40 What you notice is that all of these functions have their maximal value at the empirical estimate of P.
+00:16:50 So, for instance, the maximum of this function is simply at 0, and the empirical estimate is that we've gotten 1 tails for our only shot.
+00:17:00 here is at a half, and we've seen exactly half of the outcomes be heads.
+00:17:06 The maximum of this function, the green one, is at two-thirds, and we've seen exactly two out of three of the outcomes be heads.
+00:17:13 So in fact, the maximum likelihood estimator for a Bernoulli random variable is simply the empirical estimate.
+00:17:20 A histogram, which is a nice way of visualizing data, is also, in some sense, an empirical estimate of probabilities.
+00:17:26 Histograms estimate a probability mass function of a variable by binning the outcomes up, so it estimates the probability of the value falling within some bin region, so a particular interval.
+00:17:33 And you could think of this, again, as a maximum likelihood estimate of a probability.
+00:17:40 This is the fraction of data that fell within that interval.
+00:17:46 Histograms are very easy to do in MATLAB.
+00:17:53 You can simply define the bin position.
+00:18:00 and call the function HIST in order to construct it.
+00:18:08 Continuous random variables are a bit more subtle.
+00:18:17 Again, consider a disjoint and exhaustive partitioning of S, but now create one that's of some increasingly fine-detailed delta.
+00:18:25 So each bin is going to be of size delta, and there will be some large number of bins out of all the possible outcomes.
+00:18:34 So we know that since we've constructed this disjoint and exhaustive partitioning, if we want the probability of any outcome of a set, say some interval of this variable, then what we should do is sum together all of the bins that make up that interval and add together their probabilities.
+00:18:42 But we have this effect that as the bin size starts to go to zero, the probability of falling within any particular bin also decreases to zero.
+00:18:51 So bins that are becoming infinitesimally thin have incredible...
+00:19:00 probability of ending up in that bin.
+00:19:06 So instead of computing something like the probability mass function, which would list out the probabilities of each outcome.
+00:19:13 We instead define a density function p of x.
+00:19:20 And this is just the ratio of the probability of falling in bin i of size delta, divided by the size of delta.
+00:19:26 And as delta goes to zero, this ratio will not go to zero.
+00:19:33 It will converge to a relative scale value, which is the probability mass function, excuse me, probability density function.
+00:19:40 Then we can define the probabilities of outcomes or events A, which are sets of values, the same as before.
+00:19:46 So if A is some interval or set of intervals of x, the probability of falling within region A is simply the integral of the probability density function over that region.
+00:19:53 A subtle
+00:20:00 point here is that the density function P of X is not restricted in quite the same ways that the probability mass function is.
+00:20:07 In particular, it can have values that are greater than 1.
+00:20:15 Still all be non-negative, of course.
+00:20:22 What happens is P of X can be greater than 1 on a region with a very small area, so that the integral of P of X over that region will still be less than 1.
+00:20:30 The restriction of the axioms of probability was on the probability of an outcome, and so we just need for this integral of the mass function to be always less than 1.
+00:20:37 So for example, a Gaussian distribution with a very thin variance can rise to a high value.
+00:20:45 So here the peak value is something like 4, but if I actually integrated this function, I would find that its area was still 1.
+00:20:52 The Gaussian distribution is, of course, the most classic form of a continuous...
+00:21:00 random variable and probability density function.
+00:21:10 The Gaussian, or sometimes the normal distribution in one dimension, so over a single scalar random variable X, is parameterized by two numbers, the mean and the standard deviation, sigma, or sometimes the variance, sigma squared.
+00:21:20 And it's just written in this form.
+00:21:30 So it's an exponential e to the minus x minus the mean squared divided by sigma squared.
+00:21:40 The mean tells us the center point of this symmetric bell-shaped curve and the standard deviation, sigma, tells us something about the width of that curve.
+00:21:50 Perhaps not surprisingly, if you write down the likelihood function as a function of mu and sigma and find its maximum given some observations, x1 through xn, you'll find that the maximum likelihood estimate of the mean is simply the empirical mean.
+00:22:00 of the data.
+00:22:06 So if you want the maximum likelihood estimate, just take the empirical mean.
+00:22:12 And the maximum likelihood estimate of the variance is the empirical variance.
+00:22:18 So take each data point, subtract the empirical mean, and square it, and then average over those data points.
+00:22:24 The Gaussian distribution can also be extended to multivariate distributions fairly easily.
+00:22:30 So in this case, we define a distribution over a vector X, and it also is parameterized by mean, and now by a covariance.
+00:22:36 The mean is a vector of the same size as X.
+00:22:42 The covariance is a symmetric matrix that's square, and of the same size as X on each side.
+00:22:48 And it's defined quite similar.
+00:22:54 It's e to the minus something, where instead of X minus mu squared over sigma squared, it now becomes the vector X minus mu, times the inverse covariance
+00:23:00 matrix times the vector x minus mu.
+00:23:07 So this is a dot product defined by matrix inverse sigma squared.
+00:23:15 Just like in 1D, where it has a familiar bell-shaped curve, the Gaussian is also still unimodal and has a nice bell-shaped curve, but in this case, it will be a 2D function rather than a 1D function.
+00:23:22 In summary, the axioms of probability give us a concrete way to represent uncertainty and reason about it as we observe information, update our beliefs.
+00:23:30 Random variables define variables whose outcome is potentially known.
+00:23:37 For variables with discrete numbers of outcomes, we can use probability mass functions to represent our probability distributions.
+00:23:45 These will be vectors of numbers whose values will be positive and whose total will be 1, with one value for each possible outcome of the variable.
+00:23:52 Examples.
+00:24:00 include the Bernoulli random variables, which are coin tosses, and discrete or categorical random variables, which are things like rolling dice.
+00:24:12 We also saw the concepts of joint distributions over more than one variable, say x and y.
+00:24:24 The law of total probability taught us how to calculate the probability of just one outcome, say p of x, by summing over all possible values of y in the joint probability p of x and y together.
+00:24:36 We also saw the chain rule, which defined conditional probability, by telling us how to calculate it in terms of the joint distribution p of x and y, and the marginal distribution p of x.
+00:24:48 For continuous variables, similar concepts apply, but in this case they form probability density functions, which tell us the limiting ratio of the probability to the size of the area, the most common example of which is the Gaussian.
+00:25:00 distribution, a simple bell-shaped curve.

@@ -1,0 +1,438 @@
+[
+    {
+        "timestamp": "00:00:00",
+        "text": "We saw previously that support vector machines could be formulated as a constrained optimization, specifically a quadratic program."
+    },
+    {
+        "timestamp": "00:00:06",
+        "text": "In this section, we'll consider this optimization, examine its dual form, and look at the soft margin version of an SVM."
+    },
+    {
+        "timestamp": "00:00:13",
+        "text": "First, recall our constrained optimization for the SVM, minimizing the weights subject to constraints that enforce a correctness margin on each data point."
+    },
+    {
+        "timestamp": "00:00:20",
+        "text": "Let's think about how we would actually optimize this constrained system."
+    },
+    {
+        "timestamp": "00:00:26",
+        "text": "Even finding a point that satisfies these constraints is not trivial."
+    },
+    {
+        "timestamp": "00:00:33",
+        "text": "The constraints can only be satisfied if we find a perceptron with zero error."
+    },
+    {
+        "timestamp": "00:00:40",
+        "text": "Even assuming that one exists, just finding one such example was the entire purpose of the perceptron algorithm."
+    },
+    {
+        "timestamp": "00:00:46",
+        "text": "To better solve this constrained optimization, we'll use Lagrangian optimization."
+    },
+    {
+        "timestamp": "00:00:53",
+        "text": "Let's first rewrite our constraint slightly so that it's a non-positive inequality."
+    },
+    {
+        "timestamp": "00:00:59",
+        "text": "Now, let's generically refer to our cost function here as f of theta and to the constraint for data point i as gi of theta, where theta just means all the parameters, both w and b."
+    },
+    {
+        "timestamp": "00:01:10",
+        "text": "We can now introduce a Lagrange multiplier, alpha sub i, for each constraint g sub i."
+    },
+    {
+        "timestamp": "00:01:20",
+        "text": "This will be used to enforce the constraint."
+    },
+    {
+        "timestamp": "00:01:30",
+        "text": "The Lagrangian is given by a joint optimization over the original parameter's theta and the Lagrange multiplier's alpha, whereas before, the theta are to be minimized, but the alpha are to be maximized."
+    },
+    {
+        "timestamp": "00:01:40",
+        "text": "We also have a very simple constraint on the parameter's alpha, that they be non-negative, so it's easy to initialize a value of theta and alpha that satisfy these constraints."
+    },
+    {
+        "timestamp": "00:01:50",
+        "text": "We can then proceed to optimize theta and alpha together by, for example..."
+    },
+    {
+        "timestamp": "00:02:00",
+        "text": "gradient steps."
+    },
+    {
+        "timestamp": "00:02:06",
+        "text": "Now consider what happens when we optimize over alpha i for any fixed theta."
+    },
+    {
+        "timestamp": "00:02:13",
+        "text": "If the constraint gi is satisfied, then g of theta is negative and the largest value we can attain in this optimization is 0 by setting alpha i equal to 0."
+    },
+    {
+        "timestamp": "00:02:20",
+        "text": "But if the constraint is not satisfied and gi is positive, alpha will increase."
+    },
+    {
+        "timestamp": "00:02:26",
+        "text": "Then theta will have to change to decrease g for that constraint."
+    },
+    {
+        "timestamp": "00:02:33",
+        "text": "In fact, any optimum of the original problem will be a saddle point to the Lagrangian and vice versa."
+    },
+    {
+        "timestamp": "00:02:39",
+        "text": "This converts a set of constraints that were difficult to satisfy into a nearly unconstrained, easily satisfied constraint problem over more variables."
+    },
+    {
+        "timestamp": "00:02:46",
+        "text": "Another point that will be useful in a moment is the result of the so-called KKT complementary slackness condition."
+    },
+    {
+        "timestamp": "00:02:53",
+        "text": "It's easy to see that if we're at a saddle point, then either alpha..."
+    },
+    {
+        "timestamp": "00:02:59",
+        "text": "cannot increase the Lagrangian because its derivative is 0, so g i equals 0, or because it's itself constrained, so alpha i equals 0."
+    },
+    {
+        "timestamp": "00:03:07",
+        "text": "So for any non-zero alpha i, meaning a slack constraint on the alpha i, it must be that the constraint on g is tight."
+    },
+    {
+        "timestamp": "00:03:14",
+        "text": "So, we can simply optimize our Lagrangian over both the parameters w and b, and the Lagrange multiplier's alpha."
+    },
+    {
+        "timestamp": "00:03:22",
+        "text": "The geometric consequence of complementary slackness is that the alpha i are only non-zero for points where the margin constraint is tight, in other words, points on the boundary of the margin."
+    },
+    {
+        "timestamp": "00:03:29",
+        "text": "These points are called the support vectors."
+    },
+    {
+        "timestamp": "00:03:37",
+        "text": "Notice now that we fix alpha."
+    },
+    {
+        "timestamp": "00:03:44",
+        "text": "Then, we can solve directly for w and b in terms of alpha."
+    },
+    {
+        "timestamp": "00:03:52",
+        "text": "This is now an unconstrained..."
+    },
+    {
+        "timestamp": "00:03:59",
+        "text": "quadratic function, this is quite simple."
+    },
+    {
+        "timestamp": "00:04:06",
+        "text": "Taking the derivative and setting it equal to zero gives the optimal w is a linear combination of the data, a sum over i of alpha i y i times x i."
+    },
+    {
+        "timestamp": "00:04:13",
+        "text": "Notice that since alpha i is zero for non-support vector data points, the max margin boundary solution w star depends only on the support vectors."
+    },
+    {
+        "timestamp": "00:04:19",
+        "text": "We can also solve for b by plugging in the margin hyperplane equations for any support vector."
+    },
+    {
+        "timestamp": "00:04:26",
+        "text": "So, for example, for this point here, we know that the linear response is plus one, and since we know the value of w, we can just solve for b."
+    },
+    {
+        "timestamp": "00:04:33",
+        "text": "It's customary to average over a number of these points for numerical stability."
+    },
+    {
+        "timestamp": "00:04:40",
+        "text": "So, for example, in this formula, we average over all the support vectors and SV of them."
+    },
+    {
+        "timestamp": "00:04:46",
+        "text": "Finally, if we know the optimal value of w in terms of alphas, we can just plug it in to get an optimization solely over alpha."
+    },
+    {
+        "timestamp": "00:04:53",
+        "text": "The resulting problem is called the Lagrangian dual of the original."
+    },
+    {
+        "timestamp": "00:05:00",
+        "text": "problem."
+    },
+    {
+        "timestamp": "00:05:07",
+        "text": "Plugging in the equation for W star and rearranging, we find that the dual is given here as a maximization over positive alpha."
+    },
+    {
+        "timestamp": "00:05:15",
+        "text": "We also need to enforce the stationary condition on B that the derivative with respect to B is zero."
+    },
+    {
+        "timestamp": "00:05:22",
+        "text": "Since the original equation was linear in B, this actually becomes a constraint here."
+    },
+    {
+        "timestamp": "00:05:30",
+        "text": "Notice that this is now a quadratic function in alpha with a single linear constraint, so it's another quadratic program."
+    },
+    {
+        "timestamp": "00:05:37",
+        "text": "This quadratic program is over m variables, one for each data point, the alpha i, with m simple inequality constraints, alphas are positive, and one linear equality constraint."
+    },
+    {
+        "timestamp": "00:05:45",
+        "text": "The Lagrangian dual is always a lower bound on the original primal problem, our minimization over theta."
+    },
+    {
+        "timestamp": "00:05:52",
+        "text": "Quadratic programs like this have a property called strong duality, which"
+    },
+    {
+        "timestamp": "00:06:00",
+        "text": "says that the value of this maximization over alpha will be the same as the primal problem."
+    },
+    {
+        "timestamp": "00:06:06",
+        "text": "And as we saw, there's a simple transformation from any solution, alpha star, to a solution, w star, given by the equations in the previous slide."
+    },
+    {
+        "timestamp": "00:06:12",
+        "text": "This dual form is mainly useful when m, the number of data points, is much smaller than n, the number of features."
+    },
+    {
+        "timestamp": "00:06:18",
+        "text": "Notice that our optimization is now over alpha, which is length m."
+    },
+    {
+        "timestamp": "00:06:24",
+        "text": "Evaluating the objective here is then O of m squared."
+    },
+    {
+        "timestamp": "00:06:30",
+        "text": "And optimizing it is usually between quadratic and cubic and m, depending on the solver used, the optimization tolerances, and so on."
+    },
+    {
+        "timestamp": "00:06:36",
+        "text": "While this situation may not sound common, it'll become important shortly."
+    },
+    {
+        "timestamp": "00:06:42",
+        "text": "Before that, let's deal with the problem of non-separable data."
+    },
+    {
+        "timestamp": "00:06:48",
+        "text": "We often find ourselves with data that are not linearly separable."
+    },
+    {
+        "timestamp": "00:06:54",
+        "text": "So the margin constraints cannot be satisfied."
+    },
+    {
+        "timestamp": "00:07:00",
+        "text": "for any value of W and B."
+    },
+    {
+        "timestamp": "00:07:06",
+        "text": "The large margin principle for separable data suggests we should choose a model with small magnitude parameters."
+    },
+    {
+        "timestamp": "00:07:13",
+        "text": "However, if we're forced to have non-zero error, we should trade this off with the error that results from our predictions."
+    },
+    {
+        "timestamp": "00:07:20",
+        "text": "How can we do this?"
+    },
+    {
+        "timestamp": "00:07:26",
+        "text": "One solution is to allow some of our data points to violate the margin constraints, so a soft margin, but assign them a cost, for example the distance by which they violated the constraint scaled by some factor r."
+    },
+    {
+        "timestamp": "00:07:33",
+        "text": "If r is chosen to be very large, we'll pay a lot of attention to making sure no data violate the margin if possible."
+    },
+    {
+        "timestamp": "00:07:40",
+        "text": "On the other hand, if r is small, we'll try to maximize the margin for most data but allow some of them to violate it."
+    },
+    {
+        "timestamp": "00:07:46",
+        "text": "We do so by adding so-called slack variables, epsilon i, one for each data point."
+    },
+    {
+        "timestamp": "00:07:53",
+        "text": "Epsilon i measures the amount the data point i violates the margin constraint here."
+    },
+    {
+        "timestamp": "00:08:00",
+        "text": "It is always non-negative, zero if the constraint is satisfied, and then we add a penalty r times epsilon to our objective function, balancing the margin term, w squared, with the amount of slack."
+    },
+    {
+        "timestamp": "00:08:08",
+        "text": "Notice that this new formulation remains a quadratic program."
+    },
+    {
+        "timestamp": "00:08:17",
+        "text": "It's a quadratic objective in w and epsilon, subject to linear constraints."
+    },
+    {
+        "timestamp": "00:08:25",
+        "text": "But let's look for a moment at this optimization."
+    },
+    {
+        "timestamp": "00:08:34",
+        "text": "In fact, the constraints are far less difficult to satisfy during optimization, since now for any weight vector w, we can always choose a value of epsilon that minimizes its term and satisfies these constraints."
+    },
+    {
+        "timestamp": "00:08:42",
+        "text": "This means that first, we can always initialize a solution, w and epsilon and b, to something that satisfies the constraints, even if it doesn't minimize the objective."
+    },
+    {
+        "timestamp": "00:08:51",
+        "text": "Second, the optimal value of epsilon..."
+    },
+    {
+        "timestamp": "00:09:00",
+        "text": "epsilon given w is easy to select."
+    },
+    {
+        "timestamp": "00:09:08",
+        "text": "If data point i does not satisfy the margin, this with epsilon equal to zero, then the smallest value of epsilon that enforces this inequality to be true will be to set the two sides equal."
+    },
+    {
+        "timestamp": "00:09:17",
+        "text": "Let's choose that optimal value of epsilon for a given w, and then we can optimize the resulting cost as a function of just w directly."
+    },
+    {
+        "timestamp": "00:09:25",
+        "text": "What we find is that the cost j is only non-zero for data points that do not satisfy the margin constraint."
+    },
+    {
+        "timestamp": "00:09:34",
+        "text": "And for those points, it grows linearly with their distance to the margin."
+    },
+    {
+        "timestamp": "00:09:42",
+        "text": "Sketching this in the same form as our usual surrogate loss pictures, we see that for a positive data point, y equals plus one, if the linear response is already greater than plus one, it has no cost."
+    },
+    {
+        "timestamp": "00:09:51",
+        "text": "On the other hand, if it's less than plus one, the cost will increase linearly with its distance from the margin."
+    },
+    {
+        "timestamp": "00:10:00",
+        "text": "This surrogate loss is called the hinge loss for its hinge-like shape."
+    },
+    {
+        "timestamp": "00:10:08",
+        "text": "Its analytic form, shown here, is piecewise linear."
+    },
+    {
+        "timestamp": "00:10:17",
+        "text": "It's either 0 or a positive cost that increases away from the margin."
+    },
+    {
+        "timestamp": "00:10:25",
+        "text": "Our overall optimization, then, is the margin term, sum of w squared, plus r times the hinge loss."
+    },
+    {
+        "timestamp": "00:10:34",
+        "text": "In other words, a balance between the margin term and a term having to do with slack variables."
+    },
+    {
+        "timestamp": "00:10:42",
+        "text": "If we just divide this whole thing by r, we get that the optimal parameters minimize the sum of a data term, the hinge loss, plus 1 over r times an L2-like regularization term on the weights."
+    },
+    {
+        "timestamp": "00:10:51",
+        "text": "This form should now be very familiar as a standard linear classifier."
+    },
+    {
+        "timestamp": "00:10:59",
+        "text": "optimization from before, the only difference being the choice of the hinge loss as the surrogate loss, and not regularizing the constant coefficient B, which is itself another common thing to do in regularization."
+    },
+    {
+        "timestamp": "00:11:11",
+        "text": "We can then optimize this form in whatever manner we like, such as our standard stochastic gradient algorithm from the linear classifier."
+    },
+    {
+        "timestamp": "00:11:23",
+        "text": "If we take the dual of the soft margin quadratic program, we again obtain a quadratic program similar to before, over only the Lagrange multiplier's alpha, with just one minor modification."
+    },
+    {
+        "timestamp": "00:11:35",
+        "text": "The alphas are now bounded from above as well by R."
+    },
+    {
+        "timestamp": "00:11:47",
+        "text": "Intuitively, this says that if a data point violates the margin constraint, the Lagrange multiplier alpha i for that data point will increase until it's at most R times the violated distance, i.e. R times epsilon."
+    },
+    {
+        "timestamp": "00:11:59",
+        "text": "Complementary slackness now tells us that the alphas are non-zero only on data that are either at the margin or on the wrong side."
+    },
+    {
+        "timestamp": "00:12:08",
+        "text": "In other words, for positive data, say, any points where the linear response is less than or equal to plus one."
+    },
+    {
+        "timestamp": "00:12:17",
+        "text": "As I mentioned, the dual form can be very important when we have many more features than data points."
+    },
+    {
+        "timestamp": "00:12:25",
+        "text": "In other words, n is much greater than m."
+    },
+    {
+        "timestamp": "00:12:34",
+        "text": "A key thing to notice about the dual form of the SVM is the quadratic program involves the features x only through their dot products."
+    },
+    {
+        "timestamp": "00:12:42",
+        "text": "In other words, the coefficient of the ij interaction term between alpha i and alpha j is the inner product of the data point xi and xj."
+    },
+    {
+        "timestamp": "00:12:51",
+        "text": "Let's call this inner product K sub ij as the ij-th entry in some matrix K, sometimes called the Gram matrix."
+    },
+    {
+        "timestamp": "00:12:59",
+        "text": "We can think of this quantity as measuring the similarity of two data points, here through their dot product."
+    },
+    {
+        "timestamp": "00:13:08",
+        "text": "If the vectors are in the same direction, this takes its maximal value, if they're orthogonal it's zero, and if they're in opposite directions, you get negative values."
+    },
+    {
+        "timestamp": "00:13:17",
+        "text": "This point will be useful in a moment."
+    },
+    {
+        "timestamp": "00:13:25",
+        "text": "Interestingly, prediction also only involves dot products."
+    },
+    {
+        "timestamp": "00:13:34",
+        "text": "Using our solution for W star from before, we find that our prediction y for a new test point x is a linear combination of the dot products of x with the support vectors xi, the points where alpha i is non-zero."
+    },
+    {
+        "timestamp": "00:13:42",
+        "text": "As a side note here, evaluating b is a bit more complicated, but as before, any support vector with slack on alpha, so not equal to zero or r, will have a tight margin constraint, and can be used to solve for b."
+    },
+    {
+        "timestamp": "00:13:51",
+        "text": "Typically, b is kept updated while alpha is being solved."
+    },
+    {
+        "timestamp": "00:13:59",
+        "text": "see more about how we can use this dot product fact in the next lecture, which discusses the kernel trick."
+    }
+]

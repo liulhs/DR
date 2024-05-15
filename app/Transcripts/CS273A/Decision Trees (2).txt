@@ -1,0 +1,198 @@
+00:00:00 Now that we understand the prediction structure of a decision tree, we would like to be able to select a good decision tree structure, given some training examples, in other words, learn a decision tree from data.
+00:00:06 The most common learning procedure is to greedily select a way of splitting the training data.
+00:00:12 In particular, we proceed recursively.
+00:00:18 Given a set of training points, we make a few decisions.
+00:00:24 First, we decide whether or not this should be a leaf node.
+00:00:30 If it should, we'll be outputting a prediction.
+00:00:36 If not, we decide how we should further split the data.
+00:00:42 Example algorithms that are of this type include CART, which stands for Classification and Regression Tree Methods, and specific instances like the ID3 and C4.5 algorithms.
+00:00:48 You can see all of these in Wikipedia.
+00:00:54 For leaf nodes, we output a prediction, and it's fairly easy to think about what the best prediction, given this type of data, is.
+00:01:00 data might be.
+00:01:08 In particular, for classification, we usually pick the majority class, since that will get the majority, the largest set of the training data for that group correct.
+00:01:17 In regression, we typically do something like predict the average value, since this is the constant value that will minimize the mean squared error.
+00:01:25 For non-leaf nodes, if we decide that we'd like to split the data further, we need to choose two things.
+00:01:34 First, which feature we should split on, and secondly, which test we will perform in order to split the data into, say, two parts.
+00:01:42 And typically, we use a greedy scoring method, where we score every possible feature and every possible split that we could do among those data, and we score each split using some function that measures the purity of the class data after the split.
+00:01:51 The idea being that if we split the data and the subsets are of a strong majority,
+00:01:59 of one class or another, our predictions will be easier at that point.
+00:02:05 Finally, we need to decide when we will make a leaf node or whether we will continue to split the data.
+00:02:12 And these usually will return to this point, but we can make decisions like when all the training data are in the same class.
+00:02:18 Obviously, we can predict that class and get those training examples correct.
+00:02:24 When all the data are indistinguishable, there are no further features we could split on to do better.
+00:02:30 Or we might use heuristics like a fixed depth, which will give us a fixed complexity of the function.
+00:02:36 So let's think about how to score a possible split.
+00:02:42 Suppose we're considering splitting one feature, say Feature 1.
+00:02:48 And Feature 1 is, let's say, a continuous feature.
+00:02:54 One greedy method we could do is to simply choose the split that has the best accuracy in terms of the lowest misclassification rate if we had to predict
+00:03:00 at the next step.
+00:03:07 So that's a possibility, but it turns out that in practice, a soft scoring method can often work better.
+00:03:15 One measure of the purity of a variable or its concentration into one or a few values is called the entropy.
+00:03:22 Entropy is a notion from information theory which is commonly used in communications, data compression, and many other areas.
+00:03:30 It essentially measures how random an outcome is, and the randomness of the outcome measures also how hard it is to communicate that outcome to you.
+00:03:37 So the difficulty of representing something depends on the relative probability of all the outcomes.
+00:03:45 In particular, consider an example where I need to communicate 365 bits of information to you.
+00:03:52 Let's say I first do 365 fair coin toss.
+00:04:00 So the output is some sequence of heads and tails, which each of which is equally likely.
+00:04:07 So I have two to the three hundred and sixty five possible outcomes.
+00:04:15 And you might imagine rightly that the sequence will take three hundred and sixty five bits to represent.
+00:04:22 But now consider a different three hundred and sixty five length sequence where instead of communicating fair coin tosses, I'm communicating the outcome of my daily lottery playing.
+00:04:30 Now, since I almost always lose, the output is most likely to be lose, lose, lose, lose all the way through the entire year.
+00:04:37 So I could choose a representation for this, which would be much more efficient to represent the outcome than sending three hundred and sixty five bits.
+00:04:45 I'll choose a encoding that tells you first just whether or not I lost.
+00:04:52 And that takes only one bit since almost all.
+00:05:00 time I lose, I almost all the time only need to send you one bit.
+00:05:07 With some very small chance, I'll have won sometime during the year, and I'll have to send more bits.
+00:05:15 I'll send a bit that tells you that I won, and then I'll have to send some information to tell you when I won.
+00:05:22 If I won twice, I'd have to send even more bits to tell you that I had won more than once.
+00:05:30 But these outcomes have increasingly low probability, and so they almost never will happen.
+00:05:37 And so on average, as I send these to you, most of the time it will only take one bit to communicate them.
+00:05:45 So the reason that it takes less work for me to communicate my lottery averages is essentially because the outcome is much less random.
+00:05:52 Since I can manage to just use a few bits for the most likely outcome, and use more bits for the less likely ones, on average I'll have to send very few bits.
+00:06:00 The entropy of a random variable X is a notion that makes this idea concrete.
+00:06:10 So, H of X measures the randomness of the random variable X, and it's just calculated by summing over all possible outcomes of X, weighting by the probability of that outcome, and multiplying by log one over the probability of the outcome, or equivalently minus log P of X.
+00:06:20 Typically, we'll use log base two here, although I didn't write log sub two, since that makes the units of entropy bits, and that measures how many bits one would take to represent this outcome on average.
+00:06:30 So, here are a few examples.
+00:06:40 Suppose we have a random variable X that takes on one of four possible values, and each of those values is equally likely, so they each have probability 0.25.
+00:06:50 Then, following this formula, H of X is probability of outcome one, so 0.25, times log one over P, so log of four.
+00:07:00 Same thing for the outcome 2, same thing for outcome 3, same term for outcome 4, because they all have the same probability.
+00:07:07 If you calculate this out, you'll find that it's log 4, or 2 bits.
+00:07:15 Here's another example where X also has four outcomes, but two of these outcomes, outcomes 3 and 4, have zero probability.
+00:07:22 Outcome 1 has probability .75, and outcome 2 has probability .25.
+00:07:30 Now, following the same formula, we use the convention that 0 log 0 is 0, and we compute that the entropy is .75 times log of 1 over .75, plus .25 times log of 1 over .25, and the other terms are 0.
+00:07:37 And if you calculate this out, you'll find it's about .8 bits, so slightly less than 1 bit.
+00:07:45 If we had two equally probable outcomes, it would actually be 1 bit.
+00:07:52 So you can see that having one outcome be more likely than not.
+00:08:00 the other has reduced the entropy.
+00:08:06 Finally, here's an example where we have a random variable X that could take on four values, but with probability 1, it takes on outcome 1.
+00:08:13 So this actually is a deterministic variable.
+00:08:20 It's not actually random.
+00:08:26 It always takes on value 1.
+00:08:33 If you compute the entropy, you find 1 log 1, and then 0 log 0 for the other terms are 0, and the total entropy is 0 bits, meaning that representing a deterministic thing takes me 0 bits, since we both know what the outcome will be before I send anything.
+00:08:40 Turns out that the uniform distribution over here on the left is the maximum entropy for the number of outcomes that can happen.
+00:08:46 So here, four outcomes can take a maximum of 2 bits, and deterministic functions like the one on the right are the minimum entropy, or 0 bits.
+00:08:53 So how can we use entropy to decide how to split
+00:08:59 our data into two parts to make our prediction problem easier.
+00:09:07 There's a quantity called information, or information gain, that measures the change in randomness once you know something.
+00:09:14 So this tells you how much a piece of information will tell you about an outcome that was random.
+00:09:22 So we compute the information gain by a difference of entropies.
+00:09:29 We start by computing the entropy of the class variable, so the outcome, blue and red, in our total data set here.
+00:09:37 So here I have 10 blue points and 8 red points.
+00:09:44 And so if I treat that as a distribution, I have 10 18ths probability of outcome blue and 8 18ths probability of outcome red.
+00:09:52 And if you compute the entropy of that, you find that it's nearly 1 bit, so the entropy is almost 1 bit.
+00:09:59 Now consider some split where let's say I've divided the data into those data points that fall in X1 less than a half and those data that fall in X1 greater than a half.
+00:10:05 And so this is going to put most of the blue over on the left and on the right we have only red points.
+00:10:10 So again, let's compute the entropy of the left-hand set and the right-hand set.
+00:10:16 So these are the data sets that we would split into at the next level of the tree.
+00:10:21 So the left-hand set has 10 outcomes of blue and two outcomes of red.
+00:10:27 So now it's 10 twelfths probability of outcome blue and 2 twelfths probability of outcome red.
+00:10:32 If you compute the entropy of that, it's gone down slightly.
+00:10:38 It's now 0.77 bits.
+00:10:43 The entropy on the right-hand side, on the other hand, is all red in the data.
+00:10:49 So we have five out of five data points being red.
+00:10:54 This distribution is determined.
+00:11:00 and so we find that the entropy is zero.
+00:11:06 We also compute the fraction of data that went to the left and right.
+00:11:12 So here the left-hand side got 13 eighteenths of the data, and the right-hand side got 5 eighteenths of the data.
+00:11:18 We then calculate the information gain as the weighted difference of entropies.
+00:11:24 So we calculate the probability that we went down the left-hand branch, 13 eighteenths, times the difference in entropies, 0.99 minus 0.77.
+00:11:30 We add to it the probability that we go down the right-hand branch, times the difference in entropies on that branch, so 0.99 minus 0.
+00:11:36 There are several equivalent ways of writing this.
+00:11:42 In particular, this form that I've written here is a more classic representation of the mutual information.
+00:11:48 Here I've written it between the split variable, whether we go left or right, and the class variable, whether it's blue or red.
+00:11:54 But the most common way of writing this is to write it as a matrix.
+00:12:00 representation of this is in this form that I've given here as the weighted average of difference entropies.
+00:12:07 To see why this is useful, consider some visibly less good division of the data.
+00:12:15 Here we put most of the data on the left and only a little bit of data on the right.
+00:12:22 And again, since the data points are the same, the entropy to start with is exactly the same, and it's only the entropy of our two subdivisions that will be different.
+00:12:30 So now the subdivision on the left has 17 out of 18 data points, 7 of them are red and 10 of them are blue, and if we calculate the entropy of that, we find that it's 0.97 bits.
+00:12:37 On the other hand, the right-hand branch over here has only one point, so it's probability 1 18th that will fall in that box.
+00:12:45 And again, it's deterministic, so its entropy is zero.
+00:12:52 And if you calculate the information gain, you find that 17 18th times this distance difference in entropy.
+00:13:00 plus 1 18th times this difference of entropy is significantly smaller than the information gain in the previous slide.
+00:13:07 So that indicates that this is a less desirable split of data.
+00:13:15 The split has told us less about the class variable than a different split would have.
+00:13:22 Mainly we'll use information gain to tell us how to split data for a decision tree, but another common method of measuring impurity is called the Gini index.
+00:13:30 So I feel like I need to mention it.
+00:13:37 It's used in almost exactly the same formulas as I showed for entropy, except instead of measuring impurity via the entropy score, so here I've written H entropy is say minus sum over outcomes, the probability of the outcome, log probability of the outcome.
+00:13:45 Instead we measure an impurity score called the Gini score, which is related to a variance score.
+00:13:52 So again we sum over all the outcomes.
+00:14:00 but we calculate P times 1 minus P instead of P log P.
+00:14:06 If you plot this, you'll see that it measures impurity in much the same way.
+00:14:13 So, for instance, for a binary variable, the largest value of H entropy is when P is a half.
+00:14:20 If you plot this function, you'll see that its largest value is also when P is a half, but the shapes are slightly different, so they'll choose slightly different splits.
+00:14:26 So, again, the calculation that you go through is much the same.
+00:14:33 If you take the entire selection of data here, 8 red points and 10 blue points, you can calculate the Gini impurity as being 0.247.
+00:14:40 And then in the left-hand split where we have 10 blue and 3 red, you'll find that the Gini impurity is 0.198.
+00:14:46 The right-hand side that's all red, you find that the Gini impurity is 0 again.
+00:14:53 And now the Gini index...
+00:15:00 which measures the reduction in impurity is, again, the weighted difference.
+00:15:08 So, we calculate 13 eighteenths for the left-hand branch times the difference in its Gini impurities, plus 5 eighteenths for the right-hand branch times the difference of its impurities.
+00:15:17 So, entropy and Gini index are useful methods for classification problems.
+00:15:25 We can also do decision trees for regression, and in that case, since we're predicting a real-valued number, and our data have real-valued target values associated with them rather than class variables, those things don't really make sense.
+00:15:34 So, instead, typically, we measure the variance in the set, and we can measure the expected variance reduction.
+00:15:42 So, here, for instance, we have a full data set on the vertical axis is Y, and on the horizontal axis is our single feature X.
+00:15:51 We can measure the variance of the set.
+00:15:59 those data, let's say it's 0.25, and we can consider some split on X that splits them into left-hand and right-hand sections, and we can measure the variance of the left-hand and right-hand sections as, say, 0.1 and 0.2, and the fraction of the data, say, four-tenths of them took the left-hand branch and six- tenths of them would have taken the right-hand branch, and then the variance reduction is just the weighted difference again.
+00:16:11 So four-tenths times the difference in variances plus six-tenths times the difference in variances on the right-hand side.
+00:16:23 So you can think about the pseudocode for making a decision tree as being basically a recursive function, something like when to split the data, decision tree split data, and it takes in a set of data X and its associated target values Y.
+00:16:35 The first thing it does is perhaps decide whether it will be outputting a decision or not, making this a leaf node.
+00:16:47 So it checks some conditions, which we'll discuss further, to decide whether or not this is a leaf node.
+00:16:59 If it's not, it's an internal node, and we're going to be deciding to split the data into a left-hand and right-hand branch.
+00:17:08 So we check all the possible features, all the possible ways we could split the data.
+00:17:17 So for continuous features, we typically sort all the data, and we compute all the points where a data point and the next data point have different values, and we can split at their midpoint.
+00:17:25 So we think about all these splits.
+00:17:34 We score each of them using some kind of measure of impurity, like the information gain or the variance reduction.
+00:17:42 This tells us we just keep track of whichever feature and split scored the best, and we choose that feature and split to be the decision at that node.
+00:17:51 If we've decided this is an internal node, we then split the data according to that rule that we've just chosen, giving us two subsets, a left-hand subset of the data and a right-hand subset of the data.
+00:18:00 recursively call the same function on the left-hand branch and the right-hand branch, which will decide what their subtrees look like.
+00:18:10 So the only thing that remains that I haven't talked about are the stopping conditions, so the decisions that tell us whether we'll be outputting a prediction or making a rule to split the data further.
+00:18:20 And these are commonly things like checking whether the depth of the tree is greater than some predetermined threshold D, or whether the number of data that we're given is sufficiently large that we feel we could learn a rule on it.
+00:18:30 Or what I mentioned at the beginning, if all the data are indistinguishable, obviously nothing that we split on can help us anymore.
+00:18:40 Or we might say stop if we think that our prediction is sufficiently accurate.
+00:18:50 So if we're only mispredicting one data point, even though we haven't gotten them all correct, we might stop there.
+00:19:00 think that a good way of stopping is to ask whether the information gain or say Gini index is high enough and if that gain isn't high enough to stop.
+00:19:15 It turns out that's not a very good stopping rule for the simple reason that it might be that one split doesn't help us very much but two splits produces a really good rule.
+00:19:30 So here's a simple example of that where we've got an XOR like function and any vertical or horizontal split will still end up with about 50% of the data being blue and red on both sides but at the next level of the tree we can then split those further and we'll end up with a rule that predicts all the training data correctly.
+00:19:45 So typically instead of having a threshold that tells us to stop and when our gain is not large enough we just build the tree much further and then we prune the tree back analyzing whether the levels that we had helped us or not.
+00:20:00 we build all the way to this point, and that way we could tell that this tree actually was successful even though one of the internal nodes had a very low gain.
+00:20:05 So here's a few examples of the growing complexity of decision trees and how they can be controlled with certain parameters.
+00:20:10 So here I'm exploring depth cutoffs.
+00:20:16 Here's a picture of a decision tree that's of depth 1.
+00:20:21 So at depth 1 it's a binary split on one feature.
+00:20:27 So here we've split into predicting on the left-hand and right-hand sides, and since we only have two leaf nodes we predict blue on one side and red on the other.
+00:20:32 If we go one more depth down, now we've subdivided it.
+00:20:38 See here's exactly the same division we had before.
+00:20:43 In the left-hand region it's subdivided again into now two more regions, and the right-hand region is subdivided into two regions.
+00:20:49 And here we can now make four predictions.
+00:20:54 If we go to depth 3, each of those
+00:21:00 regions is further subdivided in two, and we can end up with a slightly more complex function.
+00:21:08 Depth 4 has up to 2 to the 4th regions being predicted, depth 5 up to 2 to the 5th, and if we are willing to go on without any limit, we end up with this much more complex looking function up here on the top right.
+00:21:17 So, setting a depth parameter can act to control the complexity of the function that can be learned.
+00:21:25 Another threshold that I mentioned was the minimum number of data to be used in a parent node.
+00:21:34 So, I'll use the notation min parent here.
+00:21:42 So, if we set here as min parent grows, we tend to have less complex functions.
+00:21:51 So, for instance, the first one, the full decision tree that I showed up on the right corresponds to min parent that means that I'm willing to split a node if it has any more than one data.
+00:22:00 Over here is minParent3, where I'm willing to split a node only if it has three data or more, or rather more than three data.
+00:22:07 And so you can see that some of the much smaller regions that were making independent decisions are no longer able to support splits.
+00:22:15 minParent5, so only split things that have six or more data points, ends up merging some of those together in a slightly simpler function.
+00:22:22 minParent10, an even simpler function, and so forth.
+00:22:30 MATLAB has a few functions built in to do decision trees.
+00:22:37 The decision tree functions are in the stats toolbox these days, in a function called classRegTree.
+00:22:45 If you have an old version of MATLAB, there used to be a standalone function called TreeFit that can do it.
+00:22:52 And these decision trees can do both regression or classification, and the way they decide which that you want to do is by the type of the variable Y.
+00:23:00 if Y is a double, which is the most common variable type for MATLAB, it assumes that you want to do regression.
+00:23:12 If you want to do classification, you have to convert Y into a logical array for a binary classifier.
+00:23:24 Its default is to use the Gini index, but you can have it use other things like information gain as well.
+00:23:36 It's nice, it can show you a picture of your decision tree with these arrow nodes telling you decision nodes, and what feature it is, and what the threshold was, and branching left and right, you come to another internal node, or at a leaf node, it tells you what the prediction is, and it can output a text form of this, which tells you lists each of the nodes in turn, and tells you which node to go to as you walk through the decision tree.
+00:23:48 So, in summary, decision trees are a common, flexible, functional form for machine learning.
+00:24:00 They work by a set of nested if-then-else statements that at each level pick a single variable or a single feature and a condition on which to split.
+00:24:08 For continuous variables, usually it's a greater-than or less-than condition.
+00:24:17 At the leaves of this tree, it predicts a value, either a class or a real-valued number for regression.
+00:24:25 In learning decision trees, we typically follow a greedy recursive pattern where we score all possible splits and pick the best split among them, and we score them using some kind of measure of impurity, like the information gain or the Gini index for classification or a variance reduction score for regression.
+00:24:34 The other important thing is what our stopping criteria are, since that determines how complex of a decision tree we'll end up learning.
+00:24:42 The complexity of our function depends on a number of things.
+00:24:51 The main one is depth, since the total number of independent outcomes will be
+00:25:00 be two to the number of depths at most.
+00:25:08 And I mentioned in the previous set that a decision stump is a particular phrase used for a single-level decision tree, meaning we choose a single feature and split it once.
+00:25:17 These are very simple classifiers, even simpler than linear classifiers.

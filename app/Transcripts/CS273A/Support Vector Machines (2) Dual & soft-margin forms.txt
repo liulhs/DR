@@ -1,0 +1,109 @@
+00:00:00 We saw previously that support vector machines could be formulated as a constrained optimization, specifically a quadratic program.
+00:00:06 In this section, we'll consider this optimization, examine its dual form, and look at the soft margin version of an SVM.
+00:00:13 First, recall our constrained optimization for the SVM, minimizing the weights subject to constraints that enforce a correctness margin on each data point.
+00:00:20 Let's think about how we would actually optimize this constrained system.
+00:00:26 Even finding a point that satisfies these constraints is not trivial.
+00:00:33 The constraints can only be satisfied if we find a perceptron with zero error.
+00:00:40 Even assuming that one exists, just finding one such example was the entire purpose of the perceptron algorithm.
+00:00:46 To better solve this constrained optimization, we'll use Lagrangian optimization.
+00:00:53 Let's first rewrite our constraint slightly so that it's a non-positive inequality.
+00:00:59 Now, let's generically refer to our cost function here as f of theta and to the constraint for data point i as gi of theta, where theta just means all the parameters, both w and b.
+00:01:10 We can now introduce a Lagrange multiplier, alpha sub i, for each constraint g sub i.
+00:01:20 This will be used to enforce the constraint.
+00:01:30 The Lagrangian is given by a joint optimization over the original parameter's theta and the Lagrange multiplier's alpha, whereas before, the theta are to be minimized, but the alpha are to be maximized.
+00:01:40 We also have a very simple constraint on the parameter's alpha, that they be non-negative, so it's easy to initialize a value of theta and alpha that satisfy these constraints.
+00:01:50 We can then proceed to optimize theta and alpha together by, for example...
+00:02:00 gradient steps.
+00:02:06 Now consider what happens when we optimize over alpha i for any fixed theta.
+00:02:13 If the constraint gi is satisfied, then g of theta is negative and the largest value we can attain in this optimization is 0 by setting alpha i equal to 0.
+00:02:20 But if the constraint is not satisfied and gi is positive, alpha will increase.
+00:02:26 Then theta will have to change to decrease g for that constraint.
+00:02:33 In fact, any optimum of the original problem will be a saddle point to the Lagrangian and vice versa.
+00:02:39 This converts a set of constraints that were difficult to satisfy into a nearly unconstrained, easily satisfied constraint problem over more variables.
+00:02:46 Another point that will be useful in a moment is the result of the so-called KKT complementary slackness condition.
+00:02:53 It's easy to see that if we're at a saddle point, then either alpha...
+00:02:59 cannot increase the Lagrangian because its derivative is 0, so g i equals 0, or because it's itself constrained, so alpha i equals 0.
+00:03:07 So for any non-zero alpha i, meaning a slack constraint on the alpha i, it must be that the constraint on g is tight.
+00:03:14 So, we can simply optimize our Lagrangian over both the parameters w and b, and the Lagrange multiplier's alpha.
+00:03:22 The geometric consequence of complementary slackness is that the alpha i are only non-zero for points where the margin constraint is tight, in other words, points on the boundary of the margin.
+00:03:29 These points are called the support vectors.
+00:03:37 Notice now that we fix alpha.
+00:03:44 Then, we can solve directly for w and b in terms of alpha.
+00:03:52 This is now an unconstrained...
+00:03:59 quadratic function, this is quite simple.
+00:04:06 Taking the derivative and setting it equal to zero gives the optimal w is a linear combination of the data, a sum over i of alpha i y i times x i.
+00:04:13 Notice that since alpha i is zero for non-support vector data points, the max margin boundary solution w star depends only on the support vectors.
+00:04:19 We can also solve for b by plugging in the margin hyperplane equations for any support vector.
+00:04:26 So, for example, for this point here, we know that the linear response is plus one, and since we know the value of w, we can just solve for b.
+00:04:33 It's customary to average over a number of these points for numerical stability.
+00:04:40 So, for example, in this formula, we average over all the support vectors and SV of them.
+00:04:46 Finally, if we know the optimal value of w in terms of alphas, we can just plug it in to get an optimization solely over alpha.
+00:04:53 The resulting problem is called the Lagrangian dual of the original.
+00:05:00 problem.
+00:05:07 Plugging in the equation for W star and rearranging, we find that the dual is given here as a maximization over positive alpha.
+00:05:15 We also need to enforce the stationary condition on B that the derivative with respect to B is zero.
+00:05:22 Since the original equation was linear in B, this actually becomes a constraint here.
+00:05:30 Notice that this is now a quadratic function in alpha with a single linear constraint, so it's another quadratic program.
+00:05:37 This quadratic program is over m variables, one for each data point, the alpha i, with m simple inequality constraints, alphas are positive, and one linear equality constraint.
+00:05:45 The Lagrangian dual is always a lower bound on the original primal problem, our minimization over theta.
+00:05:52 Quadratic programs like this have a property called strong duality, which
+00:06:00 says that the value of this maximization over alpha will be the same as the primal problem.
+00:06:06 And as we saw, there's a simple transformation from any solution, alpha star, to a solution, w star, given by the equations in the previous slide.
+00:06:12 This dual form is mainly useful when m, the number of data points, is much smaller than n, the number of features.
+00:06:18 Notice that our optimization is now over alpha, which is length m.
+00:06:24 Evaluating the objective here is then O of m squared.
+00:06:30 And optimizing it is usually between quadratic and cubic and m, depending on the solver used, the optimization tolerances, and so on.
+00:06:36 While this situation may not sound common, it'll become important shortly.
+00:06:42 Before that, let's deal with the problem of non-separable data.
+00:06:48 We often find ourselves with data that are not linearly separable.
+00:06:54 So the margin constraints cannot be satisfied.
+00:07:00 for any value of W and B.
+00:07:06 The large margin principle for separable data suggests we should choose a model with small magnitude parameters.
+00:07:13 However, if we're forced to have non-zero error, we should trade this off with the error that results from our predictions.
+00:07:20 How can we do this?
+00:07:26 One solution is to allow some of our data points to violate the margin constraints, so a soft margin, but assign them a cost, for example the distance by which they violated the constraint scaled by some factor r.
+00:07:33 If r is chosen to be very large, we'll pay a lot of attention to making sure no data violate the margin if possible.
+00:07:40 On the other hand, if r is small, we'll try to maximize the margin for most data but allow some of them to violate it.
+00:07:46 We do so by adding so-called slack variables, epsilon i, one for each data point.
+00:07:53 Epsilon i measures the amount the data point i violates the margin constraint here.
+00:08:00 It is always non-negative, zero if the constraint is satisfied, and then we add a penalty r times epsilon to our objective function, balancing the margin term, w squared, with the amount of slack.
+00:08:08 Notice that this new formulation remains a quadratic program.
+00:08:17 It's a quadratic objective in w and epsilon, subject to linear constraints.
+00:08:25 But let's look for a moment at this optimization.
+00:08:34 In fact, the constraints are far less difficult to satisfy during optimization, since now for any weight vector w, we can always choose a value of epsilon that minimizes its term and satisfies these constraints.
+00:08:42 This means that first, we can always initialize a solution, w and epsilon and b, to something that satisfies the constraints, even if it doesn't minimize the objective.
+00:08:51 Second, the optimal value of epsilon...
+00:09:00 epsilon given w is easy to select.
+00:09:08 If data point i does not satisfy the margin, this with epsilon equal to zero, then the smallest value of epsilon that enforces this inequality to be true will be to set the two sides equal.
+00:09:17 Let's choose that optimal value of epsilon for a given w, and then we can optimize the resulting cost as a function of just w directly.
+00:09:25 What we find is that the cost j is only non-zero for data points that do not satisfy the margin constraint.
+00:09:34 And for those points, it grows linearly with their distance to the margin.
+00:09:42 Sketching this in the same form as our usual surrogate loss pictures, we see that for a positive data point, y equals plus one, if the linear response is already greater than plus one, it has no cost.
+00:09:51 On the other hand, if it's less than plus one, the cost will increase linearly with its distance from the margin.
+00:10:00 This surrogate loss is called the hinge loss for its hinge-like shape.
+00:10:08 Its analytic form, shown here, is piecewise linear.
+00:10:17 It's either 0 or a positive cost that increases away from the margin.
+00:10:25 Our overall optimization, then, is the margin term, sum of w squared, plus r times the hinge loss.
+00:10:34 In other words, a balance between the margin term and a term having to do with slack variables.
+00:10:42 If we just divide this whole thing by r, we get that the optimal parameters minimize the sum of a data term, the hinge loss, plus 1 over r times an L2-like regularization term on the weights.
+00:10:51 This form should now be very familiar as a standard linear classifier.
+00:10:59 optimization from before, the only difference being the choice of the hinge loss as the surrogate loss, and not regularizing the constant coefficient B, which is itself another common thing to do in regularization.
+00:11:11 We can then optimize this form in whatever manner we like, such as our standard stochastic gradient algorithm from the linear classifier.
+00:11:23 If we take the dual of the soft margin quadratic program, we again obtain a quadratic program similar to before, over only the Lagrange multiplier's alpha, with just one minor modification.
+00:11:35 The alphas are now bounded from above as well by R.
+00:11:47 Intuitively, this says that if a data point violates the margin constraint, the Lagrange multiplier alpha i for that data point will increase until it's at most R times the violated distance, i.e. R times epsilon.
+00:11:59 Complementary slackness now tells us that the alphas are non-zero only on data that are either at the margin or on the wrong side.
+00:12:08 In other words, for positive data, say, any points where the linear response is less than or equal to plus one.
+00:12:17 As I mentioned, the dual form can be very important when we have many more features than data points.
+00:12:25 In other words, n is much greater than m.
+00:12:34 A key thing to notice about the dual form of the SVM is the quadratic program involves the features x only through their dot products.
+00:12:42 In other words, the coefficient of the ij interaction term between alpha i and alpha j is the inner product of the data point xi and xj.
+00:12:51 Let's call this inner product K sub ij as the ij-th entry in some matrix K, sometimes called the Gram matrix.
+00:12:59 We can think of this quantity as measuring the similarity of two data points, here through their dot product.
+00:13:08 If the vectors are in the same direction, this takes its maximal value, if they're orthogonal it's zero, and if they're in opposite directions, you get negative values.
+00:13:17 This point will be useful in a moment.
+00:13:25 Interestingly, prediction also only involves dot products.
+00:13:34 Using our solution for W star from before, we find that our prediction y for a new test point x is a linear combination of the dot products of x with the support vectors xi, the points where alpha i is non-zero.
+00:13:42 As a side note here, evaluating b is a bit more complicated, but as before, any support vector with slack on alpha, so not equal to zero or r, will have a tight margin constraint, and can be used to solve for b.
+00:13:51 Typically, b is kept updated while alpha is being solved.
+00:13:59 see more about how we can use this dot product fact in the next lecture, which discusses the kernel trick.

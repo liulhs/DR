@@ -1,0 +1,77 @@
+00:00:00 Next, we'll look at some simple data exploration and visualization techniques and use MATLAB software to do so.
+00:00:07 Since machine learning is fundamentally a data science, the first thing we're likely to want to do is to take a look at the data, understand it, get a feel for what might work.
+00:00:15 The type of data is often very important.
+00:00:22 Some data might be binary, for instance, labeling emails as spam or not, observing the gender of a user.
+00:00:30 Some data might be categorical, for instance, the state that the user resides in or age values binned into several groups.
+00:00:37 And some observed features are likely to be continuous or nearly so, like pixel intensities or prices.
+00:00:45 Another very important point is, are any of the data values missing?
+00:00:52 If we only have partial data, meaning some of the features that we're going to observe about these data items are...
+00:01:00 not observed in all cases, we'll likely have to do something to fill those missing entries in.
+00:01:05 We'll return to this point in later lectures.
+00:01:10 Finally, we'd often like to get an idea of the shape of the data.
+00:01:15 For multi-dimensional data, how are the dimensions, how are the features related?
+00:01:20 Are there data outliers?
+00:01:25 For instance, data points that look very different from the majority of observations.
+00:01:30 Are any of the features redundant or unnecessary?
+00:01:35 To do our visualization, we'll need some software.
+00:01:40 Here, we'll use MATLAB, a popular language for scientific computing.
+00:01:45 MATLAB was designed for linear algebra and operates directly on vectors and matrices.
+00:01:50 It's widely used in many areas of science, including machine learning, so there's lots of code available on the web, but it can be a bit inefficient since MATLAB is an interpreted language, not compiled.
+00:01:55 If you don't want to buy or use MATLAB,
+00:02:00 Octave is a free, nearly code compatible open source project mimicking MATLAB.
+00:02:06 Octave is very well established and stable, although the graphical user interface is a little bit rough.
+00:02:12 Another newer MATLAB replacement is called FreeMAT.
+00:02:18 I have less experience with this, but it's another possibility.
+00:02:24 There are a lot of other alternatives as well, of course.
+00:02:30 In statistics, the language R is very popular and free.
+00:02:36 Again, with lots of available statistics code.
+00:02:42 Python is growing in usage with a number of packages intended to replicate some of the most useful aspects of MATLAB and especially high adoption in computational biology and bioinformatics.
+00:02:48 And, of course, for fast performance, C++ is widely used.
+00:02:54 It's very hard to beat for efficiency, but it's often slow to write code and prototype in, so I don't really recommend it.
+00:03:00 it for classwork, only for production.
+00:03:04 Let's get into a little notation to get started.
+00:03:09 We'll assume that we have M data points, X, X1 through XM.
+00:03:13 I'll try to use parentheses superscripts to indicate data identification numbers.
+00:03:18 Each datum is then a vector of observation.
+00:03:23 So data point J consists of N dimensional measurements.
+00:03:27 These dimensions are often called features.
+00:03:32 It will be useful to stack these data points together so that data point 1 is the first row, data point 2 is the second row through data point N.
+00:03:36 All the features are aligned into something called the data matrix.
+00:03:41 Again, each row is a data point, each column is a feature.
+00:03:46 Note that data matrices are not standardized.
+00:03:50 Some text and code you'll find will use the opposite convention, the transpose of the matrix I'm using.
+00:03:55 So please...
+00:03:59 be careful.
+00:04:05 Here's some code just showing how to load, say, the Fisher-Iris dataset in MATLAB, renaming that matrix as X.
+00:04:11 And if we look at the size of X, we'll see that there are 150 measurements, each of four dimensions.
+00:04:18 The very first thing we might want to do is look at some basic statistics of the data.
+00:04:24 The mean, for example, tells us the average value.
+00:04:30 Calling mean on the data matrix averages over the first dimension so that we get the average in each feature.
+00:04:36 Median similarly tells us the center of the data.
+00:04:42 Maximum and minimum will tell us the range of the data.
+00:04:48 And something like standard deviation will tell us how much variation, how much spread to expect in each feature.
+00:04:54 A histogram bins the data points into a collection of discrete locations and counts the data that fall into each bin.
+00:05:00 If there are k bins, it essentially summarizes the data with k counts, and the plot gives a picture and a sense of how the data are distributed, the shape and spread of the data, presence of any outliers, etc.
+00:05:08 It's a bit trivial, but useful to think about k and how it determines how much summarization actually occurs in the histogram.
+00:05:17 K can in some sense be thought of as a complexity of the histogram.
+00:05:25 For example, if k is extremely large and the data values are actually unique, then every data point will fall into its own bin, and the histogram would simply tell you the positions of all those data.
+00:05:34 It would memorize all the data positions, and it wouldn't really be of any use in summarizing or understanding the data.
+00:05:42 Similarly, if k is too small, the binning would be extremely coarse, and you wouldn't learn anything about the shape.
+00:05:51 The actually right value of k, the best value of k for a plot, depends on...
+00:05:59 a lot of things, including how much data you have, how those data are distributed, and what you're trying to learn about the shape of the distribution.
+00:06:08 A scatterplot is another easy way to visualize how two variables relate to each other in the data.
+00:06:17 Here, we plot each datum as a point, blue, with coordinates given by its first feature X1 and second feature X2.
+00:06:25 This can give you an idea of the spread of the data in those two features, the relationship between the two features, and also, again, the presence of any outliers in the data.
+00:06:34 Of course, in practice, we'll often have more than two features, and it's very difficult to plot such things, but one option is to just look at every possible pair and do a number of two-dimensional plots.
+00:06:42 This is a so-called pair plot, showing all possible feature pairs.
+00:06:51 So for example, this entry here...
+00:06:59 corresponds to plotting x1 versus x2.
+00:07:08 This entry is x1 versus x3, and so on.
+00:07:17 A collection of plots like this give you a quick idea of how features might be related to each other and what their distribution looks like.
+00:07:25 In supervised learning, our goal is to predict something, specifically the target variable.
+00:07:34 This might be a label for email, whether it's spam or not, a price to go along with something.
+00:07:42 In this iris data set that we loaded, it's the species of the iris flower that's having its properties measured, one of three different types.
+00:07:51 So while we could treat this target like any other feature that's being measured, since part of our goal is to understand how the other measurements are related to and can help us predict this label, so for a discrete labeling problem, a classification problem.
+00:07:59 we can use color to understand how the histograms differ between the different classes or where the data from each class are located on that scatter plot.
+00:08:16 This gives us a sense of how easy it's going to be to predict the species, the target variable, from the other features.
+00:08:32 This lecture introduced some basic concepts in data exploration, the representation in terms of the data matrix, computing some basic statistics of the data, and visualizing the data using histograms, scatter plots, pair plots for higher dimensions, and using color for classification and discrete targets.

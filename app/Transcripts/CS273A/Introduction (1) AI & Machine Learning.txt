@@ -1,0 +1,58 @@
+00:00:00 Welcome to our introductory course on machine learning here at UC Irvine.
+00:00:10 My name is Professor Alexander Eiler, and I created these lectures for our introductory courses for undergraduates CS178 and graduates CS273.
+00:00:20 Machine learning is generally considered to be a subfield of artificial intelligence.
+00:00:30 As a general field, artificial intelligence is focused on building so-called intelligent agents, which are often typified by various tasks, including games like chess, now a classic man versus machine kind of scenario, autonomous behavior, such as autonomously driving vehicles, and multi-agent dynamics, such as robotic soccer competitions.
+00:00:40 Machine learning is both more specific and more broadly applied than typical artificial intelligence.
+00:00:50 Machine learning is focused on making predictions or decisions
+00:01:00 and specifically on those getting better with experience.
+00:01:04 It is fundamentally a data analysis science and combines parts of computer science and computational thinking with traditional areas of mathematics like statistics and optimization.
+00:01:09 This is intended as an introductory class with an emphasis on the practical.
+00:01:13 Some theories included, of course, but mainly to understand the principles of what works and what doesn't and how to make it work better.
+00:01:18 Machine learning is often typified by problems whose solutions are hard to describe explicitly.
+00:01:23 For instance, consider face detection by a camera autofocus.
+00:01:27 What makes a face?
+00:01:32 How can we describe to a program that this patch of the image contains a face while this patch doesn't?
+00:01:36 It's hard to describe that in a set of rules.
+00:01:41 Similarly, Netflix predicting how much you'll like a movie.
+00:01:46 What kinds of movies do you like?
+00:01:50 What kind of movie is this?
+00:01:55 Again, very hard to write down in an explicit set of.
+00:01:59 Instead, we'll need the computer to learn through examples.
+00:02:06 Both these tasks are examples of so-called supervised learning, in which we're given training data with the correct answers already tagged.
+00:02:13 We can then design a program to try to reproduce these correct answers.
+00:02:19 In general, these problems come in two flavors.
+00:02:26 Classification problems, in which the thing we must predict is a discrete value, for instance, deciding that a square contains a face or does not, a binary decision, or whether an email is a spam email or not.
+00:02:33 In contrast, regression problems, we're predicting a real value number.
+00:02:39 For example, Netflix may guess that you will rate a movie 3.8 stars.
+00:02:46 Note that the discreteness is in the prediction.
+00:02:53 In Netflix, for example, you can only rate a movie 3 or 4 stars, but because Netflix can predict a real value number like 3.8, it would be called a regression.
+00:02:59 Another type of problem, unsupervised learning, refers to problems in which there's no specific signal to predict.
+00:03:08 Instead, we simply want to understand the data, the structure, notions of similarity, how they relate to one another.
+00:03:17 Often the term data mining refers to this kind of data exploration or data understanding problem.
+00:03:25 On the left is one such unsupervised framework, this time applied to the Netflix data again, where now the data have been used to understand the notion of similarity between movies.
+00:03:34 We can use the ratings to organize and group them by similarity, summarize them, or even improve some kind of prediction problem.
+00:03:42 On the right are images of a hand as it explores two degrees of freedom, opening and closing and rotating.
+00:03:51 The computer only observes image patches.
+00:04:00 consisting of hundreds of grayscale values.
+00:04:08 Using only these kinds of image patches, unsupervised learning techniques can organize the images automatically, such that, for example, closed hands are here on the bottom, open hands are organized onto the top, and left to right shows vertical to horizontal rotation.
+00:04:17 Note that in both cases, the computer doesn't so much understand the semantic meaning behind this, as it does understand the similarity between the data.
+00:04:25 So this is an automatic organization, but the semantic meaning is then usually imposed by humans later.
+00:04:34 Many other variants of learning problems also exist.
+00:04:42 A few of note include semi-supervised learning, which is really a supervised learning problem in that there's a signal, a specific signal to predict, but not all of the examples have the correct answer already given.
+00:04:51 Typically, unsupervised-like methods can then be used to support and improve on the supervised decision.
+00:04:59 These kinds of problems are increasingly common since we now have a lot of data, but not very much time to hand label it.
+00:05:05 In medical data, for example, we might have a lot of patient information, but very few examples in which we know the actual outcome or the best action to take.
+00:05:11 On the web, on the other hand, we might have millions of photos, but we can't expect users to label or tag all of them.
+00:05:17 Users will only label a small subset.
+00:05:23 So we have a vast trove of unsupervised data to go along with a small collection of supervised data.
+00:05:29 Finally, reinforcement learning involves learning when there's only indirect feedback on quality.
+00:05:35 Rather than actually knowing the correct answer or what a human would have done, as in supervised learning, here we only get a relative quality score telling us whether we're doing better or worse.
+00:05:41 Moreover, this feedback might be delayed.
+00:05:47 It might reflect many actions or predictions in sequence.
+00:05:53 It might be noisy.
+00:05:59 just consider the game of poker.
+00:06:08 In poker, we take a sequence of actions, betting, raising, but at the end, we don't even find out the correct answer to those actions.
+00:06:16 We just find out whether we won or lost in the end.
+00:06:24 Much of robotics and other kinds of sequential action planning rely on reinforcement learning techniques for developing their behaviors.
+00:06:32 In summary, machine learning is a computational study of data, including many types of subproblems.
+00:06:40 In this course, we'll start with supervised learning, which are prediction problems in which we're given examples of what our function should output in a number of instances, taken in the form of training data with input features and labeled desired output values.

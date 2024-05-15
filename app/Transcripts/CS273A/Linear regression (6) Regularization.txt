@@ -1,0 +1,73 @@
+00:00:00 Regularization is a common way of controlling for and reducing overfitting in a flexible and tunable manner.
+00:00:04 Consider fitting a linear model to just two data points, resulting in a unique model with zero error.
+00:00:09 So we fit this line.
+00:00:13 Suppose now we want to make our model more flexible and use quadratic functions.
+00:00:18 Now instead of one unique solution, there are actually an infinite number of quadratic functions that have zero error.
+00:00:23 They also pass through those two points.
+00:00:27 So how can we choose among them?
+00:00:32 One trivial way would be to always choose the lowest order polynomial that fits.
+00:00:36 So ensure that all higher coefficients are zero if they can be.
+00:00:41 But this technique is pretty specific to polynomials.
+00:00:46 It requires that we know exactly what these features are.
+00:00:50 A method that's agnostic to the feature definitions might be to choose the parameter values that have the minimum magnitude.
+00:00:55 So the minimum size.
+00:00:59 or Euclidean norm among all models that have zero error.
+00:01:06 Either of these choices is a type of bias.
+00:01:13 They tell us which models to prefer in the absence of evidence from the data.
+00:01:19 This is exactly how regularization works.
+00:01:26 We bias the values of theta toward particular values, for example, small values near zero, by adding a penalty term that encourages those values.
+00:01:33 Optimizing the same way as before, we now balance one term, the data reconstruction error, with another term, the regularization penalty.
+00:01:40 If we optimize the same way as before, we get a similar closed-form solution.
+00:01:46 But now, instead of just y times the pseudo-inverse of x, we now have x transpose x plus an additional term, alpha times the identity.
+00:01:53 This added value regularizes this matrix inverse.
+00:02:00 so that now it's better conditioned and it will have a unique solution for any degree polynomial and number of data.
+00:02:07 Using this squared error regularization term on linear regression with mean squared error is sometimes called ridge regression.
+00:02:15 The overall effect is to shrink the values of theta toward zero by an amount that depends on the value of alpha.
+00:02:22 If alpha is very large then we tend to care more about reducing the parameter magnitude than about reducing mean squared error.
+00:02:30 For alpha going toward infinity we actually choose theta equals zero.
+00:02:37 Note that the regularization term is actually independent of the data so if we emphasize it it reduces the dependence on the actual draw of data and hence reduces the variance of our model but may increase its bias.
+00:02:45 Here's a picture of how this works in practice using the same data point in each plot.
+00:02:52 If we just fit polynomials
+00:03:00 minimizing only the squared error term.
+00:03:08 We start off with a linear function, but as we go to higher and higher order polynomials, we get some very crazy looking functions with pretty extreme values trying to hit every red point.
+00:03:17 But if we add a regularization term, here we chose alpha equal to 1, our model is unwilling to choose the extremely large parameter values that would be necessary to reduce the mean squared error so much.
+00:03:25 The decrease in the mean squared error would be offset by the increase in the norm of theta.
+00:03:34 So as we do higher order polynomials, even very high polynomials, with a regularization, we tend to still learn a simple looking function.
+00:03:42 So the regularization is helping us balance the concepts of not having too much error with keeping small parameter values.
+00:03:51 There are many different possible choices of regularization with different effects on the parameters learned.
+00:04:00 A common class of regularizers is to choose one based around the family of Lp vector norms for different values of p.
+00:04:08 For p equals 2, we sum the squared values of theta and take the square root, and so this is just the Euclidean distance.
+00:04:17 It's easy to visualize these Lp norms by sketching the shape of their isosurfaces, so the surface on which the norm takes on constant value, say 1.
+00:04:25 For the Euclidean distance, p equals 2, this is just the circle, the set of points with radius 1, with distance 1 from the origin.
+00:04:34 On the other hand, if we pick p equals 1, we get the sum of absolute values, and the isosurface looks like this star shape, a rotated square.
+00:04:42 Increases in one value of one parameter theta must be exactly offset by decreases in the other.
+00:04:51 If p is very large, the shape of the isosurface tends to look like this.
+00:05:00 to approach a square, so the set of theta such that the maximum value is 1.
+00:05:07 For p very small, here I'm picturing 0.5, the picture, the shape is very peaked, where we're allowed to have large values of one parameter, like theta 0, only if the other parameter, theta 1, is very near 0.
+00:05:15 In the limit, as p approaches 0, this approaches the counting norm.
+00:05:22 So it counts the number of non-zero parameter values.
+00:05:30 And this is a natural notion of complexity, since it measures how many parameter values are actually used by the model.
+00:05:37 The two most common choices of regularization are the L2 and the L1 norm.
+00:05:45 Optimizing a data term plus the regularization balances the mean squared error with a regularization cost.
+00:05:52 And we can picture this as the balance of two different losses, one loss.
+00:06:00 that determines how well we reconstruct the data.
+00:06:05 And that's minimized at this blue point.
+00:06:10 And as we move away from it, it increases quadratically.
+00:06:15 And the other term is a regularization term that's minimized at the origin, so all parameters equal to zero.
+00:06:20 And it increases, again, in the case of the L2 norm, quadratically away.
+00:06:25 So the combination of the data plus the regularization will be minimized at some point that touches both surfaces.
+00:06:30 Since in order to reduce the regularization, we would have to leave this isosurface and increase the data loss, and vice versa.
+00:06:35 So we can't reduce either loss without increasing the other.
+00:06:40 L1 penalties have the effect that they can encourage sparse parameter vectors.
+00:06:45 A sparse vector is one that lies exactly on some axis.
+00:06:50 For example, one of the parameters, say theta 1, is exactly zero.
+00:06:55 The sparser, the more parameters will be exactly zero.
+00:07:00 The L2 optimum over here will only be on one of the axes, so it will only be sparse if this minimum MSE point is also exactly on the axis.
+00:07:12 This will happen only with probability zero.
+00:07:24 But on the L1 optimized regularized system, the L1 optimum can be on the axis even when the blue point is not sometimes.
+00:07:36 So because its contour is sharp at that point, it means that it's possible for it to intersect with these blue ovals on the axis even when the minimum MSE point is not located on the axis.
+00:07:48 So L1 regularized solutions tend to encourage some level of sparsity, which is often helpful because it makes our model more efficient to store, more efficient to compute, and it can also reveal which features are most important to the prediction, since less important features may be forced to be exactly zero.
+00:08:00 Interestingly, LP norms form a balance between sparsity and convexity.
+00:08:07 So for P greater than or equal to 1, the norm is convex and thus relatively easy to optimize.
+00:08:14 But for P less than or equal to 1, it induces some sparsity.
+00:08:22 So the L1 norm is the only norm which both induces some sparsity in the solution and remains convex for easy optimization.

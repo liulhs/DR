@@ -1,0 +1,105 @@
+00:00:00 In these slides, we'll discuss training neural networks using gradient descent, which goes by the special name of backpropagation in the neural network literature.
+00:00:06 Recall our neural network model.
+00:00:13 We observe some features x in the input layer, which are used to compute the value of a collection of hidden nodes.
+00:00:20 These hidden nodes then become inputs for the next layer, and so on, to a possibly vector-valued output layer y hat.
+00:00:26 We'll measure the error in our prediction via a mean-squared error between the prediction y hat and the observed target vector y.
+00:00:33 We could easily change this if we want.
+00:00:40 Our training problem, then, is to select values for the weights at all layers to minimize the mean-squared error.
+00:00:46 This is an extension of our single-layer perceptron model, in which we used a logistic sigmoid nonlinearity.
+00:00:53 This ensures that our optimization will be smooth and differentiable, allowing us to optimize the weights using either batch or stochastic...
+00:00:59 online gradient descent.
+00:01:05 The backpropagation algorithm simply applies gradient descent to the neural network cascade of weights.
+00:01:10 It's fundamentally simply an application of the chain rule calculus over and over.
+00:01:16 We'll write some notation here.
+00:01:21 The loss function is the sum of squared errors over the output vector, which we'll index with k.
+00:01:27 The output layer is a smooth nonlinearity sigma of a linear response sk.
+00:01:32 So sk is a weighted linear combination of the hidden nodes.
+00:01:38 And finally, the hidden nodes are an activation function of a linear response t, which is a weighted combination of the input features.
+00:01:43 Now we can take the derivative of the loss j with respect to one of the parameters.
+00:01:49 Let's say a weight in the second layer, denoted w2, is equal to w1, where w1 is the input feature, and w2 is the output feature, and w1 is the activation function of w1.
+00:01:54 So we can take the derivative of the loss j with respect to one of the parameters, w1, with respect to one of the parameters, w2, with respect to one of the parameters, w1.
+00:01:59 sub kj, the weight of the second layer between hidden node j and output node k.
+00:02:15 Following the chain rule on the lost j, we get, here's the definition, we get the sum over output nodes, the derivative of y minus y hat squared is just y minus y hat, times the derivative of the interior, which is minus the derivative of y hat, so that's dy hat.
+00:02:30 When we look at the definition of y hat, it's sigma of sk, so we get the slope of sigma at point sk times the derivative of sk, and sk is just linear in the weights, so we get the hidden value hj.
+00:02:45 Notably, so far, this is exactly the same derivation that we had for logistic mean squared error regression, since a single layer, given the values of h, is just a perceptron with a logistic...
+00:03:00 sigmoid on the output.
+00:03:12 Now let's take the derivative with respect to a different weight, say one at the first layer, W1 sub ji, so the weight between input node xi and hidden node hj.
+00:03:24 Following the chain rule, we take the derivative of j, we get a bunch of y minus y hat terms times the derivative of the y hats.
+00:03:36 As before, the derivative of y hat is just the slope sigma prime at value sk times the derivative of sk, but now sk depends on weight the weights in the first layer through the hidden node value h, so we get Wkj times the derivative of hj.
+00:03:48 Finally, hj depends on the weights at the slope
+00:04:00 slope of sigma at point tj times the derivative of the interior, which is just xi.
+00:04:15 We can notice that in the second computation, we use this term, y minus y hat times the slope of sigma at sk, but we already computed this value when we were computing the derivatives of layer 2.
+00:04:30 So we can reuse it here, we'll just call it beta at layer 2 sub k, propagating the derivative values backward to the previous layer.
+00:04:45 If we had another, even earlier layer, it would involve terms that included the sum over k of y minus y hat sigma prime sk wk sigma prime of tj, and we could save those values and propagate them backward.
+00:05:00 again to an earlier layer.
+00:05:07 This gives gradient descent its popular name backpropagation.
+00:05:15 In code, this is usually implemented as an easy recursion, as we compute the beta terms and derivatives recursively starting with the last layer and moving backwards to the first.
+00:05:22 So let's suppose there are N3 output nodes, N2 hidden nodes, and N1 input nodes.
+00:05:30 Then the beta values at layer 2, B2, are just Y hat times the derivative of sigma at value S.
+00:05:37 So this is a vector indexed by node K, so it's length N3.
+00:05:45 We can then use this to compute the gradient of the weights at layer 2.
+00:05:52 This is a matrix, so this is an outer product between B2 and H.
+00:06:00 So, it's a matrix of size N3 by N2, which is the same size as the weight matrix of the second layer.
+00:06:07 We can use the betas at layer 2 to also compute the betas at layer 1 as beta 2 times weight 2.
+00:06:15 So, that sums over K and size N3, that's the output node index.
+00:06:22 And then multiplying by the slope of the activation, d sigma, at value T.
+00:06:30 So, that sums over K giving a vector of length N2, and then it's an element-wise product by another vector of length N2.
+00:06:37 So, we get beta being the size of the number of hidden nodes.
+00:06:45 And finally, the gradient of the weights at the earlier layer is then beta 1 times the input features X.
+00:06:52 So, that'll be a matrix that's the same size as the weight.
+00:07:00 matrix, so it's N2 times N1 plus 1.
+00:07:10 Actually, the H matrix here should have also had the constant feature, so that this gradient should also have been N3 by N2 plus 1.
+00:07:20 Overall, this gives us the gradient of the entire system, which is just the gradient of the weights at the second and first layer together.
+00:07:30 Using this gradient, we can do gradient descent or stochastic gradient descent just by repeatedly updating our parameter vectors and recomputing the gradient.
+00:07:40 Just as a simple example of what a neural network regression model might look like, here's a two-layer model trained on some data from the UCI repository, the motorcycle data set.
+00:07:50 So the model consists of one hidden layer with 10 nodes with logistic sigma activation functions, followed by an output layer.
+00:08:00 with a linear activation so that we get a regression.
+00:08:08 After training, the hidden nodes activations are plotted down here at the bottom.
+00:08:17 And you can see that they act to segment the original feature space X into different regions with the hidden nodes effectively acting like step function detectors.
+00:08:25 So then, a linear combination of these hidden node values can produce this output function, which we can see is hiding nonlinear in the original feature space X.
+00:08:34 Here's another simple example that shows the actual optimization process during gradient descent for a classifier using two features of the Iris dataset.
+00:08:42 So we're optimizing the mean squared error of an output vector, which is a 1 of k representation of the three classes, using stochastic gradient descent.
+00:08:51 And the values of the optimization, the mean squared error...
+00:08:59 are shown in blue.
+00:09:05 The gradient descent takes steps changing theta, which decreases that overall MSE with every step.
+00:09:11 At the same time, we can take the output and threshold it and use that as a classification decision and evaluate the error rate of that classification decision.
+00:09:17 So, this is shown in green.
+00:09:23 You can see that these aren't perfectly related, right?
+00:09:29 The mean squared error is acting as a surrogate for the harder-to-optimize classification loss.
+00:09:35 But typically, improving the MSE of the prediction also improves the error rate of the classification.
+00:09:41 So, the trained classification boundaries are shown over here.
+00:09:47 You can see they're somewhat nonlinear versions of the original features.
+00:09:53 In practice, neural networks provide complex, highly flexible input-output behavior for a variety of classification tasks.
+00:09:59 by Professor Jeff Hinton of a Deep Belief Network.
+00:10:09 More precisely, I think this demo is actually a Deep Boltzmann machine, which he's made available as an online demonstration.
+00:10:19 The task here is to classify handwritten digits from a U.S. Postal Service data set, USPS, identifying which of the 10 digits is written in each patch of image.
+00:10:29 So the input features X are a 16 by 16 pixel image, so 784 pixels, and the network has four layers.
+00:10:39 So shown are the response values, the post activation function values of the hidden layer 1, the second hidden layer, the third hidden layer, and the output layer.
+00:10:49 The first hidden layer is 500 nodes, the second one is the same size, the third one is larger at 2,000 nodes, and then
+00:10:59 And the output layer is using a 1 of k representation for our 10 digits, so it's a vector of length 10.
+00:11:09 So in this input, we input a handwritten 2 as an image, compute the activation function at the first, then second, then third layers, then the output layer, and choose the largest response as our decision.
+00:11:19 Here it outputs, predicts 0, 0, 1, 0, 0, or which is a 2, since the 1 is in the position of the 2 digit.
+00:11:29 If we input a different image patch, we can recompute the output at each layers and the output.
+00:11:39 Here we input a 6, and after passing it through the network, the prediction correctly predicts a 1 in the 6 position.
+00:11:49 Interestingly, the actual model being used here is capable...
+00:11:59 of being interpreted as a probability distribution as well.
+00:12:09 So the demo program actually will allow you to fix an output configuration, say 0, and then do a process which approximately samples from the values of the rest of the system.
+00:12:19 Here that lets you draw a sample from the input vector which the model thinks might have generated this output.
+00:12:29 And here it's drawn an awkward but recognizable synthetic 0, which suggests that the resulting probability distribution defined by this model does have some idea of what makes, say, a 0 in appearance different from other possible values.
+00:12:39 So this particular variety of neural network, Boltzmann machine, is actually interpretable as a generative model over the features as well.
+00:12:49 If you're interested in neural networks, there's quite a lot more to learn and do than we cover in this class.
+00:12:59 This is a very active area of research these days.
+00:13:06 To try things out, I would probably suggest the Deep Learning Toolbox, which is available on GitHub as open source code.
+00:13:13 It's written for MATLAB and Octave, and it's a good starting place for exploring and testing out some of the methods that are popular right now.
+00:13:19 There are also other open source toolkits available.
+00:13:26 Notably, there's one that's supplied with MATLAB, but it requires the purchase of the Neural Network Toolbox and your license.
+00:13:33 Or there's an older code base called NetLab, which was widely used at one point, but hasn't been updated for a while.
+00:13:39 In summary, neural networks, or multilayer perceptrons, provide an extremely flexible class of functions.
+00:13:46 They're built up from a cascade of several layers, each of which is a collection of simple linear responses with a nonlinear activation function, essentially a perceptron model.
+00:13:53 The hidden layers of the model can be interpreted as designing good features.
+00:13:59 the original output that can then be used by the output layer perceptron classifier.
+00:14:08 When more than one layer is used, the resulting neural network becomes a general function approximator.
+00:14:16 In other words, it's capable of approximating any function given enough nodes, or in other words, tunable features.
+00:14:24 We can use this functional framework either for classification or for regression.
+00:14:32 Because each layer is smooth and differentiable, we can train the overall system using gradient descent methods, which we derived using the chain rule.
+00:14:40 Furthermore, because this computation can be ordered from last layer to first, reusing some of the computation at the previous layer, gradient descent in neural network models is usually called backpropagation.

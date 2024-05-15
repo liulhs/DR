@@ -1,0 +1,109 @@
+00:00:00 A very common variant of Bayes classifiers for systems with many features is called Naive Bayes.
+00:00:07 Recall that for Bayes classifiers, we would estimate several quantities.
+00:00:15 The first was the probability of each class overall, and the second was a collection of class conditional distributions.
+00:00:22 So for every possible class outcome of Y, we would estimate a model of the features X.
+00:00:30 And then we could take these and use them to calculate the probability of each class, given an observation of that feature X using Bayes rule.
+00:00:37 Given these probabilities, we would simply choose the most likely class C.
+00:00:45 We saw that for a simple discrete X, we could represent this as a contingency table.
+00:00:52 So we could compute the probabilities of each outcome, Y given X, and then choose the maximum class, the class that maximized that probability, as our prediction.
+00:01:00 However, what if we have more features, discrete features X, perhaps many more?
+00:01:06 Well, one straightforward approach is to just use a joint distribution over all the outcomes of X.
+00:01:12 So, for instance, say X is made up of three features A, B, C.
+00:01:18 We can represent a truth table over all the possible outcomes.
+00:01:24 And each of these entries represents one possible outcome for the entire feature vector X.
+00:01:30 Then, for each possible combination of those values, we can associate a probability.
+00:01:36 So P of X is then a probability associated with the outcome of that vector A, B, C.
+00:01:42 Since this is a probability distribution, the total amount of probability here must sum to one.
+00:01:48 And so if we have, say, three binary variables, this is a table over eight possible entries.
+00:01:54 Those entries sum to one, so we essentially have freedom to specify seven of those entries.
+00:02:00 such that they sum to less than 1.
+00:02:08 The problem with this approach comes in when we start to bring in the fact that we'll be estimating these using a finite data set.
+00:02:17 So we have a collection of data, and we'll estimate the probabilities, let's say using the empirical probabilities that we saw in our data set.
+00:02:25 So we have a collection of outcomes, for instance, ABC might be 0, 0, 0, and we see that in our data set, say, 4 out of 10 times.
+00:02:34 Similarly, another outcome, 0, 0, 1, might occur 1 out of 10 times, 0, 1, 0 might have never occurred out of the 10 examples in this class.
+00:02:42 The problem is that we have only a fixed amount of data, say, m data points, and the size of this table is growing exponentially with the number of discrete features.
+00:02:51 So if we have n features, then we have 2 to the n possible entries in this table to fill in, and this is increasingly important because
+00:03:00 if we have very small amounts of data, many of these entries will have no data associated with it, which means that we're estimating that the probability of seeing that outcome in this particular class is zero.
+00:03:07 So if we ever do see that outcome, our empirical estimate of probability will say that that should never have occurred in this class, and we'll rule out this class entirely.
+00:03:15 So this is essentially an overfitting effect.
+00:03:22 We have 2 to the n possible parameters to associate with each class and only m data points to associate.
+00:03:30 So the more features we add, the more complex our contingency table representation of our classifier is getting.
+00:03:37 One simple option to try to improve things is to smooth or regularize our empirical estimates away from zero.
+00:03:45 So instead of choosing the fraction of data points, say 4 out of 10, we would add some small smoothing parameter alpha.
+00:03:52 So we would take 4 plus alpha.
+00:04:00 for that entry, and then we'd normalize by the sum of all of them, so 10 plus 8 alpha.
+00:04:08 This ensures that we never estimate any probability as exactly 0, so it's sometimes called smoothing.
+00:04:17 It's better to think of this as regularization, which we'll cover in later lectures.
+00:04:25 However, another powerful approach is to try to simplify the representation of this table of possible outcomes.
+00:04:34 So, one possibility is to just compute this probability under a very simple model of the features.
+00:04:42 So, for instance, independent variables have the property that the joint probability of two variables A and B is just the product of a probability of A and a probability associated with outcome B, meaning that events A and B are independent of one another.
+00:04:51 Observing A does not affect B, and vice versa.
+00:05:00 For more background on probability, please see my background probability slides.
+00:05:08 Taking this to a large number of features, say x1 through xn, discrete features, we might assume that within this class, feature 1 and 2 and 3 and so on are all independent of each other.
+00:05:17 So that means the probabilities in this table are simply the product of a probability associated with the outcome of x1, a probability associated with the outcome of x2, and so on.
+00:05:25 And that means we only need to estimate these probabilities over single discrete features at a time.
+00:05:34 So, for instance, we might estimate the probability of A in our data, and A might say 40% of the time come out 0 and 60% of the time come out 1.
+00:05:42 Separately from that, we would estimate the probability of B being 0 or 1 or C being 0 and 1.
+00:05:51 And then the entries of this exponentially large table can be computed very simply as the product of the probability
+00:05:59 associated with the outcomes of A, B, and C.
+00:06:05 Clearly, this drastically reduces the number of parameters being estimated.
+00:06:11 For instance, here we have one parameter for A, one for B, and one for C, so three total as compared to seven to specify the joint probability table.
+00:06:17 Often this is used in systems with very many features.
+00:06:23 So, for example, suppose we want to predict a discrete binary Y, say whether or not a person will be in an auto accident within the next year.
+00:06:29 For each person, we have a large number of possible co-observed measurements.
+00:06:35 We might observe their age, their income, their education level, perhaps the zip code they live in, the number of years driving, things like that.
+00:06:41 Lots of possible discrete variables in this case.
+00:06:47 So, we want to learn a model that takes all of those possible features into account when it predicts Y.
+00:06:53 If we were to try to learn this table directly,
+00:06:59 as a contingency over every possibility of X1 through Xm, it would take d to the m plus 1 possible values to specify that probability distribution.
+00:07:08 So, exponential in the number of features that we observe, which is many.
+00:07:17 The Naive Bayes model, on the other hand, uses Bayes' rule combined to a prediction of the possible outcomes of Y, so that's quite simple.
+00:07:25 There are only two outcomes of Y, and a model of P of X given Y that factors into a probability of each feature given Y.
+00:07:34 So, each feature only has a small number of outcomes, so estimating this probability over just the outcomes of that one feature is much easier.
+00:07:42 So, this assumes that given each underlying cause, each class, the covariate features are actually independent.
+00:07:51 Note that that might not be a good model of the actual data.
+00:07:59 So, for instance, we think it's unlikely that age and income or income and education are actually independent of one another, even given whether you will or will not have an accident in the future.
+00:08:08 But the point of this is not to be a good model of the features X, but to capture the dependencies that might lead to predicting Y.
+00:08:17 So, in practice, this can be very good at predicting Y, even if it's not a very good model of the features X itself.
+00:08:25 So, here's a classic model of using Naive Bayes models, which is spam filtering in email.
+00:08:34 So, we have a binary class to predict whether the email is spam or not spam.
+00:08:42 And our features will be the context, the content of the email, right, the words that appear in the email.
+00:08:51 So, for example, we might just list out every possible word in the English dictionary.
+00:08:59 10,000 of those words commonly used, and then we give ourselves a 1 in the entry if that particular word appears.
+00:09:09 So we'll have one feature that's whether the word the appears, another feature that's whether the word probabilistic appears anywhere in the email, another that's whether the word lottery appears anywhere in the email.
+00:09:19 So this will be about 10,000 binary features of each email.
+00:09:29 So if we have several thousand words, if we were to estimate the joint probability of X given Y or Y given every possible outcome X, we would need 2 to the 10,000 or so parameters, which is a big problem because it's much, much larger than the number of atoms even in the universe.
+00:09:39 So instead what we'll do is we'll model the words that appear in the email as independent given the email type.
+00:09:49 So what this is going to capture is that some words are more likely to appear in...
+00:09:59 the spam category.
+00:10:06 Like for me, spam will be more likely to have lottery than real email would.
+00:10:13 And some words are going to be indicative of real email.
+00:10:19 Like I rarely get spam with the word probabilistic in it, but I regularly get email from students with that word.
+00:10:26 And so what that's going to mean is each possible word, appearing or not appearing, gets its own distribution in the spam and not spam categories.
+00:10:33 And so that's going to mean that instead of 2 to the 10,000 parameters, we're only going to have about 10,000 parameters for spam and 10,000 parameters for not spam.
+00:10:39 So only on the order of 10,000 or 20,000 parameters total.
+00:10:46 Given only that many parameters, a reasonably sized data set should be able to estimate those probabilities with fairly good quality.
+00:10:53 It's useful to think about what the naive Bayes assumption is from a Gaussian modeling...
+00:10:59 perspective as well.
+00:11:11 So, if we give a Gaussian model to feature 1, so feature 1 is a Gaussian over a univariate feature x1, and feature 2 is a Gaussian over the univariate feature x2, the Naive Bayes assumes that for each class, P of x1 and x2, the joint probability is just the product of these two individual probabilities.
+00:11:23 If we write that out and try to fit it into the form of a complete joint probability, what we find is that the x1 and x2 components decompose.
+00:11:35 And the way to fit that into this joint probability with a arbitrary covariance matrix is that you find that the mean parameters is just the mean of the first feature and the mean of the second feature formed as a vector, but the covariance matrix is simplified.
+00:11:47 The covariance matrix is a diagonal matrix whose 1, 1 entry is the variance of feature 1 and whose 2, 2 entry is the variance of feature 2.
+00:11:59 entry is the variance of feature 2.
+00:12:11 Again, this has the interpretation of having fewer parameters to estimate, since an arbitrary covariance matrix over two features would have not only those diagonal entries, but would also estimate an off-diagonal term relating to their correlation.
+00:12:23 So, if I have, say, m features, an arbitrary covariance matrix will estimate approximately m squared over 2 of those parameters, whereas a Naive Bayes model will only estimate the diagonal entries, so it's going to be on the order of m features.
+00:12:35 So, again, we have the notion that the Naive Bayes model has many fewer parameters to a model over all the features.
+00:12:47 In terms of Gaussians, this diagonal form means that our covariance matrices are going to form axis-aligned independent Gaussians, so they'll tend to look like ovals that follow axes.
+00:12:59 aligned shapes, so there'll be no correlation to the different features X1 and X2 within that class.
+00:13:11 In summary, to use Bayes classifiers and Naive Bayes classifiers, you should know Bayes rule, which expresses the probability of our class given the features in terms of a class conditional model P of X given Y, and a class distribution P of Y.
+00:13:23 So to estimate these from data, we learn these two components, the probability of each class individually, and a model of the features for each possible class outcome, which we can learn from the data only associated with that class.
+00:13:35 Naive Bayes models simplify P of X given Y by assuming that for each class Y, P of X is an independent distribution.
+00:13:47 So P of X given Y equals some outcome C is just a product over models for each feature individually given that class.
+00:13:59 And typically, for all these probabilities, we'll be estimating their values using just the empirical estimators, which in this case also correspond to the maximum likelihood estimators.
+00:14:08 So, for discrete variables, you should be familiar with the empirical estimator, the number of counts divided by the total number of data.
+00:14:17 For Gaussian variables, we'll use the empirical mean and empirical covariance or empirical variances.
+00:14:25 And most importantly, there's an effect as this model, P of X given Y, becomes increasingly complex as it requires increasingly many parameters to express it.
+00:14:34 We run into danger of overfitting.
+00:14:42 If we have exponentially many parameters for this model and only a small number of data, we'll never be able to estimate it very well.
+00:14:51 So, models like Naive Bayes use simplifying assumptions on the form of this distribution, like a product of individual ones, to reduce the number of parameters and thus simplify the
+00:14:59 overall model of P of X given Y.

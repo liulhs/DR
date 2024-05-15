@@ -1,0 +1,226 @@
+[
+    {
+        "timestamp": "00:00:00",
+        "text": "The first machine learning technique we'll look at are nearest neighbor methods."
+    },
+    {
+        "timestamp": "00:00:08",
+        "text": "While at first they may not appear to do much learning per se, in practice they can be quite useful and will illustrate some of the issues we'll be dealing with."
+    },
+    {
+        "timestamp": "00:00:17",
+        "text": "Recall that these are supervised learning problems, so we'll be trying to predict a target Y using some collection or vector of features X."
+    },
+    {
+        "timestamp": "00:00:25",
+        "text": "Our learner will take in the features and will spit out a prediction Y hat, and our learner will be parameterized in some way so that observing data will change its input-output behavior."
+    },
+    {
+        "timestamp": "00:00:34",
+        "text": "Let's start with a regression problem."
+    },
+    {
+        "timestamp": "00:00:42",
+        "text": "In regression, for the purposes of plotting, we'll assume that we just have a single scalar feature X and the target Y, and therefore we can plot each of our observed data points as a point with an XY coordinate."
+    },
+    {
+        "timestamp": "00:00:51",
+        "text": "And when we look at this scatter plot..."
+    },
+    {
+        "timestamp": "00:00:59",
+        "text": "that suggests some relationship between x and y that we can use so that given a new x point that we're asked to predict at, this relationship will suggest what value we should predict the y value for that feature x at."
+    },
+    {
+        "timestamp": "00:01:12",
+        "text": "The nearest neighbor predictor follows a very simple formula."
+    },
+    {
+        "timestamp": "00:01:24",
+        "text": "We simply save all of the training data points, the red dots in the scatter plot, and our predictor just follows a very simple procedure, which is that given a new feature x, it looks in that data set, finds the data point with the closest value of x, and predicts the y value that was associated with that training point."
+    },
+    {
+        "timestamp": "00:01:36",
+        "text": "So given x new, we find the xi training data point that's closest and predict its associated yi."
+    },
+    {
+        "timestamp": "00:01:48",
+        "text": "While defined as a procedure, this"
+    },
+    {
+        "timestamp": "00:02:00",
+        "text": "implicitly defines a function of x, since every x has a prediction associated with it."
+    },
+    {
+        "timestamp": "00:02:10",
+        "text": "If we evaluate that procedure at each possible feature x, we get a function that looks like this."
+    },
+    {
+        "timestamp": "00:02:20",
+        "text": "So, whenever we're closest to this data point, we predict its y value."
+    },
+    {
+        "timestamp": "00:02:30",
+        "text": "The moment that we become halfway between that data point and the next data point, we transition abruptly to the new nearest data point's y value."
+    },
+    {
+        "timestamp": "00:02:40",
+        "text": "Notice that as a regression, this function is locally constant, since as we move very slightly, we continue to have the same nearest neighbor, so we continue to predict exactly the same y value, followed by an abrupt transition whenever we change our nearest data point."
+    },
+    {
+        "timestamp": "00:02:50",
+        "text": "In classification, a supervised learning problem in which the target values y are discrete-valued, instead of plotting them as we did in the"
+    },
+    {
+        "timestamp": "00:03:00",
+        "text": "a scatterplot in regression, we'll simply indicate them using a symbol or a color."
+    },
+    {
+        "timestamp": "00:03:05",
+        "text": "So here, 1 and 0."
+    },
+    {
+        "timestamp": "00:03:10",
+        "text": "And that allows us to pretend that we have two features."
+    },
+    {
+        "timestamp": "00:03:16",
+        "text": "So for our purposes of illustration, we'll imagine that we have a feature x1 and another feature x2."
+    },
+    {
+        "timestamp": "00:03:21",
+        "text": "And in this case, the problem is the same."
+    },
+    {
+        "timestamp": "00:03:27",
+        "text": "Given a new feature vector x, we'd like to predict whether that associated y will be a 0 or a 1."
+    },
+    {
+        "timestamp": "00:03:32",
+        "text": "The nearest neighbor rule here simply looks and chooses the data point that's closest in terms of distance and predicts the value associated with it."
+    },
+    {
+        "timestamp": "00:03:38",
+        "text": "So here, we need a distance on a vector space."
+    },
+    {
+        "timestamp": "00:03:43",
+        "text": "So we'll typically choose the Euclidean distance, which is just the sum of squared distances over the features."
+    },
+    {
+        "timestamp": "00:03:49",
+        "text": "Again, we can evaluate this procedure at every possible point x."
+    },
+    {
+        "timestamp": "00:03:54",
+        "text": "And that will define a function."
+    },
+    {
+        "timestamp": "00:04:00",
+        "text": "points x where we're closest to a 1, we'll predict 1."
+    },
+    {
+        "timestamp": "00:04:06",
+        "text": "At all points x where we're closest to a 0, we'll predict 0."
+    },
+    {
+        "timestamp": "00:04:13",
+        "text": "And between them, there'll be an abrupt change called the decision boundary."
+    },
+    {
+        "timestamp": "00:04:20",
+        "text": "The decision boundary indicates the set of points at which on one side we're predicting 1 and on the other side we're predicting 0."
+    },
+    {
+        "timestamp": "00:04:26",
+        "text": "Geometrically, it's clear that just like in the regression case, there'll be a set of points where each data point is in fact the closest point."
+    },
+    {
+        "timestamp": "00:04:33",
+        "text": "So in the neighborhood of this data point, I'll be using it for prediction, and so whenever I'm closest to it, I'll be predicting its value."
+    },
+    {
+        "timestamp": "00:04:40",
+        "text": "Similarly, in the neighborhood of this data point, it will be the closest point and I will be predicting its value."
+    },
+    {
+        "timestamp": "00:04:46",
+        "text": "If we think about what this turns into, we see that each data point can be thought of breaking up the space into a Voronoi tessellation."
+    },
+    {
+        "timestamp": "00:04:53",
+        "text": "The set of points that are closest to a 1 is called a Voronoi tessellation, and the set of points that are closest to a 0 is called a Voronoi tessellation."
+    },
+    {
+        "timestamp": "00:05:00",
+        "text": "to that data point than any other data point."
+    },
+    {
+        "timestamp": "00:05:08",
+        "text": "So, for example, all points in this section of the space are closer to this data point than to any other example data point."
+    },
+    {
+        "timestamp": "00:05:17",
+        "text": "Similarly, points in this set of space are closer to this data point than to any of the other data."
+    },
+    {
+        "timestamp": "00:05:25",
+        "text": "The decision boundary, then, is simply the set of these boundaries that border one value on one side and a different value on the other side."
+    },
+    {
+        "timestamp": "00:05:34",
+        "text": "That will be the set of points that are transitioning from predicting a 1 to predicting a 0."
+    },
+    {
+        "timestamp": "00:05:42",
+        "text": "It's easy to see that this decision boundary must be piecewise linear, since if we look at any pair of data points, we can think about what the set of points that are equidistant between them, which will be the point at which we transition from being closer to this 0 to that 1."
+    },
+    {
+        "timestamp": "00:05:51",
+        "text": "If we draw a straight line between those two points,"
+    },
+    {
+        "timestamp": "00:06:00",
+        "text": "the points that are equidistant between them must lie on the perpendicular to that line."
+    },
+    {
+        "timestamp": "00:06:10",
+        "text": "So, locally, this point is halfway between the two data points, and if we deviate slightly perpendicular to the line between them, we'll stay equidistant between those two points."
+    },
+    {
+        "timestamp": "00:06:20",
+        "text": "Then, if we simply follow that line a little bit further, eventually we will become closer to this data point than we are to one of those two other points."
+    },
+    {
+        "timestamp": "00:06:30",
+        "text": "At that point, our new boundary will be equidistant between a new pair of data points and will be perpendicular to the line that connects them."
+    },
+    {
+        "timestamp": "00:06:40",
+        "text": "Continuing on, we see more boundary emerging as we draw the perpendiculars between more pairs of points until the entire boundary has been drawn."
+    },
+    {
+        "timestamp": "00:06:50",
+        "text": "Again, the decision boundary will then..."
+    },
+    {
+        "timestamp": "00:07:00",
+        "text": "be the set of these lines that form a transition between a region where we would be predicting 1 and a region where we would be predicting 0."
+    },
+    {
+        "timestamp": "00:07:09",
+        "text": "If we have more data points, this procedure stays essentially the same."
+    },
+    {
+        "timestamp": "00:07:18",
+        "text": "But the decision boundary itself may get more complex because every pair of points produces a possible decision boundary being the line between them."
+    },
+    {
+        "timestamp": "00:07:27",
+        "text": "So the more points we have, the more possible segments there are to form our decision boundary."
+    },
+    {
+        "timestamp": "00:07:36",
+        "text": "Of course, this also depends on the layout of the points, but in general, for nearest neighbor methods, more data points can lead to a more complex decision boundary."
+    }
+]

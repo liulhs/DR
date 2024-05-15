@@ -1,0 +1,114 @@
+00:00:00 A basic toolset for optimization in machine learning are gradient-based methods.
+00:00:06 They're simple, easy to use, and very widely applicable.
+00:00:12 Suppose that we have a cost function J of theta, here plotted for a single parameter theta, and a current value of theta indicated by the blue dot.
+00:00:18 We'd like to evolve theta in such a way that the cost J decreases.
+00:00:24 To do this, should we increase or decrease theta?
+00:00:30 If we look at the derivative of J at the point theta, we'll find that it's positive, which indicates that the function is increasing as theta increases.
+00:00:36 So to decrease J, we should go in the opposite direction, decrease theta, i.e., move in the direction of the negative derivative.
+00:00:42 In higher dimensions, the analog of the derivative is the gradient.
+00:00:48 The gradient measures the vector direction of steepest ascent for the function.
+00:00:54 It's a vector whose entries are the partial derivatives of J with respect to each dimension.
+00:01:00 dimension, so each parameter theta i.
+00:01:07 So to decrease j, we can take steps in the negative gradient direction.
+00:01:15 This is gradient descent.
+00:01:22 We evaluate the gradient, del j, at a particular point and take a step in its negative direction.
+00:01:30 Evaluating the gradient at the new point, we get a new vector and take a step in its negative direction, and so on, until we find a local minimum of the function.
+00:01:37 This gives us the extremely simple gradient descent algorithm.
+00:01:45 We initialize our parameters in some way, often just randomly or setting them to 0, and then iterate, finding the gradient of our function j and updating it by a small amount called the step size, or sometimes the learning rate, which may be constant or may change according to the iteration.
+00:01:52 Finally, we have some stopping conditions.
+00:02:00 stopping the procedure either when J is not changing sufficiently quickly or when, say, our gradient is sufficiently small.
+00:02:07 In 1D, this procedure looks like this.
+00:02:15 We start off at some initial theta, evaluate the gradient, and take a step to decrease the function.
+00:02:22 That gives us a new value of theta.
+00:02:30 We evaluate the gradient again and take another step, followed by another step, until we find that we are at a local minimum as measured by, say, the gradient being sufficiently small.
+00:02:37 For linear regression, we can write the mean squared error cost function as before and then compute its gradient.
+00:02:45 Let's expand our prediction into each term and now denote the error residual here in the interior by E sub J, the error residual at data point J.
+00:02:52 We can take the derivative with respect to J.
+00:03:00 to say one parameter theta zero, we find that just by following the chain rule we can derive the answer.
+00:03:06 So the 1 over m sum over j are linear so they commute with the derivative and it moves into the interior.
+00:03:13 The derivative of the square of e is just 2 times e times the derivative of e and then we can evaluate this term by looking at the dependence on e.
+00:03:19 The term y is just the target so that value is constant.
+00:03:26 Its derivative is zero.
+00:03:33 This term will have a derivative of x.
+00:03:39 This term is constant with respect to theta zero so it will have a derivative of zero as will the others.
+00:03:46 This leaves us with just one term here the derivative with theta zero x zero and we find that the derivative of e is negative x zero, the zeroth feature.
+00:03:53 We can repeat this
+00:03:59 for other parameters, theta one, theta two, and we'll find essentially the same thing.
+00:04:07 This part will remain the same, and over here instead of feature zero, we'll get feature one or feature two.
+00:04:14 Collecting these terms into a vector, the gradient is given by this formula here, where each term is fairly similar.
+00:04:22 Each entry in the vector is a sum over all the data, and each contains the same two over m sum over e sub j times something terms.
+00:04:29 So we can pull these out using the distributive rule for a more compact rewriting of the vector, given here.
+00:04:37 The gradient value has an intuitive interpretation, the product of one term that measures the error magnitude and its direction.
+00:04:44 So how much error have we made on data point j, and which direction should we go to decrease it?
+00:04:52 And another term over here that indicates how fast our error.
+00:04:59 changes if we change one of the parameters, say, theta 0 or theta 1.
+00:05:07 This term was the derivative of E with respect to theta.
+00:05:14 Since we're interested in taking a very small step, we should go in a direction that will have a large impact on the error.
+00:05:22 So, this is measuring the sensitivity of the error to each parameter theta i.
+00:05:29 Again, in MATLAB, this is compactly represented using matrix notation.
+00:05:37 Using our same definition before of the parameter vector theta, the vector of targets y, and the data matrix x, we can write the gradient as being the inner product between the error residual vector as before and the data matrix x.
+00:05:44 In MATLAB, this is easy to express.
+00:05:52 We just compute the error residual, and then we can compute the gradient, del j, just using that formula.
+00:05:59 And if we want to do one step of gradient descent, we simply update theta in the negative gradient direction.
+00:06:05 So just one compact line of MATLAB implements the inner loop of gradient descent.
+00:06:10 Now let's visualize the gradient descent procedure.
+00:06:16 We start with an initial parameter setting.
+00:06:21 So some blue dot indicates a particular value of theta.
+00:06:27 In this case, x1 equals 0, x0 equal minus 20.
+00:06:32 Those parameters correspond to some predictor.
+00:06:38 So we can plot that in the data space over here as the line minus 20 plus 0 times x.
+00:06:43 Evaluating the gradient and then taking a step, this moves us in parameter space from the initial value of theta to our first iteration's value of theta.
+00:06:49 This one is at theta 0 equal minus 10, theta 1 equal 1.
+00:06:54 It corresponds to a different model, this one with intercept minus 10 and slope 1.
+00:06:59 and so it produces these predictions for X, which we can see are considerably better than the initial ones.
+00:07:09 As we take more and more steps, we get an evolving value of theta and an evolving model and different predictions for each value of X, with the overall mean squared error tending to decrease.
+00:07:19 More steps changes the model parameters further, and the mean squared error slowly moves toward its minimum value.
+00:07:29 Gradient descent is an extremely general and useful algorithm that we'll use numerous times.
+00:07:39 However, being a descent procedure, it can be sensitive to initialization and can get stuck in local minima.
+00:07:49 Given two different initializations, we may be attracted to the same local minimum, say, this one here, but even a smaller initialization may be attracted to the same local minimum.
+00:07:59 change in initialization to, say, this point, could give us a very different gradient direction, and thus a very different local minimum found by the procedure.
+00:08:09 In fact, any local minimum is an attractor for this procedure.
+00:08:19 And so depending on how we initialize theta and the step size we take, we can end up in any one of these local minima.
+00:08:29 Another problem is the choice of step size, which can influence both the convergence rate and behavior of our procedure.
+00:08:39 If the step size is chosen too large, we can jump over the minimum, perhaps jumping back, and it may take us a long time to converge.
+00:08:49 On the other hand, if we take our step size too small, we may take very small steps.
+00:08:59 and make very little progress at each one, also increasing the amount of time it takes to converge.
+00:09:06 We may also want to adapt or change the step size as we run the algorithm, often to, say, decrease it with iteration to improve convergence properties.
+00:09:13 Some common choices are to just leave it fixed over all iterations.
+00:09:19 Decrease it linearly with the number of iterations.
+00:09:26 This has nice convergence properties and proofs of convergence for fairly weak conditions.
+00:09:33 We also may want to use local properties of the function to decide what size step to take.
+00:09:39 So for instance, Newton's method uses the local curvature of the function, so the second order derivatives, to tell us how big of a step we should take.
+00:09:46 Another very useful variant of gradient descent is called stochastic or online gradient descent.
+00:09:53 In most machine learning problems, the loss function J decomposes into a.
+00:09:59 a sum or average over the loss having to do with each individual data point.
+00:10:07 So each data point might measure, say, a squared error, and our loss function would be the mean squared error, the average over them.
+00:10:14 By linearity, if this cost function decomposes, then the gradient also decomposes.
+00:10:22 So the gradient of J is also a sum or average over local gradients having to do with the gradient to improve the squared error of just data point J.
+00:10:29 So the idea underlying stochastic gradient descent is to update using only one data point at a time.
+00:10:37 We pick a data point J at random, update using only the gradient of J, and then repeat.
+00:10:44 In practice, usually, instead of choosing a random data point, we usually choose a random ordering over the data and then walk sequentially through them.
+00:10:52 This has the property that at any optimum of original gradient descent, so any minimum of J.
+00:10:59 where the gradient of J is 0, we have that on average over the random choice of the data point, our update will be 0.
+00:11:07 Of course, no individual update will actually be 0, just on average over the data point.
+00:11:14 Let's see how this works in the same plot.
+00:11:22 We have a parameter space, the values of theta, we have a model space with the observations and their targets, and a prediction given by our current model values theta.
+00:11:29 Given an initial value of theta, we pick a data point, compute its error, and then take a step toward reducing that particular data point's error.
+00:11:37 We get a new model here, usually where that data point has a better prediction associated with it.
+00:11:44 And picking another data point, we then take a small step designed to reduce that data point's error.
+00:11:52 Note that this step is designed to decrease
+00:11:59 that particular point's error, it might even increase the error overall, but on average over these steps, the loss will decrease.
+00:12:09 Then we pick another data point, update, and so on until we feel we've converged.
+00:12:19 Stochastic gradient descent is often preferred for systems where we have many data, because it has better speed properties, while gradient descent needs to touch all M data points before updating the parameter vector even once, stochastic gradient descent begins updating theta immediately and updates it M times per pass through the data.
+00:12:29 So if we have lots of data, that will be many more updates per pass through the data.
+00:12:39 When the parameters are very far from optimal, say when we've just initialized them, almost all the data tend to indicate theta should be evolving in one direction.
+00:12:49 And so updating it quickly after only seeing a few data points is much more efficient than looking at all the data before changing it.
+00:12:59 it at all.
+00:13:08 However, since the procedure is now somewhat random and is no longer strictly descent, it can be harder to debug and also harder to assess convergence and stopping criteria in the code.
+00:13:17 For example, even just evaluating J for our stopping criteria requires actually touching all the data for a fixed value of theta.
+00:13:25 So often we may not want to do that, and so we might use a substitute approximate value of J where we just accumulate the error as we go through this loop.
+00:13:34 But that means that every error, J sub J, is associated with the value of theta that we saw at that particular point, which means the loss we calculate isn't associated with any particular value of theta.
+00:13:42 So it's not really the same as doing descent or calculating the value of J to stop.
+00:13:51 Another method one can use is to use mini-batch updates.
+00:13:59 this interpolates between stochastic gradient descent and batch gradient by using small groups of data to do these estimates.
+00:14:10 Overall, if we have a sufficient number of data, we typically prefer stochastic gradient descent or mini-batch descent to batch descent.

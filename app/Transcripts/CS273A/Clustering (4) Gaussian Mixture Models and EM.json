@@ -1,0 +1,558 @@
+[
+    {
+        "timestamp": "00:00:00",
+        "text": "Another common and important clustering technique is based on probability density estimation using Gaussian mixture models and a procedure called expectation maximization, or EM, to fit the model parameters."
+    },
+    {
+        "timestamp": "00:00:10",
+        "text": "If you recall the k-means algorithm, we described each cluster center using just a single point in feature space, the cluster center, and assigned each data point to its nearest cluster."
+    },
+    {
+        "timestamp": "00:00:20",
+        "text": "But what if our concept of the grouping of the data have groups that overlap in the feature space?"
+    },
+    {
+        "timestamp": "00:00:30",
+        "text": "So then first of all, it's hard to know which assignment is right, since both are plausible."
+    },
+    {
+        "timestamp": "00:00:40",
+        "text": "And secondly, in k-means, we always use Euclidean distance to the center, but what if our cluster is defined by some non-circular shape?"
+    },
+    {
+        "timestamp": "00:00:50",
+        "text": "So for example, in these data over here, the data can be seen as forming two groups, one of which has a lot of spread in x2 here, and the other of which has a lot of spread in x1."
+    },
+    {
+        "timestamp": "00:01:00",
+        "text": "one."
+    },
+    {
+        "timestamp": "00:01:06",
+        "text": "Both are centered at the same place."
+    },
+    {
+        "timestamp": "00:01:13",
+        "text": "So it's easy mentally to see these as falling into two groups and to cluster these data in one and these data in the other, but something like k-means won't be able to discover that assignment."
+    },
+    {
+        "timestamp": "00:01:20",
+        "text": "Gaussian mixture models are an extension of the k-means model in which clusters are modeled with Gaussian distributions."
+    },
+    {
+        "timestamp": "00:01:26",
+        "text": "So we have not only their mean, but also a covariance that describes their ellipsoidal shape."
+    },
+    {
+        "timestamp": "00:01:33",
+        "text": "So then we can fit the model by maximizing the likelihood of the observed data."
+    },
+    {
+        "timestamp": "00:01:40",
+        "text": "We do so with an algorithm called EM."
+    },
+    {
+        "timestamp": "00:01:46",
+        "text": "It'll be very reminiscent of k-means, except it'll assign data to each cluster with some soft probability."
+    },
+    {
+        "timestamp": "00:01:53",
+        "text": "As a positive side effect, after clustering, we're actually creating a generative model for the data X, a probability model, which means we can do a lot of useful tasks like sampling new examples that we think are like the data that we measured or"
+    },
+    {
+        "timestamp": "00:02:00",
+        "text": "comparing two collections of data, like the training and test set, to see if they differ, or imputing missing data values from some of our data."
+    },
+    {
+        "timestamp": "00:02:06",
+        "text": "In fact, often k-means is actually viewed as a special case of a Gaussian mixture model to derive some of these benefits."
+    },
+    {
+        "timestamp": "00:02:13",
+        "text": "A Gaussian mixture model is a useful probability distribution model."
+    },
+    {
+        "timestamp": "00:02:20",
+        "text": "We begin with several mixture components indexed by c, each of which is described by a Gaussian distribution."
+    },
+    {
+        "timestamp": "00:02:26",
+        "text": "So each has a mean, mu c, a variance or covariance, sigma c, and a size, pi c."
+    },
+    {
+        "timestamp": "00:02:33",
+        "text": "For example, in this figure, we have three Gaussian components with means here, here, and here."
+    },
+    {
+        "timestamp": "00:02:40",
+        "text": "Each of these components has a different variance and a different height or area."
+    },
+    {
+        "timestamp": "00:02:46",
+        "text": "So the joint probability distribution has been defined by the weighted average of these individual components."
+    },
+    {
+        "timestamp": "00:02:53",
+        "text": "So pi c."
+    },
+    {
+        "timestamp": "00:02:59",
+        "text": "times the Gaussian defined by mu c and sigma c."
+    },
+    {
+        "timestamp": "00:03:06",
+        "text": "We can interpret this joint probability distribution over X in a simple generative way."
+    },
+    {
+        "timestamp": "00:03:13",
+        "text": "To draw a sample from X, from P of X, we first select one of the components with discrete probability pi."
+    },
+    {
+        "timestamp": "00:03:19",
+        "text": "So components with large pi are selected more often."
+    },
+    {
+        "timestamp": "00:03:26",
+        "text": "As in k-means, we'll view this as the assignment of that sample to one of the components and denote it by Z."
+    },
+    {
+        "timestamp": "00:03:33",
+        "text": "Then given the component assignment Z equals C, we can draw a value from X from the corresponding Gaussian distribution."
+    },
+    {
+        "timestamp": "00:03:39",
+        "text": "So together these two distributions make a joint model over X and Z."
+    },
+    {
+        "timestamp": "00:03:46",
+        "text": "Discarding the value of Z gives a sample from the marginal P of X defined above."
+    },
+    {
+        "timestamp": "00:03:53",
+        "text": "Models like this are sometimes called latent variable models."
+    },
+    {
+        "timestamp": "00:03:59",
+        "text": "are modeled jointly with an additional variable, z, that we don't get to observe."
+    },
+    {
+        "timestamp": "00:04:08",
+        "text": "It's hidden."
+    },
+    {
+        "timestamp": "00:04:17",
+        "text": "The presence of the unknown value of z helps explain patterns in the values of x."
+    },
+    {
+        "timestamp": "00:04:25",
+        "text": "For example, in this case, groups or clusters."
+    },
+    {
+        "timestamp": "00:04:34",
+        "text": "Usually, our features are multivariate, even high-dimensional."
+    },
+    {
+        "timestamp": "00:04:42",
+        "text": "So, we'll typically use a multivariate Gaussian, which has the same quadratic form, but now involves a vector mean, mu, of length n, the same size as the number of features in a data point x, and an n by n covariance matrix, sigma."
+    },
+    {
+        "timestamp": "00:04:51",
+        "text": "Recall that if we were given data from a multivariate Gaussian, the maximum likelihood estimate for the model parameters were simply the mean of the data, so the first moment of the data, and the covariance estimate was the mean of the n by n matrices formed by the outer product."
+    },
+    {
+        "timestamp": "00:04:59",
+        "text": "of X minus mu with itself."
+    },
+    {
+        "timestamp": "00:05:07",
+        "text": "So this is the centered second moment of the data."
+    },
+    {
+        "timestamp": "00:05:14",
+        "text": "EM then proceeds iteratively in two steps."
+    },
+    {
+        "timestamp": "00:05:22",
+        "text": "The first, the expectation or E-step, treats the Gaussian parameters mu, sigma, and pi as fixed."
+    },
+    {
+        "timestamp": "00:05:29",
+        "text": "Then for each data point, i, and each cluster, c, we compute a responsibility value, R sub i, c, that measures the relative probability that data point xi belongs to cluster c."
+    },
+    {
+        "timestamp": "00:05:37",
+        "text": "To do this, we just compute the probability of x under model component c, a weighted Gaussian, and normalize by the total over all the values of c."
+    },
+    {
+        "timestamp": "00:05:44",
+        "text": "So here, we evaluate a data point x under component 1, so pi 1 times the Gaussian defined by mean mu 1 and covariance sigma 1."
+    },
+    {
+        "timestamp": "00:05:52",
+        "text": "We then also evaluate its probability under component 2."
+    },
+    {
+        "timestamp": "00:05:59",
+        "text": "So pi 2 times the Gaussian defined by mu 2 and sigma 2."
+    },
+    {
+        "timestamp": "00:06:08",
+        "text": "If a particular component C is not a very good explanation for x, it will typically have a small RIC value."
+    },
+    {
+        "timestamp": "00:06:17",
+        "text": "Conversely, if it's by far the best possible explanation for x, it will have RIC approximately equal to 1."
+    },
+    {
+        "timestamp": "00:06:25",
+        "text": "Here, component 2 is about twice as good an explanation as component 1 for that data point."
+    },
+    {
+        "timestamp": "00:06:34",
+        "text": "So component 2 gets responsibility two-thirds, and component 1 gets responsibility one-third."
+    },
+    {
+        "timestamp": "00:06:42",
+        "text": "Practically speaking, RIC is a number of data by number of clusters, so m by k matrix, that sums to 1 over the index C."
+    },
+    {
+        "timestamp": "00:06:51",
+        "text": "Then, in the second step of EM, the maximization or M step, we fix these assignment responsibilities RIC and update the parameters of the clusters."
+    },
+    {
+        "timestamp": "00:06:59",
+        "text": "mu, sigma, and pi."
+    },
+    {
+        "timestamp": "00:07:07",
+        "text": "Then for each cluster C, we update its parameters using an estimate weighted by the probabilities RIC, as if it observed some fraction RIC of data point I."
+    },
+    {
+        "timestamp": "00:07:14",
+        "text": "So cluster C sees some total number of data points MC that's the sum of these soft memberships, or fractional weights assigned to cluster C."
+    },
+    {
+        "timestamp": "00:07:22",
+        "text": "Then pi C is just this value normalized by the total number of data M."
+    },
+    {
+        "timestamp": "00:07:29",
+        "text": "So this is the fraction of data point probabilities that's assigned to cluster C."
+    },
+    {
+        "timestamp": "00:07:37",
+        "text": "The weighted mean, mu C, is just the weighted average of the data."
+    },
+    {
+        "timestamp": "00:07:44",
+        "text": "So each point Xi is given weight RIC, and we divide by the total MC."
+    },
+    {
+        "timestamp": "00:07:52",
+        "text": "So if a point Xi was poorly explained by some cluster C, its RIC will be small."
+    },
+    {
+        "timestamp": "00:07:59",
+        "text": "and that point won't influence this average very much."
+    },
+    {
+        "timestamp": "00:08:07",
+        "text": "But on the other hand, if C was the best explanation for X, then RIC will be large, and Xi will influence the mean more."
+    },
+    {
+        "timestamp": "00:08:14",
+        "text": "The covariance is similarly just a weighted average of the n by n matrices formed by taking the outer product of Xi minus its cluster C's mean."
+    },
+    {
+        "timestamp": "00:08:22",
+        "text": "Again, they're weighted by RIC, so that if Xi is a strong member of cluster C, this weight will be nearly 1."
+    },
+    {
+        "timestamp": "00:08:29",
+        "text": "If Xi is not very well explained by cluster C, then it won't enter into this average very much."
+    },
+    {
+        "timestamp": "00:08:37",
+        "text": "It's straightforward to prove, although I won't do it here, that these iterations strictly increase the log likelihood of the model, increasing its fit to the data."
+    },
+    {
+        "timestamp": "00:08:44",
+        "text": "The log likelihood is just the log probability of the data points under the mixture model."
+    },
+    {
+        "timestamp": "00:08:52",
+        "text": "So it's a sum over data points of log of the probability."
+    },
+    {
+        "timestamp": "00:08:59",
+        "text": "P of X from before, where that probability is a mixture of Gaussians."
+    },
+    {
+        "timestamp": "00:09:06",
+        "text": "In fact, EM is interpretable as a form of coordinate ascent, just like our previous k-means algorithm."
+    },
+    {
+        "timestamp": "00:09:13",
+        "text": "So thus, we're again guaranteed to converge."
+    },
+    {
+        "timestamp": "00:09:19",
+        "text": "However, convergence here won't typically be as abrupt as it was in k-means."
+    },
+    {
+        "timestamp": "00:09:26",
+        "text": "So in practice, one usually stops once the parameters or the likelihood objective have stopped changing very much."
+    },
+    {
+        "timestamp": "00:09:33",
+        "text": "Note that like in k-means, convergence is not guaranteed to be to a global optimum."
+    },
+    {
+        "timestamp": "00:09:39",
+        "text": "So we may have to start from several initializations and use the log likelihood to select the best."
+    },
+    {
+        "timestamp": "00:09:46",
+        "text": "One quick point, the result of this algorithm is a description of a collection of clusters, so centers and covariances and so on, and soft membership probabilities for each data point."
+    },
+    {
+        "timestamp": "00:09:53",
+        "text": "If we want to identify our data points with a single cluster, like in k-means, we could actually just choose the most probable cluster, so the cluster C that has largest value RIC for data points."
+    },
+    {
+        "timestamp": "00:09:59",
+        "text": "point i."
+    },
+    {
+        "timestamp": "00:10:07",
+        "text": "Just like in k-means, the view of clusters is easily applied to new out-of-sample data points as well."
+    },
+    {
+        "timestamp": "00:10:14",
+        "text": "So, these points can be given either a soft cluster membership RIC using an E-step or a hard membership assignment ZI by, again, taking the largest RIC."
+    },
+    {
+        "timestamp": "00:10:22",
+        "text": "Also like k-means, selecting the number of clusters is important and can't be done using the cluster data themselves."
+    },
+    {
+        "timestamp": "00:10:29",
+        "text": "So, like k-means, one option is to use a complexity penalty in our score."
+    },
+    {
+        "timestamp": "00:10:37",
+        "text": "An analog to the mean squared error cost in k-means is the negative log-likelihood of the data in our mixture model."
+    },
+    {
+        "timestamp": "00:10:44",
+        "text": "And we can then include a complexity penalty like BIC just like before."
+    },
+    {
+        "timestamp": "00:10:52",
+        "text": "Alternatively, since the Gaussian mixture model is a true probability model, we can use the log-likelihood of a validation or test set to assess the model fit as well by evaluating the mixture probability on the new data points."
+    },
+    {
+        "timestamp": "00:10:59",
+        "text": "Here's a demonstration of YAM, courtesy of some slides by Professor Poric Smith here at UC Irvine, run on data measuring properties of patients' red blood cells."
+    },
+    {
+        "timestamp": "00:11:07",
+        "text": "The data include both a group of normal patients and a group of anemic patients, but the diagnosis is actually hidden from us, so we only see the feature measurements themselves."
+    },
+    {
+        "timestamp": "00:11:14",
+        "text": "Probably you can see the two groups of patients already in the data."
+    },
+    {
+        "timestamp": "00:11:22",
+        "text": "Up here, with high red blood cell volume and high hemoglobin are the normals, and then this long dispersed group with lower volume and lower hemoglobin are the anemics."
+    },
+    {
+        "timestamp": "00:11:29",
+        "text": "Let's see how YAM identifies these two groups automatically."
+    },
+    {
+        "timestamp": "00:11:37",
+        "text": "We initialize our two clusters randomly."
+    },
+    {
+        "timestamp": "00:11:44",
+        "text": "In this case, they're actually quite similar, but the means and covariances of the green cluster and the red cluster are slightly different, and that'll actually be enough."
+    },
+    {
+        "timestamp": "00:11:52",
+        "text": "During the E-step, these points over here will be slightly more probable under the red model than the green, while these"
+    },
+    {
+        "timestamp": "00:11:59",
+        "text": "These points will be about equally explained, and these points will be slightly more probable under green."
+    },
+    {
+        "timestamp": "00:12:07",
+        "text": "Given these soft assignments or responsibilities, when we update our model parameters to compute the weighted mean and covariances, we'll find that the red model shifts slightly to better accommodate the data down here that were given higher probability under the red model."
+    },
+    {
+        "timestamp": "00:12:14",
+        "text": "And similarly, green shifts to better accommodate the data that were given slightly higher probability under its component."
+    },
+    {
+        "timestamp": "00:12:22",
+        "text": "Then re-computing the probabilities in the E-step makes these data even more likely under red and these data even more likely under green."
+    },
+    {
+        "timestamp": "00:12:29",
+        "text": "Another M-step evolves the components even further away to help explain their respective data points better."
+    },
+    {
+        "timestamp": "00:12:37",
+        "text": "Repeating, we see that the clusters are continuing to separate."
+    },
+    {
+        "timestamp": "00:12:44",
+        "text": "By iteration 10, they're explaining very different groups of data."
+    },
+    {
+        "timestamp": "00:12:52",
+        "text": "And by iteration 15, red is almost entirely..."
+    },
+    {
+        "timestamp": "00:12:59",
+        "text": "for the dispersed data and the green cluster for the tight grouping of normals."
+    },
+    {
+        "timestamp": "00:13:08",
+        "text": "Eventually this process converges, the models cease to change very much, and we can stop."
+    },
+    {
+        "timestamp": "00:13:17",
+        "text": "Note that the model doesn't know which of these two groups is normal or anemic, just that it can find two distinct groups or clusters in the data that behave differently, and a description of what the data in each cluster look like."
+    },
+    {
+        "timestamp": "00:13:25",
+        "text": "If we look at the log likelihood of the data over the course of the algorithm, we find that each iteration strictly increases the log likelihood score."
+    },
+    {
+        "timestamp": "00:13:34",
+        "text": "So after about 15 iterations, the score plateaus and doesn't increase any further, indicating, again, that the model has converged."
+    },
+    {
+        "timestamp": "00:13:42",
+        "text": "The EM algorithm is actually quite general and can be used for many models or problems involving partially observed data."
+    },
+    {
+        "timestamp": "00:13:51",
+        "text": "From this viewpoint, here the complete data are the feature values and the cluster assignments, but unfortunately for us the assignments to the eye are more important."
+    },
+    {
+        "timestamp": "00:13:59",
+        "text": "missing."
+    },
+    {
+        "timestamp": "00:14:05",
+        "text": "Then EM corresponds to first computing the distribution over the hidden variable zi, given the current parameters of the model, and then maximizing the complete log-likelihood over x and z together in expectation over the distribution of z."
+    },
+    {
+        "timestamp": "00:14:11",
+        "text": "In Gaussian mixture models, this gives us this elegant algorithm that we saw, where we compute soft assignments for each data point and then plug those soft assignments into the maximum likelihood estimates."
+    },
+    {
+        "timestamp": "00:14:17",
+        "text": "But in more general models, it may be procedurally a bit more complex."
+    },
+    {
+        "timestamp": "00:14:23",
+        "text": "Two simple alternatives are often used when EM is difficult to implement."
+    },
+    {
+        "timestamp": "00:14:29",
+        "text": "There's a stochastic version of EM or a hard version of EM."
+    },
+    {
+        "timestamp": "00:14:35",
+        "text": "In stochastic EM, instead of taking the expectation over z, we just sample its value and then fix it."
+    },
+    {
+        "timestamp": "00:14:41",
+        "text": "In hard EM, we select the most probable value and fix it."
+    },
+    {
+        "timestamp": "00:14:47",
+        "text": "Often it's easier to work with a fixed value of z than maximizing the expectation."
+    },
+    {
+        "timestamp": "00:14:53",
+        "text": "This process of"
+    },
+    {
+        "timestamp": "00:14:59",
+        "text": "of plugging a value into z is often called imputing the value of z."
+    },
+    {
+        "timestamp": "00:15:05",
+        "text": "Both variants, stochastic and hard EM, are quite similar to regular EM."
+    },
+    {
+        "timestamp": "00:15:10",
+        "text": "Hard EM, as you might imagine, is a little less smooth in its optimization, since the best value of z might change discontinuously."
+    },
+    {
+        "timestamp": "00:15:16",
+        "text": "And it's often prone to more local optima, since once we have a hard assignment, we'll move the parameters to explain it, which then reinforces that hard assignment."
+    },
+    {
+        "timestamp": "00:15:21",
+        "text": "Hard EM is very closely related to k-means with this best assignment update."
+    },
+    {
+        "timestamp": "00:15:27",
+        "text": "Stochastic EM is less prone to local optima, but has more randomness built in, making it harder to gauge convergence."
+    },
+    {
+        "timestamp": "00:15:32",
+        "text": "In summary, Gaussian mixture models are a useful and flexible class of probability distributions."
+    },
+    {
+        "timestamp": "00:15:38",
+        "text": "And here, we're using them for clustering."
+    },
+    {
+        "timestamp": "00:15:43",
+        "text": "They explain the distribution of the data x using a latent variable framework."
+    },
+    {
+        "timestamp": "00:15:49",
+        "text": "So we posit that there's some hidden grouping, or clustering, that explains a lot of the variation in the data."
+    },
+    {
+        "timestamp": "00:15:54",
+        "text": "Our model then contains a."
+    },
+    {
+        "timestamp": "00:15:59",
+        "text": "latent membership or assignment variable Zi, and then the actual feature values Xi are Gaussian given that cluster assignment Zi. We can learn the parameters of a Gaussian mixture model using expectation maximization, or EM."
+    },
+    {
+        "timestamp": "00:16:09",
+        "text": "EM applied to Gaussian mixture models has a simple and elegant form."
+    },
+    {
+        "timestamp": "00:16:19",
+        "text": "We just iterate between computing soft membership or assignment probabilities, which we call the responsibilities, R sub IC, and updating the parameters of the mixture model components, so the cluster centers, covariances, and so on, using these soft memberships."
+    },
+    {
+        "timestamp": "00:16:29",
+        "text": "This procedure is guaranteed to strictly increase the log likelihood, decrease the negative log likelihood of the model on training data, which ensures that it's convergent."
+    },
+    {
+        "timestamp": "00:16:39",
+        "text": "But it's non-convex, so it may have local optima, which makes initialization potentially very important."
+    },
+    {
+        "timestamp": "00:16:49",
+        "text": "We also discussed how we can set the number of clusters using either a complexity penalty like BIC, just like we did in k-means, or..."
+    },
+    {
+        "timestamp": "00:16:59",
+        "text": "Since the Gaussian mixture model is a true probability model over X, we can actually use the log-likelihood score on held-out validation or test data as well."
+    }
+]

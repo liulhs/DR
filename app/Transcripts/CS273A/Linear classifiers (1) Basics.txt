@@ -1,0 +1,121 @@
+00:00:00 We'll now discuss the use of linear models for classification.
+00:00:08 As usual, we'll be doing supervised learning, where we have features X used to predict targets Y.
+00:00:17 Our predictions will be called Y-hat, and the model parameters will be called theta.
+00:00:25 When we considered linear regression, we predicted a real-valued target Y using a linear form, theta 0 plus theta 1 X1, and so on.
+00:00:34 In contrast, when we classify, we're required to predict a discrete-valued target Y, and so our outputs must also be discrete-valued.
+00:00:42 Let's consider a problem with only two classes, so a binary classifier, say classes plus 1, positive, and minus 1, negative.
+00:00:51 A simple idea is to just compute the same linear response, so theta 0 plus theta 1 X1,
+00:00:59 and so on, but then convert that output into a discrete class just by taking the sign of the linear response.
+00:01:06 In other words, we predict plus one if the linear computation was positive and predict minus one if it was negative.
+00:01:13 Here's a visualization with only one feature x explicitly drawing the class y.
+00:01:20 So these points are class minus one, these points are class plus one.
+00:01:26 Then a linear function of x, f of x, is thresholded to produce a binary output prediction.
+00:01:33 Historically, linear classifiers are often called perceptrons.
+00:01:40 While mostly use theta to represent the parameters, they're sometimes called weights, so w is another common variable name.
+00:01:46 As with regression, we'll assume there's a constant input feature to simplify our notation.
+00:01:53 In our linear classifier, it computes the...
+00:02:00 weighted sum of the input features, just as in regression, but converts it by thresholding it to produce a binary output.
+00:02:07 The term perceptron derives from a notion that this threshold of weighted inputs could be some kind of oversimplified model of a neuron, so that the neuron would fire, output plus one, if enough of its inputs were sufficiently stimulated by synapses, the weighted features.
+00:02:15 Notationally, we have our d input features, x1 through xd, plus an additional constant feature, x0.
+00:02:22 Together, we'll refer to this as the feature vector.
+00:02:30 We similarly have d plus 1 weights, theta, one for each feature, together called the parameter vector.
+00:02:37 Our linear response is now just the dot product between these vectors, which computes the weighted sum theta 0 times feature 0 plus theta 0 times feature 0.
+00:02:45 Plus theta 1 times feature 1.
+00:02:52 Then the output prediction is produced by.
+00:03:00 threshold such as the sine function, which outputs plus 1 for positive values and minus 1 for negative values.
+00:03:06 A MATLAB implementation of this is fairly trivial.
+00:03:13 We can compute the linear response just with a vector product here.
+00:03:20 Then we could alternatively compute it explicitly with a sum over the indices.
+00:03:26 And then we can convert our linear response into a discrete output just using the sine function.
+00:03:33 An important characterization of classifiers is their decision boundary.
+00:03:39 Since here we switch output values when we transition from negative to positive, the decision boundary is the set of points where the linear response equals 0, so transitioning from negative to positive.
+00:03:46 Solving this linear equation, we can see that the decision boundary is also a linear surface.
+00:03:53 So for two features, the decision boundary will be a line, for three it will be a plane, for more it will be a hyperplane.
+00:03:59 Specifically, it's given by solving for that linear response equal to zero.
+00:04:06 So here's a quick example of computing the decision boundary for a model with two features.
+00:04:13 Suppose our parameter vector is given by 0.5 minus 0.5, zero.
+00:04:19 Clearly for this point, if X2 is positive and X1 is zero, then our response will be negative.
+00:04:26 So our prediction will be class minus one.
+00:04:33 At this other point, X1 is positive and X2 is zero, so our response will be positive.
+00:04:40 The decision boundary lives somewhere in between these points and corresponds to the solution of this linear equation, theta times X equals zero.
+00:04:46 If we write this out and explicitly solve, we can manipulate until we find that X2 equals some function of X1.
+00:04:53 So it in fact involves a line, and X2 equals X1 is the solution.
+00:05:00 On this side of the decision boundary, X2 is greater than X1, and so in this part we predict class minus 1 because our linear response is negative.
+00:05:08 On this side of the decision boundary, X1 is greater than X2, our linear response is positive, and we output class plus 1.
+00:05:17 A useful concept in classification is the notion of separability of a dataset.
+00:05:25 We say that a dataset is separable by a particular learner if there exists some instance of that learner, so some set of parameter values, that will correctly predict the targets of all the data points.
+00:05:34 For a linear model, the data are linearly separable if there exists a line that divides the data by their class.
+00:05:42 For example, over here, we have two classes, red and blue.
+00:05:51 They're well separated in the two-dimensional feature space, feature 1 and feature 2, and we can easily draw a line that will separate the two classes.
+00:05:59 and thus predict them correctly.
+00:06:05 On this data set, on the other hand, while we still have the same two classes, they're no longer well-separated.
+00:06:11 And we can see that any line that we draw will fail to get all of the data points correct.
+00:06:17 Non-separability just means that the data are not perfectly predictable by the model.
+00:06:23 This often happens when features do not provide enough information to know the target.
+00:06:29 For example, when predicting, say, a credit default, given only the features of, say, age and income, it's quite plausible that for any particular values of age and income, there could be examples, data points, coming from either class.
+00:06:35 So this might indicate that we need more information if we want to do a better job.
+00:06:41 We might want to gather extra features.
+00:06:47 Or that we may need to model a more complex relationship between the features we do have and the class.
+00:06:53 In some cases, the target might not be perfectly predictable given any.
+00:06:59 reasonable amount of information and any model will have some errors.
+00:07:07 So here's another example of two classes, red and blue, and we can see that they are not linearly separable.
+00:07:14 There's no way that we can draw a line that divides the data in two parts such that we don't make any errors.
+00:07:22 But on the other hand, if we were allowed a more complex nonlinear decision boundary, we might be able to separate the data into those two classes.
+00:07:29 So our separability is a function of the class of models that we're allowed to use to do the prediction.
+00:07:37 Here's a classic example with binary valued features to help see some of the limitations of a linear function.
+00:07:44 Suppose we try to use a linear model to represent a binary and function.
+00:07:52 So we have two binary features, X1 with value 0 and 1, and X2 with value 0 and 1, and we output class positive if both...
+00:07:59 features take value 1 and we output class negative otherwise.
+00:08:07 If we want to learn this function we can exactly reproduce this output just by using the following linear classifier with a decision boundary here and class positive on the upper side.
+00:08:14 But now if we try to do the same thing for an XOR function where the output class positive when feature 0 and feature 1 match and negative otherwise we can't.
+00:08:22 There's no line we can put through here that will correctly separate these four points.
+00:08:29 So this function is not linearly inseparable and not representable by a perceptron.
+00:08:37 Just as in linear regression we can increase the power of our class of functions by artificially expanding its set of features and hence the corresponding number of parameters.
+00:08:45 For example the following data with a one-dimensional feature X is not linearly separable.
+00:08:52 There's no function of the four
+00:09:00 threshold on BX plus C that will correctly divide these data into red and blue.
+00:09:06 But if we add an additional feature whose value is X squared, we can now plot it in a two-dimensional feature space.
+00:09:13 X on the horizontal and the value X squared on the vertical.
+00:09:19 So now the data lives in a one-dimensional manifold in that 2D feature space.
+00:09:26 And when we look at the data, we see that it now is linearly separable.
+00:09:33 We can draw this line, which divides it into class positive on one side and class negative on the other.
+00:09:39 An equivalent view is that by allowing ourselves a more complex response function, a quadratic function of X, when we apply our threshold operator, we get a more complex class of output functions.
+00:09:46 For example, in the original features, the decision boundary was initially a point.
+00:09:53 The solution of BX plus C equals 0, but in the quadratic.
+00:09:59 The decision boundary has more solutions, and thus a potentially more complex decision function.
+00:10:06 So here we see the quadratic form of ax squared plus b plus c, bx plus c.
+00:10:13 When we threshold that, we get an output with a more complex decision boundary.
+00:10:19 Returning to our binary function example, we can ask what set of features would be sufficient to learn the XOR function.
+00:10:26 If we were to increase the number of features available, for example, to include quadratic polynomials, we would be able to learn a function whose decision boundary corresponds to an ellipse.
+00:10:33 And within this ellipse, predict plus 1 and outside minus 1.
+00:10:39 So this would be sufficient to reproduce an XOR function.
+00:10:46 Note that these features are sufficient, but one could also achieve the same thing using other features.
+00:10:53 Since our classifier is a linear function of the features, the abilities of the learner are highly influenced by the choice of features.
+00:10:59 As an example, consider a discrete feature for poisonous mushroom classification, and we'll have a feature that the surface can be either fibrous, grooved, scaly, or smooth.
+00:11:09 If we represent this information by converting these categories to an integer value, one through four, it will probably not be used very effectively by the classifier.
+00:11:19 There's no reason to believe that the influence of observing a smooth feature should be four times the influence of observing a fibrous feature, and in the same direction.
+00:11:29 So an alternative is to convert this into a one-of-K representation, where we create four features, binary valued, and turn on exactly one depending on the value of that discrete class.
+00:11:39 So if fibrous, we output features 1, 0, 0, 0, and if smooth, we output features 0, 0, 0, 1.
+00:11:49 Of course...
+00:11:59 This introduces more parameters into the model, but it allows a more flexible relationship between the discrete feature and the output class.
+00:12:06 In general, we find that data sets will be increasingly separable given more features, whether those features are measured or constructed.
+00:12:13 In some sense, this is good.
+00:12:19 By using more features, we stand a better chance of learning the true, possibly complex, relationship to the target variable.
+00:12:26 We get a better performance on our training data.
+00:12:33 But in another sense, this means that more features can increase our chance of overfitting.
+00:12:39 As we perform better and better on the training set, that doesn't necessarily mean that we'll perform better on new, unseen test data.
+00:12:46 So we have this classic curve where, as we increase the complexity of our model, moving to the right, we perform better and better on the training data and also perform better on the test data as we go to more complex predictors.
+00:12:53 But at some point...
+00:12:59 Even though our training data keeps getting better, our performance keeps decreasing its error, at some point our test error actually starts to go the other way and perform worse.
+00:13:05 So we need to be careful about increasing our feature set too greatly.
+00:13:11 In summary, a perceptron is simply a binary linear classifier, which converts a linear response, similar to linear regression, into a discrete class value.
+00:13:17 The decision boundary of such a linear classifier is just this linear sub-manifold.
+00:13:23 So if we have one feature, it's a point.
+00:13:29 If we have 2D features, it's a line, and so on.
+00:13:35 We discussed the notion of separability, which depends on both the data set and the model class.
+00:13:41 So a data set is separable for a particular learner if there's some instance of that learner, some setting of the parameters, that can correctly predict all the points.
+00:13:47 We saw that not all functions can be represented with a linear classifier.
+00:13:53 We also saw that by adding features artificially, we could increase the representation.
+00:13:59 representational power of the learner.
+00:14:04 This increases the number of parameters in the model and also increases its ability to separate datasets.
+00:14:09 While this enables us to learn more complex relationships to the target variable, it also increases our risk of overfitting.

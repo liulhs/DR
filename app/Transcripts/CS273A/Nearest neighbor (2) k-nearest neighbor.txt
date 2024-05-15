@@ -1,0 +1,67 @@
+00:00:00 Here we'll look at a simple variant on nearest neighbor methods called k-nearest neighbors.
+00:00:10 For the k-nearest neighbor methods, instead of finding the single training point that's closest to our point of interest x, we instead find the k-nearest data points.
+00:00:20 In other words, we rank all of the training data points according to their distance from the new point x, and we just take the k that are closest.
+00:00:30 Then, using these k-closest points, we can use them to make a prediction.
+00:00:40 For regression, we usually just average the y-values, i.e., the target values associated with those k-closest examples.
+00:00:50 For classification, the y-values are discrete, so the ranking gives the k-closest and a set of k class labels associated with them, and we usually use a majority vote method, so we pick the class label that's most common from that set.
+00:01:00 For problems with only two classes, like binary classification problems, if we choose k to be odd, then there will never be any ties.
+00:01:10 Otherwise, we can choose a somewhat arbitrary tie-breaking technique.
+00:01:20 Note that training for k-nearest neighbor methods is trivial.
+00:01:30 There's no training procedure at all.
+00:01:40 We just store all of the training data in a database, and whenever a test point arrives, we search it to find the nearest points.
+00:01:50 Like the one-nearest neighbor classifier, the decision boundary of a k-nearest neighbor classifier is piecewise linear, since, again, if we're anywhere in this feature space, our decision can change only when the set of nearest training examples also changes, which must be at the midpoint between some member of the old set of closest points and the new point that we'll be joining.
+00:02:00 As we increase k, it tends to simplify the decision function and simplify the decision boundary in some sense.
+00:02:08 You can see that for k equals 1, we'll carve out, for example, little regions to surround each training example.
+00:02:17 As we go to higher values of k, those regions become less and less noticeable.
+00:02:25 As k increases further, those regions become smaller and smaller, and the decision boundary, while technically not any more simple to describe, takes on a simpler-looking shape.
+00:02:34 So by k equals 7, this region of blue here has completely disappeared, and the decision boundary here is starting to take on a smoother, simpler form.
+00:02:42 By k equals 25, the decision boundary is quite simple indeed.
+00:02:51 Another thing that's visible from these pictures...
+00:03:00 is the change in the training error rate as we increase the value of k.
+00:03:08 When we start off with a small k, say k equals 1, we can see that each one of the data points has a little region carved around it that predicts its color.
+00:03:17 By the time we get to a high k, like k equals 25, that's no longer true.
+00:03:25 Several of the red points have blue being predicted, and several of the blue points have red being predicted.
+00:03:34 So what's happening is, as a function of k, as we increase k, the error on our training data is starting to increase.
+00:03:42 In fact, it's easy to see that at k equals 1, all of the training data will be exactly predicted, since if we pick any training data to evaluate at, its closest point in the training set will be itself, and will predict its y value.
+00:03:51 So at this point, in this point of the curve as k increases, we've actually memorized the data completely.
+00:04:00 regurgitating any particular data point and its correct label.
+00:04:06 However, of course, this isn't a complete story.
+00:04:13 What we're really interested in is how well these predictors work on new data that they haven't seen before.
+00:04:20 If we look at that, we see a pretty different looking curve.
+00:04:26 The error on test data follows a different shape entirely.
+00:04:33 We see that at k equals 1, it might be high, but it tends to decrease with k until some point at which it begins to increase again.
+00:04:40 So if we want to select the best value of k for the purposes of future data, we should pick the minimum of this green curve, the point at which the test data's error is lowest.
+00:04:46 This is an example of the complexity and overfitting tradeoff that we discussed in the introduction.
+00:04:53 In particular, a very complex model might be able to predict all of the training points well, but may not generalize very well to new data.
+00:05:00 data points.
+00:05:07 Here we see that effect, where at k equals 1, we can perfectly memorize all of the training examples, and our decision function is very complex.
+00:05:15 It carves out a region of a particular color around every single data point.
+00:05:22 If we increase k, that decision function becomes less complex looking, and in fact another extreme point is by the time we pick k equals m, the full size of the data set, our majority vote rule will always predict whatever class is in the majority in the training set, meaning that every single point in all of space will be predicted with the same value.
+00:05:30 So this is about as simple of a function as you could possibly get.
+00:05:37 So for the purposes of k nearest neighbor, k equals 1 is as complex of a function as you can choose, and k equals m simplifies.
+00:05:45 So increasing k simplifies up until k equals m.
+00:05:52 The way to choose k is...
+00:06:00 to use some sort of validation or test data so that you can evaluate this green curve and find out what value of k is going to generalize best to the future.
+00:06:08 A few theoretical considerations about the k-nearest neighbor methods.
+00:06:17 So as I just mentioned, as k increases, the effect is that every prediction at any particular point is averaging over a larger set of neighbors.
+00:06:25 And that makes the decision boundary more smooth and simple looking.
+00:06:34 Similarly, as n increases, our ability to have complex functions also increases, since the complexity of our boundary is a function of the number of data points.
+00:06:42 So typically, as n increases, the best value of k to choose tends to increase as well, but usually more slowly than n, usually something like log n.
+00:06:51 Another nice theoretical result about nearest neighbor methods is for the...
+00:07:00 for the simplest nearest neighbor method, the k equals one nearest neighbor method, for a sufficiently large number of data points, which may be not achievable in practice.
+00:07:10 But if you have data approaching infinity, it turns out that the error of the k nearest neighbor or the nearest neighbor classifier in this case is at most two times the best possible error of any predictor.
+00:07:20 So if you have enough data, the k nearest neighbor or rather the single nearest neighbor method might not do so badly.
+00:07:30 K nearest neighbor methods are very highly studied, have been around for a long time, and so there are many variations and extensions.
+00:07:40 A very simple one that I'll mention here are weighted distance measures, where perhaps some of the features might be more important or less important for the prediction process.
+00:07:50 So if features are irrelevant, we might want to give them no weight in the distance calculation.
+00:08:00 important and small differences in that feature are very important in determining how similar two things is, we might want to give them higher weight.
+00:08:08 So, a simple definition might be to use a weighted Euclidean distance.
+00:08:17 There are also a number of works on using fast methods so that the data size for nearest neighbor methods can be extremely large.
+00:08:25 Since the amount of time that you spend searching for the nearest neighbor has to be done for every prediction and depends on the size of the training set.
+00:08:34 If you want to use a very large training set, you need to use some algorithmic tricks to try to speed this up.
+00:08:42 So, there are things like approximate hashing methods and spatially oriented data structures to help you find the k-nearest neighbors quickly.
+00:08:51 So, in summary, k-nearest neighbor methods use the k-nearest examples to make predictions.
+00:09:00 Typically, in classification, we use a majority vote out of those k-nearest neighbors, and in regression, we use an average or possibly a weighted average to combine them.
+00:09:13 For classifiers, what we find is that the decision boundary that's induced by k-nearest neighbors is piecewise linear, and I showed a method of calculating it.
+00:09:26 And we saw how k affects the process of overfitting, so that as k increases, the decision function becomes simpler, so that increasing k can be used to control overfitting.
+00:09:40 In order to find the best k, we need to use some kind of data that the trainer hasn't seen, so we need to use validation data that we've split off beforehand or a test dataset to try to estimate this test error and use that to select the value of k that'll perform best in the future.

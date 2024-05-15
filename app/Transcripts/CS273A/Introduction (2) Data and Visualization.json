@@ -1,0 +1,310 @@
+[
+    {
+        "timestamp": "00:00:00",
+        "text": "Next, we'll look at some simple data exploration and visualization techniques and use MATLAB software to do so."
+    },
+    {
+        "timestamp": "00:00:07",
+        "text": "Since machine learning is fundamentally a data science, the first thing we're likely to want to do is to take a look at the data, understand it, get a feel for what might work."
+    },
+    {
+        "timestamp": "00:00:15",
+        "text": "The type of data is often very important."
+    },
+    {
+        "timestamp": "00:00:22",
+        "text": "Some data might be binary, for instance, labeling emails as spam or not, observing the gender of a user."
+    },
+    {
+        "timestamp": "00:00:30",
+        "text": "Some data might be categorical, for instance, the state that the user resides in or age values binned into several groups."
+    },
+    {
+        "timestamp": "00:00:37",
+        "text": "And some observed features are likely to be continuous or nearly so, like pixel intensities or prices."
+    },
+    {
+        "timestamp": "00:00:45",
+        "text": "Another very important point is, are any of the data values missing?"
+    },
+    {
+        "timestamp": "00:00:52",
+        "text": "If we only have partial data, meaning some of the features that we're going to observe about these data items are..."
+    },
+    {
+        "timestamp": "00:01:00",
+        "text": "not observed in all cases, we'll likely have to do something to fill those missing entries in."
+    },
+    {
+        "timestamp": "00:01:05",
+        "text": "We'll return to this point in later lectures."
+    },
+    {
+        "timestamp": "00:01:10",
+        "text": "Finally, we'd often like to get an idea of the shape of the data."
+    },
+    {
+        "timestamp": "00:01:15",
+        "text": "For multi-dimensional data, how are the dimensions, how are the features related?"
+    },
+    {
+        "timestamp": "00:01:20",
+        "text": "Are there data outliers?"
+    },
+    {
+        "timestamp": "00:01:25",
+        "text": "For instance, data points that look very different from the majority of observations."
+    },
+    {
+        "timestamp": "00:01:30",
+        "text": "Are any of the features redundant or unnecessary?"
+    },
+    {
+        "timestamp": "00:01:35",
+        "text": "To do our visualization, we'll need some software."
+    },
+    {
+        "timestamp": "00:01:40",
+        "text": "Here, we'll use MATLAB, a popular language for scientific computing."
+    },
+    {
+        "timestamp": "00:01:45",
+        "text": "MATLAB was designed for linear algebra and operates directly on vectors and matrices."
+    },
+    {
+        "timestamp": "00:01:50",
+        "text": "It's widely used in many areas of science, including machine learning, so there's lots of code available on the web, but it can be a bit inefficient since MATLAB is an interpreted language, not compiled."
+    },
+    {
+        "timestamp": "00:01:55",
+        "text": "If you don't want to buy or use MATLAB,"
+    },
+    {
+        "timestamp": "00:02:00",
+        "text": "Octave is a free, nearly code compatible open source project mimicking MATLAB."
+    },
+    {
+        "timestamp": "00:02:06",
+        "text": "Octave is very well established and stable, although the graphical user interface is a little bit rough."
+    },
+    {
+        "timestamp": "00:02:12",
+        "text": "Another newer MATLAB replacement is called FreeMAT."
+    },
+    {
+        "timestamp": "00:02:18",
+        "text": "I have less experience with this, but it's another possibility."
+    },
+    {
+        "timestamp": "00:02:24",
+        "text": "There are a lot of other alternatives as well, of course."
+    },
+    {
+        "timestamp": "00:02:30",
+        "text": "In statistics, the language R is very popular and free."
+    },
+    {
+        "timestamp": "00:02:36",
+        "text": "Again, with lots of available statistics code."
+    },
+    {
+        "timestamp": "00:02:42",
+        "text": "Python is growing in usage with a number of packages intended to replicate some of the most useful aspects of MATLAB and especially high adoption in computational biology and bioinformatics."
+    },
+    {
+        "timestamp": "00:02:48",
+        "text": "And, of course, for fast performance, C++ is widely used."
+    },
+    {
+        "timestamp": "00:02:54",
+        "text": "It's very hard to beat for efficiency, but it's often slow to write code and prototype in, so I don't really recommend it."
+    },
+    {
+        "timestamp": "00:03:00",
+        "text": "it for classwork, only for production."
+    },
+    {
+        "timestamp": "00:03:04",
+        "text": "Let's get into a little notation to get started."
+    },
+    {
+        "timestamp": "00:03:09",
+        "text": "We'll assume that we have M data points, X, X1 through XM."
+    },
+    {
+        "timestamp": "00:03:13",
+        "text": "I'll try to use parentheses superscripts to indicate data identification numbers."
+    },
+    {
+        "timestamp": "00:03:18",
+        "text": "Each datum is then a vector of observation."
+    },
+    {
+        "timestamp": "00:03:23",
+        "text": "So data point J consists of N dimensional measurements."
+    },
+    {
+        "timestamp": "00:03:27",
+        "text": "These dimensions are often called features."
+    },
+    {
+        "timestamp": "00:03:32",
+        "text": "It will be useful to stack these data points together so that data point 1 is the first row, data point 2 is the second row through data point N."
+    },
+    {
+        "timestamp": "00:03:36",
+        "text": "All the features are aligned into something called the data matrix."
+    },
+    {
+        "timestamp": "00:03:41",
+        "text": "Again, each row is a data point, each column is a feature."
+    },
+    {
+        "timestamp": "00:03:46",
+        "text": "Note that data matrices are not standardized."
+    },
+    {
+        "timestamp": "00:03:50",
+        "text": "Some text and code you'll find will use the opposite convention, the transpose of the matrix I'm using."
+    },
+    {
+        "timestamp": "00:03:55",
+        "text": "So please..."
+    },
+    {
+        "timestamp": "00:03:59",
+        "text": "be careful."
+    },
+    {
+        "timestamp": "00:04:05",
+        "text": "Here's some code just showing how to load, say, the Fisher-Iris dataset in MATLAB, renaming that matrix as X."
+    },
+    {
+        "timestamp": "00:04:11",
+        "text": "And if we look at the size of X, we'll see that there are 150 measurements, each of four dimensions."
+    },
+    {
+        "timestamp": "00:04:18",
+        "text": "The very first thing we might want to do is look at some basic statistics of the data."
+    },
+    {
+        "timestamp": "00:04:24",
+        "text": "The mean, for example, tells us the average value."
+    },
+    {
+        "timestamp": "00:04:30",
+        "text": "Calling mean on the data matrix averages over the first dimension so that we get the average in each feature."
+    },
+    {
+        "timestamp": "00:04:36",
+        "text": "Median similarly tells us the center of the data."
+    },
+    {
+        "timestamp": "00:04:42",
+        "text": "Maximum and minimum will tell us the range of the data."
+    },
+    {
+        "timestamp": "00:04:48",
+        "text": "And something like standard deviation will tell us how much variation, how much spread to expect in each feature."
+    },
+    {
+        "timestamp": "00:04:54",
+        "text": "A histogram bins the data points into a collection of discrete locations and counts the data that fall into each bin."
+    },
+    {
+        "timestamp": "00:05:00",
+        "text": "If there are k bins, it essentially summarizes the data with k counts, and the plot gives a picture and a sense of how the data are distributed, the shape and spread of the data, presence of any outliers, etc."
+    },
+    {
+        "timestamp": "00:05:08",
+        "text": "It's a bit trivial, but useful to think about k and how it determines how much summarization actually occurs in the histogram."
+    },
+    {
+        "timestamp": "00:05:17",
+        "text": "K can in some sense be thought of as a complexity of the histogram."
+    },
+    {
+        "timestamp": "00:05:25",
+        "text": "For example, if k is extremely large and the data values are actually unique, then every data point will fall into its own bin, and the histogram would simply tell you the positions of all those data."
+    },
+    {
+        "timestamp": "00:05:34",
+        "text": "It would memorize all the data positions, and it wouldn't really be of any use in summarizing or understanding the data."
+    },
+    {
+        "timestamp": "00:05:42",
+        "text": "Similarly, if k is too small, the binning would be extremely coarse, and you wouldn't learn anything about the shape."
+    },
+    {
+        "timestamp": "00:05:51",
+        "text": "The actually right value of k, the best value of k for a plot, depends on..."
+    },
+    {
+        "timestamp": "00:05:59",
+        "text": "a lot of things, including how much data you have, how those data are distributed, and what you're trying to learn about the shape of the distribution."
+    },
+    {
+        "timestamp": "00:06:08",
+        "text": "A scatterplot is another easy way to visualize how two variables relate to each other in the data."
+    },
+    {
+        "timestamp": "00:06:17",
+        "text": "Here, we plot each datum as a point, blue, with coordinates given by its first feature X1 and second feature X2."
+    },
+    {
+        "timestamp": "00:06:25",
+        "text": "This can give you an idea of the spread of the data in those two features, the relationship between the two features, and also, again, the presence of any outliers in the data."
+    },
+    {
+        "timestamp": "00:06:34",
+        "text": "Of course, in practice, we'll often have more than two features, and it's very difficult to plot such things, but one option is to just look at every possible pair and do a number of two-dimensional plots."
+    },
+    {
+        "timestamp": "00:06:42",
+        "text": "This is a so-called pair plot, showing all possible feature pairs."
+    },
+    {
+        "timestamp": "00:06:51",
+        "text": "So for example, this entry here..."
+    },
+    {
+        "timestamp": "00:06:59",
+        "text": "corresponds to plotting x1 versus x2."
+    },
+    {
+        "timestamp": "00:07:08",
+        "text": "This entry is x1 versus x3, and so on."
+    },
+    {
+        "timestamp": "00:07:17",
+        "text": "A collection of plots like this give you a quick idea of how features might be related to each other and what their distribution looks like."
+    },
+    {
+        "timestamp": "00:07:25",
+        "text": "In supervised learning, our goal is to predict something, specifically the target variable."
+    },
+    {
+        "timestamp": "00:07:34",
+        "text": "This might be a label for email, whether it's spam or not, a price to go along with something."
+    },
+    {
+        "timestamp": "00:07:42",
+        "text": "In this iris data set that we loaded, it's the species of the iris flower that's having its properties measured, one of three different types."
+    },
+    {
+        "timestamp": "00:07:51",
+        "text": "So while we could treat this target like any other feature that's being measured, since part of our goal is to understand how the other measurements are related to and can help us predict this label, so for a discrete labeling problem, a classification problem."
+    },
+    {
+        "timestamp": "00:07:59",
+        "text": "we can use color to understand how the histograms differ between the different classes or where the data from each class are located on that scatter plot."
+    },
+    {
+        "timestamp": "00:08:16",
+        "text": "This gives us a sense of how easy it's going to be to predict the species, the target variable, from the other features."
+    },
+    {
+        "timestamp": "00:08:32",
+        "text": "This lecture introduced some basic concepts in data exploration, the representation in terms of the data matrix, computing some basic statistics of the data, and visualizing the data using histograms, scatter plots, pair plots for higher dimensions, and using color for classification and discrete targets."
+    }
+]

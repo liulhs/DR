@@ -1,0 +1,119 @@
+00:00:00 In these slides, we'll discuss the unsupervised learning problem of dimensionality reduction and, in particular, linear dimensionality reduction techniques like principal components analysis and the singular value decomposition.
+00:00:12 The idea of dimensionality reduction is that we have some high-dimensional data like images or text or, as an example, we'll use here a vector of stock price data.
+00:00:24 Although these data are described in a very high-dimensional way using many, many values per example, we'd like to describe them in a simpler way that will allow us to compare them or plot them or explore them in some simpler fashion.
+00:00:36 So as an example, suppose we had a vector of 500 stock price changes in the S&P 500.
+00:00:48 Although this is typically described with 500 real values per day, we might imagine that there are lots of structures in the way these data change, so we might not need to describe them using all of them.
+00:01:00 all 500 numbers.
+00:01:06 If we wanted to compress the data and describe it using, say, only a few values, we might try to explore this structure.
+00:01:12 So for example, elements of this vector tend to change together.
+00:01:18 Perhaps we only need to use a few of these values to describe most of the changes in the prices.
+00:01:24 For example, we might start by describing the overall average change in all the prices, since we expect that typically all stocks rise or fall together.
+00:01:30 Then we might describe changes in subcategories of the data.
+00:01:36 For instance, we might group many stocks as being in tech sector, and we might describe that those stocks rose by some amount or fell by some amount.
+00:01:42 Might have other stocks in a different sector, like manufacturing.
+00:01:48 We might describe them as rising or falling together as well.
+00:01:54 Although in this example, I've used human notions of what stocks might be grouped together, we'd like to access this in.
+00:02:00 an automatic way.
+00:02:10 So we'd like to design an algorithm that can tell which elements of this data vector are changing together and exploit that to describe them using only a smaller number of real values.
+00:02:20 As usual, we'll illustrate this with a very small feature space so that we can plot it.
+00:02:30 So we'll imagine we have data with two real values, x1 and x2, and we'd like to compress these to a smaller dimensional space, so say one real value, z.
+00:02:40 If we were to communicate only one real value, zi, for each data point, xi, in two-dimensional space, we could do so by first communicating a model, f, that would tell our receiver how to convert the single real number, z, into a vector, x.
+00:02:50 Then we could communicate just that model, and then only one real value per data point, which would essentially compress our data space.
+00:03:00 by about a factor of 2.
+00:03:06 Here, we'll consider linear functions f, so meaning z is a simple multiplier of a vector v that's in the same space as the data x.
+00:03:12 So we'll have a vector v described with two values, v1 and v2.
+00:03:18 And our receiver will reconstruct a point x just by multiplying whatever scalar we send z times this model vector v.
+00:03:24 So v will be the same for all the data points.
+00:03:30 We'll communicate it once, and then each data point will have a value z that tells us the closest point on that vector to the original point x.
+00:03:36 So here's a picture.
+00:03:42 All these blue data points on the left are the original data.
+00:03:48 v is the vector that we've sent to our receiver as our model to convert scalar values to vectors x.
+00:03:54 And when we send a value z for.
+00:04:00 each data point, each data point will send the value of z that will be closest on this v vector, and our receiver will reconstruct a point that's exactly along this v vector, but still hopefully very close to the data point xi.
+00:04:10 So xi will be approximated with zi times this vector v.
+00:04:20 So what vector v and values a can we send that will most closely approximate the data point xi?
+00:04:30 Suppose we measure our error between the true data point xi and the reconstructed point a times v in a least squares sense.
+00:04:40 So we'd like to choose the vector of values a, one for each data point, and the vector v, v1, v2, that minimizes the mean squared error between the overall data points xi and the reconstructed data points a times v.
+00:04:50 If we fix v, choosing a is fairly simple.
+00:05:00 a is simply the projection of the point x onto the vector v.
+00:05:08 So if we have a data point here, and we choose the closest point in the least square sense to v, that will be the best value of a.
+00:05:17 So the main problem is to choose v, and then given v, we can compute the a's fairly easily.
+00:05:25 We'd like to choose v to minimize the residual variance, the variance in the errors that we make, given that we've chosen a in this optimal way.
+00:05:34 Equivalently, if we're trying to minimize the variance off the vector v, v will be the direction that maximizes the variance of the data within its space.
+00:05:42 Although in this example, I'm choosing a single vector v and a single scalar a, if we have a higher dimensional x, we can think of generalizing this to a more complicated model with more coefficients.
+00:05:51 So if x had, say, three or four dimensions, we might describe it as a linear combination of two vectors, v and w.
+00:05:59 each in four space, and two coefficients a, b.
+00:06:08 So this would compress the four-dimensional vector x into a two-dimensional vector a, b, and a model Vw with two components each.
+00:06:17 So, how can we choose the vector V that maximizes the variance of the data within that space?
+00:06:25 We can do it by exploiting some of the geometry of the Gaussian distribution.
+00:06:34 Recall that the covariance matrix sigma decomposed the variance into a set of directions and scales.
+00:06:42 In particular, the covariance matrix sigma could be written using an eigendecomposition as a set of eigenvectors U and a set of eigenvalues lambda.
+00:06:51 Geometrically, the eigenvectors determine the axes of an ellipse that surrounded the data and captured its variance, and the eigenvalues lambda determine the scale of each of the.
+00:06:59 these eigenvectors, the scale of the variance of the data in that direction.
+00:07:06 So, if we want the direction of maximal variance, we can simply take the eigendecomposition of the covariance.
+00:07:13 That'll tell us the directions of variation, and we can look at the scale of these numbers, lambda 1, lambda 2, and so forth.
+00:07:19 The one with the largest eigenvalue will be the direction with the largest spread.
+00:07:26 This technique is called principal components analysis, and is a classic and powerful way of doing linear dimensionality reduction.
+00:07:33 The basic procedure is as follows.
+00:07:39 First, we typically subtract the mean from each data point, so that it becomes data with a zero mean.
+00:07:46 Typically for PCA, we also scale each dimension by its variance.
+00:07:53 This ensures that the principal component directions that we find will be not influenced by the magnitude or scale of.
+00:07:59 of the variable, meaning the units that that variable was measured in.
+00:08:08 So after we've centered it and perhaps scaled it, we compute the covariance matrix of the data in the usual way, the empirical covariance.
+00:08:17 Then we take the eigen decomposition of this covariance matrix, giving us a set of eigenvectors, V, and a set of eigenvalues, D.
+00:08:25 If we sort these in terms of the magnitude of their eigenvalues in order, we'll find the largest eigenvector, V1, we'll call the first principal component.
+00:08:34 The eigenvector with the second largest eigenvalue, we'll call V2, the second principal component, and so on.
+00:08:42 In MATLAB, this is fairly straightforward.
+00:08:51 We can compute the empirical mean and subtract it from the data, compute the covariance matrix, S, and take its eigendecomposition using EIG, pulling out the k largest eigenvectors.
+00:08:59 If your matrix is very large, if your data have very high dimension, this EIG function may be very inefficient, and it may be better to use an incremental search for the eigenvectors like EIGs. It would be slightly more efficient.
+00:09:11 Given the principal directions, V1 through Vk, we can then find the coefficients of those by simply projecting each point onto that linear subspace.
+00:09:23 Alternatively, instead of taking the eigendecomposition of the covariance matrix, we can take the singular value decomposition of the data matrix.
+00:09:35 You can think of this as just an alternative method to calculate the same eigenvectors and also the coefficients that go along with them to reconstruct the data.
+00:09:47 The idea here is we take the data matrix X and we decompose it into its singular value decomposition, which is a matrix decomposition into a matrix U, a diagonal matrix S, and another matrix V, where U...
+00:09:59 and V are unitary transforms, meaning they're orthogonal and orthonormal bases.
+00:10:11 To see how this connects to the eigen decomposition of the covariance matrix, consider the covariance matrix X transpose X.
+00:10:23 If we multiply X transpose by X, we simply get V times S transpose, since S is diagonal, that's just S, U transpose, U, but U transpose times U, because they're orthonormal, is just the identity matrix, then S, then V transpose.
+00:10:35 So U transpose X becomes V S V transpose, and denoting S times S, the product of two diagonal matrices as another diagonal matrix D, we see that this becomes an eigen decomposition, the eigen decomposition of the covariance matrix, where the matrix V are the eigenvectors of that covariance matrix.
+00:10:47 In addition to finding the eigenvectors...
+00:10:59 eigenvectors V of the covariance, this process also finds the coefficients.
+00:11:11 So that data point Xi is actually reconstructed by this coefficient, Ui1 S11, times the eigenvector V1, plus this coefficient, Ui2 times S22, times the second eigenvector, and so forth.
+00:11:23 So this process not only finds the eigenvectors, but also simultaneously finds the coefficients, A1, A2, and so forth, that will be used to reconstruct the data.
+00:11:35 Another equivalent way of envisioning this decomposition is that the data matrix, an n by d matrix, is being composed into a product of low rank matrices.
+00:11:47 If we keep only the first k eigenvectors, this is approximating the data matrix as the product of one matrix that's of the same number of rows as the data, so one row per.
+00:11:59 example, data point, but only with K.
+00:12:08 Another diagonal matrix, S, and finally a matrix that's of the same dimensionality as the data, but has only K rows.
+00:12:17 So these are the set of eigenvectors that tell us how to reconstruct the data, and the product of U times S gives us a set of K coefficients for each data point.
+00:12:25 You can see that this is a simpler description of the original data matrix, since suppose we had 100 data points of dimension 10, then this matrix would have 1,000 entries.
+00:12:34 Now suppose we kept only the first three principal components.
+00:12:42 We would have 100 by 3, so 300, plus 3 entries, plus 10 times 3, or 30 total real numbers to communicate, or about 333 compared to 1,000.
+00:12:51 Each data point can then, instead of being described in a detail,
+00:12:59 space be simply described in a k-dimensional space where that space, the coefficients of the reconstruction, give the position in that space.
+00:13:06 So each data point corresponds to a row of U times S which gives k real-valued numbers.
+00:13:13 Let's look at a quick example of representing images of faces and finding a low-dimensional representation of those faces.
+00:13:19 So I have a large number of image patches, each of which is a 24 by 24 image patch.
+00:13:26 So it has 576 real values, one per pixel.
+00:13:33 I can think of this patch of image as a single observation vector just by moving in raster scan order over the image and assembling a 576 length vector of real numbers.
+00:13:39 Then I can create a data matrix by running through each example.
+00:13:46 Each example becomes a row of our data matrix X where each row contains 576 real values.
+00:13:53 Then I perform
+00:13:59 PCA by taking the singular value decomposition of this data matrix, which decomposes it into a product U times S, forming an N by K matrix, and another matrix V that's a K by D matrix.
+00:14:09 The principal component directions are this matrix V, so we have K principal components, each of which is a D dimensional vector.
+00:14:19 Because this is a 576 length vector, we can interpret it again as an image patch just by reforming it into a 24 by 24 patch.
+00:14:29 If we do this, the mean of that data matrix looks something like this, so it looks fairly like an average face, and these are the directions that we find as the principal components.
+00:14:39 So we'll be describing each image as a mean, plus some coefficient times this image, some coefficient times this image, a third coefficient times that one, a fourth times this one, and so forth.
+00:14:49 This representation can be used to construct fairly low dimensional representations of the image.
+00:14:59 patch that do a reasonable job of reconstructing the image, or approximating the image.
+00:15:07 Take these two examples, two faces from our data set, and consider the approximations that would be reconstructed using only four coefficients in the first four principal components, or 50 coefficients in the first 50 principal components.
+00:15:14 At four coefficients, both faces look fairly similar.
+00:15:22 They look fairly generic.
+00:15:29 It's not a particularly good reconstruction.
+00:15:37 But by the time we describe each image using 50 coefficients, we've gotten a pretty reasonable approximation.
+00:15:44 So although they're blurry, you can see the orientation of the face, their general shape, the position of features like the nose and mouth, and other characteristics like the collar and neckline and so forth of the image.
+00:15:52 To interpret, although sending this image in its complete form would require me to send almost 600 real values, I can get away with it.
+00:15:59 with sending only 50 real values, along with the principal components that are the same for all of the data points, and reconstruct an image that's reasonably close to the original face patch.
+00:16:11 So I've managed to describe this high dimensional data point using a feature space that's only about 10% of the size of the original data.
+00:16:23 In summary, dimensionality reduction is a technique of unsupervised learning for finding a new representation of our data points that are smaller and uses fewer coefficients than our original data representation.
+00:16:35 Here, we're considering linear dimensionality reduction, where we decompose it into a collection of basis vectors, called the principal components, and a set of coefficients that multiply those to reconstruct an approximation of each data point.
+00:16:47 A linear approach to this is called principal components analysis, and corresponds to an eye
+00:16:59 decomposition of the covariance matrix of the data, an alternative way of calculating it is the singular value decomposition of the original data matrix, which gives us both the eigenvectors of the covariance, the principal components, and also the coefficients that should multiply those to reconstruct our data matrix.
+00:17:18 We saw one example of this in face images of reconstructing 600-dimensional data that represent faces using a fairly small number of coefficients and basis vectors.

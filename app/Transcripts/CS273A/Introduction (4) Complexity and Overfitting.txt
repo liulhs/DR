@@ -1,0 +1,49 @@
+00:00:00 A major theme that we'll revisit again and again during supervised learning is the concept of overfitting and the complexity of a predictor.
+00:00:07 Suppose we have a simple regression problem with one feature X and a real-valued target Y.
+00:00:15 And here are our training examples from which we'd like to learn the relationship between X and Y.
+00:00:22 Here's one possible, plausible model for the relationship between X and Y.
+00:00:30 It says that Y is a linear function of X, but then there's an addition of a small amount of noise so that these data points are not perfectly predictable given the relationship.
+00:00:37 So we're explaining each data point by a linear relationship plus some uncertainty due to things that we can't actually measure.
+00:00:45 On the other hand, here's a very different explanation of the same points.
+00:00:52 Here we're supposing that the relationship between X and Y is a linear function of X.
+00:01:00 y is some very complicated function, and because this function actually touches all of the data points exactly, we don't need to explain any uncertainty or misses in our predictions using noise.
+00:01:07 So this would be a noise-free or nearly noise-free model.
+00:01:15 Intuitively speaking, very few people believe that this is the real relationship between x and y, but there's no particular reason not to think so.
+00:01:22 In fact, both of these models explain the data perfectly well, just using different phenomena.
+00:01:30 However, the real test of a predictor is not how well it predicted the data that it saw when it trained, but how well it does in the future once you deploy it on a new system.
+00:01:37 Suppose we gather a new collection of examples of the relationship between x and y, consisting of these green points.
+00:01:45 So these are points that the model never saw when it was trying to learn itself.
+00:01:52 These can just be surrogates for...
+00:02:00 what would happen if we then tried to use this model in the future.
+00:02:06 When we compare the linear model, relating x and y through a line, its explanation still holds up.
+00:02:13 The line is fairly reasonable, and there's a small amount of noise that's not being explained by that relationship.
+00:02:20 On the other hand, the complex example completely breaks down.
+00:02:26 Many of these points are near misses, but many of them are completely poorly explained by this line.
+00:02:33 So although the complex curve manages to explain all the red points that we're seen during training fairly well, it has quite poor predictive properties on data that it hasn't seen.
+00:02:39 This general phenomenon is known as overfitting.
+00:02:46 And what typically happens is we can see how our performance on the training data evolves as we allow our predictions to get more complicated.
+00:02:53 As we allow ourselves more and more complex models, we'll be better and better able to fit.
+00:02:59 the training data so that we come closer and closer to them, and we need to explain less and less of their values using noise.
+00:03:06 However, the same property doesn't quite hold for test data.
+00:03:13 If we were to get new data that we've never seen before, we would find a different, more U-shaped curve.
+00:03:19 In this case, it's possible for our model to be too simple.
+00:03:26 As we allow ourselves more and more complex models, we're better able to model the actual relationship between X and Y.
+00:03:33 However, at some point, that bottoms out, and we start to get worse and worse.
+00:03:39 And in this section, we're actually overfitting to the data.
+00:03:46 We're using a very complex function to try to explain changes in the training data that are really just due to noise.
+00:03:53 And so, we're going to see as we try to fit the training data better.
+00:03:59 our performance on new data is actually going to degrade.
+00:04:09 So over here, where we've got a model that's too simple, and making it more complex would help us model the actual phenomenon, is a phenomenon called underfitting.
+00:04:19 And over here, where we've chosen a model that's too complex, and it's done a great job of fitting the training data, but is doing poorly on the test data, is called overfitting.
+00:04:29 Ideally, we'd like to be in this middle range, where we get the best possible performance on new data that we've never seen.
+00:04:39 Typically, the underfitting regime is characterized by fairly close values between the training error and the test error, while overfitting regime is characterized by diverging values of the training data as error heads towards zero and the test data as error increases.
+00:04:49 In the overfitting regime, our estimated error, using only the training data,
+00:04:59 underestimates the actual error we'll experience in practice.
+00:05:08 Thus, it's always important to have data that your model has never seen in order to try to assess what its performance will be in the future.
+00:05:17 Almost all competitions use this form, providing a certain amount of training data that you can use to build your models, and another set of different data called the validation data that they'll use to assess and select among the models.
+00:05:25 Usually, this is used for validation and for a leader board to tell you how your methods are improving.
+00:05:34 And finally, there'll be even more data that you'll never be able to see, and that's used to estimate the real performance and do the final scoring.
+00:05:42 So since you're not able to see this at any point during the competition, you're not able to train your model to do well on it in particular, and so it's going to estimate the actual performance in practice.
+00:05:51 This kind of splitting often happens in multiple levels.
+00:05:59 So for instance, you yourself might take your training data and split it into multiple tiers so that you have your own validation data with which to do the same kind of processing.
+00:06:10 Over- and underfitting phenomena are critical to machine learning and we'll see them arise again and again in numerous supervised learning tasks.

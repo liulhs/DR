@@ -1,0 +1,442 @@
+[
+    {
+        "timestamp": "00:00:00",
+        "text": "Our first ensemble technique is called bagging, and is a classic technique for generating lots of predictors and combining them together in a simple way to do a better job."
+    },
+    {
+        "timestamp": "00:00:07",
+        "text": "Ensemble methods try to use a collection of predictors to do a better job than any single predictor would alone."
+    },
+    {
+        "timestamp": "00:00:15",
+        "text": "Our first instance of this is called bagging, which stands for bootstrap aggregation."
+    },
+    {
+        "timestamp": "00:00:22",
+        "text": "Bagging is a technique for learning many classifiers, each using only portions of the data, and then combining them through a model averaging technique."
+    },
+    {
+        "timestamp": "00:00:30",
+        "text": "The idea behind this is to reduce overfitting of a class of models."
+    },
+    {
+        "timestamp": "00:00:37",
+        "text": "So recall that when we overfit, we would memorize the data set, and we would get a far lower training error on that training data set than we would see on, say, a new validation or test data."
+    },
+    {
+        "timestamp": "00:00:45",
+        "text": "So we did techniques like cross-validation to try to test or check to see whether we had overfit."
+    },
+    {
+        "timestamp": "00:00:52",
+        "text": "In cross-validation, we would take our data set"
+    },
+    {
+        "timestamp": "00:01:00",
+        "text": "and we would repeatedly split it up into one part, which would train a model with a given complexity level, and another part which would check to see whether we had overfit."
+    },
+    {
+        "timestamp": "00:01:12",
+        "text": "So this was a way to use the entire training set, but still do some kind of verification of whether or not we were beginning to overfit on the data."
+    },
+    {
+        "timestamp": "00:01:24",
+        "text": "So the idea behind bagging is to do a similar kind of data splitting or resampling technique, but instead of using them to check to see whether we overfit, we instead try to combine them so that we produce a better classifier or predictor."
+    },
+    {
+        "timestamp": "00:01:36",
+        "text": "Bagging relies on a classical statistical technique called the bootstrap, which creates a random new subset of data by sampling from a given data set."
+    },
+    {
+        "timestamp": "00:01:48",
+        "text": "So the idea is that we have a particular data set, and we'd like to generate a similar data set by sampling from it with replacement."
+    },
+    {
+        "timestamp": "00:02:00",
+        "text": "confidence values, or confidence intervals of estimates, and understand what the variation due to the particular realization of the data set is."
+    },
+    {
+        "timestamp": "00:02:10",
+        "text": "To do it, we take a collection of N data points, and we can generate a new imaginary data set of size N prime by simply drawing those N prime data points from our collection using replacement."
+    },
+    {
+        "timestamp": "00:02:20",
+        "text": "There are variants of this that use without replacement, but we won't really focus on those."
+    },
+    {
+        "timestamp": "00:02:30",
+        "text": "Bagging, then, uses Bootstrap as a subroutine of its learners."
+    },
+    {
+        "timestamp": "00:02:40",
+        "text": "So it creates K learners, each of which is created independently."
+    },
+    {
+        "timestamp": "00:02:50",
+        "text": "We take the original training set, and each learner generates its own training data set, so data set sub I, by drawing N prime data points from the original full training set using replacement."
+    },
+    {
+        "timestamp": "00:03:00",
+        "text": "a classifier on these data."
+    },
+    {
+        "timestamp": "00:03:07",
+        "text": "Now these data will were drawn with replacement so some of them will be repeated and other data points will be left out."
+    },
+    {
+        "timestamp": "00:03:15",
+        "text": "We just learn all of these in parallel and then to test we predict on all K of the predictors and we have them do an unweighted combination."
+    },
+    {
+        "timestamp": "00:03:22",
+        "text": "So a classifier would do a majority vote and a regressor would do say an unweighted average."
+    },
+    {
+        "timestamp": "00:03:30",
+        "text": "So this technique is used to reduce the complexity or reduce overfitting and you can see why it might reduce complexity to some degree."
+    },
+    {
+        "timestamp": "00:03:37",
+        "text": "It has some complexity control."
+    },
+    {
+        "timestamp": "00:03:45",
+        "text": "It's harder for any particular bag classifier to memorize the data since each one is seeing its own individually generated training data set and that training data set was sampled from the original one so it's left some points out."
+    },
+    {
+        "timestamp": "00:03:52",
+        "text": "So those points won't be seen by that particular classifier and even if it really is a"
+    },
+    {
+        "timestamp": "00:04:00",
+        "text": "overfitting type of classifier, even if it memorizes its training set, it will be missing some data from the original training data, and so it won't be able to memorize the full training set."
+    },
+    {
+        "timestamp": "00:04:10",
+        "text": "So it should control complexity to some degree because every element of it will be unable to fully memorize the data."
+    },
+    {
+        "timestamp": "00:04:20",
+        "text": "So I should say that this doesn't work on predictors that are linear functions of the input data, since the average of a linear function will just be another linear function, so it doesn't really do very much."
+    },
+    {
+        "timestamp": "00:04:30",
+        "text": "It does work with anything that has non-linearity, so things like perceptrons, where we have a linear function but it's thresholded, so the actual prediction is not a linear function of the inputs, it's fine."
+    },
+    {
+        "timestamp": "00:04:40",
+        "text": "Bagging is fundamentally trading off on the bias-variance balance that we find in under and overfitting."
+    },
+    {
+        "timestamp": "00:04:50",
+        "text": "The idea behind bias and variance was that..."
+    },
+    {
+        "timestamp": "00:05:00",
+        "text": "The two effects that we were worried about in our training were, one, bias, which represents our inability to represent the true function in the class of functions that we're willing to tolerate."
+    },
+    {
+        "timestamp": "00:05:10",
+        "text": "So bias tends to be something that pulls us toward a particular function or class of functions, regardless of the data."
+    },
+    {
+        "timestamp": "00:05:20",
+        "text": "And this might be something simple like only looking at a certain class of functions like linear or quadratic functions, or it might be something softer like a strong regularization, which will force us toward models that tend to have zeros in the parameters or have small parameter values."
+    },
+    {
+        "timestamp": "00:05:30",
+        "text": "On the other hand, when we didn't invoke any such bias, we ended up with models that were quite complex."
+    },
+    {
+        "timestamp": "00:05:40",
+        "text": "They could fit very complex functions, but they had high variance."
+    },
+    {
+        "timestamp": "00:05:50",
+        "text": "So they were extremely dependent on the exact data that they"
+    },
+    {
+        "timestamp": "00:06:00",
+        "text": "were trained on."
+    },
+    {
+        "timestamp": "00:06:08",
+        "text": "So, in particular, if we had, let's say, a hundred training examples and we trained one of these very complex models, it would be able to fit whatever function explained those data, but it would be quite likely that if we drew a hundred new examples from the same concept, that the model we trained on the new data would be very different than the first model."
+    },
+    {
+        "timestamp": "00:06:17",
+        "text": "And so, any particular realization of the data set produces a high degree of variation in the predictor."
+    },
+    {
+        "timestamp": "00:06:25",
+        "text": "So, the model itself has high variance."
+    },
+    {
+        "timestamp": "00:06:34",
+        "text": "Bagging works on the high-variance end of the spectrum by taking a collection of low-bias, high-variance models and averaging them together."
+    },
+    {
+        "timestamp": "00:06:42",
+        "text": "So, the averaging works to reduce variance, but without significantly increasing the bias."
+    },
+    {
+        "timestamp": "00:06:51",
+        "text": "So, it simply tries to move this curve downward."
+    },
+    {
+        "timestamp": "00:06:59",
+        "text": "Here's an example of bootstrap and of bagging using decision trees on the iris data."
+    },
+    {
+        "timestamp": "00:07:11",
+        "text": "So here, up in the upper right, is the actual iris data with three classes, blue, green, and red, being plotted, and a decision tree with full depth and no complexity control and the function that it learns on those data being plotted as well."
+    },
+    {
+        "timestamp": "00:07:23",
+        "text": "So the bootstrap procedure takes these data and it draws a new set of data, in this case of the same size, using replacement to try to simulate some equally likely data set that we could have seen in a different universe."
+    },
+    {
+        "timestamp": "00:07:35",
+        "text": "So here's that data set."
+    },
+    {
+        "timestamp": "00:07:47",
+        "text": "It's on a slightly different scale, so it's a little hard to compare, but you can see if you stare that a few data points are missing, in particular, this red."
+    },
+    {
+        "timestamp": "00:07:59",
+        "text": "point here has vanished from this data set."
+    },
+    {
+        "timestamp": "00:08:06",
+        "text": "It's particularly hard to tell."
+    },
+    {
+        "timestamp": "00:08:13",
+        "text": "Oh, and this red point here also has vanished."
+    },
+    {
+        "timestamp": "00:08:19",
+        "text": "It's particularly hard to tell data that have been sampled twice since those points are right on top of each other, but they're present as well."
+    },
+    {
+        "timestamp": "00:08:26",
+        "text": "So this is a new data set of the same size simulated from the original data set, and being slightly different, it learns a slightly different decision tree model."
+    },
+    {
+        "timestamp": "00:08:33",
+        "text": "Here's yet another data set sampled in exactly the same way."
+    },
+    {
+        "timestamp": "00:08:39",
+        "text": "Again, being slightly different, it learns a slightly different decision tree model."
+    },
+    {
+        "timestamp": "00:08:46",
+        "text": "Here's a third, again slightly different, a fourth, and a fifth."
+    },
+    {
+        "timestamp": "00:08:53",
+        "text": "The randomness created in the bootstrap data generation process produces five equally likely models."
+    },
+    {
+        "timestamp": "00:08:59",
+        "text": "in some sense that we could have gotten from the same data had we just been, say, differently lucky."
+    },
+    {
+        "timestamp": "00:09:06",
+        "text": "So now we take that collection and combine it into an overall average with an unweighted sum."
+    },
+    {
+        "timestamp": "00:09:13",
+        "text": "So in this case, we're classifying, so I mean we take a majority vote."
+    },
+    {
+        "timestamp": "00:09:19",
+        "text": "So if the majority of classifiers picks a particular class, we predict that one."
+    },
+    {
+        "timestamp": "00:09:26",
+        "text": "This reduces the memorization effect, since not every predictor can see each data point."
+    },
+    {
+        "timestamp": "00:09:33",
+        "text": "In particular, a region will only be predicted to a class if it has enough support among all of the data points that in most of the decision trees we learn, that region is still assigned to the class."
+    },
+    {
+        "timestamp": "00:09:39",
+        "text": "So this will lower the complexity of the overall predictor and typically lead us to better generalization performance than the single predictor we learned at first."
+    },
+    {
+        "timestamp": "00:09:46",
+        "text": "So here's an example where we've learned the five trees shown on the previous slide and averaged them together."
+    },
+    {
+        "timestamp": "00:09:53",
+        "text": "And you can see already region."
+    },
+    {
+        "timestamp": "00:09:59",
+        "text": "regions like this that were assigned to green by the influence of a single data point have now been overwhelmed by some of the other predictors that did not perhaps have that data point in it."
+    },
+    {
+        "timestamp": "00:10:11",
+        "text": "By 25 trees, we're starting to see what I think a human would start to assign."
+    },
+    {
+        "timestamp": "00:10:23",
+        "text": "So blue is taking a more oblong region in the upper left, red in the right-hand side and green in the lower center, and we're starting to see that shape emerge from our collection of trees."
+    },
+    {
+        "timestamp": "00:10:35",
+        "text": "By 100 trees, that shape is generally prevalent, and many of the artifacts that we saw in the single decision tree have vanished, so that now we find that green has a relatively sensible looking support in the center, and blue and red have also taken on fairly sensible looking supports as well."
+    },
+    {
+        "timestamp": "00:10:47",
+        "text": "Practically speaking, bagging is an easy procedure."
+    },
+    {
+        "timestamp": "00:10:59",
+        "text": "to implement."
+    },
+    {
+        "timestamp": "00:11:08",
+        "text": "So here's MATLAB code just showing how easy."
+    },
+    {
+        "timestamp": "00:11:17",
+        "text": "The first thing we do is we create a container for our set of classifiers, in this case a cell array."
+    },
+    {
+        "timestamp": "00:11:25",
+        "text": "Cell arrays in MATLAB can represent collections of arbitrary types of objects, although in this case we'll probably just be using the same type of classifier."
+    },
+    {
+        "timestamp": "00:11:34",
+        "text": "We then iterate over the number of classifiers we'd like to learn and we do a procedure to generate our bootstrap data sample."
+    },
+    {
+        "timestamp": "00:11:42",
+        "text": "So if we'd like to generate unused data points valued between 1 and n with replacement, we just generate unused random numbers between 1 and n, and so we can do that just by uniformly generating random numbers, multiplying them by n, and then rounding them up using the ceiling function."
+    },
+    {
+        "timestamp": "00:11:51",
+        "text": "We select out those data points that'll contain several values that are the same, so we'll get some repetition in our data just by extracting data."
+    },
+    {
+        "timestamp": "00:11:59",
+        "text": "data set I to be X of those indices, and we extract out the targets as well."
+    },
+    {
+        "timestamp": "00:12:08",
+        "text": "And then we call our classifier function, so this is some black box function that trains a classifier on the new bootstrap data set XI with targets YI."
+    },
+    {
+        "timestamp": "00:12:17",
+        "text": "We store the result in our set of classifiers."
+    },
+    {
+        "timestamp": "00:12:25",
+        "text": "When we go to test, we just create a collection of predictions, so we need the number of data that we're testing on times the number of classifiers that we've trained."
+    },
+    {
+        "timestamp": "00:12:34",
+        "text": "We predict on that vector of test data for each classifier in turn, and then at the end we do a procedure to do a majority vote, so this is a simple one-line majority vote between outputs one and two."
+    },
+    {
+        "timestamp": "00:12:42",
+        "text": "If you have a multiclass classifier, you need to do a slightly more complex procedure."
+    },
+    {
+        "timestamp": "00:12:51",
+        "text": "A particularly common application of bagging is the use of them using decision trees, and an algorithm called random porous."
+    },
+    {
+        "timestamp": "00:12:59",
+        "text": "So one problem that arises when you apply bagging to decision trees is that if you have a large enough amount of data, often the decision trees that you learn aren't very different."
+    },
+    {
+        "timestamp": "00:13:08",
+        "text": "So if you have enough data, for example, the root node, even if you resample those data with replacement, will look generally the same."
+    },
+    {
+        "timestamp": "00:13:17",
+        "text": "And so the first variable selected, the first feature, and the first split point will be fairly similar."
+    },
+    {
+        "timestamp": "00:13:25",
+        "text": "And so the class of trees that you learn in your bagging procedure is not really different enough."
+    },
+    {
+        "timestamp": "00:13:34",
+        "text": "It's not really diverse enough to help."
+    },
+    {
+        "timestamp": "00:13:42",
+        "text": "The solution is to introduce some extra variability in the learner and inject some extra randomness into this procedure."
+    },
+    {
+        "timestamp": "00:13:51",
+        "text": "And so the way random forests do that is at every step of the decision tree training process, instead of searching over all features, we just search over some subset of features."
+    },
+    {
+        "timestamp": "00:13:59",
+        "text": "So, this is going to create diversity among our trees, because at any particular node, in one tree versus another, the same set of features will not be available."
+    },
+    {
+        "timestamp": "00:14:09",
+        "text": "And so, in one tree, the best feature among its allowed set will be different than the best feature among a different tree's allowed set."
+    },
+    {
+        "timestamp": "00:14:19",
+        "text": "That'll produce a larger variability in our collection of trees, and then we just average over them in the same way."
+    },
+    {
+        "timestamp": "00:14:29",
+        "text": "This is, again, extremely simple to implement, so in our decision tree recursive data splitting function, instead of searching over every possible features in every possible split, we first generate a random subset of the features of some size, and search only over that set and all splits."
+    },
+    {
+        "timestamp": "00:14:39",
+        "text": "Otherwise, the procedure works exactly the same way as before."
+    },
+    {
+        "timestamp": "00:14:49",
+        "text": "In summary, bagging is a classic ensemble technique for..."
+    },
+    {
+        "timestamp": "00:14:59",
+        "text": "better predictors than any single predictor."
+    },
+    {
+        "timestamp": "00:15:07",
+        "text": "It stands for bootstrap aggregation and it's a technique that tries to reduce the complexity of a model class."
+    },
+    {
+        "timestamp": "00:15:14",
+        "text": "So you choose a model class that's very prone to overfitting and apply bagging to provide a collection of learners in that class that are less complex and less prone to overfitting."
+    },
+    {
+        "timestamp": "00:15:22",
+        "text": "In practice, it's quite simple to implement."
+    },
+    {
+        "timestamp": "00:15:29",
+        "text": "We just re-sample the data once for each learner."
+    },
+    {
+        "timestamp": "00:15:37",
+        "text": "Each learner is trained on an individual re-sampling, and we create a predictor that might overfit on that sample, but then by averaging them together produces something that's robust to small variations in the data."
+    },
+    {
+        "timestamp": "00:15:44",
+        "text": "It essentially plays on the bias-variance tradeoff, choosing something that's prone to overfitting and thus has low bias, but reducing its variance through model averaging."
+    },
+    {
+        "timestamp": "00:15:52",
+        "text": "The price of this, of course, is the computational cost, which if we learn K bagged predictors."
+    },
+    {
+        "timestamp": "00:15:59",
+        "text": "our prediction time computation becomes k times larger than it would have been before."
+    }
+]

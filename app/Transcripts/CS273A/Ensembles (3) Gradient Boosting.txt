@@ -1,0 +1,96 @@
+00:00:00 Boosting is another ensemble technique for creating collections of predictors, and gradient boosting is a technique for producing regression models consisting of collections of regressors.
+00:00:12 An ensemble is a collection of predictors whose predictions are combined, usually by some sort of weighted average or vote, in order to provide an overall prediction that takes its guidance from the collection itself.
+00:00:24 Boosting is an ensemble technique in which learners are learned sequentially, with early learners fitting simple models to the data, and then analyzing the data for errors.
+00:00:36 Those errors identify problems or particular instances of the data that are the difficult or hard-to-fit examples, and later models focus primarily on those examples, trying to get them right.
+00:00:48 In the end, all the models are given weight, and the set is combined into some
+00:01:00 overall predictors.
+00:01:05 So boosting is a method of converting a sequence of weak learners into a very complex predictor.
+00:01:10 It's a way of increasing the complexity of a particular model.
+00:01:15 Initial learners tend to be very simple and then the weighted combination can grow more and more complex as learners are added.
+00:01:20 Gradient boosting is an instantiation of this idea for regression.
+00:01:25 The idea is to repeatedly follow this procedure.
+00:01:30 We learn a simple regression predictor of our data.
+00:01:35 Then we compute the error residual, the amount the error per data point in our predictions.
+00:01:40 And then we learn a new model to try to predict this error residual.
+00:01:45 So here's an example with red data on the left indicating the motorcycle data set.
+00:01:50 So it has a fairly complex shape with regard to the feature time.
+00:01:55 And here we fit an extreme
+00:02:00 simple predictor.
+00:02:06 So this is a one-layer decision tree used for regression.
+00:02:13 So it partitions the space into two parts, thresholding at some particular value, predicting a constant value on the left and a constant value on the right.
+00:02:20 Obviously this model is too simple to fit the shape of the data, and so there are a lot of errors.
+00:02:26 We make errors over here where the prediction is too low, errors here where the prediction is too high, and so forth.
+00:02:33 And if we compute that error on a data-by-data basis, the error residual, it becomes a function plotted over here in the green on the right.
+00:02:39 Then that function can further be predicted by the model, by a new model.
+00:02:46 Again fitting a model from our simple class of predictors, we get a new prediction of these error residuals.
+00:02:53 So here we've predicted a region where the error residuals were quite high and fairly constant, and then partitioned into
+00:02:59 two parts, and on the right-hand region we've predicted a slightly negative value, producing what becomes the best one-layer decision tree regressor for the error residuals.
+00:03:11 Adding these two predictors together gives a new function, which is slightly more complex than a single-layer decision tree.
+00:03:23 So here in the far left-hand side, we see that the combination of the two predictors has done a better job than the first predictor alone, then it drops down and then it goes back up.
+00:03:35 So now we have a function that has two transition points and fits the data better than the original single-layer decision tree did.
+00:03:47 Again, we take this function and we can compute its error residual, meaning the error for each data point, and we can plot that over here on the left.
+00:03:59 in green.
+00:04:06 So now we have a new error residual function, and we can again try to fit that using a new model.
+00:04:13 We fit another single-layer decision tree, and we produce the following model, slightly negative over here on the left, slightly positive over here on the right, the best single-layer decision stump regressor for this error residual.
+00:04:19 Adding this into the set will produce a slightly more complex function, regressor, being the sum of now three decision stumps, and thus possibly having three transition points, and so on.
+00:04:26 So here's the sequence of models that we might learn, and their error residuals.
+00:04:33 Over here is the first decision stump regressor.
+00:04:40 It's error residual.
+00:04:46 Obviously it's too simple of a model to do a very good job of fitting this function.
+00:04:53 Once we fit the error residual, we add its model in, and we get this model, which is now slightly negative.
+00:05:00 slightly more complex, slightly better able to fit the data.
+00:05:06 Again, computing its error residual, we get this green function down here.
+00:05:12 Fitting it to a single-layer decision tree regressor, we get another function.
+00:05:18 Adding it in, we get a slightly more complex shape, a new error residual.
+00:05:24 Fit it to a simple model, add it in, get a slightly more complex shape.
+00:05:30 As we proceed, we move from the left where we have a single decision stump to the right where we have the sum of five decision stumps, and our function is getting slightly more complicated at each step.
+00:05:36 While its accuracy is getting slightly better to the training data at each step as well.
+00:05:42 This algorithm is an instance of gradient boosting.
+00:05:48 It's called gradient boosting because it's related to a gradient ascent sort of procedure.
+00:05:54 First, we make a set of predictions.
+00:06:00 one for each data point.
+00:06:05 So y hat i is our prediction for data point i.
+00:06:10 We can calculate the error in our predictions.
+00:06:16 Let's call it j.
+00:06:21 And j just relates the accuracy of y hat in modeling y.
+00:06:27 For mean squared error, which is what my previous example was focused on, this cost function is the sum over the data points of y i minus y hat i squared.
+00:06:32 And so now we can try to think about adjusting our prediction y hat to try to reduce this error.
+00:06:38 So the gradient of j with respect to the predictions y hat is just solved by taking the derivative with respect to all the predictions.
+00:06:43 And a gradient ascent on the predictions would look like adjusting y hat to be its old value plus some step size alpha times the gradient f.
+00:06:49 So f i is the gradient of j.
+00:06:54 And if we take the derivative of this mean squared error function, we find that it's.
+00:06:59 take the derivative of the mean squared error function with respect to the prediction y-hat-i, we find that it is simply two times the difference y-i minus y-hat-i.
+00:07:08 And this is precisely the error residual.
+00:07:17 So the example I gave before, where we're computing an estimate y-hat, we're computing a model that we fit to its error residual.
+00:07:25 You can think of that as fitting a model to this gradient function.
+00:07:34 And then we take a step, alpha, by adding it together.
+00:07:42 So each learner is estimating this gradient del J, and a gradient descent on the squared error takes a sequence of steps to try to reduce J.
+00:07:51 So we'll estimate the gradient and take a step of size alpha.
+00:07:59 in reducing that gradient by adding in the new predictor of the gradient to our y hat.
+00:08:06 So here's pseudocode for the procedure, again specialized to mean squared error.
+00:08:13 Usually we start off with the extremely simple predictor of a constant value.
+00:08:19 So the best mean squared error predictor of y with a constant value is simply its mean.
+00:08:26 And so we start off by predicting mu, which is an extremely simple predictor.
+00:08:33 We calculate its error residual y minus mu.
+00:08:39 Then we run from 1 to the number of boosted predictors that we'd like to learn.
+00:08:46 Each learner we do by training a regression model from the features x to our error residual dy.
+00:08:53 And we take some step size alpha k, which I'll discuss in just a moment.
+00:08:59 This becomes the weight of that learner in the model.
+00:09:06 Then, we update our predictions.
+00:09:13 So, our new prediction consists of a sum of learners, and dy already captures most of those.
+00:09:19 So, we have only to subtract the new addition of our predictions.
+00:09:26 So, we subtract our step size alpha times our new learner of the current error residual, and compute a new error residual, dy.
+00:09:33 That's the difference between what we were trying to predict, the old error residual, and what we were able to predict with this learner.
+00:09:39 So, alpha k is the step size of this particular learner, and you can think of it as a learning rate.
+00:09:46 So, often the choice is simply to set it equal to 1.
+00:09:53 What one typically finds is that if alpha is large, like 1, the system will converge very rapidly.
+00:09:59 to a model that's unable to get any better, meaning its error residual can't be modeled by the class of predictors anymore.
+00:10:11 On the other hand, choosing a smaller value of alpha will tend to use a lot more classifiers because it's taking smaller steps and so it needs more steps to cover the distance, but often it can produce a better prediction because it follows this gradient in a smoother way.
+00:10:23 So if you choose a small alpha, you tend to get better results, but computationally it's more difficult because you'll need to train more models and you'll need to use them in prediction time.
+00:10:35 And when it comes time to predict, you simply take a prediction vector, you run through all of your boosted predictors and your overall prediction is the weighted sum of those predictions.
+00:10:47 So here we predict something that is the sum over k of.
+00:10:59 are weight alpha k times the predictor of that instance, or rather the kth predictor.
+00:11:09 In summary, gradient boosting is a particular kind of ensemble method that uses weighted sums of regressors to produce an overall better regressors.
+00:11:19 It works by using a very simple regression model to begin with, and then subsequent models are trained to predict the errors made by the model so far.
+00:11:28 So the models are trained sequentially, and slowly focus in on the difficult to predict models.
+00:11:38 The overall prediction is then given a weighted sum of the collection, so that each predictor is evaluated and summed together with a weight given by the step size alpha.

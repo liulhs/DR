@@ -1,0 +1,198 @@
+[
+    {
+        "timestamp": "00:00:00",
+        "text": "A major theme that we'll revisit again and again during supervised learning is the concept of overfitting and the complexity of a predictor."
+    },
+    {
+        "timestamp": "00:00:07",
+        "text": "Suppose we have a simple regression problem with one feature X and a real-valued target Y."
+    },
+    {
+        "timestamp": "00:00:15",
+        "text": "And here are our training examples from which we'd like to learn the relationship between X and Y."
+    },
+    {
+        "timestamp": "00:00:22",
+        "text": "Here's one possible, plausible model for the relationship between X and Y."
+    },
+    {
+        "timestamp": "00:00:30",
+        "text": "It says that Y is a linear function of X, but then there's an addition of a small amount of noise so that these data points are not perfectly predictable given the relationship."
+    },
+    {
+        "timestamp": "00:00:37",
+        "text": "So we're explaining each data point by a linear relationship plus some uncertainty due to things that we can't actually measure."
+    },
+    {
+        "timestamp": "00:00:45",
+        "text": "On the other hand, here's a very different explanation of the same points."
+    },
+    {
+        "timestamp": "00:00:52",
+        "text": "Here we're supposing that the relationship between X and Y is a linear function of X."
+    },
+    {
+        "timestamp": "00:01:00",
+        "text": "y is some very complicated function, and because this function actually touches all of the data points exactly, we don't need to explain any uncertainty or misses in our predictions using noise."
+    },
+    {
+        "timestamp": "00:01:07",
+        "text": "So this would be a noise-free or nearly noise-free model."
+    },
+    {
+        "timestamp": "00:01:15",
+        "text": "Intuitively speaking, very few people believe that this is the real relationship between x and y, but there's no particular reason not to think so."
+    },
+    {
+        "timestamp": "00:01:22",
+        "text": "In fact, both of these models explain the data perfectly well, just using different phenomena."
+    },
+    {
+        "timestamp": "00:01:30",
+        "text": "However, the real test of a predictor is not how well it predicted the data that it saw when it trained, but how well it does in the future once you deploy it on a new system."
+    },
+    {
+        "timestamp": "00:01:37",
+        "text": "Suppose we gather a new collection of examples of the relationship between x and y, consisting of these green points."
+    },
+    {
+        "timestamp": "00:01:45",
+        "text": "So these are points that the model never saw when it was trying to learn itself."
+    },
+    {
+        "timestamp": "00:01:52",
+        "text": "These can just be surrogates for..."
+    },
+    {
+        "timestamp": "00:02:00",
+        "text": "what would happen if we then tried to use this model in the future."
+    },
+    {
+        "timestamp": "00:02:06",
+        "text": "When we compare the linear model, relating x and y through a line, its explanation still holds up."
+    },
+    {
+        "timestamp": "00:02:13",
+        "text": "The line is fairly reasonable, and there's a small amount of noise that's not being explained by that relationship."
+    },
+    {
+        "timestamp": "00:02:20",
+        "text": "On the other hand, the complex example completely breaks down."
+    },
+    {
+        "timestamp": "00:02:26",
+        "text": "Many of these points are near misses, but many of them are completely poorly explained by this line."
+    },
+    {
+        "timestamp": "00:02:33",
+        "text": "So although the complex curve manages to explain all the red points that we're seen during training fairly well, it has quite poor predictive properties on data that it hasn't seen."
+    },
+    {
+        "timestamp": "00:02:39",
+        "text": "This general phenomenon is known as overfitting."
+    },
+    {
+        "timestamp": "00:02:46",
+        "text": "And what typically happens is we can see how our performance on the training data evolves as we allow our predictions to get more complicated."
+    },
+    {
+        "timestamp": "00:02:53",
+        "text": "As we allow ourselves more and more complex models, we'll be better and better able to fit."
+    },
+    {
+        "timestamp": "00:02:59",
+        "text": "the training data so that we come closer and closer to them, and we need to explain less and less of their values using noise."
+    },
+    {
+        "timestamp": "00:03:06",
+        "text": "However, the same property doesn't quite hold for test data."
+    },
+    {
+        "timestamp": "00:03:13",
+        "text": "If we were to get new data that we've never seen before, we would find a different, more U-shaped curve."
+    },
+    {
+        "timestamp": "00:03:19",
+        "text": "In this case, it's possible for our model to be too simple."
+    },
+    {
+        "timestamp": "00:03:26",
+        "text": "As we allow ourselves more and more complex models, we're better able to model the actual relationship between X and Y."
+    },
+    {
+        "timestamp": "00:03:33",
+        "text": "However, at some point, that bottoms out, and we start to get worse and worse."
+    },
+    {
+        "timestamp": "00:03:39",
+        "text": "And in this section, we're actually overfitting to the data."
+    },
+    {
+        "timestamp": "00:03:46",
+        "text": "We're using a very complex function to try to explain changes in the training data that are really just due to noise."
+    },
+    {
+        "timestamp": "00:03:53",
+        "text": "And so, we're going to see as we try to fit the training data better."
+    },
+    {
+        "timestamp": "00:03:59",
+        "text": "our performance on new data is actually going to degrade."
+    },
+    {
+        "timestamp": "00:04:09",
+        "text": "So over here, where we've got a model that's too simple, and making it more complex would help us model the actual phenomenon, is a phenomenon called underfitting."
+    },
+    {
+        "timestamp": "00:04:19",
+        "text": "And over here, where we've chosen a model that's too complex, and it's done a great job of fitting the training data, but is doing poorly on the test data, is called overfitting."
+    },
+    {
+        "timestamp": "00:04:29",
+        "text": "Ideally, we'd like to be in this middle range, where we get the best possible performance on new data that we've never seen."
+    },
+    {
+        "timestamp": "00:04:39",
+        "text": "Typically, the underfitting regime is characterized by fairly close values between the training error and the test error, while overfitting regime is characterized by diverging values of the training data as error heads towards zero and the test data as error increases."
+    },
+    {
+        "timestamp": "00:04:49",
+        "text": "In the overfitting regime, our estimated error, using only the training data,"
+    },
+    {
+        "timestamp": "00:04:59",
+        "text": "underestimates the actual error we'll experience in practice."
+    },
+    {
+        "timestamp": "00:05:08",
+        "text": "Thus, it's always important to have data that your model has never seen in order to try to assess what its performance will be in the future."
+    },
+    {
+        "timestamp": "00:05:17",
+        "text": "Almost all competitions use this form, providing a certain amount of training data that you can use to build your models, and another set of different data called the validation data that they'll use to assess and select among the models."
+    },
+    {
+        "timestamp": "00:05:25",
+        "text": "Usually, this is used for validation and for a leader board to tell you how your methods are improving."
+    },
+    {
+        "timestamp": "00:05:34",
+        "text": "And finally, there'll be even more data that you'll never be able to see, and that's used to estimate the real performance and do the final scoring."
+    },
+    {
+        "timestamp": "00:05:42",
+        "text": "So since you're not able to see this at any point during the competition, you're not able to train your model to do well on it in particular, and so it's going to estimate the actual performance in practice."
+    },
+    {
+        "timestamp": "00:05:51",
+        "text": "This kind of splitting often happens in multiple levels."
+    },
+    {
+        "timestamp": "00:05:59",
+        "text": "So for instance, you yourself might take your training data and split it into multiple tiers so that you have your own validation data with which to do the same kind of processing."
+    },
+    {
+        "timestamp": "00:06:10",
+        "text": "Over- and underfitting phenomena are critical to machine learning and we'll see them arise again and again in numerous supervised learning tasks."
+    }
+]

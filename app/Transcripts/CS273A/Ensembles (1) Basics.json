@@ -1,0 +1,182 @@
+[
+    {
+        "timestamp": "00:00:00",
+        "text": "Ensembl methods in machine learning are a kind of meta-algorithm that makes use of other machine learning algorithms as a component to learn a collection of predictors."
+    },
+    {
+        "timestamp": "00:00:08",
+        "text": "Ensembl methods take the attitude that more predictors can be better than any single one, and by learning many we can do a better job."
+    },
+    {
+        "timestamp": "00:00:17",
+        "text": "An Ensembl combines many predictors, often through some weighted average or weighted combination, and these might be of the same kind of learner or of different types."
+    },
+    {
+        "timestamp": "00:00:25",
+        "text": "So Ensembls might be used to combine many different kinds of predictors, like a neural network, a support vector machine, and the decision tree, if we didn't know what the best kind of predictor or what type of predictor would be best for this problem."
+    },
+    {
+        "timestamp": "00:00:34",
+        "text": "They can also be used to compute collections of the same type of learner."
+    },
+    {
+        "timestamp": "00:00:42",
+        "text": "We'll see several examples, like bagging and boosting, that use a single kind of learner, but many instances to try to do a better job."
+    },
+    {
+        "timestamp": "00:00:51",
+        "text": "One view of Ensembl learning is related to a psychological phenomenon"
+    },
+    {
+        "timestamp": "00:00:59",
+        "text": "known as the wisdom of the crowds."
+    },
+    {
+        "timestamp": "00:01:10",
+        "text": "Most of us have probably seen the show Who Wants to Be a Millionaire, where a series of contestants are asked multiple choice questions testing their knowledge of trivia."
+    },
+    {
+        "timestamp": "00:01:20",
+        "text": "In that show, there are several ways of getting assistance, one of which is phoning a predetermined friend who is presumably someone very good or very smart, someone who knows a lot of trivia, and the other where you poll the audience, which is asking a collection of 100 people who had nothing better to do than show up to the game show."
+    },
+    {
+        "timestamp": "00:01:30",
+        "text": "Yet, if you actually watch the show, you'll see a strange phenomenon."
+    },
+    {
+        "timestamp": "00:01:40",
+        "text": "The phone a friend is often wrong, but asking the audience is almost never wrong."
+    },
+    {
+        "timestamp": "00:01:50",
+        "text": "Somehow, a collection of 100 non-experts turns out to be a far better predictor of the correct answer than the prediction of the one predetermined expert."
+    },
+    {
+        "timestamp": "00:02:00",
+        "text": "that the contestant was able to select."
+    },
+    {
+        "timestamp": "00:02:05",
+        "text": "Fundamentally, this is what ensembles try to do."
+    },
+    {
+        "timestamp": "00:02:10",
+        "text": "They take a collection of OK predictors and try to combine them into something far more powerful."
+    },
+    {
+        "timestamp": "00:02:16",
+        "text": "The simplest kind of ensemble is simply a committee or unweighted average."
+    },
+    {
+        "timestamp": "00:02:21",
+        "text": "If we're doing regression, we'd do something like an unweighted average of the predictions."
+    },
+    {
+        "timestamp": "00:02:27",
+        "text": "If we're doing classification, we might do a majority vote."
+    },
+    {
+        "timestamp": "00:02:32",
+        "text": "This is probably the simplest way combining a collection of predictions."
+    },
+    {
+        "timestamp": "00:02:38",
+        "text": "More generally, you could think about using weighted averages."
+    },
+    {
+        "timestamp": "00:02:43",
+        "text": "For example, we might believe that some of our predictors are better or more accurate than others, and we'd like to give them higher weight than the lower quality performances."
+    },
+    {
+        "timestamp": "00:02:49",
+        "text": "So a simple example of this, suppose we had a collection of predictors F1, F2, F3, and so on, and they produced predictions Y1, Y2, Y hat 1, Y hat 2, and so on."
+    },
+    {
+        "timestamp": "00:02:54",
+        "text": "We might try to combine these by giving them each some."
+    },
+    {
+        "timestamp": "00:03:00",
+        "text": "weight, alpha i, and if the classes are, say, plus and minus 1, we could just add up the weighted sum, weighted signed sum of our predictions."
+    },
+    {
+        "timestamp": "00:03:12",
+        "text": "And if a greater weight preferred plus 1, this would be positive, and if a greater weight preferred minus 1, it would be negative, so we'd take the sign of that to be our prediction."
+    },
+    {
+        "timestamp": "00:03:24",
+        "text": "Even more generally, we could take these predictions as being features of some other predictor."
+    },
+    {
+        "timestamp": "00:03:36",
+        "text": "So we simply learn our predictors, F1 through Fk, as best we can, and then we could just combine them using some entirely new predictor, FeF ensemble, that takes the output of those initial predictors and tries to use them to produce a better predictor, y hat."
+    },
+    {
+        "timestamp": "00:03:48",
+        "text": "So this is quite similar to the idea in multilayer perceptrons, where we have one layer of predictors, let's say perceptrons, F1 through Fk, producing features for a..."
+    },
+    {
+        "timestamp": "00:04:00",
+        "text": "another layer of prediction, except that unlike multi-layer perceptrons where all the layers are going to be trained simultaneously, here we're going to just train the individual predictors once and then we'll try to combine them using a post-processing prediction step."
+    },
+    {
+        "timestamp": "00:04:15",
+        "text": "In the case that the Y-hats are binary, like plus minus one, and our ensemble predictor Fe is linear, this will arrive at a weighted vote, but it would give you perhaps a way to train the weights of that weighted vote in a principled way."
+    },
+    {
+        "timestamp": "00:04:30",
+        "text": "I should mention that if you are planning on training the ensemble weights or the ensemble predictor Fe, you should probably either use validation data or some separated out data, since if F1 through Fk have used the same data as Fe, Fe will simply choose the one that overfits the data the most."
+    },
+    {
+        "timestamp": "00:04:45",
+        "text": "So for instance, if one of the FIs is..."
+    },
+    {
+        "timestamp": "00:05:00",
+        "text": "nearest neighbor predictor, it'll get all of the training data correct, and then FE will decide to trust it entirely if it's trained on the same data."
+    },
+    {
+        "timestamp": "00:05:08",
+        "text": "So, it should be trained on some validation data."
+    },
+    {
+        "timestamp": "00:05:17",
+        "text": "Even more generally, the concept of mixtures of experts produces ensembles of predictors or ensembles of models that make the weights perhaps depend on X."
+    },
+    {
+        "timestamp": "00:05:25",
+        "text": "So, mixture of experts have some weight, alpha i, that might be a function of the feature X, and that weight indicates their expertise."
+    },
+    {
+        "timestamp": "00:05:34",
+        "text": "And depending on the work, some mixtures of experts use a weighted average, some just use the majority, the largest value as the most confident expert."
+    },
+    {
+        "timestamp": "00:05:42",
+        "text": "And what this will do is provide a model that is a mixture of other models."
+    },
+    {
+        "timestamp": "00:05:51",
+        "text": "So, for instance, here we have some training data, and we've fit a model consisting of three linear predictors."
+    },
+    {
+        "timestamp": "00:06:00",
+        "text": "Each of which is capable of doing a good job of predicting, but only on some narrow regime of x."
+    },
+    {
+        "timestamp": "00:06:10",
+        "text": "So here we would learn perhaps a function alpha i of x that would tell us which region we're in, and which of our experts we should use, and learn the experts to fit that region."
+    },
+    {
+        "timestamp": "00:06:21",
+        "text": "So these models are usually trained in a simultaneous way, where we're simultaneously trying to figure out what region the model should be an expert in, and also what the job of that expert should be."
+    },
+    {
+        "timestamp": "00:06:31",
+        "text": "So this will connect to mixture models when we see that in unsupervised learning."
+    },
+    {
+        "timestamp": "00:06:42",
+        "text": "For the near future, though, we'll concentrate mostly on simple weights, simple scalar weights on the experts, and weighted averages or weighted votes."
+    }
+]
