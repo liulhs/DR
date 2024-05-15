@@ -4,7 +4,7 @@ from pydub import AudioSegment
 from openai import OpenAI
 import re
 
-def transcribe_to_file(input_file_path, output_folder_path, model_name="whisper-1", chunk_length_ms=60000):
+def transcribe_to_file(input_file_path, output_folder_path, output_name="transcription_output", model_name="whisper-1", chunk_length_ms=60000):
     # Ensure output folder exists
     output_folder = Path(output_folder_path)
     output_folder.mkdir(parents=True, exist_ok=True)
@@ -30,7 +30,7 @@ def transcribe_to_file(input_file_path, output_folder_path, model_name="whisper-
         return f"{hours:02d}:{minutes:02d}:{seconds:02d}"
     
     json_output = []
-    txt_output_path = output_folder / "transcription_output.txt"
+    txt_output_path = output_folder / "{}.txt".format(output_name)
     
     start_time = 0
     with txt_output_path.open('w') as txt_file:
@@ -58,7 +58,7 @@ def transcribe_to_file(input_file_path, output_folder_path, model_name="whisper-
                 start_time += sentence_duration
     
     # Export JSON transcription
-    json_output_path = output_folder / "transcription_output.json"
+    json_output_path = output_folder / "{}.json".format(output_name)
     with json_output_path.open('w') as json_file:
         import json
         json.dump(json_output, json_file, indent=4)
