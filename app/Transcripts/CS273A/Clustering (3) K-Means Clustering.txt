@@ -1,0 +1,125 @@
+00:00:00 Another very popular method for clustering is the k-means algorithm, which we describe next.
+00:00:06 k-means is a simple procedure for finding clusters, which iterates between assigning the data points to clusters and updating the cluster's summarization based on the assigned data.
+00:00:13 In MATLAB, this is available as the k-means function in the Statistics Toolbox.
+00:00:20 For our notation, we'll denote data example i as x sub i.
+00:00:26 Notice I use a subscript here instead of our usual superscript.
+00:00:33 And we'll assume that there are exactly k clusters.
+00:00:40 Each cluster is described by a single center point, mu c.
+00:00:46 So here we have three clusters, mu1, mu2, and mu3.
+00:00:53 And each cluster claims a set of nearby points, here, so that the cluster is effectively defined by closeness to the cluster center.
+00:00:59 We'll also need to think about the assignment of particular data points to clusters.
+00:01:05 So we'll do this with a variable called z, indexed by i, running over the data points.
+00:01:10 So there's one assignment zi for each data point i.
+00:01:15 And z takes on values 1 through k.
+00:01:20 So z indicates which cluster the point is assigned to.
+00:01:25 So if this is point 1, then z1 tells us that this point has been assigned to cluster 1.
+00:01:30 If this is point 2, then z2 equals 3 tells us that that point is assigned to cluster 3, and so on.
+00:01:35 Now, to run k-means, we start by initializing the cluster center's mu to some locations.
+00:01:40 We'll discuss the initialization in more detail later.
+00:01:45 k-means then proceeds by iterating over two steps.
+00:01:50 First, for each data point, we'll find the closest cluster center.
+00:01:55 So zi takes on the value c that minimizes the distance between point xi and the cluster center.
+00:02:00 center, mu C.
+00:02:06 So in this plot, for each data point, we're going to decide which of these two cluster centers to assign each data point to.
+00:02:13 We can visualize that with arrows.
+00:02:20 So for instance, this data point's assignment is to cluster 1, this one also, while this data point's assignment is to cluster 2.
+00:02:26 Then we update the cluster center's mu sub C by setting mu C to the centroid, or mean, of the data that are assigned to cluster C.
+00:02:33 So SC is the set of all data points that have ZI equal to C, MC is their total number, and then mu C is simply the average of those assigned data points.
+00:02:39 Over here in B, we show that process.
+00:02:46 Once these points have been assigned to cluster 1, then cluster 1 is updated to be the centroid of those two points.
+00:02:53 These points are assigned to cluster 2, and mu 2 is moved to be
+00:02:59 centroid of those three points.
+00:03:07 We can now go back and repeat step A, finding the minimizing cluster center, the closest clusters to each data point, and then repeat step B, moving the means to be the mean of the assigned points, and so on.
+00:03:14 This procedure can be viewed as optimizing a cost function over the data, assignments, and cluster centers, which measures how much error is introduced by summarizing data point I with its cluster center that it's assigned to.
+00:03:22 So mu sub zI is the cluster center that's assigned via index zI.
+00:03:29 We measure this just with Euclidean distance.
+00:03:37 Then the algorithm is simply a coordinate descent procedure.
+00:03:44 Step A is minimizing cost function over the assignments z.
+00:03:52 If we fix the cluster center's mu sub c,
+00:03:59 You can see that only one term in the sum depends on each zi, the term corresponding to data point i.
+00:04:08 So if we minimize over zi, we can just check the distances from that point to each of the two clusters and choose the one that's smallest.
+00:04:17 Step b, then minimizes the function over the locations mu.
+00:04:25 If we fix the zis, then the terms that depend on any particular mu, say mu1, are only those terms that have the data assigned to cluster 1, so zi equal to 1.
+00:04:34 Then it's easy to show that the location of mu that minimizes the sum of squared errors is simply the centroid or mean.
+00:04:42 Then, since each step, a and b, is minimizing over some variables given the others, each step is guaranteed to decrease the cost at every step.
+00:04:51 Since the cost is decreasing and bounded below, that means it must converge.
+00:04:59 At some point, the updated means will lead us to the same assignments, which lead us to the same means, and so on.
+00:05:09 Although this procedure is guaranteed to converge, it's not guaranteed to find a global optimum of the cost function.
+00:05:19 In fact, the resulting clustering often depends quite a lot on the algorithm's initialization.
+00:05:29 So in practice, we often work by starting with several randomly chosen initializations and then running the algorithm from each, we get several different clusterings.
+00:05:39 Then we can use the cost C of each clustering to select among our results, and this gives us a better approximation to the global optimum.
+00:05:49 So for example, after one initialization and run, we might end up with this clustering here with cost 223.3. If we initialize differently and then run again, we might find a better clustering here, so slightly lower cost.
+00:05:59 212.6. And after we've run a few more with different random initializations, we might find yet a better clustering here, meaning a lower cost.
+00:06:08 This has cost 167.0. So after several such executions, we can then keep the best according to this cost function C.
+00:06:17 Given the importance of initialization to the results, there's been a fair amount of thought into how to initialize k-means.
+00:06:25 The simplest way is to initialize randomly.
+00:06:34 Usually that's done by choosing k of the data points themselves at random to be the initial cluster centers.
+00:06:42 This ensures that the cluster centers will at least be near some data, since they're actual data points, and large groups of data will probably end up getting one.
+00:06:51 But the drawback is that it may choose two points that are near each other or within the same group of data, such as has happened over here.
+00:06:59 To avoid cluster centers that are too close to each other, one option is to choose faraway points.
+00:07:06 So we could start by one randomly chosen data point, say here, to be our first cluster center.
+00:07:13 Then, we find the data point that's farthest from that data point as the next cluster center, here.
+00:07:19 At each step, we score all the data by their distance to the closest of the already selected points.
+00:07:26 Then, we choose as our next cluster center the data point that's furthest away.
+00:07:33 While this solves the issue of choosing too nearby data, it's also imperfect, as it will often choose outlier data points, so data that are very far away from all the other data.
+00:07:39 These data tend to be unusual in the data set and not very good centers.
+00:07:46 Also, the procedure is not very random.
+00:07:53 So that means that if we run k-means multiple times, we'll often get very similar initializations.
+00:07:59 lot of opportunity to improve on the quality of our overall clustering by starting with a better initialization.
+00:08:08 A nice balance is the k-means plus plus algorithm which was proposed some years ago.
+00:08:17 This technique chooses the next cluster location to be far but random from the already selected locations.
+00:08:25 So like the distance method, we score each point by its distance to the already selected clusters.
+00:08:34 But then instead of choosing the furthest point, we choose the next center randomly with probability proportional to the squared distance.
+00:08:42 So this means that data that are far away here will have higher probability, but also areas of the space that have a lot of data will also tend to have higher probability since we might choose any of those points to be a cluster center.
+00:08:51 So this procedure also has significantly more randomness than the max distance method, which helps us get diverse initializations across runs.
+00:08:59 Once we have a clustering of our data, one common issue we might run into is that we'd like to describe new points that weren't available during the clustering using our cluster centers.
+00:09:07 So these are called out-of-sample data, since they weren't in the data sample that was available during clustering.
+00:09:14 This is actually quite easy for k-means.
+00:09:22 We can just compute the cluster assignment of the new data point without updating that cluster's location.
+00:09:29 So each cluster claims a part of the space that's nearer to that cluster center than any other.
+00:09:37 So this results in a Voronoi tessellation, just like we saw in our nearest neighbor decision boundaries.
+00:09:44 In fact, we can evaluate the out-of-sample assignment using something like our k-nearest neighbor code here.
+00:09:52 After finding the means, mu, using our clustering, we can create a nearest neighbor classifier using those centers and the IDs of the clusters, and then compute the assignment by just predicting in that model.
+00:09:59 Another critical choice we run into in k-means is the value of k, the number of clusters that we try to find.
+00:10:08 So what happens if we try to choose the best value of k for this cost function here?
+00:10:17 Suppose we cluster these data with three clusters, and we do a lot of initializations and find the optimal clustering.
+00:10:25 If we then compare to what happens when we cluster with five clusters, we'll find that we reduce the total cost.
+00:10:34 So here, for example, two of the clusters, this red one has been split into two parts, and this green one has been split into two parts.
+00:10:42 And so the data in these clusters must be closer to their cluster centers than the data in these ones.
+00:10:51 If we increase k still further to say 10 clusters, this continues with the clusters growing ever smaller, and hence the cluster centers being ever closer to their associated...
+00:10:59 data points.
+00:11:05 Thus, the cost function, C, always decreases with larger K.
+00:11:10 So, if K equals M, the number of data points, the cost is actually zero.
+00:11:16 Each data point will be its own cluster center.
+00:11:21 We can see this as a model complexity issue.
+00:11:27 Choosing K, like other model selection or hyperparameter choice problems, just can't be accomplished using the training data.
+00:11:32 In fact, in this case, even testing error, using our out-of-sample procedure from a second ago, is not really meaningful, since the assignment of the test error is chosen to be the closest cluster center.
+00:11:38 So, the more cluster centers there are, the closer the nearest one will be.
+00:11:43 A typical solution is to penalize for model complexity.
+00:11:49 So, our total cost is not only the squared error of the data, but plus a term that increases with the number of clusters.
+00:11:54 So, the total error is the squared error plus a complexity term.
+00:12:00 That way, adding more clusters can actually increase the cost if adding them doesn't decrease the squared error enough to compensate for the increased complexity.
+00:12:05 So we visualize that here.
+00:12:10 Red is the squared error, which gets better with k.
+00:12:16 Green is the complexity term, which increases with k.
+00:12:21 And blue is their sum, which gets better as k increases for a while.
+00:12:27 But then, as the squared error becomes near zero, it starts to increase as the complexity keeps going up.
+00:12:32 For example, a common choice for this complexity penalty is the Bayesian Information Criterion, or BIC, penalty.
+00:12:38 So here's a simple version of that penalty.
+00:12:43 BIC is used to penalize the likelihood of a probability model over data.
+00:12:49 So to apply it here, we can interpret the cost function squared error as a likelihood of a multivariate Gaussian with a fixed variance and unknown mean.
+00:12:54 So BIC actually balances the log.
+00:13:00 of the squared error with a term that increases with k times log m over m.
+00:13:10 So what we find is that the penalty here increases with the number of clusters k, but decreases with the number of data m, so that the more data we have, the more clusters we're able to pick.
+00:13:20 So this penalty is a rather simple version of the probabilistic model plus BIC.
+00:13:30 For a more precise and detailed version of this approach, along with tricks for computational efficiency and other things, you can see, for example, a paper called x-means from a KDD conference a few years back.
+00:13:40 In summary, the k-means clustering approach describes each cluster using a single point in the data feature space called the cluster center.
+00:13:50 After initializing these locations, we proceed by updating the assignment of each data point to its closest center.
+00:14:00 Then, moving the cluster center to be as close as possible to all the assigned data.
+00:14:08 This can be viewed as a coordinate descent procedure on a mean squared error criterion.
+00:14:17 However, this optimization process is prone to local optima, so initialization can be very important.
+00:14:25 By starting from several randomized initializations, we can improve our representation by selecting the final clustering that has lowest cost.
+00:14:34 It's also easy to apply the cluster definitions to out-of-sample data by just applying the assignment procedure to new data points.
+00:14:42 Choosing the number of clusters K can be very difficult and is a model selection problem, since increasing K always reduces the K-means cost function.
+00:14:51 By adding a complexity penalty like BIC that increases with the number of clusters K, we can try to trade off a relative improvement in the mean squared error and weigh whether it was worth the increase in model complexity from increasing K.
+00:15:00 you

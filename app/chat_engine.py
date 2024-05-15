@@ -8,7 +8,7 @@ from llama_index.llms.openai import OpenAI
 Settings.embed_model = HuggingFaceEmbedding(
     model_name="BAAI/bge-m3"
 )
-storage_context = StorageContext.from_defaults(persist_dir="./index/video")
+storage_context = StorageContext.from_defaults(persist_dir="./app/index")
 index = load_index_from_storage(storage_context)
 memory = ChatMemoryBuffer.from_defaults(token_limit=50000)
 
