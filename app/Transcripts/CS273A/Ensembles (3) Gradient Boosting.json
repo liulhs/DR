@@ -1,0 +1,386 @@
+[
+    {
+        "timestamp": "00:00:00",
+        "text": "Boosting is another ensemble technique for creating collections of predictors, and gradient boosting is a technique for producing regression models consisting of collections of regressors."
+    },
+    {
+        "timestamp": "00:00:12",
+        "text": "An ensemble is a collection of predictors whose predictions are combined, usually by some sort of weighted average or vote, in order to provide an overall prediction that takes its guidance from the collection itself."
+    },
+    {
+        "timestamp": "00:00:24",
+        "text": "Boosting is an ensemble technique in which learners are learned sequentially, with early learners fitting simple models to the data, and then analyzing the data for errors."
+    },
+    {
+        "timestamp": "00:00:36",
+        "text": "Those errors identify problems or particular instances of the data that are the difficult or hard-to-fit examples, and later models focus primarily on those examples, trying to get them right."
+    },
+    {
+        "timestamp": "00:00:48",
+        "text": "In the end, all the models are given weight, and the set is combined into some"
+    },
+    {
+        "timestamp": "00:01:00",
+        "text": "overall predictors."
+    },
+    {
+        "timestamp": "00:01:05",
+        "text": "So boosting is a method of converting a sequence of weak learners into a very complex predictor."
+    },
+    {
+        "timestamp": "00:01:10",
+        "text": "It's a way of increasing the complexity of a particular model."
+    },
+    {
+        "timestamp": "00:01:15",
+        "text": "Initial learners tend to be very simple and then the weighted combination can grow more and more complex as learners are added."
+    },
+    {
+        "timestamp": "00:01:20",
+        "text": "Gradient boosting is an instantiation of this idea for regression."
+    },
+    {
+        "timestamp": "00:01:25",
+        "text": "The idea is to repeatedly follow this procedure."
+    },
+    {
+        "timestamp": "00:01:30",
+        "text": "We learn a simple regression predictor of our data."
+    },
+    {
+        "timestamp": "00:01:35",
+        "text": "Then we compute the error residual, the amount the error per data point in our predictions."
+    },
+    {
+        "timestamp": "00:01:40",
+        "text": "And then we learn a new model to try to predict this error residual."
+    },
+    {
+        "timestamp": "00:01:45",
+        "text": "So here's an example with red data on the left indicating the motorcycle data set."
+    },
+    {
+        "timestamp": "00:01:50",
+        "text": "So it has a fairly complex shape with regard to the feature time."
+    },
+    {
+        "timestamp": "00:01:55",
+        "text": "And here we fit an extreme"
+    },
+    {
+        "timestamp": "00:02:00",
+        "text": "simple predictor."
+    },
+    {
+        "timestamp": "00:02:06",
+        "text": "So this is a one-layer decision tree used for regression."
+    },
+    {
+        "timestamp": "00:02:13",
+        "text": "So it partitions the space into two parts, thresholding at some particular value, predicting a constant value on the left and a constant value on the right."
+    },
+    {
+        "timestamp": "00:02:20",
+        "text": "Obviously this model is too simple to fit the shape of the data, and so there are a lot of errors."
+    },
+    {
+        "timestamp": "00:02:26",
+        "text": "We make errors over here where the prediction is too low, errors here where the prediction is too high, and so forth."
+    },
+    {
+        "timestamp": "00:02:33",
+        "text": "And if we compute that error on a data-by-data basis, the error residual, it becomes a function plotted over here in the green on the right."
+    },
+    {
+        "timestamp": "00:02:39",
+        "text": "Then that function can further be predicted by the model, by a new model."
+    },
+    {
+        "timestamp": "00:02:46",
+        "text": "Again fitting a model from our simple class of predictors, we get a new prediction of these error residuals."
+    },
+    {
+        "timestamp": "00:02:53",
+        "text": "So here we've predicted a region where the error residuals were quite high and fairly constant, and then partitioned into"
+    },
+    {
+        "timestamp": "00:02:59",
+        "text": "two parts, and on the right-hand region we've predicted a slightly negative value, producing what becomes the best one-layer decision tree regressor for the error residuals."
+    },
+    {
+        "timestamp": "00:03:11",
+        "text": "Adding these two predictors together gives a new function, which is slightly more complex than a single-layer decision tree."
+    },
+    {
+        "timestamp": "00:03:23",
+        "text": "So here in the far left-hand side, we see that the combination of the two predictors has done a better job than the first predictor alone, then it drops down and then it goes back up."
+    },
+    {
+        "timestamp": "00:03:35",
+        "text": "So now we have a function that has two transition points and fits the data better than the original single-layer decision tree did."
+    },
+    {
+        "timestamp": "00:03:47",
+        "text": "Again, we take this function and we can compute its error residual, meaning the error for each data point, and we can plot that over here on the left."
+    },
+    {
+        "timestamp": "00:03:59",
+        "text": "in green."
+    },
+    {
+        "timestamp": "00:04:06",
+        "text": "So now we have a new error residual function, and we can again try to fit that using a new model."
+    },
+    {
+        "timestamp": "00:04:13",
+        "text": "We fit another single-layer decision tree, and we produce the following model, slightly negative over here on the left, slightly positive over here on the right, the best single-layer decision stump regressor for this error residual."
+    },
+    {
+        "timestamp": "00:04:19",
+        "text": "Adding this into the set will produce a slightly more complex function, regressor, being the sum of now three decision stumps, and thus possibly having three transition points, and so on."
+    },
+    {
+        "timestamp": "00:04:26",
+        "text": "So here's the sequence of models that we might learn, and their error residuals."
+    },
+    {
+        "timestamp": "00:04:33",
+        "text": "Over here is the first decision stump regressor."
+    },
+    {
+        "timestamp": "00:04:40",
+        "text": "It's error residual."
+    },
+    {
+        "timestamp": "00:04:46",
+        "text": "Obviously it's too simple of a model to do a very good job of fitting this function."
+    },
+    {
+        "timestamp": "00:04:53",
+        "text": "Once we fit the error residual, we add its model in, and we get this model, which is now slightly negative."
+    },
+    {
+        "timestamp": "00:05:00",
+        "text": "slightly more complex, slightly better able to fit the data."
+    },
+    {
+        "timestamp": "00:05:06",
+        "text": "Again, computing its error residual, we get this green function down here."
+    },
+    {
+        "timestamp": "00:05:12",
+        "text": "Fitting it to a single-layer decision tree regressor, we get another function."
+    },
+    {
+        "timestamp": "00:05:18",
+        "text": "Adding it in, we get a slightly more complex shape, a new error residual."
+    },
+    {
+        "timestamp": "00:05:24",
+        "text": "Fit it to a simple model, add it in, get a slightly more complex shape."
+    },
+    {
+        "timestamp": "00:05:30",
+        "text": "As we proceed, we move from the left where we have a single decision stump to the right where we have the sum of five decision stumps, and our function is getting slightly more complicated at each step."
+    },
+    {
+        "timestamp": "00:05:36",
+        "text": "While its accuracy is getting slightly better to the training data at each step as well."
+    },
+    {
+        "timestamp": "00:05:42",
+        "text": "This algorithm is an instance of gradient boosting."
+    },
+    {
+        "timestamp": "00:05:48",
+        "text": "It's called gradient boosting because it's related to a gradient ascent sort of procedure."
+    },
+    {
+        "timestamp": "00:05:54",
+        "text": "First, we make a set of predictions."
+    },
+    {
+        "timestamp": "00:06:00",
+        "text": "one for each data point."
+    },
+    {
+        "timestamp": "00:06:05",
+        "text": "So y hat i is our prediction for data point i."
+    },
+    {
+        "timestamp": "00:06:10",
+        "text": "We can calculate the error in our predictions."
+    },
+    {
+        "timestamp": "00:06:16",
+        "text": "Let's call it j."
+    },
+    {
+        "timestamp": "00:06:21",
+        "text": "And j just relates the accuracy of y hat in modeling y."
+    },
+    {
+        "timestamp": "00:06:27",
+        "text": "For mean squared error, which is what my previous example was focused on, this cost function is the sum over the data points of y i minus y hat i squared."
+    },
+    {
+        "timestamp": "00:06:32",
+        "text": "And so now we can try to think about adjusting our prediction y hat to try to reduce this error."
+    },
+    {
+        "timestamp": "00:06:38",
+        "text": "So the gradient of j with respect to the predictions y hat is just solved by taking the derivative with respect to all the predictions."
+    },
+    {
+        "timestamp": "00:06:43",
+        "text": "And a gradient ascent on the predictions would look like adjusting y hat to be its old value plus some step size alpha times the gradient f."
+    },
+    {
+        "timestamp": "00:06:49",
+        "text": "So f i is the gradient of j."
+    },
+    {
+        "timestamp": "00:06:54",
+        "text": "And if we take the derivative of this mean squared error function, we find that it's."
+    },
+    {
+        "timestamp": "00:06:59",
+        "text": "take the derivative of the mean squared error function with respect to the prediction y-hat-i, we find that it is simply two times the difference y-i minus y-hat-i."
+    },
+    {
+        "timestamp": "00:07:08",
+        "text": "And this is precisely the error residual."
+    },
+    {
+        "timestamp": "00:07:17",
+        "text": "So the example I gave before, where we're computing an estimate y-hat, we're computing a model that we fit to its error residual."
+    },
+    {
+        "timestamp": "00:07:25",
+        "text": "You can think of that as fitting a model to this gradient function."
+    },
+    {
+        "timestamp": "00:07:34",
+        "text": "And then we take a step, alpha, by adding it together."
+    },
+    {
+        "timestamp": "00:07:42",
+        "text": "So each learner is estimating this gradient del J, and a gradient descent on the squared error takes a sequence of steps to try to reduce J."
+    },
+    {
+        "timestamp": "00:07:51",
+        "text": "So we'll estimate the gradient and take a step of size alpha."
+    },
+    {
+        "timestamp": "00:07:59",
+        "text": "in reducing that gradient by adding in the new predictor of the gradient to our y hat."
+    },
+    {
+        "timestamp": "00:08:06",
+        "text": "So here's pseudocode for the procedure, again specialized to mean squared error."
+    },
+    {
+        "timestamp": "00:08:13",
+        "text": "Usually we start off with the extremely simple predictor of a constant value."
+    },
+    {
+        "timestamp": "00:08:19",
+        "text": "So the best mean squared error predictor of y with a constant value is simply its mean."
+    },
+    {
+        "timestamp": "00:08:26",
+        "text": "And so we start off by predicting mu, which is an extremely simple predictor."
+    },
+    {
+        "timestamp": "00:08:33",
+        "text": "We calculate its error residual y minus mu."
+    },
+    {
+        "timestamp": "00:08:39",
+        "text": "Then we run from 1 to the number of boosted predictors that we'd like to learn."
+    },
+    {
+        "timestamp": "00:08:46",
+        "text": "Each learner we do by training a regression model from the features x to our error residual dy."
+    },
+    {
+        "timestamp": "00:08:53",
+        "text": "And we take some step size alpha k, which I'll discuss in just a moment."
+    },
+    {
+        "timestamp": "00:08:59",
+        "text": "This becomes the weight of that learner in the model."
+    },
+    {
+        "timestamp": "00:09:06",
+        "text": "Then, we update our predictions."
+    },
+    {
+        "timestamp": "00:09:13",
+        "text": "So, our new prediction consists of a sum of learners, and dy already captures most of those."
+    },
+    {
+        "timestamp": "00:09:19",
+        "text": "So, we have only to subtract the new addition of our predictions."
+    },
+    {
+        "timestamp": "00:09:26",
+        "text": "So, we subtract our step size alpha times our new learner of the current error residual, and compute a new error residual, dy."
+    },
+    {
+        "timestamp": "00:09:33",
+        "text": "That's the difference between what we were trying to predict, the old error residual, and what we were able to predict with this learner."
+    },
+    {
+        "timestamp": "00:09:39",
+        "text": "So, alpha k is the step size of this particular learner, and you can think of it as a learning rate."
+    },
+    {
+        "timestamp": "00:09:46",
+        "text": "So, often the choice is simply to set it equal to 1."
+    },
+    {
+        "timestamp": "00:09:53",
+        "text": "What one typically finds is that if alpha is large, like 1, the system will converge very rapidly."
+    },
+    {
+        "timestamp": "00:09:59",
+        "text": "to a model that's unable to get any better, meaning its error residual can't be modeled by the class of predictors anymore."
+    },
+    {
+        "timestamp": "00:10:11",
+        "text": "On the other hand, choosing a smaller value of alpha will tend to use a lot more classifiers because it's taking smaller steps and so it needs more steps to cover the distance, but often it can produce a better prediction because it follows this gradient in a smoother way."
+    },
+    {
+        "timestamp": "00:10:23",
+        "text": "So if you choose a small alpha, you tend to get better results, but computationally it's more difficult because you'll need to train more models and you'll need to use them in prediction time."
+    },
+    {
+        "timestamp": "00:10:35",
+        "text": "And when it comes time to predict, you simply take a prediction vector, you run through all of your boosted predictors and your overall prediction is the weighted sum of those predictions."
+    },
+    {
+        "timestamp": "00:10:47",
+        "text": "So here we predict something that is the sum over k of."
+    },
+    {
+        "timestamp": "00:10:59",
+        "text": "are weight alpha k times the predictor of that instance, or rather the kth predictor."
+    },
+    {
+        "timestamp": "00:11:09",
+        "text": "In summary, gradient boosting is a particular kind of ensemble method that uses weighted sums of regressors to produce an overall better regressors."
+    },
+    {
+        "timestamp": "00:11:19",
+        "text": "It works by using a very simple regression model to begin with, and then subsequent models are trained to predict the errors made by the model so far."
+    },
+    {
+        "timestamp": "00:11:28",
+        "text": "So the models are trained sequentially, and slowly focus in on the difficult to predict models."
+    },
+    {
+        "timestamp": "00:11:38",
+        "text": "The overall prediction is then given a weighted sum of the collection, so that each predictor is evaluated and summed together with a weight given by the step size alpha."
+    }
+]

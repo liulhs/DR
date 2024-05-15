@@ -1,0 +1,270 @@
+[
+    {
+        "timestamp": "00:00:00",
+        "text": "Here we'll look at a simple variant on nearest neighbor methods called k-nearest neighbors."
+    },
+    {
+        "timestamp": "00:00:10",
+        "text": "For the k-nearest neighbor methods, instead of finding the single training point that's closest to our point of interest x, we instead find the k-nearest data points."
+    },
+    {
+        "timestamp": "00:00:20",
+        "text": "In other words, we rank all of the training data points according to their distance from the new point x, and we just take the k that are closest."
+    },
+    {
+        "timestamp": "00:00:30",
+        "text": "Then, using these k-closest points, we can use them to make a prediction."
+    },
+    {
+        "timestamp": "00:00:40",
+        "text": "For regression, we usually just average the y-values, i.e., the target values associated with those k-closest examples."
+    },
+    {
+        "timestamp": "00:00:50",
+        "text": "For classification, the y-values are discrete, so the ranking gives the k-closest and a set of k class labels associated with them, and we usually use a majority vote method, so we pick the class label that's most common from that set."
+    },
+    {
+        "timestamp": "00:01:00",
+        "text": "For problems with only two classes, like binary classification problems, if we choose k to be odd, then there will never be any ties."
+    },
+    {
+        "timestamp": "00:01:10",
+        "text": "Otherwise, we can choose a somewhat arbitrary tie-breaking technique."
+    },
+    {
+        "timestamp": "00:01:20",
+        "text": "Note that training for k-nearest neighbor methods is trivial."
+    },
+    {
+        "timestamp": "00:01:30",
+        "text": "There's no training procedure at all."
+    },
+    {
+        "timestamp": "00:01:40",
+        "text": "We just store all of the training data in a database, and whenever a test point arrives, we search it to find the nearest points."
+    },
+    {
+        "timestamp": "00:01:50",
+        "text": "Like the one-nearest neighbor classifier, the decision boundary of a k-nearest neighbor classifier is piecewise linear, since, again, if we're anywhere in this feature space, our decision can change only when the set of nearest training examples also changes, which must be at the midpoint between some member of the old set of closest points and the new point that we'll be joining."
+    },
+    {
+        "timestamp": "00:02:00",
+        "text": "As we increase k, it tends to simplify the decision function and simplify the decision boundary in some sense."
+    },
+    {
+        "timestamp": "00:02:08",
+        "text": "You can see that for k equals 1, we'll carve out, for example, little regions to surround each training example."
+    },
+    {
+        "timestamp": "00:02:17",
+        "text": "As we go to higher values of k, those regions become less and less noticeable."
+    },
+    {
+        "timestamp": "00:02:25",
+        "text": "As k increases further, those regions become smaller and smaller, and the decision boundary, while technically not any more simple to describe, takes on a simpler-looking shape."
+    },
+    {
+        "timestamp": "00:02:34",
+        "text": "So by k equals 7, this region of blue here has completely disappeared, and the decision boundary here is starting to take on a smoother, simpler form."
+    },
+    {
+        "timestamp": "00:02:42",
+        "text": "By k equals 25, the decision boundary is quite simple indeed."
+    },
+    {
+        "timestamp": "00:02:51",
+        "text": "Another thing that's visible from these pictures..."
+    },
+    {
+        "timestamp": "00:03:00",
+        "text": "is the change in the training error rate as we increase the value of k."
+    },
+    {
+        "timestamp": "00:03:08",
+        "text": "When we start off with a small k, say k equals 1, we can see that each one of the data points has a little region carved around it that predicts its color."
+    },
+    {
+        "timestamp": "00:03:17",
+        "text": "By the time we get to a high k, like k equals 25, that's no longer true."
+    },
+    {
+        "timestamp": "00:03:25",
+        "text": "Several of the red points have blue being predicted, and several of the blue points have red being predicted."
+    },
+    {
+        "timestamp": "00:03:34",
+        "text": "So what's happening is, as a function of k, as we increase k, the error on our training data is starting to increase."
+    },
+    {
+        "timestamp": "00:03:42",
+        "text": "In fact, it's easy to see that at k equals 1, all of the training data will be exactly predicted, since if we pick any training data to evaluate at, its closest point in the training set will be itself, and will predict its y value."
+    },
+    {
+        "timestamp": "00:03:51",
+        "text": "So at this point, in this point of the curve as k increases, we've actually memorized the data completely."
+    },
+    {
+        "timestamp": "00:04:00",
+        "text": "regurgitating any particular data point and its correct label."
+    },
+    {
+        "timestamp": "00:04:06",
+        "text": "However, of course, this isn't a complete story."
+    },
+    {
+        "timestamp": "00:04:13",
+        "text": "What we're really interested in is how well these predictors work on new data that they haven't seen before."
+    },
+    {
+        "timestamp": "00:04:20",
+        "text": "If we look at that, we see a pretty different looking curve."
+    },
+    {
+        "timestamp": "00:04:26",
+        "text": "The error on test data follows a different shape entirely."
+    },
+    {
+        "timestamp": "00:04:33",
+        "text": "We see that at k equals 1, it might be high, but it tends to decrease with k until some point at which it begins to increase again."
+    },
+    {
+        "timestamp": "00:04:40",
+        "text": "So if we want to select the best value of k for the purposes of future data, we should pick the minimum of this green curve, the point at which the test data's error is lowest."
+    },
+    {
+        "timestamp": "00:04:46",
+        "text": "This is an example of the complexity and overfitting tradeoff that we discussed in the introduction."
+    },
+    {
+        "timestamp": "00:04:53",
+        "text": "In particular, a very complex model might be able to predict all of the training points well, but may not generalize very well to new data."
+    },
+    {
+        "timestamp": "00:05:00",
+        "text": "data points."
+    },
+    {
+        "timestamp": "00:05:07",
+        "text": "Here we see that effect, where at k equals 1, we can perfectly memorize all of the training examples, and our decision function is very complex."
+    },
+    {
+        "timestamp": "00:05:15",
+        "text": "It carves out a region of a particular color around every single data point."
+    },
+    {
+        "timestamp": "00:05:22",
+        "text": "If we increase k, that decision function becomes less complex looking, and in fact another extreme point is by the time we pick k equals m, the full size of the data set, our majority vote rule will always predict whatever class is in the majority in the training set, meaning that every single point in all of space will be predicted with the same value."
+    },
+    {
+        "timestamp": "00:05:30",
+        "text": "So this is about as simple of a function as you could possibly get."
+    },
+    {
+        "timestamp": "00:05:37",
+        "text": "So for the purposes of k nearest neighbor, k equals 1 is as complex of a function as you can choose, and k equals m simplifies."
+    },
+    {
+        "timestamp": "00:05:45",
+        "text": "So increasing k simplifies up until k equals m."
+    },
+    {
+        "timestamp": "00:05:52",
+        "text": "The way to choose k is..."
+    },
+    {
+        "timestamp": "00:06:00",
+        "text": "to use some sort of validation or test data so that you can evaluate this green curve and find out what value of k is going to generalize best to the future."
+    },
+    {
+        "timestamp": "00:06:08",
+        "text": "A few theoretical considerations about the k-nearest neighbor methods."
+    },
+    {
+        "timestamp": "00:06:17",
+        "text": "So as I just mentioned, as k increases, the effect is that every prediction at any particular point is averaging over a larger set of neighbors."
+    },
+    {
+        "timestamp": "00:06:25",
+        "text": "And that makes the decision boundary more smooth and simple looking."
+    },
+    {
+        "timestamp": "00:06:34",
+        "text": "Similarly, as n increases, our ability to have complex functions also increases, since the complexity of our boundary is a function of the number of data points."
+    },
+    {
+        "timestamp": "00:06:42",
+        "text": "So typically, as n increases, the best value of k to choose tends to increase as well, but usually more slowly than n, usually something like log n."
+    },
+    {
+        "timestamp": "00:06:51",
+        "text": "Another nice theoretical result about nearest neighbor methods is for the..."
+    },
+    {
+        "timestamp": "00:07:00",
+        "text": "for the simplest nearest neighbor method, the k equals one nearest neighbor method, for a sufficiently large number of data points, which may be not achievable in practice."
+    },
+    {
+        "timestamp": "00:07:10",
+        "text": "But if you have data approaching infinity, it turns out that the error of the k nearest neighbor or the nearest neighbor classifier in this case is at most two times the best possible error of any predictor."
+    },
+    {
+        "timestamp": "00:07:20",
+        "text": "So if you have enough data, the k nearest neighbor or rather the single nearest neighbor method might not do so badly."
+    },
+    {
+        "timestamp": "00:07:30",
+        "text": "K nearest neighbor methods are very highly studied, have been around for a long time, and so there are many variations and extensions."
+    },
+    {
+        "timestamp": "00:07:40",
+        "text": "A very simple one that I'll mention here are weighted distance measures, where perhaps some of the features might be more important or less important for the prediction process."
+    },
+    {
+        "timestamp": "00:07:50",
+        "text": "So if features are irrelevant, we might want to give them no weight in the distance calculation."
+    },
+    {
+        "timestamp": "00:08:00",
+        "text": "important and small differences in that feature are very important in determining how similar two things is, we might want to give them higher weight."
+    },
+    {
+        "timestamp": "00:08:08",
+        "text": "So, a simple definition might be to use a weighted Euclidean distance."
+    },
+    {
+        "timestamp": "00:08:17",
+        "text": "There are also a number of works on using fast methods so that the data size for nearest neighbor methods can be extremely large."
+    },
+    {
+        "timestamp": "00:08:25",
+        "text": "Since the amount of time that you spend searching for the nearest neighbor has to be done for every prediction and depends on the size of the training set."
+    },
+    {
+        "timestamp": "00:08:34",
+        "text": "If you want to use a very large training set, you need to use some algorithmic tricks to try to speed this up."
+    },
+    {
+        "timestamp": "00:08:42",
+        "text": "So, there are things like approximate hashing methods and spatially oriented data structures to help you find the k-nearest neighbors quickly."
+    },
+    {
+        "timestamp": "00:08:51",
+        "text": "So, in summary, k-nearest neighbor methods use the k-nearest examples to make predictions."
+    },
+    {
+        "timestamp": "00:09:00",
+        "text": "Typically, in classification, we use a majority vote out of those k-nearest neighbors, and in regression, we use an average or possibly a weighted average to combine them."
+    },
+    {
+        "timestamp": "00:09:13",
+        "text": "For classifiers, what we find is that the decision boundary that's induced by k-nearest neighbors is piecewise linear, and I showed a method of calculating it."
+    },
+    {
+        "timestamp": "00:09:26",
+        "text": "And we saw how k affects the process of overfitting, so that as k increases, the decision function becomes simpler, so that increasing k can be used to control overfitting."
+    },
+    {
+        "timestamp": "00:09:40",
+        "text": "In order to find the best k, we need to use some kind of data that the trainer hasn't seen, so we need to use validation data that we've split off beforehand or a test dataset to try to estimate this test error and use that to select the value of k that'll perform best in the future."
+    }
+]

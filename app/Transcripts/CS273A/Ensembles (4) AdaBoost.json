@@ -1,0 +1,602 @@
+[
+    {
+        "timestamp": "00:00:00",
+        "text": "Boosting uses ensemble techniques to create a sequence of increasingly complex predictors out of building blocks made out of very simple predictors."
+    },
+    {
+        "timestamp": "00:00:10",
+        "text": "Boosting trains models by sequentially training a new simple model based on the errors of the previous model."
+    },
+    {
+        "timestamp": "00:00:20",
+        "text": "So we start off by learning a very simple predictor and then evaluate its errors and focus the next predictor on getting these examples right."
+    },
+    {
+        "timestamp": "00:00:30",
+        "text": "So this procedure tends to discover the examples and data points that are hard to predict and focuses later classifiers on predicting these examples better."
+    },
+    {
+        "timestamp": "00:00:40",
+        "text": "In the end we combine the whole set uses some weighted combination and this is a way of scaling up complexity."
+    },
+    {
+        "timestamp": "00:00:50",
+        "text": "So each individual predictor tends to be very simple and by combining many of these weak learners that are not able to learn complex functions we can convert them all into an overall much more complex classifier."
+    },
+    {
+        "timestamp": "00:01:00",
+        "text": "So, here's an example of boosting for classification."
+    },
+    {
+        "timestamp": "00:01:06",
+        "text": "Suppose we have the following data set, which has some plus one class entries in red, some minus one class entries in blue."
+    },
+    {
+        "timestamp": "00:01:12",
+        "text": "We learn a classifier for these data, but we restrict ourselves to an extremely simple kind of classifier, let's say a decision stump, so a one-level decision tree."
+    },
+    {
+        "timestamp": "00:01:18",
+        "text": "So, we learn this decision stump, which splits on X2 at this point."
+    },
+    {
+        "timestamp": "00:01:24",
+        "text": "This gets most of the points right, but it gets these two negative points wrong and this positive point wrong."
+    },
+    {
+        "timestamp": "00:01:30",
+        "text": "So what we'll do is we'll focus the next trainer on those."
+    },
+    {
+        "timestamp": "00:01:36",
+        "text": "The best such classifier in this extremely simple class is the following."
+    },
+    {
+        "timestamp": "00:01:42",
+        "text": "So we split on X2 at this point, and this gets many of the data right, but not all of them."
+    },
+    {
+        "timestamp": "00:01:48",
+        "text": "In particular, it makes three mistakes, two minuses over here, and one plus right there."
+    },
+    {
+        "timestamp": "00:01:54",
+        "text": "These are the data we'll focus on next for the next"
+    },
+    {
+        "timestamp": "00:02:00",
+        "text": "classifier."
+    },
+    {
+        "timestamp": "00:02:06",
+        "text": "We increase the weights of these points, the importance of getting them right in the classifier."
+    },
+    {
+        "timestamp": "00:02:12",
+        "text": "Now we have a new training data set which consists of the same points as originally, but now we have weights assigned to these points."
+    },
+    {
+        "timestamp": "00:02:18",
+        "text": "So here I've indicated those visually by the size of the indicators."
+    },
+    {
+        "timestamp": "00:02:24",
+        "text": "So these smaller pluses and smaller minuses are less important for us to get right, while the larger points, the large plus and the larger minuses, are more important."
+    },
+    {
+        "timestamp": "00:02:30",
+        "text": "We now train another classifier of the same kind, so a very simple decision stump, but we train it to try to get the weighted error to be low."
+    },
+    {
+        "timestamp": "00:02:36",
+        "text": "So here's the best decision stump that we find."
+    },
+    {
+        "timestamp": "00:02:42",
+        "text": "Again, we see that it gets a lot of points right."
+    },
+    {
+        "timestamp": "00:02:48",
+        "text": "In particular, it tries to get these weighted points more right."
+    },
+    {
+        "timestamp": "00:02:54",
+        "text": "So here we've learned something that, unlike the first data set, the first prediction over here is now focused on getting..."
+    },
+    {
+        "timestamp": "00:03:00",
+        "text": "say, those three points correct."
+    },
+    {
+        "timestamp": "00:03:08",
+        "text": "It also happens to get all of those correct, but is willing to make a mistake on three small minuses, as opposed to the, say, two large minuses that we got wrong in the first step."
+    },
+    {
+        "timestamp": "00:03:17",
+        "text": "Again, we identify the data points where we've made a mistake, and we increase their weight for the next round, decreasing the weights of the ones we get right."
+    },
+    {
+        "timestamp": "00:03:25",
+        "text": "Since we got these points correct, their weight's gone down."
+    },
+    {
+        "timestamp": "00:03:34",
+        "text": "Since we got these pluses correct, their weight's gone down even further, and these points, which got smaller in the first step, have now gotten larger again."
+    },
+    {
+        "timestamp": "00:03:42",
+        "text": "We now train another model of the same simple type to try to predict these weighted data points with low weighted error."
+    },
+    {
+        "timestamp": "00:03:51",
+        "text": "Again, this classifier is focused primarily on getting the larger data points right, and thus it will be slightly different than the previous ones, focusing on getting, say, this red plus and those three minuses correct, and being willing to perhaps make a mistake on these."
+    },
+    {
+        "timestamp": "00:04:00",
+        "text": "for very small red pluses."
+    },
+    {
+        "timestamp": "00:04:12",
+        "text": "Although we haven't talked about minimizing weighted error, it's not particularly different than the unweighted error we've minimized in the past."
+    },
+    {
+        "timestamp": "00:04:24",
+        "text": "In particular, for algorithms that directly minimize a cost function, like linear classifiers and others, instead of an unweighted sum, where each term Ji corresponds to some cost function on data point I, and we sum those up and take their average, we might have a weighted average where we have weights Wi, which in the unweighted case, simply correspond to one over N for all I, but in this case might correspond to different values of W."
+    },
+    {
+        "timestamp": "00:04:36",
+        "text": "And these terms weight the cost function for point I, and tell us which data points are more important to minimize error or less important."
+    },
+    {
+        "timestamp": "00:04:48",
+        "text": "For algorithms that are not direct minimizations, like decision trees, so forth, we can simply modify the techniques."
+    },
+    {
+        "timestamp": "00:05:00",
+        "text": "had before to now take weights."
+    },
+    {
+        "timestamp": "00:05:08",
+        "text": "So for instance, in the decision tree, we might use a weighted impurity score where we still calculate the entropy, but instead of calculating the entropy of the unweighted fraction of data in one class or another, we define, for instance, the probability of a class plus 1 to be the total weight of data in class plus 1, and class minus 1 have the total weight of data in class minus 1."
+    },
+    {
+        "timestamp": "00:05:17",
+        "text": "And that will still define a probability distribution over classes as long as the weights are forced to sum to 1."
+    },
+    {
+        "timestamp": "00:05:25",
+        "text": "And we can still take that as a probability and define an impurity score, h of p, which we can then use to score information gain and so forth."
+    },
+    {
+        "timestamp": "00:05:34",
+        "text": "In the end, each of these classifiers is assigned a weight, which we'll describe in a moment."
+    },
+    {
+        "timestamp": "00:05:42",
+        "text": "And their weighted combination becomes an overall combined predictor."
+    },
+    {
+        "timestamp": "00:05:51",
+        "text": "Since we're predicting plus or minus 1, we simply."
+    },
+    {
+        "timestamp": "00:06:00",
+        "text": "add up the weighted sum of the predictions and we check its sign."
+    },
+    {
+        "timestamp": "00:06:07",
+        "text": "So if the sign of the weighted sum is positive, we predict plus one."
+    },
+    {
+        "timestamp": "00:06:15",
+        "text": "If the sign is negative, we predict minus one."
+    },
+    {
+        "timestamp": "00:06:22",
+        "text": "When we do this, we find that the combination of several extremely simple models, decision stumps, produces an overall decision region that is more complex."
+    },
+    {
+        "timestamp": "00:06:30",
+        "text": "So here, this weighted combination has managed to carve out a shape, a region to predict plus one and minus one in, that is more complex than any simple decision stump could have."
+    },
+    {
+        "timestamp": "00:06:37",
+        "text": "The classic example of boosting for classification is the AdaBoost, or adaptive boosting algorithm."
+    },
+    {
+        "timestamp": "00:06:45",
+        "text": "AdaBoost trains a series of models, say n-boost models sequentially, using a weighted trainer."
+    },
+    {
+        "timestamp": "00:06:52",
+        "text": "So we can use any black box machine learning algorithm that we would like, as long as it's able to accept."
+    },
+    {
+        "timestamp": "00:07:00",
+        "text": "a weighted collection of training points and try to minimize the weighted error."
+    },
+    {
+        "timestamp": "00:07:06",
+        "text": "So here, when we train classifier I, we train it on not just a data set X with targets Y, but we have a vector of weights that tell us how important it is to get that particular data point right."
+    },
+    {
+        "timestamp": "00:07:13",
+        "text": "When we start off, we set all the weights to uniform."
+    },
+    {
+        "timestamp": "00:07:20",
+        "text": "And as we go on, these weights evolve to tell us which points should be focused on by the next learner."
+    },
+    {
+        "timestamp": "00:07:26",
+        "text": "We train our model to try to minimize the weighted error, and then we compute what that model predicts for us."
+    },
+    {
+        "timestamp": "00:07:33",
+        "text": "So Y hat is the predictions of model I, and then we check to see which data points have been gotten wrong by this predictor."
+    },
+    {
+        "timestamp": "00:07:40",
+        "text": "So we check for all the data points where Y is not equal to Y hat, and we compute an error vector that's the weighted sum error."
+    },
+    {
+        "timestamp": "00:07:46",
+        "text": "So weights is a vector of weights on the data points."
+    },
+    {
+        "timestamp": "00:07:53",
+        "text": "This is a vector of zeros and ones"
+    },
+    {
+        "timestamp": "00:08:00",
+        "text": "us whether we got that point wrong."
+    },
+    {
+        "timestamp": "00:08:06",
+        "text": "And so e will be the sum, the vector product of those things."
+    },
+    {
+        "timestamp": "00:08:13",
+        "text": "So the sum of the weighted errors."
+    },
+    {
+        "timestamp": "00:08:20",
+        "text": "We compute our weight alpha i to be one half times the log odds ratio of that error."
+    },
+    {
+        "timestamp": "00:08:26",
+        "text": "And we compute a new weight vector."
+    },
+    {
+        "timestamp": "00:08:33",
+        "text": "So we update the weight vector for the data by multiplying it by e to the minus alpha i times y times y hat."
+    },
+    {
+        "timestamp": "00:08:40",
+        "text": "So y times y hat, since these classes are plus and minus one, if we've gotten the data correct, we've made a correct prediction, y and y hat will be the same sign, and this will be positive."
+    },
+    {
+        "timestamp": "00:08:46",
+        "text": "And so e to the minus alpha i, alpha will be a, will be a positive number as well."
+    },
+    {
+        "timestamp": "00:08:53",
+        "text": "So e to the minus alpha i will be, alpha i, y, y hat will be."
+    },
+    {
+        "timestamp": "00:09:00",
+        "text": "be a positive number and e to the minus it will be a small number."
+    },
+    {
+        "timestamp": "00:09:10",
+        "text": "On the other hand if y and y hat are of different classes their sign will be opposite and so this will be a positive number and so e to the positive number will be a large number so we'll up weight things."
+    },
+    {
+        "timestamp": "00:09:20",
+        "text": "So we update the weights increasing the weights of anything where y is not equal to y hat and decreasing the weight of things where y does equal y hat and then we normalize the weights to sum to one because we want to have a normalized collection of weights."
+    },
+    {
+        "timestamp": "00:09:30",
+        "text": "We repeat this procedure over and over until we've learned however many classifiers we want and our final classifier is just the weighted sum of our predictions."
+    },
+    {
+        "timestamp": "00:09:40",
+        "text": "So again these are signs plus and minus one so the weighted sum of them will be above zero and we'll predict positive one or below zero and we'll predict negative one."
+    },
+    {
+        "timestamp": "00:09:50",
+        "text": "A few things about this algorithm..."
+    },
+    {
+        "timestamp": "00:10:00",
+        "text": "might seem a bit mysterious, like why that choice of alpha or why that choice of weights."
+    },
+    {
+        "timestamp": "00:10:06",
+        "text": "And although I'm not going to go into very many details, it has a nice theoretical justification."
+    },
+    {
+        "timestamp": "00:10:13",
+        "text": "It turns out that this algorithm, AdaBoost, corresponds to minimizing a surrogate loss function of our error."
+    },
+    {
+        "timestamp": "00:10:20",
+        "text": "In particular, AdaBoost minimizes something called the exponential loss."
+    },
+    {
+        "timestamp": "00:10:26",
+        "text": "So the sum over the data points of e to the minus class times our linear predictor, or our prediction function, rather."
+    },
+    {
+        "timestamp": "00:10:33",
+        "text": "So again, if these two things have the same sign, this is a positive number, e to the minus, a positive number, will be small."
+    },
+    {
+        "timestamp": "00:10:39",
+        "text": "If they have a different sign, it'll grow."
+    },
+    {
+        "timestamp": "00:10:46",
+        "text": "So this is a smooth, convex surrogate for the 0, 1 loss, and thus is fairly easier to optimize."
+    },
+    {
+        "timestamp": "00:10:53",
+        "text": "And it turns out this AdaBoost procedure is iteratively minimizing this exponential loss."
+    },
+    {
+        "timestamp": "00:10:59",
+        "text": "One example where Adaboost was really applied with tremendous success is to the face detection problem and a classic algorithm called the Viola-Jones face detector."
+    },
+    {
+        "timestamp": "00:11:07",
+        "text": "The idea here is that we can, well, again, combine a collection of many very weak and easy-to-compute classifiers."
+    },
+    {
+        "timestamp": "00:11:14",
+        "text": "In particular, Viola-Jones uses decision stumps with thresholds on single feature, just like my example earlier."
+    },
+    {
+        "timestamp": "00:11:22",
+        "text": "And we'll do this by defining lots and lots of features, but using very simple classifiers of those features."
+    },
+    {
+        "timestamp": "00:11:29",
+        "text": "So the number of features will make us prone to overfitting."
+    },
+    {
+        "timestamp": "00:11:37",
+        "text": "The choice of an extremely simple classifier function will make us less prone to overfitting."
+    },
+    {
+        "timestamp": "00:11:44",
+        "text": "And then we'll use Adaboost to slowly build up a more complex function and fit well."
+    },
+    {
+        "timestamp": "00:11:52",
+        "text": "So the idea of face detection is we're going to build a classifier that looks at a single patch of an image."
+    },
+    {
+        "timestamp": "00:11:59",
+        "text": "and decides whether or not that image patch has a face."
+    },
+    {
+        "timestamp": "00:12:07",
+        "text": "So, cameras do this all the time, they look at a single patch and they decide whether that looks more like a natural background or whether it actually has a human face in it, meaning that probably it's something that the camera should focus on."
+    },
+    {
+        "timestamp": "00:12:14",
+        "text": "To do this well, you want the model to be extremely accurate and also extremely fast."
+    },
+    {
+        "timestamp": "00:12:22",
+        "text": "In any computer vision or image processing problem, the feature representation turns out to be critically important."
+    },
+    {
+        "timestamp": "00:12:29",
+        "text": "It turns out that there's very little to be told about a particular pixel being a particular shade of gray."
+    },
+    {
+        "timestamp": "00:12:37",
+        "text": "It's not very helpful in recognizing visual phenomena."
+    },
+    {
+        "timestamp": "00:12:44",
+        "text": "And so, computer vision researchers have done a lot of work to try to find feature representations that are evocative of actual phenomena in the visual image."
+    },
+    {
+        "timestamp": "00:12:52",
+        "text": "The basis chosen here is called the Haar wavelet basis."
+    },
+    {
+        "timestamp": "00:12:59",
+        "text": "and consists of image responses to patches of filters."
+    },
+    {
+        "timestamp": "00:13:05",
+        "text": "So there are four basic types."
+    },
+    {
+        "timestamp": "00:13:11",
+        "text": "There's a vertical response and a horizontal response and some more."
+    },
+    {
+        "timestamp": "00:13:17",
+        "text": "And the way that you interpret this is this is a region which will be used to extract out an appearance of a particular piece of this image."
+    },
+    {
+        "timestamp": "00:13:23",
+        "text": "So over here is a patch which may or may not contain a face."
+    },
+    {
+        "timestamp": "00:13:29",
+        "text": "And each feature in our new representation will consist of a sum, a weighted sum, of many of these pixels in the image."
+    },
+    {
+        "timestamp": "00:13:35",
+        "text": "So for instance, here is a HAR wavelet that's a horizontal response."
+    },
+    {
+        "timestamp": "00:13:41",
+        "text": "It's got black region above a white region."
+    },
+    {
+        "timestamp": "00:13:47",
+        "text": "And so what we do is we add together all the pixels under the black region and then we subtract from that the sum of all the pixels under the white region."
+    },
+    {
+        "timestamp": "00:13:53",
+        "text": "So."
+    },
+    {
+        "timestamp": "00:13:59",
+        "text": "A patch like this, a filter like this, is going to have a high response when there's a light region, say over the eyes, and a dark region, so small values, right beneath it."
+    },
+    {
+        "timestamp": "00:14:11",
+        "text": "Similarly, here's another type, so another type has a black or a white in the interior and then the opposite color on the exteriors, so sort of a three-bar pattern."
+    },
+    {
+        "timestamp": "00:14:23",
+        "text": "And so, something like that here, this is going to have a response when there's a large intensity on the outer and some dark patch in the interior."
+    },
+    {
+        "timestamp": "00:14:35",
+        "text": "So in this case, something like the eyes, which might have dark on the outside and the nose causing a bright patch in the middle, might have a large negative response to this filter."
+    },
+    {
+        "timestamp": "00:14:47",
+        "text": "And so that might be useful in recognizing faces, because we would see that spike in a particular area of the image, and we would know that the..."
+    },
+    {
+        "timestamp": "00:14:59",
+        "text": "that might correspond to eyes and a nose in that piece."
+    },
+    {
+        "timestamp": "00:15:09",
+        "text": "They're also not too inefficient to calculate, because you can pre-process the image to compute something called the integral image."
+    },
+    {
+        "timestamp": "00:15:19",
+        "text": "And what this is, is you compute the partial sum of the image up to a particular pixel, so in a rectangle to, say, the up and left of that point."
+    },
+    {
+        "timestamp": "00:15:29",
+        "text": "And then the integral over some region, let's say over this white region that I want to subtract, I can compute by just using the four points at the corners of the pixels."
+    },
+    {
+        "timestamp": "00:15:39",
+        "text": "And that will tell me what the sum in a number of regions are, and I can just calculate it by the difference of those points."
+    },
+    {
+        "timestamp": "00:15:49",
+        "text": "So if you look over these four shapes and all of the different sizes, so lengths and scales that one could look at, it turns out that for a fairly simple, small image, say a 28 by 28 image patch like the one I showed."
+    },
+    {
+        "timestamp": "00:15:59",
+        "text": "there are about 140,000, maybe 180,000 features of this wavelet type."
+    },
+    {
+        "timestamp": "00:16:05",
+        "text": "So 180,000 features is quite a lot, and so already we're probably in danger of perhaps overfitting."
+    },
+    {
+        "timestamp": "00:16:11",
+        "text": "And so we'll choose an extremely simple classifier, a decision stump."
+    },
+    {
+        "timestamp": "00:16:17",
+        "text": "So we'll look at only one feature and perform some thresholding."
+    },
+    {
+        "timestamp": "00:16:23",
+        "text": "So each of these features is going to be one possible classifiers."
+    },
+    {
+        "timestamp": "00:16:29",
+        "text": "And so to train, we'll train a sequence of classifiers."
+    },
+    {
+        "timestamp": "00:16:35",
+        "text": "We'll train a classifier on, each of these classifiers will be trained by learning one classifier per feature using whatever our weights are."
+    },
+    {
+        "timestamp": "00:16:41",
+        "text": "Then we pick only the best one."
+    },
+    {
+        "timestamp": "00:16:47",
+        "text": "We find where it makes its errors and we reweight the data."
+    },
+    {
+        "timestamp": "00:16:53",
+        "text": "So this can take a long, long time to train."
+    },
+    {
+        "timestamp": "00:16:59",
+        "text": "because there are hundreds of thousands of features to test, and we have to test each one of them for each of our sequence of boosted classifiers."
+    },
+    {
+        "timestamp": "00:17:07",
+        "text": "So one thing you could do is to make this classifier even weaker by simply not training it very well."
+    },
+    {
+        "timestamp": "00:17:14",
+        "text": "So instead of finding the best decision stump, you could just find a quick decision stump."
+    },
+    {
+        "timestamp": "00:17:22",
+        "text": "So this is fairly easy to do."
+    },
+    {
+        "timestamp": "00:17:29",
+        "text": "You can do something like choose the weighted midpoint between the means of the plus 1 class and the means of the minus 1 class or something."
+    },
+    {
+        "timestamp": "00:17:37",
+        "text": "So any procedure that doesn't directly optimize and thus spend a lot of time."
+    },
+    {
+        "timestamp": "00:17:44",
+        "text": "I'm also glossing over a lot of tricks in the real Viola-Jones paper that were really used to make this an effective and practical technique."
+    },
+    {
+        "timestamp": "00:17:52",
+        "text": "So in particular, the actual Viola-Jones method used a cascade of decisions."
+    },
+    {
+        "timestamp": "00:17:59",
+        "text": "of just a weighted combination."
+    },
+    {
+        "timestamp": "00:18:09",
+        "text": "So, if earlier classifiers had rejected a data point as having a face, it would be immediately discarded and not considered further."
+    },
+    {
+        "timestamp": "00:18:19",
+        "text": "And that allowed them to process many more patches quickly than if all of the boosted predictors need to be applied to every patch."
+    },
+    {
+        "timestamp": "00:18:29",
+        "text": "So, that makes it more computationally efficient, particularly since it also needs to be applied at multiple scales of the image, since the face might be very large in the picture, taking up most of the frame, or it might be small somewhere in the background."
+    },
+    {
+        "timestamp": "00:18:39",
+        "text": "Overall, though, this boosted technique produced an extremely good facial recognition or facial detection process and is one of the baselines of facial detection to this day."
+    },
+    {
+        "timestamp": "00:18:49",
+        "text": "So, in summary, ensemble methods try to combine multiple classifiers to make a better one, and boosting in particular tries to train"
+    },
+    {
+        "timestamp": "00:18:59",
+        "text": "a sequence of models, each of which is trained using the errors of the previous models."
+    },
+    {
+        "timestamp": "00:19:11",
+        "text": "This makes later predictors able to focus on the mistakes of the earlier ones and focus on getting hard examples right."
+    },
+    {
+        "timestamp": "00:19:23",
+        "text": "The example of boosting for classification in this case is AdaBoost or adaptive boosting, and this uses the result of earlier classifiers to up-weight training examples, and then in the classification process the black box classifier tries to minimize the weighted errors."
+    }
+]

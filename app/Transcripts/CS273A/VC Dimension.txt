@@ -1,0 +1,135 @@
+00:00:00 We've seen several examples of how the complexity of our model affects performance, but without creating a clear definition of complexity.
+00:00:08 One quantitative definition that captures much of what we mean by complexity is a quantity called the VC dimension.
+00:00:17 Note that many of these slides are based on Andrew Moore's slides from CMU.
+00:00:25 When we talk about the complexity of a learner, we usually mean its representational power, both its ability to learn a wide variety of input-output relationships, and at an extreme, its ability to memorize or overfit to the data.
+00:00:34 Different learners define different classes of possible behavior.
+00:00:42 For example, our standard perceptron learner is a classifier here in two dimensions, features X1 and X2, with a coefficient for each feature, theta 1, theta 2, and a constant theta 0.
+00:00:51 The types of functions it can learn are predictions, in which the two classes of predictions, so the blue prediction, and the red prediction, can be used to predict the behavior of the 
+00:00:59 predictions and the red predictions are separated by an arbitrary line.
+00:01:07 But choosing a different form for the classifier would choose a different set of possible functions.
+00:01:15 For example, suppose we chose to use a class of learners that were thresholding a linear equation, but this time we did not include a constant feature.
+00:01:22 So we have only two parameters, theta 1 times feature 1 and theta 2 times feature 2.
+00:01:30 Then it's easy to see that the decision boundary of this classifier must pass through the origin.
+00:01:37 So this defines a more restrictive class of functions where we divide the space into blue predictions and red predictions through a line, but that line is now restricted.
+00:01:45 Another different functional form might be, for example, to take the sign of the norm of x minus some constant theta 0.
+00:01:52 If we think about what kinds of functions this form can produce...
+00:02:00 we find that if the value of the point x is farther from the origin than theta 0, then this function will predict class plus 1.
+00:02:10 If it's closer to the origin than theta 0, then predict minus 1.
+00:02:20 So we can think of this set of all possible functions learnable by this particular classifier as any function where the negative class lives in some sphere centered around the origin.
+00:02:30 The usual tradeoff we expect from any kind of model is that the more representational power our class of functions has, the more chance it will include the real feature-to-target relationship, but also the more chance it may overfit to random variations in the data.
+00:02:40 If we provide less power to the learner, we won't overfit, but we may not find the best possible function.
+00:02:50 It's not easy to try to quantify this notion of representational power, but it's not easy to quantify this notion of representational power.
+00:03:00 But one very useful formulation is the VC or Vapnik-Chervenenko's dimension of the learner.
+00:03:07 First, some preliminaries.
+00:03:15 Let's assume that our training and our future test data are all independent and identically distributed from some distribution P of X.
+00:03:22 We'll define the risk as the long-term test error, so the expected error rate of our predictions over that distribution P.
+00:03:30 The empirical risk we'll define as the training error, so it's the risk on our finite collection of M data points, which is the average error rate.
+00:03:37 The relationship, as we've seen, between the risk and the empirical risk depends on whether we're overfitting.
+00:03:45 If the model is very simple and we happen to be in the underfitting regime, their performance will be quite similar.
+00:03:52 But if our model becomes more and more complex,
+00:04:00 it becomes too complex, the test error might actually be far worse than just the training error would suggest.
+00:04:08 We'll actually define the VC dimension in a minute, but first let's see what the VC dimension tells us about the error.
+00:04:17 Suppose we know the VC dimension of our learner and call it h.
+00:04:25 Then we can show that with high probability 1 minus eta, where eta is a small number, the test error will be upper bounded by our training error plus an additional term that depends on the VC dimension h, the number of data points m, and also on that probability eta.
+00:04:34 Notice that if h is very small or m is very large, this additional bounding term will be small.
+00:04:42 So low VC dimension compared to the number of data will suggest that the training and test error will be quite similar.
+00:04:51 This is in some sense an amazing result.
+00:04:59 result, we can actually make a strong statement about what our test performance will be on data we haven't seen using only a property of the model, the VC dimension, and also the assumption that our data are IID from the same distribution.
+00:05:09 So once we understand this, let's now start to define the VC dimension.
+00:05:19 We'll need one more concept first.
+00:05:29 We say a classifier f of x can shatter a collection of points x1 to xh if for every possible target label for those h points, our model f of x can achieve zero training error on that collection of labeled data.
+00:05:39 In other words, however we assign the labels, there's some value of the parameters of the model that can achieve that labeling.
+00:05:49 So for example, let's consider the linear classifier on two features, a standard perceptron given by theta.
+00:05:59 Theta 0 plus Theta 1 times feature 1 plus Theta 2 times feature 2.
+00:06:07 Given the following two positions of data points X1 and X2, can we shatter them with this learner?
+00:06:14 Yes, we can, which we can verify just by going through all possible labelings.
+00:06:22 So one point blue, one point red, the reverse, one point red, one point blue, both red and both blue.
+00:06:29 For the first pattern, we just choose Theta such that the decision boundary passes between the two points, and the negative side is over here to the left.
+00:06:37 For the reverse labeling, we just negate all the parameters.
+00:06:44 That will make the left side of that line positive and the other side negative.
+00:06:52 For the all red or all blue, we just choose lines that have them both on the same side, and so on.
+00:06:59 two points, and a different learner.
+00:07:05 So here we'll take the sine of the radius minus theta.
+00:07:11 In this case, no.
+00:07:17 Again, let's just run through the patterns.
+00:07:23 So there are four possible patterns for these two points.
+00:07:29 And several of them can be predicted.
+00:07:35 For instance, if both data points are blue, we just make theta large enough so that they're both within that radius.
+00:07:41 If they're both red, we take theta very small so that they're outside of the radius.
+00:07:47 If the inner point is blue, then we make the radius such that it falls between the two points, and we can predict them correctly.
+00:07:53 But the last case, where the nearer of the two points is red and the further one is blue, there's no circle that we can create such that this classifier will predict plus 1 in the interior region and minus 1 in the outer region, on the farther away point.
+00:07:59 So, this particular classifier cannot shatter these two points.
+00:08:07 The VC dimension, then, is defined as the maximum number of points that can be arranged so that the classifier f of x can shatter them.
+00:08:14 I think it's helpful to think of this process as a kind of game.
+00:08:22 So we fix the definition of our learner, f of x, beforehand, and then we alternate between two players.
+00:08:29 So Player 1 gets to choose the locations of the feature space of the points x1 to xh.
+00:08:37 Then Player 2 chooses a label for each of them in an attempt to make them as hard to reproduce as possible.
+00:08:45 Player 1 then tries to pick a value for the parameters of the learner that will actually reproduce that target labeling.
+00:08:52 If Player 1 succeeds, then the points can be shattered.
+00:09:00 is at least H.
+00:09:06 If player 1 fails, then the VC dimension must be less than H.
+00:09:13 Mathematically, we have the definition that there exists a collection of H points X1 to XH, such that for all possible labelings Y1 to YH, there exists a setting of the parameters so that all the training labels can be produced by the classifier.
+00:09:19 Okay, so with that definition in hand, another example.
+00:09:26 Using the same model as before that predicts plus 1 outside of radius square root of theta, what is the VC dimension of this learner?
+00:09:33 Well, we can prove that it's 1.
+00:09:39 So we will do this just exhaustively, just by looking at the two cases.
+00:09:46 If we have one point, we can certainly select a parameter to predict either of the two patterns.
+00:09:53 If the data point is colored
+00:09:59 blue, we select the radius large.
+00:10:06 If the data point is colored red, we select the radius small.
+00:10:13 But from our previous example, we found that we could not shatter these two points.
+00:10:19 It was a case that we could not reproduce the labeling.
+00:10:26 So it remains to be shown that one cannot shatter any two points, but since in general one point will always be closer to the origin than the other, the argument holds.
+00:10:33 Note that you might think we could make both points equidistant from the origin, but then that would mean that both points would always be predicted with the same label.
+00:10:39 And since player one determines the locations of those points and wants to be able to predict arbitrary patterns, in general she will not position the points in such a way.
+00:10:46 Okay, so another example with the Perceptron model now on two features, three parameters.
+00:10:53 Again, checking all possible cases,
+00:10:59 is it's easy to see that three points can be shattered.
+00:11:05 Either all three points are the same color, in which case it's easy, or two of them are one color, and one is a different color, and that's illustrated in diagram.
+00:11:10 We place a line between them and color them correctly.
+00:11:16 What about four points?
+00:11:21 Can we shatter, say, these four points?
+00:11:27 It turns out we cannot.
+00:11:32 A quick argument to see this is geometric.
+00:11:38 For the following pattern, looks basically like an XOR pattern that we saw could not be learned by a linear classifier before.
+00:11:43 We can try to predict these two points, with these colored red and these colored blue.
+00:11:49 In that case, we must have the decision boundary passed between this red point and this blue point, and also between this red point and this blue point.
+00:11:54 But, in order to get both red points correct, that line cannot pass.
+00:11:59 through the line connecting the two reds.
+00:12:06 So since there's no line that passes between this area without splitting the reds, at least one point must be incorrectly predicted.
+00:12:13 It turns out that for the perceptron, we can make a very general statement.
+00:12:19 In d dimensions, with a constant term, the VC dimension is exactly d plus 1.
+00:12:26 Note that this is easy to remember because this is also the number of parameters of the model.
+00:12:33 One for the constant plus D for each of the features.
+00:12:39 And as we know, adding more parameters tends to make a more complex classifier.
+00:12:46 In general, the VC dimension may not exactly equal the number of parameters.
+00:12:53 The VC dimension is an existential measure of the ability of the learner to memorize arbitrary patterns in the data, which is much more difficult to analyze than just a simple.
+00:12:59 parameter count, but one can construct a somewhat convoluted examples of cases where the parameter account is very different from the VC dimension.
+00:13:11 For example, you can create a classifier with a lot of parameters, but designing those parameters so that most of them don't have any real effect, then counting the number of parameters will overestimate the complexity of the actual learner.
+00:13:23 It's harder to do the opposite, but you can compact all the variability in the learner's behavior into one parameter, and then you can get a very complex function that appears to only have one parameter.
+00:13:35 Luckily, legions of machine learning researchers have given the VC dimension a lot of thought, and for many of the learners that you might want to think about, you can simply look up in the literature what the VC dimension is.
+00:13:47 So now let's consider how to use the VC dimension and its associated test error bound in practice.
+00:13:59 So recall we had a fundamental problem of model selection between models with varying degrees of complexity.
+00:14:09 If we slowly ratchet up the representational power from simple to more complex, for example, maybe a constant predictor, a linear predictor, a quadratic predictor, and so on, our optimized training performance can only get better as the model increases.
+00:14:19 So large error for simple models, small error for more complex models.
+00:14:29 But if we actually estimate the test performance, either using a validation set or a cross-validation procedure, we find that although the error might decrease at first, at some point the error will start to increase and will degrade.
+00:14:39 And so what we should do is try to choose the model with the best estimated test performance.
+00:14:49 We can use the VC dimension risk bound in a similar manner.
+00:14:59 number of training data points, as the complexity of the model increases, the training error will get smaller.
+00:15:08 But the second term in the upper bound we saw that depends on the VC dimension will increase because the VC dimension will increase.
+00:15:17 So when you look at the sum of these two, which is the upper bound on our test risk, we find that the sum will decrease for a bit and then increase again as complexity grows.
+00:15:25 So one possible model selection procedure is to choose the model that minimizes our VC upper bound on risk.
+00:15:34 This technique is called structural risk minimization, and it's an alternative to trying to estimate the test error through some validation process.
+00:15:42 Notice that as the number of data M increase, the bound term will get smaller.
+00:15:51 So assuming that the training error stays the same, as you might expect, the more data you have, the more able you are to support higher and higher complexity.
+00:15:59 models.
+00:16:08 This general theme of selecting the right complexity of model using a penalized score on training data is common to a number of different techniques.
+00:16:17 In probabilistic models, our training score is usually the log-likelihood of the data instead of an error rate.
+00:16:25 But similarly, techniques like the Akkakei information criterion and the Bayesian information criterion use an extra penalty term to try to penalize for high-complexity models.
+00:16:34 Then, even though the more complex model will always have a higher likelihood than the simpler model, it may not be enough higher to compensate for the penalty which will increase with complexity.
+00:16:42 AIC and BIC differ mainly in the degree to which they penalize the complexity measured in the number of parameters.
+00:16:51 And there are also other probabilistic methods of doing model selection that are commonly chosen.
+00:16:59 like using marginal likelihood comparisons, and those implicitly penalized for complexity instead of explicitly adding a penalty term.
+00:17:10 In practice, my feeling is that many of these methods are very conservative.
+00:17:20 Structural risk minimization is considered very conservative and may really not be as effective as just simply using a holdout set or a cross-validation set.
+00:17:30 However, the concept of VC dimension is certainly very useful in understanding the role of complexity in learning and the degree to which a more flexible class of learners can lead to overfitting and how.

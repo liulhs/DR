@@ -1,0 +1,294 @@
+[
+    {
+        "timestamp": "00:00:00",
+        "text": "Regularization is a common way of controlling for and reducing overfitting in a flexible and tunable manner."
+    },
+    {
+        "timestamp": "00:00:04",
+        "text": "Consider fitting a linear model to just two data points, resulting in a unique model with zero error."
+    },
+    {
+        "timestamp": "00:00:09",
+        "text": "So we fit this line."
+    },
+    {
+        "timestamp": "00:00:13",
+        "text": "Suppose now we want to make our model more flexible and use quadratic functions."
+    },
+    {
+        "timestamp": "00:00:18",
+        "text": "Now instead of one unique solution, there are actually an infinite number of quadratic functions that have zero error."
+    },
+    {
+        "timestamp": "00:00:23",
+        "text": "They also pass through those two points."
+    },
+    {
+        "timestamp": "00:00:27",
+        "text": "So how can we choose among them?"
+    },
+    {
+        "timestamp": "00:00:32",
+        "text": "One trivial way would be to always choose the lowest order polynomial that fits."
+    },
+    {
+        "timestamp": "00:00:36",
+        "text": "So ensure that all higher coefficients are zero if they can be."
+    },
+    {
+        "timestamp": "00:00:41",
+        "text": "But this technique is pretty specific to polynomials."
+    },
+    {
+        "timestamp": "00:00:46",
+        "text": "It requires that we know exactly what these features are."
+    },
+    {
+        "timestamp": "00:00:50",
+        "text": "A method that's agnostic to the feature definitions might be to choose the parameter values that have the minimum magnitude."
+    },
+    {
+        "timestamp": "00:00:55",
+        "text": "So the minimum size."
+    },
+    {
+        "timestamp": "00:00:59",
+        "text": "or Euclidean norm among all models that have zero error."
+    },
+    {
+        "timestamp": "00:01:06",
+        "text": "Either of these choices is a type of bias."
+    },
+    {
+        "timestamp": "00:01:13",
+        "text": "They tell us which models to prefer in the absence of evidence from the data."
+    },
+    {
+        "timestamp": "00:01:19",
+        "text": "This is exactly how regularization works."
+    },
+    {
+        "timestamp": "00:01:26",
+        "text": "We bias the values of theta toward particular values, for example, small values near zero, by adding a penalty term that encourages those values."
+    },
+    {
+        "timestamp": "00:01:33",
+        "text": "Optimizing the same way as before, we now balance one term, the data reconstruction error, with another term, the regularization penalty."
+    },
+    {
+        "timestamp": "00:01:40",
+        "text": "If we optimize the same way as before, we get a similar closed-form solution."
+    },
+    {
+        "timestamp": "00:01:46",
+        "text": "But now, instead of just y times the pseudo-inverse of x, we now have x transpose x plus an additional term, alpha times the identity."
+    },
+    {
+        "timestamp": "00:01:53",
+        "text": "This added value regularizes this matrix inverse."
+    },
+    {
+        "timestamp": "00:02:00",
+        "text": "so that now it's better conditioned and it will have a unique solution for any degree polynomial and number of data."
+    },
+    {
+        "timestamp": "00:02:07",
+        "text": "Using this squared error regularization term on linear regression with mean squared error is sometimes called ridge regression."
+    },
+    {
+        "timestamp": "00:02:15",
+        "text": "The overall effect is to shrink the values of theta toward zero by an amount that depends on the value of alpha."
+    },
+    {
+        "timestamp": "00:02:22",
+        "text": "If alpha is very large then we tend to care more about reducing the parameter magnitude than about reducing mean squared error."
+    },
+    {
+        "timestamp": "00:02:30",
+        "text": "For alpha going toward infinity we actually choose theta equals zero."
+    },
+    {
+        "timestamp": "00:02:37",
+        "text": "Note that the regularization term is actually independent of the data so if we emphasize it it reduces the dependence on the actual draw of data and hence reduces the variance of our model but may increase its bias."
+    },
+    {
+        "timestamp": "00:02:45",
+        "text": "Here's a picture of how this works in practice using the same data point in each plot."
+    },
+    {
+        "timestamp": "00:02:52",
+        "text": "If we just fit polynomials"
+    },
+    {
+        "timestamp": "00:03:00",
+        "text": "minimizing only the squared error term."
+    },
+    {
+        "timestamp": "00:03:08",
+        "text": "We start off with a linear function, but as we go to higher and higher order polynomials, we get some very crazy looking functions with pretty extreme values trying to hit every red point."
+    },
+    {
+        "timestamp": "00:03:17",
+        "text": "But if we add a regularization term, here we chose alpha equal to 1, our model is unwilling to choose the extremely large parameter values that would be necessary to reduce the mean squared error so much."
+    },
+    {
+        "timestamp": "00:03:25",
+        "text": "The decrease in the mean squared error would be offset by the increase in the norm of theta."
+    },
+    {
+        "timestamp": "00:03:34",
+        "text": "So as we do higher order polynomials, even very high polynomials, with a regularization, we tend to still learn a simple looking function."
+    },
+    {
+        "timestamp": "00:03:42",
+        "text": "So the regularization is helping us balance the concepts of not having too much error with keeping small parameter values."
+    },
+    {
+        "timestamp": "00:03:51",
+        "text": "There are many different possible choices of regularization with different effects on the parameters learned."
+    },
+    {
+        "timestamp": "00:04:00",
+        "text": "A common class of regularizers is to choose one based around the family of Lp vector norms for different values of p."
+    },
+    {
+        "timestamp": "00:04:08",
+        "text": "For p equals 2, we sum the squared values of theta and take the square root, and so this is just the Euclidean distance."
+    },
+    {
+        "timestamp": "00:04:17",
+        "text": "It's easy to visualize these Lp norms by sketching the shape of their isosurfaces, so the surface on which the norm takes on constant value, say 1."
+    },
+    {
+        "timestamp": "00:04:25",
+        "text": "For the Euclidean distance, p equals 2, this is just the circle, the set of points with radius 1, with distance 1 from the origin."
+    },
+    {
+        "timestamp": "00:04:34",
+        "text": "On the other hand, if we pick p equals 1, we get the sum of absolute values, and the isosurface looks like this star shape, a rotated square."
+    },
+    {
+        "timestamp": "00:04:42",
+        "text": "Increases in one value of one parameter theta must be exactly offset by decreases in the other."
+    },
+    {
+        "timestamp": "00:04:51",
+        "text": "If p is very large, the shape of the isosurface tends to look like this."
+    },
+    {
+        "timestamp": "00:05:00",
+        "text": "to approach a square, so the set of theta such that the maximum value is 1."
+    },
+    {
+        "timestamp": "00:05:07",
+        "text": "For p very small, here I'm picturing 0.5, the picture, the shape is very peaked, where we're allowed to have large values of one parameter, like theta 0, only if the other parameter, theta 1, is very near 0."
+    },
+    {
+        "timestamp": "00:05:15",
+        "text": "In the limit, as p approaches 0, this approaches the counting norm."
+    },
+    {
+        "timestamp": "00:05:22",
+        "text": "So it counts the number of non-zero parameter values."
+    },
+    {
+        "timestamp": "00:05:30",
+        "text": "And this is a natural notion of complexity, since it measures how many parameter values are actually used by the model."
+    },
+    {
+        "timestamp": "00:05:37",
+        "text": "The two most common choices of regularization are the L2 and the L1 norm."
+    },
+    {
+        "timestamp": "00:05:45",
+        "text": "Optimizing a data term plus the regularization balances the mean squared error with a regularization cost."
+    },
+    {
+        "timestamp": "00:05:52",
+        "text": "And we can picture this as the balance of two different losses, one loss."
+    },
+    {
+        "timestamp": "00:06:00",
+        "text": "that determines how well we reconstruct the data."
+    },
+    {
+        "timestamp": "00:06:05",
+        "text": "And that's minimized at this blue point."
+    },
+    {
+        "timestamp": "00:06:10",
+        "text": "And as we move away from it, it increases quadratically."
+    },
+    {
+        "timestamp": "00:06:15",
+        "text": "And the other term is a regularization term that's minimized at the origin, so all parameters equal to zero."
+    },
+    {
+        "timestamp": "00:06:20",
+        "text": "And it increases, again, in the case of the L2 norm, quadratically away."
+    },
+    {
+        "timestamp": "00:06:25",
+        "text": "So the combination of the data plus the regularization will be minimized at some point that touches both surfaces."
+    },
+    {
+        "timestamp": "00:06:30",
+        "text": "Since in order to reduce the regularization, we would have to leave this isosurface and increase the data loss, and vice versa."
+    },
+    {
+        "timestamp": "00:06:35",
+        "text": "So we can't reduce either loss without increasing the other."
+    },
+    {
+        "timestamp": "00:06:40",
+        "text": "L1 penalties have the effect that they can encourage sparse parameter vectors."
+    },
+    {
+        "timestamp": "00:06:45",
+        "text": "A sparse vector is one that lies exactly on some axis."
+    },
+    {
+        "timestamp": "00:06:50",
+        "text": "For example, one of the parameters, say theta 1, is exactly zero."
+    },
+    {
+        "timestamp": "00:06:55",
+        "text": "The sparser, the more parameters will be exactly zero."
+    },
+    {
+        "timestamp": "00:07:00",
+        "text": "The L2 optimum over here will only be on one of the axes, so it will only be sparse if this minimum MSE point is also exactly on the axis."
+    },
+    {
+        "timestamp": "00:07:12",
+        "text": "This will happen only with probability zero."
+    },
+    {
+        "timestamp": "00:07:24",
+        "text": "But on the L1 optimized regularized system, the L1 optimum can be on the axis even when the blue point is not sometimes."
+    },
+    {
+        "timestamp": "00:07:36",
+        "text": "So because its contour is sharp at that point, it means that it's possible for it to intersect with these blue ovals on the axis even when the minimum MSE point is not located on the axis."
+    },
+    {
+        "timestamp": "00:07:48",
+        "text": "So L1 regularized solutions tend to encourage some level of sparsity, which is often helpful because it makes our model more efficient to store, more efficient to compute, and it can also reveal which features are most important to the prediction, since less important features may be forced to be exactly zero."
+    },
+    {
+        "timestamp": "00:08:00",
+        "text": "Interestingly, LP norms form a balance between sparsity and convexity."
+    },
+    {
+        "timestamp": "00:08:07",
+        "text": "So for P greater than or equal to 1, the norm is convex and thus relatively easy to optimize."
+    },
+    {
+        "timestamp": "00:08:14",
+        "text": "But for P less than or equal to 1, it induces some sparsity."
+    },
+    {
+        "timestamp": "00:08:22",
+        "text": "So the L1 norm is the only norm which both induces some sparsity in the solution and remains convex for easy optimization."
+    }
+]

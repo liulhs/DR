@@ -1,0 +1,406 @@
+[
+    {
+        "timestamp": "00:00:00",
+        "text": "The first clustering algorithm we'll look at is a procedure called hierarchical agglomerative clustering."
+    },
+    {
+        "timestamp": "00:00:05",
+        "text": "Hierarchical agglomerative clustering is a simple algorithm for partitioning the data into groups."
+    },
+    {
+        "timestamp": "00:00:10",
+        "text": "We start by defining a measure of the distance, or dissimilarity, between two groups."
+    },
+    {
+        "timestamp": "00:00:16",
+        "text": "We'll return to what this is exactly in a moment."
+    },
+    {
+        "timestamp": "00:00:21",
+        "text": "Then we initialize the algorithm by creating a separate cluster for each data point, so m clusters total."
+    },
+    {
+        "timestamp": "00:00:27",
+        "text": "We compute our cluster distance score between all pairs of clusters."
+    },
+    {
+        "timestamp": "00:00:32",
+        "text": "We'll store and reuse this for efficiency."
+    },
+    {
+        "timestamp": "00:00:38",
+        "text": "And then find the closest pair according to our distance and merge the clusters."
+    },
+    {
+        "timestamp": "00:00:43",
+        "text": "We'll continue until we end up with the desired number of clusters."
+    },
+    {
+        "timestamp": "00:00:49",
+        "text": "Or, more commonly, we can continue until all the data are in one cluster and output the entire sequence of clusterings in a data structure called a dendrogram."
+    },
+    {
+        "timestamp": "00:00:54",
+        "text": "Let's walk through this procedure on these data, and we'll keep track of the results."
+    },
+    {
+        "timestamp": "00:00:59",
+        "text": "of the computational complexity."
+    },
+    {
+        "timestamp": "00:01:06",
+        "text": "Initially, every datum is a cluster."
+    },
+    {
+        "timestamp": "00:01:13",
+        "text": "Computing the distances between all pairs of data points takes O of m squared computation."
+    },
+    {
+        "timestamp": "00:01:20",
+        "text": "We'll also sort them so we can find the smallest easily, which takes O of m squared log m time."
+    },
+    {
+        "timestamp": "00:01:26",
+        "text": "We'll now merge the closest pair, giving us a new cluster shown in red."
+    },
+    {
+        "timestamp": "00:01:33",
+        "text": "Now we need to compute all the cluster pairs distances again."
+    },
+    {
+        "timestamp": "00:01:40",
+        "text": "Most of these are the same as in the previous step, but we need to recompute m minus 1 of them, the distances from each cluster to the new red cluster, and insert them into our sorted data structure, which takes m log m time."
+    },
+    {
+        "timestamp": "00:01:46",
+        "text": "We'll visualize this process as a dendrogram here by drawing two points, shown in red, and connecting them with a line whose height indicates their distance when they were merged."
+    },
+    {
+        "timestamp": "00:01:53",
+        "text": "Thank you."
+    },
+    {
+        "timestamp": "00:02:00",
+        "text": "We again select the closest pair, perhaps this pair here, merge them, and recompute the distances from all the clusters to this new one, adding another m log m computation to our total."
+    },
+    {
+        "timestamp": "00:02:06",
+        "text": "We'll draw these points over in the dendrogram and merge them."
+    },
+    {
+        "timestamp": "00:02:13",
+        "text": "Since this pair was more distant than the first pair, their merge height will be higher."
+    },
+    {
+        "timestamp": "00:02:20",
+        "text": "Finding the next closest pair of clusters, it might be that it involves one of our previously merged groups."
+    },
+    {
+        "timestamp": "00:02:26",
+        "text": "In that case, we again connect the two clusters, forming a larger cluster, and join them in the dendrogram with a height that indicates their computed dissimilarity."
+    },
+    {
+        "timestamp": "00:02:33",
+        "text": "Each merge reduces the total number of clusters by one."
+    },
+    {
+        "timestamp": "00:02:40",
+        "text": "Eventually, we have only a few clusters."
+    },
+    {
+        "timestamp": "00:02:46",
+        "text": "We can stop when we reach the desired number of clusters and use the resulting partitioning, purple, blue, and red."
+    },
+    {
+        "timestamp": "00:02:53",
+        "text": "This procedure is implemented in the MATLAB Statistics Toolbox as the linkage function."
+    },
+    {
+        "timestamp": "00:02:59",
+        "text": "However, it's more common to simply continue merging."
+    },
+    {
+        "timestamp": "00:03:05",
+        "text": "So three clusters become two, we join them here."
+    },
+    {
+        "timestamp": "00:03:11",
+        "text": "Until finally, after m minus one steps, all the data must belong to the same single cluster."
+    },
+    {
+        "timestamp": "00:03:17",
+        "text": "Since each step was m log m, the total work for the merging process is also O of m squared log m."
+    },
+    {
+        "timestamp": "00:03:23",
+        "text": "Hence, the total computation is m squared log m as well."
+    },
+    {
+        "timestamp": "00:03:29",
+        "text": "Moreover, our dendrogram over here illustrates the trace of this merging procedure, showing not only which data were joined at each point, but when they were merged together in the order of increasing cluster distance."
+    },
+    {
+        "timestamp": "00:03:35",
+        "text": "Given this sequence of merges, we can easily replay the clustering to select the output, given that we stop at a particular number of clusters."
+    },
+    {
+        "timestamp": "00:03:41",
+        "text": "Alternatively, we might not know how many clusters there should be."
+    },
+    {
+        "timestamp": "00:03:47",
+        "text": "Instead, we could choose clusters subject to some threshold on their dissimilarity."
+    },
+    {
+        "timestamp": "00:03:53",
+        "text": "In other words, stop merging."
+    },
+    {
+        "timestamp": "00:03:59",
+        "text": "once the clusters are more dissimilar than some threshold."
+    },
+    {
+        "timestamp": "00:04:09",
+        "text": "So this condition corresponds to a cut across the dendrogram at some height, which then tells us how many clusters there are here, 1, 2, 3, 4."
+    },
+    {
+        "timestamp": "00:04:20",
+        "text": "A critical choice in a kilometer of clustering is the cluster distance, which measures the dissimilarity between two groups of data points."
+    },
+    {
+        "timestamp": "00:04:30",
+        "text": "This choice often determines the characteristics of the clustering that results."
+    },
+    {
+        "timestamp": "00:04:40",
+        "text": "Perhaps the most common choice is to measure the distance between one group of points, Ci, and another group of points, Cj, using the minimum distance between any pair of points, x in cluster i and y in cluster j."
+    },
+    {
+        "timestamp": "00:04:50",
+        "text": "So here, if the red points have already been merged to form cluster i, and the blue points have been merged to form cluster j, then the minimum distance will measure the similarity between red and blue clusters."
+    },
+    {
+        "timestamp": "00:05:00",
+        "text": "by their closest distance, this pair here."
+    },
+    {
+        "timestamp": "00:05:08",
+        "text": "This often goes by the special name single linkage."
+    },
+    {
+        "timestamp": "00:05:17",
+        "text": "Notice that by merging the closest pair of the connected components, this is effectively just finding the minimum spanning tree of the data and using that to construct the clustering."
+    },
+    {
+        "timestamp": "00:05:25",
+        "text": "Another common choice is to use so-called complete linkage, or the maximum distance between any pair of points X and I and Y and J."
+    },
+    {
+        "timestamp": "00:05:34",
+        "text": "Unlike single linkage, which merges two clusters if they're close somewhere, this gives low dissimilarity only to clusters that are close everywhere."
+    },
+    {
+        "timestamp": "00:05:42",
+        "text": "We'll see some examples of how these differ in a moment."
+    },
+    {
+        "timestamp": "00:05:51",
+        "text": "Other choices include using the average distance between all pairs of points across the sets, so D average here, or using the distance between the two clusters' centers, means here, where mu i and mu j"
+    },
+    {
+        "timestamp": "00:05:59",
+        "text": "are the centroids of cluster I and cluster J."
+    },
+    {
+        "timestamp": "00:06:09",
+        "text": "All these choices result in slightly different clusterings with different behaviors and resulting clusters."
+    },
+    {
+        "timestamp": "00:06:19",
+        "text": "Notice that the mean of the data distances here is different from the distance between the data means here."
+    },
+    {
+        "timestamp": "00:06:29",
+        "text": "One point to mention, however, is that our computational analysis in the previous slides assumed that it was easy, so constant time, to compute the distance between the clusters."
+    },
+    {
+        "timestamp": "00:06:39",
+        "text": "Effectively, to have this assumption be true, we need that if we've already computed the distances from A to C, two clusters A and C, and between clusters B and C, then we should be able to compute the distance between a merged cluster, A and B, with C as well in constant time without examining all of the data that live inside that cluster."
+    },
+    {
+        "timestamp": "00:06:49",
+        "text": "All the distance choices that are listed here have that behavior."
+    },
+    {
+        "timestamp": "00:06:59",
+        "text": "They have sufficient statistics that allow us to do this."
+    },
+    {
+        "timestamp": "00:07:08",
+        "text": "For example, trivially, if we use the minimum distance, say, then we can just adopt the smaller of the two values, D of A to C and D of B to C, and that will be the minimum distance between the joint group A and B together and C."
+    },
+    {
+        "timestamp": "00:07:17",
+        "text": "So let's see a few examples."
+    },
+    {
+        "timestamp": "00:07:25",
+        "text": "As I mentioned, the choice of the dissimilarity measure can dramatically affect the clusters that result from a glomerative clustering."
+    },
+    {
+        "timestamp": "00:07:34",
+        "text": "For example, here are two data sets in which we'll find, say, five clusters using either single or complete linkage."
+    },
+    {
+        "timestamp": "00:07:42",
+        "text": "In the first data set here, the clusters we would probably want, looking at this holistically, is two clusters forming these groups."
+    },
+    {
+        "timestamp": "00:07:51",
+        "text": "The data form two coherent shapes, slightly separated."
+    },
+    {
+        "timestamp": "00:07:59",
+        "text": "something like this clustering, since the nearest data point to any other is probably along the same wavy curve."
+    },
+    {
+        "timestamp": "00:08:09",
+        "text": "So merges typically happen within the two clusters that we see visually."
+    },
+    {
+        "timestamp": "00:08:19",
+        "text": "Complete linkage over here, on the other hand, is unable to find these clusters."
+    },
+    {
+        "timestamp": "00:08:29",
+        "text": "Since the quality of a grouping is measured by its furthest pair, when we have a fine grouping like, say, two groups here instead of just one, it's much more likely to group this group with this, since its furthest distance is close, than this group with this part of this orange one, since their furthest distances is quite long."
+    },
+    {
+        "timestamp": "00:08:39",
+        "text": "So complete linkage tends to avoid elongated clusters and merges the data in a way that doesn't respect the similarity that we see in these data."
+    },
+    {
+        "timestamp": "00:08:49",
+        "text": "In the second data set, on the other hand, complete linkage results look much more appealing than the single linkage results."
+    },
+    {
+        "timestamp": "00:08:59",
+        "text": "A slightly further separation of a few points here and here has led single linkage to put almost all of the data into one group within slightly separated groups for the smaller sets."
+    },
+    {
+        "timestamp": "00:09:06",
+        "text": "Whereas in the complete linkage, things are more reasonably clustered."
+    },
+    {
+        "timestamp": "00:09:13",
+        "text": "Thus, we may want to select our dissimilarity measure to reflect the types and shapes of clusters that we're hoping to get out of this procedure."
+    },
+    {
+        "timestamp": "00:09:19",
+        "text": "Another common use of agglomerative clustering is to look at arrays of data in a technique called clustergrams."
+    },
+    {
+        "timestamp": "00:09:26",
+        "text": "In MATLAB, this is found in the bioinformatics toolbox."
+    },
+    {
+        "timestamp": "00:09:33",
+        "text": "Suppose that we measure the expression levels of a collection of genes across various experimental conditions, such as diseases, or time, or patient identities."
+    },
+    {
+        "timestamp": "00:09:39",
+        "text": "Then every condition gives us a vector of gene observations."
+    },
+    {
+        "timestamp": "00:09:46",
+        "text": "Or we could view each gene as a data point."
+    },
+    {
+        "timestamp": "00:09:53",
+        "text": "We could view each gene as a data point and have a vector of the conditions measured."
+    },
+    {
+        "timestamp": "00:09:59",
+        "text": "In this image, we'll visualize green as very positive measurements, so increased expression, and red as negative measurements, suppressed expression."
+    },
+    {
+        "timestamp": "00:10:05",
+        "text": "The unsupervised task is to try to understand this data matrix."
+    },
+    {
+        "timestamp": "00:10:11",
+        "text": "Which genes behave similar to which?"
+    },
+    {
+        "timestamp": "00:10:17",
+        "text": "Do they behave similarly in all the patients or only some?"
+    },
+    {
+        "timestamp": "00:10:23",
+        "text": "Which patients are similar to which?"
+    },
+    {
+        "timestamp": "00:10:29",
+        "text": "We can perform agglomerative clustering on both the rows here and columns here of the data."
+    },
+    {
+        "timestamp": "00:10:35",
+        "text": "And then this dendrogram can be used to permute the data into an ordering that reflects and illustrates their grouping pattern."
+    },
+    {
+        "timestamp": "00:10:41",
+        "text": "Then the overall reordered image reveals patterns."
+    },
+    {
+        "timestamp": "00:10:47",
+        "text": "For example, these genes are expressed more in this set of conditions, and similarly express less in this set of conditions."
+    },
+    {
+        "timestamp": "00:10:53",
+        "text": "Thus, the clustergram can help us understand patterns."
+    },
+    {
+        "timestamp": "00:10:59",
+        "text": "patterns in a data matrix by organizing the rows and the columns into ways that form groups that behave similarly and expose some of these group-based behaviors."
+    },
+    {
+        "timestamp": "00:11:08",
+        "text": "In summary, agglomerative clustering is a simple procedure for discovering groupings in the data."
+    },
+    {
+        "timestamp": "00:11:17",
+        "text": "Given a way of measuring the distance or the dissimilarity between a pair of clusters, groups of data, we successively merge the closest pair of clusters and update our distances until all the data are in a single cluster."
+    },
+    {
+        "timestamp": "00:11:25",
+        "text": "We can then visualize the process by drawing a dendrogram, which shows the sequence in which the clusters were merged and how dissimilar they were at the time."
+    },
+    {
+        "timestamp": "00:11:34",
+        "text": "Analyzing the computational complexity, we found it was a bit over quadratic in m, the number of data."
+    },
+    {
+        "timestamp": "00:11:42",
+        "text": "We saw an application of this to understanding data matrices called clustergrams, where we cluster both the rows and columns of the data matrix."
+    },
+    {
+        "timestamp": "00:11:51",
+        "text": "Reordering them to group them by their clusters, these newly ordered data matrix exposes differences"
+    },
+    {
+        "timestamp": "00:11:59",
+        "text": "and similarities, and changes in the feature values across subgroups of data."
+    },
+    {
+        "timestamp": "00:12:08",
+        "text": "We also saw that the resulting clusters also depend critically on the measure of dissimilarity that we use."
+    },
+    {
+        "timestamp": "00:12:16",
+        "text": "For example, single linkage will often give long connected clusters, but can result in small isolated clusters as well, while something like complete linkage will prefer more spatially grouped clusters."
+    },
+    {
+        "timestamp": "00:12:25",
+        "text": "So we need to select a dissimilarity measure that reflects how we think the data should be grouped."
+    }
+]

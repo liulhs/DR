@@ -1,0 +1,282 @@
+[
+    {
+        "timestamp": "00:00:00",
+        "text": "For linear regression with the mean squared error loss, it turns out that we can also compute the optimal values of theta in closed form."
+    },
+    {
+        "timestamp": "00:00:10",
+        "text": "Consider the following simple problem in which we have only two data points to fit a line."
+    },
+    {
+        "timestamp": "00:00:20",
+        "text": "Our two data points give us two equations corresponding to each data, each of which has two unknowns, theta 0 and theta 1, and we can just solve this set of linear equations."
+    },
+    {
+        "timestamp": "00:00:30",
+        "text": "As you may recall from linear algebra, in matrix form, we can simply write this down, y equals theta x, and solve it, which corresponds to the matrix inverse of x transpose."
+    },
+    {
+        "timestamp": "00:00:40",
+        "text": "More generally, of course, x is not square and thus not invertible, but if m is greater than n, this corresponds to there being no linear function that hits all the data exactly, and instead we'll solve directly for the minimum of the mean squared error function."
+    },
+    {
+        "timestamp": "00:00:50",
+        "text": "The minimum of J corresponds to the minimum of theta."
+    },
+    {
+        "timestamp": "00:01:00",
+        "text": "points to the point where the gradient of J equals 0."
+    },
+    {
+        "timestamp": "00:01:05",
+        "text": "So computing this and setting it equal to 0, we can distribute x inside the parentheses and move theta x transpose x to the other side."
+    },
+    {
+        "timestamp": "00:01:10",
+        "text": "x transpose x is a square matrix."
+    },
+    {
+        "timestamp": "00:01:16",
+        "text": "Assuming it's full rank, we can solve by multiplying by its inverse."
+    },
+    {
+        "timestamp": "00:01:21",
+        "text": "And we find that the minimum of J is given at theta equal to y transpose x."
+    },
+    {
+        "timestamp": "00:01:27",
+        "text": "x transpose x inverse."
+    },
+    {
+        "timestamp": "00:01:32",
+        "text": "This quantity, x x transpose x inverse, is called the Moore-Penrose pseudo-inverse of x transpose."
+    },
+    {
+        "timestamp": "00:01:38",
+        "text": "If x transpose is square and full rank, it's exactly equal to x transpose inverse."
+    },
+    {
+        "timestamp": "00:01:43",
+        "text": "But in most practical situations, we have more data than features."
+    },
+    {
+        "timestamp": "00:01:49",
+        "text": "So meaning m greater than n, in which case the pseudo-inverse gives the minimum mean squared error fit."
+    },
+    {
+        "timestamp": "00:01:54",
+        "text": "Now that we have a linear algebraic square, let's definition the square."
+    },
+    {
+        "timestamp": "00:01:59",
+        "text": "form for the optimal value of theta, this is easy to solve in MATLAB."
+    },
+    {
+        "timestamp": "00:02:10",
+        "text": "We again write our Y and X matrix, and we can solve this either manually by simply executing the form of the equation, Y transpose X inverse of X transpose X, or by using a special MATLAB operator, the matrix right divide operation."
+    },
+    {
+        "timestamp": "00:02:20",
+        "text": "This operator explicitly solves a set of linear equations defined by Y equals theta times X transpose."
+    },
+    {
+        "timestamp": "00:02:30",
+        "text": "While this may look less obviously equivalent to our derivation, it lets MATLAB use a more numerically stable solution technique."
+    },
+    {
+        "timestamp": "00:02:40",
+        "text": "One useful interpretation of the stationary point equation we solved gives them the name the normal equations."
+    },
+    {
+        "timestamp": "00:02:50",
+        "text": "Consider the vector of target values, Y1 through Ym, an m-dimensional space where."
+    },
+    {
+        "timestamp": "00:03:00",
+        "text": "M is the number of data points."
+    },
+    {
+        "timestamp": "00:03:06",
+        "text": "We can also regard the data matrix as a collection of column vectors."
+    },
+    {
+        "timestamp": "00:03:13",
+        "text": "So Xi will be a vector consisting of the i-th feature for all M data points."
+    },
+    {
+        "timestamp": "00:03:19",
+        "text": "This is, again, a vector in M-dimensional space."
+    },
+    {
+        "timestamp": "00:03:26",
+        "text": "So here, X1 is the vector of feature one across all the data, X2 is the vector of feature two across all the data, and so forth."
+    },
+    {
+        "timestamp": "00:03:33",
+        "text": "Now, any linear combination, a linear predictor, must live in the span of these vectors."
+    },
+    {
+        "timestamp": "00:03:39",
+        "text": "So our vector of predictions at all the data points is also an M-dimensional vector, which lives somewhere in this subspace, spanned by X1, X2."
+    },
+    {
+        "timestamp": "00:03:46",
+        "text": "The normal equations say that the error residual, the difference between Y and Y hat, when dot-producted with the matrix X, equals 0."
+    },
+    {
+        "timestamp": "00:03:53",
+        "text": "So that means this error vector is orthogonal to every column of X."
+    },
+    {
+        "timestamp": "00:03:59",
+        "text": "that the difference between y, the vector of true targets, and y hat are predictions, that error vector is orthogonal to the space spanned by x."
+    },
+    {
+        "timestamp": "00:04:07",
+        "text": "So far we've been looking at mean squared error, which is a useful and widely used loss function."
+    },
+    {
+        "timestamp": "00:04:14",
+        "text": "One particularly nice aspect of it is that we can solve it exactly and fairly easily in closed form."
+    },
+    {
+        "timestamp": "00:04:22",
+        "text": "However, mean squared error is not always the best choice."
+    },
+    {
+        "timestamp": "00:04:29",
+        "text": "Take the following data, say maybe y is house price where x is house size, and suppose we make a fit to it, in which case we learn the following model, the linear model of x."
+    },
+    {
+        "timestamp": "00:04:37",
+        "text": "Now suppose we add a data point that doesn't follow the general trend."
+    },
+    {
+        "timestamp": "00:04:44",
+        "text": "So here's an outlier, it's perhaps a particularly large house for which almost nothing was paid."
+    },
+    {
+        "timestamp": "00:04:52",
+        "text": "Perhaps we've entered the data incorrectly, perhaps the householder simply sold to a relative."
+    },
+    {
+        "timestamp": "00:04:59",
+        "text": "very cheaply."
+    },
+    {
+        "timestamp": "00:05:05",
+        "text": "The error residual on this point is very large."
+    },
+    {
+        "timestamp": "00:05:11",
+        "text": "So here it's 16, so the squared error is 16 squared."
+    },
+    {
+        "timestamp": "00:05:17",
+        "text": "Because it's squared, reducing an error of 16 is much more important than reducing, say, 16 errors of size 1."
+    },
+    {
+        "timestamp": "00:05:23",
+        "text": "Viewed another way, mean squared error is in some senses equivalent to a Gaussian assumption on error residuals."
+    },
+    {
+        "timestamp": "00:05:29",
+        "text": "And if we look at the histogram of error residuals in this model, it's clearly not Gaussian."
+    },
+    {
+        "timestamp": "00:05:35",
+        "text": "There's one mode over here near 0, and another mode over here."
+    },
+    {
+        "timestamp": "00:05:41",
+        "text": "It's extremely far away, far out in the tails and outlier."
+    },
+    {
+        "timestamp": "00:05:47",
+        "text": "If we optimize our model to minimize mean squared error with this data point included, we'll get a significant distortion in the model."
+    },
+    {
+        "timestamp": "00:05:53",
+        "text": "So instead of learning the black line, we'll learn the blue line, because reducing the error on this..."
+    },
+    {
+        "timestamp": "00:05:59",
+        "text": "large squared error is extremely important and is worthwhile to distort ourselves from several of these other things that have smaller error."
+    },
+    {
+        "timestamp": "00:06:06",
+        "text": "So now let's see how a different loss function might behave."
+    },
+    {
+        "timestamp": "00:06:13",
+        "text": "Suppose instead of the mean squared error, we look at the mean absolute error, sometimes called the L1 error."
+    },
+    {
+        "timestamp": "00:06:19",
+        "text": "So the sum or average of absolute differences between the target and our prediction."
+    },
+    {
+        "timestamp": "00:06:26",
+        "text": "So here again in black is our squared error minimum using the original data points."
+    },
+    {
+        "timestamp": "00:06:33",
+        "text": "If we fit this using mean absolute error instead, we get the green line, which is quite similar and still a quite good looking fit to the data."
+    },
+    {
+        "timestamp": "00:06:40",
+        "text": "If we now include this outlier and retrain using the mean absolute error, we find that we get very little distortion."
+    },
+    {
+        "timestamp": "00:06:46",
+        "text": "So in this case, we still have an error of 16, but we don't square that."
+    },
+    {
+        "timestamp": "00:06:53",
+        "text": "So the error of 16 is worth the..."
+    },
+    {
+        "timestamp": "00:07:00",
+        "text": "same amount as 16 smaller errors of size 1."
+    },
+    {
+        "timestamp": "00:07:07",
+        "text": "So it's not as important to our optimization procedure to reduce this big error."
+    },
+    {
+        "timestamp": "00:07:15",
+        "text": "We often visualize the behavior of our loss functions by showing the total loss as a function of the error magnitude."
+    },
+    {
+        "timestamp": "00:07:22",
+        "text": "So we find that mean squared error increases quadratically, so that small errors are relatively unimportant, but outliers or extreme large errors have a very big impact."
+    },
+    {
+        "timestamp": "00:07:30",
+        "text": "Mean absolute error, on the other hand, the red curve, increases only linearly, so large outlier errors will have less impact."
+    },
+    {
+        "timestamp": "00:07:37",
+        "text": "If we really want to reduce large errors, we could even design an alternative loss function that accounts for this."
+    },
+    {
+        "timestamp": "00:07:45",
+        "text": "So for example, this blue one, which looks quadratic near zero, but as we get to higher and higher errors, asymptotes to some constant value."
+    },
+    {
+        "timestamp": "00:07:52",
+        "text": "So that no matter how wrong our prediction, no matter how large the error, the value in our"
+    },
+    {
+        "timestamp": "00:08:00",
+        "text": "our loss function will be bounded by some constant."
+    },
+    {
+        "timestamp": "00:08:07",
+        "text": "Of course, optimizing these more arbitrary loss functions means that we can no longer use a closed form solution the way we did with mean squared error."
+    },
+    {
+        "timestamp": "00:08:14",
+        "text": "But we can still optimize our loss function using something like gradient descent."
+    }
+]

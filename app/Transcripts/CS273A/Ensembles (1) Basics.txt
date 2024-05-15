@@ -1,0 +1,45 @@
+00:00:00 Ensembl methods in machine learning are a kind of meta-algorithm that makes use of other machine learning algorithms as a component to learn a collection of predictors.
+00:00:08 Ensembl methods take the attitude that more predictors can be better than any single one, and by learning many we can do a better job.
+00:00:17 An Ensembl combines many predictors, often through some weighted average or weighted combination, and these might be of the same kind of learner or of different types.
+00:00:25 So Ensembls might be used to combine many different kinds of predictors, like a neural network, a support vector machine, and the decision tree, if we didn't know what the best kind of predictor or what type of predictor would be best for this problem.
+00:00:34 They can also be used to compute collections of the same type of learner.
+00:00:42 We'll see several examples, like bagging and boosting, that use a single kind of learner, but many instances to try to do a better job.
+00:00:51 One view of Ensembl learning is related to a psychological phenomenon
+00:00:59 known as the wisdom of the crowds.
+00:01:10 Most of us have probably seen the show Who Wants to Be a Millionaire, where a series of contestants are asked multiple choice questions testing their knowledge of trivia.
+00:01:20 In that show, there are several ways of getting assistance, one of which is phoning a predetermined friend who is presumably someone very good or very smart, someone who knows a lot of trivia, and the other where you poll the audience, which is asking a collection of 100 people who had nothing better to do than show up to the game show.
+00:01:30 Yet, if you actually watch the show, you'll see a strange phenomenon.
+00:01:40 The phone a friend is often wrong, but asking the audience is almost never wrong.
+00:01:50 Somehow, a collection of 100 non-experts turns out to be a far better predictor of the correct answer than the prediction of the one predetermined expert.
+00:02:00 that the contestant was able to select.
+00:02:05 Fundamentally, this is what ensembles try to do.
+00:02:10 They take a collection of OK predictors and try to combine them into something far more powerful.
+00:02:16 The simplest kind of ensemble is simply a committee or unweighted average.
+00:02:21 If we're doing regression, we'd do something like an unweighted average of the predictions.
+00:02:27 If we're doing classification, we might do a majority vote.
+00:02:32 This is probably the simplest way combining a collection of predictions.
+00:02:38 More generally, you could think about using weighted averages.
+00:02:43 For example, we might believe that some of our predictors are better or more accurate than others, and we'd like to give them higher weight than the lower quality performances.
+00:02:49 So a simple example of this, suppose we had a collection of predictors F1, F2, F3, and so on, and they produced predictions Y1, Y2, Y hat 1, Y hat 2, and so on.
+00:02:54 We might try to combine these by giving them each some.
+00:03:00 weight, alpha i, and if the classes are, say, plus and minus 1, we could just add up the weighted sum, weighted signed sum of our predictions.
+00:03:12 And if a greater weight preferred plus 1, this would be positive, and if a greater weight preferred minus 1, it would be negative, so we'd take the sign of that to be our prediction.
+00:03:24 Even more generally, we could take these predictions as being features of some other predictor.
+00:03:36 So we simply learn our predictors, F1 through Fk, as best we can, and then we could just combine them using some entirely new predictor, FeF ensemble, that takes the output of those initial predictors and tries to use them to produce a better predictor, y hat.
+00:03:48 So this is quite similar to the idea in multilayer perceptrons, where we have one layer of predictors, let's say perceptrons, F1 through Fk, producing features for a...
+00:04:00 another layer of prediction, except that unlike multi-layer perceptrons where all the layers are going to be trained simultaneously, here we're going to just train the individual predictors once and then we'll try to combine them using a post-processing prediction step.
+00:04:15 In the case that the Y-hats are binary, like plus minus one, and our ensemble predictor Fe is linear, this will arrive at a weighted vote, but it would give you perhaps a way to train the weights of that weighted vote in a principled way.
+00:04:30 I should mention that if you are planning on training the ensemble weights or the ensemble predictor Fe, you should probably either use validation data or some separated out data, since if F1 through Fk have used the same data as Fe, Fe will simply choose the one that overfits the data the most.
+00:04:45 So for instance, if one of the FIs is...
+00:05:00 nearest neighbor predictor, it'll get all of the training data correct, and then FE will decide to trust it entirely if it's trained on the same data.
+00:05:08 So, it should be trained on some validation data.
+00:05:17 Even more generally, the concept of mixtures of experts produces ensembles of predictors or ensembles of models that make the weights perhaps depend on X.
+00:05:25 So, mixture of experts have some weight, alpha i, that might be a function of the feature X, and that weight indicates their expertise.
+00:05:34 And depending on the work, some mixtures of experts use a weighted average, some just use the majority, the largest value as the most confident expert.
+00:05:42 And what this will do is provide a model that is a mixture of other models.
+00:05:51 So, for instance, here we have some training data, and we've fit a model consisting of three linear predictors.
+00:06:00 Each of which is capable of doing a good job of predicting, but only on some narrow regime of x.
+00:06:10 So here we would learn perhaps a function alpha i of x that would tell us which region we're in, and which of our experts we should use, and learn the experts to fit that region.
+00:06:21 So these models are usually trained in a simultaneous way, where we're simultaneously trying to figure out what region the model should be an expert in, and also what the job of that expert should be.
+00:06:31 So this will connect to mixture models when we see that in unsupervised learning.
+00:06:42 For the near future, though, we'll concentrate mostly on simple weights, simple scalar weights on the experts, and weighted averages or weighted votes.

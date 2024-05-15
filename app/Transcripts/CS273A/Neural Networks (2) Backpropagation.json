@@ -1,0 +1,422 @@
+[
+    {
+        "timestamp": "00:00:00",
+        "text": "In these slides, we'll discuss training neural networks using gradient descent, which goes by the special name of backpropagation in the neural network literature."
+    },
+    {
+        "timestamp": "00:00:06",
+        "text": "Recall our neural network model."
+    },
+    {
+        "timestamp": "00:00:13",
+        "text": "We observe some features x in the input layer, which are used to compute the value of a collection of hidden nodes."
+    },
+    {
+        "timestamp": "00:00:20",
+        "text": "These hidden nodes then become inputs for the next layer, and so on, to a possibly vector-valued output layer y hat."
+    },
+    {
+        "timestamp": "00:00:26",
+        "text": "We'll measure the error in our prediction via a mean-squared error between the prediction y hat and the observed target vector y."
+    },
+    {
+        "timestamp": "00:00:33",
+        "text": "We could easily change this if we want."
+    },
+    {
+        "timestamp": "00:00:40",
+        "text": "Our training problem, then, is to select values for the weights at all layers to minimize the mean-squared error."
+    },
+    {
+        "timestamp": "00:00:46",
+        "text": "This is an extension of our single-layer perceptron model, in which we used a logistic sigmoid nonlinearity."
+    },
+    {
+        "timestamp": "00:00:53",
+        "text": "This ensures that our optimization will be smooth and differentiable, allowing us to optimize the weights using either batch or stochastic..."
+    },
+    {
+        "timestamp": "00:00:59",
+        "text": "online gradient descent."
+    },
+    {
+        "timestamp": "00:01:05",
+        "text": "The backpropagation algorithm simply applies gradient descent to the neural network cascade of weights."
+    },
+    {
+        "timestamp": "00:01:10",
+        "text": "It's fundamentally simply an application of the chain rule calculus over and over."
+    },
+    {
+        "timestamp": "00:01:16",
+        "text": "We'll write some notation here."
+    },
+    {
+        "timestamp": "00:01:21",
+        "text": "The loss function is the sum of squared errors over the output vector, which we'll index with k."
+    },
+    {
+        "timestamp": "00:01:27",
+        "text": "The output layer is a smooth nonlinearity sigma of a linear response sk."
+    },
+    {
+        "timestamp": "00:01:32",
+        "text": "So sk is a weighted linear combination of the hidden nodes."
+    },
+    {
+        "timestamp": "00:01:38",
+        "text": "And finally, the hidden nodes are an activation function of a linear response t, which is a weighted combination of the input features."
+    },
+    {
+        "timestamp": "00:01:43",
+        "text": "Now we can take the derivative of the loss j with respect to one of the parameters."
+    },
+    {
+        "timestamp": "00:01:49",
+        "text": "Let's say a weight in the second layer, denoted w2, is equal to w1, where w1 is the input feature, and w2 is the output feature, and w1 is the activation function of w1."
+    },
+    {
+        "timestamp": "00:01:54",
+        "text": "So we can take the derivative of the loss j with respect to one of the parameters, w1, with respect to one of the parameters, w2, with respect to one of the parameters, w1."
+    },
+    {
+        "timestamp": "00:01:59",
+        "text": "sub kj, the weight of the second layer between hidden node j and output node k."
+    },
+    {
+        "timestamp": "00:02:15",
+        "text": "Following the chain rule on the lost j, we get, here's the definition, we get the sum over output nodes, the derivative of y minus y hat squared is just y minus y hat, times the derivative of the interior, which is minus the derivative of y hat, so that's dy hat."
+    },
+    {
+        "timestamp": "00:02:30",
+        "text": "When we look at the definition of y hat, it's sigma of sk, so we get the slope of sigma at point sk times the derivative of sk, and sk is just linear in the weights, so we get the hidden value hj."
+    },
+    {
+        "timestamp": "00:02:45",
+        "text": "Notably, so far, this is exactly the same derivation that we had for logistic mean squared error regression, since a single layer, given the values of h, is just a perceptron with a logistic..."
+    },
+    {
+        "timestamp": "00:03:00",
+        "text": "sigmoid on the output."
+    },
+    {
+        "timestamp": "00:03:12",
+        "text": "Now let's take the derivative with respect to a different weight, say one at the first layer, W1 sub ji, so the weight between input node xi and hidden node hj."
+    },
+    {
+        "timestamp": "00:03:24",
+        "text": "Following the chain rule, we take the derivative of j, we get a bunch of y minus y hat terms times the derivative of the y hats."
+    },
+    {
+        "timestamp": "00:03:36",
+        "text": "As before, the derivative of y hat is just the slope sigma prime at value sk times the derivative of sk, but now sk depends on weight the weights in the first layer through the hidden node value h, so we get Wkj times the derivative of hj."
+    },
+    {
+        "timestamp": "00:03:48",
+        "text": "Finally, hj depends on the weights at the slope"
+    },
+    {
+        "timestamp": "00:04:00",
+        "text": "slope of sigma at point tj times the derivative of the interior, which is just xi."
+    },
+    {
+        "timestamp": "00:04:15",
+        "text": "We can notice that in the second computation, we use this term, y minus y hat times the slope of sigma at sk, but we already computed this value when we were computing the derivatives of layer 2."
+    },
+    {
+        "timestamp": "00:04:30",
+        "text": "So we can reuse it here, we'll just call it beta at layer 2 sub k, propagating the derivative values backward to the previous layer."
+    },
+    {
+        "timestamp": "00:04:45",
+        "text": "If we had another, even earlier layer, it would involve terms that included the sum over k of y minus y hat sigma prime sk wk sigma prime of tj, and we could save those values and propagate them backward."
+    },
+    {
+        "timestamp": "00:05:00",
+        "text": "again to an earlier layer."
+    },
+    {
+        "timestamp": "00:05:07",
+        "text": "This gives gradient descent its popular name backpropagation."
+    },
+    {
+        "timestamp": "00:05:15",
+        "text": "In code, this is usually implemented as an easy recursion, as we compute the beta terms and derivatives recursively starting with the last layer and moving backwards to the first."
+    },
+    {
+        "timestamp": "00:05:22",
+        "text": "So let's suppose there are N3 output nodes, N2 hidden nodes, and N1 input nodes."
+    },
+    {
+        "timestamp": "00:05:30",
+        "text": "Then the beta values at layer 2, B2, are just Y hat times the derivative of sigma at value S."
+    },
+    {
+        "timestamp": "00:05:37",
+        "text": "So this is a vector indexed by node K, so it's length N3."
+    },
+    {
+        "timestamp": "00:05:45",
+        "text": "We can then use this to compute the gradient of the weights at layer 2."
+    },
+    {
+        "timestamp": "00:05:52",
+        "text": "This is a matrix, so this is an outer product between B2 and H."
+    },
+    {
+        "timestamp": "00:06:00",
+        "text": "So, it's a matrix of size N3 by N2, which is the same size as the weight matrix of the second layer."
+    },
+    {
+        "timestamp": "00:06:07",
+        "text": "We can use the betas at layer 2 to also compute the betas at layer 1 as beta 2 times weight 2."
+    },
+    {
+        "timestamp": "00:06:15",
+        "text": "So, that sums over K and size N3, that's the output node index."
+    },
+    {
+        "timestamp": "00:06:22",
+        "text": "And then multiplying by the slope of the activation, d sigma, at value T."
+    },
+    {
+        "timestamp": "00:06:30",
+        "text": "So, that sums over K giving a vector of length N2, and then it's an element-wise product by another vector of length N2."
+    },
+    {
+        "timestamp": "00:06:37",
+        "text": "So, we get beta being the size of the number of hidden nodes."
+    },
+    {
+        "timestamp": "00:06:45",
+        "text": "And finally, the gradient of the weights at the earlier layer is then beta 1 times the input features X."
+    },
+    {
+        "timestamp": "00:06:52",
+        "text": "So, that'll be a matrix that's the same size as the weight."
+    },
+    {
+        "timestamp": "00:07:00",
+        "text": "matrix, so it's N2 times N1 plus 1."
+    },
+    {
+        "timestamp": "00:07:10",
+        "text": "Actually, the H matrix here should have also had the constant feature, so that this gradient should also have been N3 by N2 plus 1."
+    },
+    {
+        "timestamp": "00:07:20",
+        "text": "Overall, this gives us the gradient of the entire system, which is just the gradient of the weights at the second and first layer together."
+    },
+    {
+        "timestamp": "00:07:30",
+        "text": "Using this gradient, we can do gradient descent or stochastic gradient descent just by repeatedly updating our parameter vectors and recomputing the gradient."
+    },
+    {
+        "timestamp": "00:07:40",
+        "text": "Just as a simple example of what a neural network regression model might look like, here's a two-layer model trained on some data from the UCI repository, the motorcycle data set."
+    },
+    {
+        "timestamp": "00:07:50",
+        "text": "So the model consists of one hidden layer with 10 nodes with logistic sigma activation functions, followed by an output layer."
+    },
+    {
+        "timestamp": "00:08:00",
+        "text": "with a linear activation so that we get a regression."
+    },
+    {
+        "timestamp": "00:08:08",
+        "text": "After training, the hidden nodes activations are plotted down here at the bottom."
+    },
+    {
+        "timestamp": "00:08:17",
+        "text": "And you can see that they act to segment the original feature space X into different regions with the hidden nodes effectively acting like step function detectors."
+    },
+    {
+        "timestamp": "00:08:25",
+        "text": "So then, a linear combination of these hidden node values can produce this output function, which we can see is hiding nonlinear in the original feature space X."
+    },
+    {
+        "timestamp": "00:08:34",
+        "text": "Here's another simple example that shows the actual optimization process during gradient descent for a classifier using two features of the Iris dataset."
+    },
+    {
+        "timestamp": "00:08:42",
+        "text": "So we're optimizing the mean squared error of an output vector, which is a 1 of k representation of the three classes, using stochastic gradient descent."
+    },
+    {
+        "timestamp": "00:08:51",
+        "text": "And the values of the optimization, the mean squared error..."
+    },
+    {
+        "timestamp": "00:08:59",
+        "text": "are shown in blue."
+    },
+    {
+        "timestamp": "00:09:05",
+        "text": "The gradient descent takes steps changing theta, which decreases that overall MSE with every step."
+    },
+    {
+        "timestamp": "00:09:11",
+        "text": "At the same time, we can take the output and threshold it and use that as a classification decision and evaluate the error rate of that classification decision."
+    },
+    {
+        "timestamp": "00:09:17",
+        "text": "So, this is shown in green."
+    },
+    {
+        "timestamp": "00:09:23",
+        "text": "You can see that these aren't perfectly related, right?"
+    },
+    {
+        "timestamp": "00:09:29",
+        "text": "The mean squared error is acting as a surrogate for the harder-to-optimize classification loss."
+    },
+    {
+        "timestamp": "00:09:35",
+        "text": "But typically, improving the MSE of the prediction also improves the error rate of the classification."
+    },
+    {
+        "timestamp": "00:09:41",
+        "text": "So, the trained classification boundaries are shown over here."
+    },
+    {
+        "timestamp": "00:09:47",
+        "text": "You can see they're somewhat nonlinear versions of the original features."
+    },
+    {
+        "timestamp": "00:09:53",
+        "text": "In practice, neural networks provide complex, highly flexible input-output behavior for a variety of classification tasks."
+    },
+    {
+        "timestamp": "00:09:59",
+        "text": "by Professor Jeff Hinton of a Deep Belief Network."
+    },
+    {
+        "timestamp": "00:10:09",
+        "text": "More precisely, I think this demo is actually a Deep Boltzmann machine, which he's made available as an online demonstration."
+    },
+    {
+        "timestamp": "00:10:19",
+        "text": "The task here is to classify handwritten digits from a U.S. Postal Service data set, USPS, identifying which of the 10 digits is written in each patch of image."
+    },
+    {
+        "timestamp": "00:10:29",
+        "text": "So the input features X are a 16 by 16 pixel image, so 784 pixels, and the network has four layers."
+    },
+    {
+        "timestamp": "00:10:39",
+        "text": "So shown are the response values, the post activation function values of the hidden layer 1, the second hidden layer, the third hidden layer, and the output layer."
+    },
+    {
+        "timestamp": "00:10:49",
+        "text": "The first hidden layer is 500 nodes, the second one is the same size, the third one is larger at 2,000 nodes, and then"
+    },
+    {
+        "timestamp": "00:10:59",
+        "text": "And the output layer is using a 1 of k representation for our 10 digits, so it's a vector of length 10."
+    },
+    {
+        "timestamp": "00:11:09",
+        "text": "So in this input, we input a handwritten 2 as an image, compute the activation function at the first, then second, then third layers, then the output layer, and choose the largest response as our decision."
+    },
+    {
+        "timestamp": "00:11:19",
+        "text": "Here it outputs, predicts 0, 0, 1, 0, 0, or which is a 2, since the 1 is in the position of the 2 digit."
+    },
+    {
+        "timestamp": "00:11:29",
+        "text": "If we input a different image patch, we can recompute the output at each layers and the output."
+    },
+    {
+        "timestamp": "00:11:39",
+        "text": "Here we input a 6, and after passing it through the network, the prediction correctly predicts a 1 in the 6 position."
+    },
+    {
+        "timestamp": "00:11:49",
+        "text": "Interestingly, the actual model being used here is capable..."
+    },
+    {
+        "timestamp": "00:11:59",
+        "text": "of being interpreted as a probability distribution as well."
+    },
+    {
+        "timestamp": "00:12:09",
+        "text": "So the demo program actually will allow you to fix an output configuration, say 0, and then do a process which approximately samples from the values of the rest of the system."
+    },
+    {
+        "timestamp": "00:12:19",
+        "text": "Here that lets you draw a sample from the input vector which the model thinks might have generated this output."
+    },
+    {
+        "timestamp": "00:12:29",
+        "text": "And here it's drawn an awkward but recognizable synthetic 0, which suggests that the resulting probability distribution defined by this model does have some idea of what makes, say, a 0 in appearance different from other possible values."
+    },
+    {
+        "timestamp": "00:12:39",
+        "text": "So this particular variety of neural network, Boltzmann machine, is actually interpretable as a generative model over the features as well."
+    },
+    {
+        "timestamp": "00:12:49",
+        "text": "If you're interested in neural networks, there's quite a lot more to learn and do than we cover in this class."
+    },
+    {
+        "timestamp": "00:12:59",
+        "text": "This is a very active area of research these days."
+    },
+    {
+        "timestamp": "00:13:06",
+        "text": "To try things out, I would probably suggest the Deep Learning Toolbox, which is available on GitHub as open source code."
+    },
+    {
+        "timestamp": "00:13:13",
+        "text": "It's written for MATLAB and Octave, and it's a good starting place for exploring and testing out some of the methods that are popular right now."
+    },
+    {
+        "timestamp": "00:13:19",
+        "text": "There are also other open source toolkits available."
+    },
+    {
+        "timestamp": "00:13:26",
+        "text": "Notably, there's one that's supplied with MATLAB, but it requires the purchase of the Neural Network Toolbox and your license."
+    },
+    {
+        "timestamp": "00:13:33",
+        "text": "Or there's an older code base called NetLab, which was widely used at one point, but hasn't been updated for a while."
+    },
+    {
+        "timestamp": "00:13:39",
+        "text": "In summary, neural networks, or multilayer perceptrons, provide an extremely flexible class of functions."
+    },
+    {
+        "timestamp": "00:13:46",
+        "text": "They're built up from a cascade of several layers, each of which is a collection of simple linear responses with a nonlinear activation function, essentially a perceptron model."
+    },
+    {
+        "timestamp": "00:13:53",
+        "text": "The hidden layers of the model can be interpreted as designing good features."
+    },
+    {
+        "timestamp": "00:13:59",
+        "text": "the original output that can then be used by the output layer perceptron classifier."
+    },
+    {
+        "timestamp": "00:14:08",
+        "text": "When more than one layer is used, the resulting neural network becomes a general function approximator."
+    },
+    {
+        "timestamp": "00:14:16",
+        "text": "In other words, it's capable of approximating any function given enough nodes, or in other words, tunable features."
+    },
+    {
+        "timestamp": "00:14:24",
+        "text": "We can use this functional framework either for classification or for regression."
+    },
+    {
+        "timestamp": "00:14:32",
+        "text": "Because each layer is smooth and differentiable, we can train the overall system using gradient descent methods, which we derived using the chain rule."
+    },
+    {
+        "timestamp": "00:14:40",
+        "text": "Furthermore, because this computation can be ordered from last layer to first, reusing some of the computation at the previous layer, gradient descent in neural network models is usually called backpropagation."
+    }
+]

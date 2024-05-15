@@ -1,0 +1,758 @@
+[
+    {
+        "timestamp": "00:00:00",
+        "text": "In these slides, we'll discuss some background on random variables and probability."
+    },
+    {
+        "timestamp": "00:00:07",
+        "text": "In computer science, it's often tempting to think of everything as very predictable, with binary outcomes in every condition either true or false."
+    },
+    {
+        "timestamp": "00:00:15",
+        "text": "But in machine learning, we're interfacing computers into data and the real world."
+    },
+    {
+        "timestamp": "00:00:22",
+        "text": "And in that case, these things may become much more complicated."
+    },
+    {
+        "timestamp": "00:00:30",
+        "text": "In fact, real world systems contain quite a bit of uncertainty."
+    },
+    {
+        "timestamp": "00:00:37",
+        "text": "This uncertainty may be due to true inherent randomness, such as games of chance, or it might be due to overwhelming complexity in the system, or even just a lack of knowledge about how that complexity operates."
+    },
+    {
+        "timestamp": "00:00:45",
+        "text": "Think of understanding traffic patterns in a large urban region."
+    },
+    {
+        "timestamp": "00:00:52",
+        "text": "It might be that if we had perfect knowledge of everyone in the system, where they live, where they work, when they leave for work, how fast and how aggressively they drive, it might be that the traffic patterns would be no surprise at all and not be..."
+    },
+    {
+        "timestamp": "00:01:00",
+        "text": "random at all, but in fact that kind of information is impossible, and so it's far easier to sweep that kind of thing under the rug and simply call it random."
+    },
+    {
+        "timestamp": "00:01:08",
+        "text": "When making predictions and decisions we simply can't get by without representing and reasoning about uncertainty."
+    },
+    {
+        "timestamp": "00:01:17",
+        "text": "For example, consider trying to decide when to leave for the airport."
+    },
+    {
+        "timestamp": "00:01:25",
+        "text": "There's a high cost to being late and a low cost to being early, so it's no good to just know the average amount of time it takes to get there."
+    },
+    {
+        "timestamp": "00:01:34",
+        "text": "Instead we need to know the distribution of times so that we can select something that will accurately balance our need to not be late with our desire to not be too early."
+    },
+    {
+        "timestamp": "00:01:42",
+        "text": "Systems tend to be like this."
+    },
+    {
+        "timestamp": "00:01:51",
+        "text": "Unless we reason and represent and communicate uncertainty from one subsystem to the next, it'll be very easy for a later subsystem to make a bad decision because it's operating without complete knowledge of the"
+    },
+    {
+        "timestamp": "00:01:59",
+        "text": "uncertainty in the estimates of some other part."
+    },
+    {
+        "timestamp": "00:02:10",
+        "text": "So given that we need to represent uncertainty in some way, why should we use probability?"
+    },
+    {
+        "timestamp": "00:02:20",
+        "text": "It turns out that there's a result from 1946 that under fairly mild conditions, any system that expresses a degree of belief can be mapped into probability space."
+    },
+    {
+        "timestamp": "00:02:30",
+        "text": "In fact, the Bayesian viewpoint of probability explicitly takes this notion of degree of belief."
+    },
+    {
+        "timestamp": "00:02:40",
+        "text": "Moreover, another classic result from De Finetti tells us that if we try to make bets with probabilities that do not follow the laws of probability, there's always a way to construct bets such that one is always beaten."
+    },
+    {
+        "timestamp": "00:02:50",
+        "text": "So in particular, probability will give us a natural way to try to describe our assumptions about the system in concrete mathematical terms and give us rules for how to combine information and make predictions."
+    },
+    {
+        "timestamp": "00:03:00",
+        "text": "in a concise and clear way."
+    },
+    {
+        "timestamp": "00:03:05",
+        "text": "In probability, we'll think about an event A and some event space S."
+    },
+    {
+        "timestamp": "00:03:10",
+        "text": "And the event A can be anything which might or might not happen."
+    },
+    {
+        "timestamp": "00:03:15",
+        "text": "So for example, the statement, I'll have a hangover tomorrow, might or might not be true."
+    },
+    {
+        "timestamp": "00:03:20",
+        "text": "That's an event."
+    },
+    {
+        "timestamp": "00:03:25",
+        "text": "The statement, I have a hangover, might or might not be true, at least as far as you know."
+    },
+    {
+        "timestamp": "00:03:30",
+        "text": "The statement, I have hantavirus, might or might not be true."
+    },
+    {
+        "timestamp": "00:03:35",
+        "text": "These are all events and they live in some space of possibilities."
+    },
+    {
+        "timestamp": "00:03:40",
+        "text": "The probability of some event, PR of A, essentially counts what the chance that A is true is."
+    },
+    {
+        "timestamp": "00:03:45",
+        "text": "So you can think of this as perhaps being something like the number of universes or the number of worlds in which A would happen."
+    },
+    {
+        "timestamp": "00:03:50",
+        "text": "This is essentially a measure, kind of like area."
+    },
+    {
+        "timestamp": "00:03:55",
+        "text": "If you think of perhaps listing out every possible outcome that could possibly happen."
+    },
+    {
+        "timestamp": "00:04:00",
+        "text": "this would be counting the number of such outcomes."
+    },
+    {
+        "timestamp": "00:04:08",
+        "text": "You can sort of think of it in that term, and I'll draw things over here that indicate that kind of intuition."
+    },
+    {
+        "timestamp": "00:04:17",
+        "text": "So the space S of everything that can possibly happen, and the space in which the outcome A is true is some subset of that space."
+    },
+    {
+        "timestamp": "00:04:25",
+        "text": "Probability is defined by a relatively few number of axioms."
+    },
+    {
+        "timestamp": "00:04:34",
+        "text": "The first axiom tells us that the probability of any event A must be greater than zero, greater than or equal to zero, and that just tells us that the size of this set in which A is true cannot get any smaller than size zero, in which case there are no worlds or universes in which A is true."
+    },
+    {
+        "timestamp": "00:04:42",
+        "text": "Similarly, the probability of an event A cannot get any larger than one."
+    },
+    {
+        "timestamp": "00:04:51",
+        "text": "We define the size of the entire space."
+    },
+    {
+        "timestamp": "00:04:59",
+        "text": "S to be 1."
+    },
+    {
+        "timestamp": "00:05:07",
+        "text": "And the set in which A is true can't get any larger than the set of all possible worlds."
+    },
+    {
+        "timestamp": "00:05:14",
+        "text": "And so 100% of those might have A true, in which case the probability of A would be at most 1."
+    },
+    {
+        "timestamp": "00:05:22",
+        "text": "The last axiom tells us how to compute the probability of overlaps or unions of regions."
+    },
+    {
+        "timestamp": "00:05:29",
+        "text": "Particular, it says that the probability of the union of two events, A union B, is the sum of their individual probabilities minus the sum of their intersection."
+    },
+    {
+        "timestamp": "00:05:37",
+        "text": "Again, an intuition resorting to area will help us out here."
+    },
+    {
+        "timestamp": "00:05:44",
+        "text": "Considering the set A here of worlds in which event A is true, another set B of worlds in which B is true, then the area of A union B is simply the area of A plus the area of B minus the area of their intersection."
+    },
+    {
+        "timestamp": "00:05:52",
+        "text": "For the most part, we'll be focusing on random variables."
+    },
+    {
+        "timestamp": "00:05:59",
+        "text": "which are a particularly useful representation of events."
+    },
+    {
+        "timestamp": "00:06:08",
+        "text": "A random variable X you can think of as taking on a finite set of values, say S, partitioning into A1 through AD."
+    },
+    {
+        "timestamp": "00:06:17",
+        "text": "The outcomes of X partition the space S into a disjoint and exhaustive set."
+    },
+    {
+        "timestamp": "00:06:25",
+        "text": "What this means is that X will take on one and exactly one of these possible outcomes."
+    },
+    {
+        "timestamp": "00:06:34",
+        "text": "So over here I have a diagram of our entire event space S and it's been partitioned into the set in which X takes on value 1, value 2, and value 3."
+    },
+    {
+        "timestamp": "00:06:42",
+        "text": "We can then define a probability mass function or PMF that defines a measure on this subset of S and in particular we can do that simply by defining the probability that random variable X takes on each value for each of these values."
+    },
+    {
+        "timestamp": "00:06:51",
+        "text": "And then because these sets are disjoint, the probability..."
+    },
+    {
+        "timestamp": "00:06:59",
+        "text": "probability that X takes on a value in any subset will simply be the sum of the probabilities of its individual possible values."
+    },
+    {
+        "timestamp": "00:07:06",
+        "text": "So this tells us that we can define the probability mass function on a variable X simply by defining the probabilities associated with each one of its possible outcomes."
+    },
+    {
+        "timestamp": "00:07:13",
+        "text": "And these things have a few constraints."
+    },
+    {
+        "timestamp": "00:07:19",
+        "text": "So the probability of any given outcome must be greater than or equal to zero for the same reason as before."
+    },
+    {
+        "timestamp": "00:07:26",
+        "text": "They must be less than or equal to one."
+    },
+    {
+        "timestamp": "00:07:33",
+        "text": "And the sum over all possible outcomes must be equal to one."
+    },
+    {
+        "timestamp": "00:07:39",
+        "text": "So this tells us the probability of all outcomes totally must be one and all of them must be positive."
+    },
+    {
+        "timestamp": "00:07:46",
+        "text": "It will also be useful to think about more than one variable at a time."
+    },
+    {
+        "timestamp": "00:07:53",
+        "text": "So first of all, we'll typically abbreviate the probability that random variable to X takes on value little x."
+    },
+    {
+        "timestamp": "00:08:00",
+        "text": "as just P of X."
+    },
+    {
+        "timestamp": "00:08:07",
+        "text": "This is a slight abusive notation, but it should be fairly clear from the notation."
+    },
+    {
+        "timestamp": "00:08:15",
+        "text": "So each variable represents a partitioning of the entire event space."
+    },
+    {
+        "timestamp": "00:08:22",
+        "text": "So random variable X partitions the space into the outcomes where it takes on value one, value two, or value three."
+    },
+    {
+        "timestamp": "00:08:30",
+        "text": "A different random variable Y might partition the space into areas where it takes on values B1, B2, and B3."
+    },
+    {
+        "timestamp": "00:08:37",
+        "text": "And so then the joint distribution is a probability distribution over X and Y together."
+    },
+    {
+        "timestamp": "00:08:45",
+        "text": "And by P of XY, we mean the probability that random variable X takes on value little x and random variable Y takes on value little y."
+    },
+    {
+        "timestamp": "00:08:52",
+        "text": "And since each of these are partitionings of the space S, X equals X and Y equals Y together is some finer partitioning of S in which some."
+    },
+    {
+        "timestamp": "00:09:00",
+        "text": "region of the graph has X1 equal to A and Y1 equal to B."
+    },
+    {
+        "timestamp": "00:09:07",
+        "text": "Another region of the graph might have X1 equal to A and Y equal to B, too, and so forth."
+    },
+    {
+        "timestamp": "00:09:15",
+        "text": "So the joint configuration of several variables can itself be thought of as a partitioning of S."
+    },
+    {
+        "timestamp": "00:09:22",
+        "text": "Similarly, we can write a probability mass function for X and Y together."
+    },
+    {
+        "timestamp": "00:09:30",
+        "text": "In this case, we call it the joint distribution over X and Y."
+    },
+    {
+        "timestamp": "00:09:37",
+        "text": "We can express it as a table of joint probability values where each entry of that table corresponds to the probability that X takes on value X and Y takes on value Y."
+    },
+    {
+        "timestamp": "00:09:45",
+        "text": "Similarly to before, each of these entries will be positive, and the sum over the entire table must be 1."
+    },
+    {
+        "timestamp": "00:09:52",
+        "text": "The law of total probability tells us how to relate"
+    },
+    {
+        "timestamp": "00:10:00",
+        "text": "the probability of just one variable P of X to this joint probability distribution table."
+    },
+    {
+        "timestamp": "00:10:12",
+        "text": "In particular, the probability that X takes on value little x will be the sum over all possible values of Y of the joint probability."
+    },
+    {
+        "timestamp": "00:10:24",
+        "text": "The intuition here is that some value of Y must occur, and if we don't know which one, we can simply sum over them since their events are disjoint."
+    },
+    {
+        "timestamp": "00:10:36",
+        "text": "So the probability of this outcome, the probability associated with set little x, will simply be the probability that X and Y equals 0 happen, or that X and Y equals 1 happen, or so on and so forth."
+    },
+    {
+        "timestamp": "00:10:48",
+        "text": "So in particular, if some point in this table is the joint probability of X and Y, then the entire column here summed together will be P of X, and the entire row summed together will be P of Y."
+    },
+    {
+        "timestamp": "00:11:00",
+        "text": "A useful concept is that two variables might be independent."
+    },
+    {
+        "timestamp": "00:11:12",
+        "text": "Independent variables have this table P of x, y is in fact equal to a product of a function only of x and a function only of y."
+    },
+    {
+        "timestamp": "00:11:24",
+        "text": "Similarly, we can define a conditional probability via a chain rule that the joint probability of x and y together is the marginal probability of x times the conditional probability of y given x."
+    },
+    {
+        "timestamp": "00:11:36",
+        "text": "So this says that we can decompose the probability of x and y both occurring into the probability that x occurs and any y times the probability that y occurs given that x."
+    },
+    {
+        "timestamp": "00:11:48",
+        "text": "More generally, the chain rule can be expressed in a repeated fashion, so the probability of say three variables together, x, y, z, will be the probability of one, say x, times the probability of y."
+    },
+    {
+        "timestamp": "00:12:00",
+        "text": "of y given x times the probability of z given everything up to that point, so x and y."
+    },
+    {
+        "timestamp": "00:12:07",
+        "text": "Or the probability of four variables could be expressed in a similar expansive way."
+    },
+    {
+        "timestamp": "00:12:15",
+        "text": "P of x, P of y given x, P of z given x and y, P of w given x, y, and z."
+    },
+    {
+        "timestamp": "00:12:22",
+        "text": "So each term involves conditioning on everything that's come before."
+    },
+    {
+        "timestamp": "00:12:30",
+        "text": "So think of this intuition here, that the probability that x occurs times the probability that y occurs given what we've accepted so far times the probability that z occurs given that we've accepted so far."
+    },
+    {
+        "timestamp": "00:12:37",
+        "text": "A few simple examples of classic probability mass functions."
+    },
+    {
+        "timestamp": "00:12:45",
+        "text": "A Bernoulli random variable is just a binary outcome like a coin toss."
+    },
+    {
+        "timestamp": "00:12:52",
+        "text": "So a random variable x might take on values say 0 and 1 or heads and tails."
+    },
+    {
+        "timestamp": "00:13:00",
+        "text": "case, since the probability mass function has only two possible values and they sum to one, it's parameterized by just one number."
+    },
+    {
+        "timestamp": "00:13:07",
+        "text": "So we usually write that the probability that X takes on value one is, say, P, and then the probability that X takes on its other value, zero, is just one minus P."
+    },
+    {
+        "timestamp": "00:13:15",
+        "text": "So we'll assure this that they're both positive and sum to one."
+    },
+    {
+        "timestamp": "00:13:22",
+        "text": "Another common example is the binomial distribution."
+    },
+    {
+        "timestamp": "00:13:30",
+        "text": "So binomial distribution corresponds to a collection of Bernoulli random variables summed together."
+    },
+    {
+        "timestamp": "00:13:37",
+        "text": "So, for example, if we were to flip the coin multiple times, we could ask, say, how many outcomes came up heads, rather than whether a single outcome did."
+    },
+    {
+        "timestamp": "00:13:45",
+        "text": "An extension of Bernoulli to multivariate outcomes, for example, dice, is the discrete or categorical distribution with, say, d outcomes."
+    },
+    {
+        "timestamp": "00:13:52",
+        "text": "And here, instead of"
+    },
+    {
+        "timestamp": "00:14:00",
+        "text": "If x being only 0 and 1, it can be 0 through, say, d minus 1, so that there are d possible outcomes."
+    },
+    {
+        "timestamp": "00:14:07",
+        "text": "And in that case, instead of having one value, we typically write it down as a vector of probabilities, p0 through pd minus 1, with the constraint that those numbers all sum to 1."
+    },
+    {
+        "timestamp": "00:14:15",
+        "text": "There's similarly a generalization of binomial called the multinomial, which is like rolling a die multiple times and counting how many times it came up with each value."
+    },
+    {
+        "timestamp": "00:14:22",
+        "text": "Of course, in any machine learning class, we're primarily interested in estimating quantities from data."
+    },
+    {
+        "timestamp": "00:14:30",
+        "text": "So what do we do if we get a couple of observations?"
+    },
+    {
+        "timestamp": "00:14:37",
+        "text": "How do we estimate these probabilities?"
+    },
+    {
+        "timestamp": "00:14:45",
+        "text": "Typical way is to use something called the likelihood function and to find a maximum likelihood estimator."
+    },
+    {
+        "timestamp": "00:14:52",
+        "text": "So the likelihood of written p of x parameterized by theta, some parameter."
+    },
+    {
+        "timestamp": "00:15:00",
+        "text": "It's very much like a probability distribution, except that the data, the outcome x, is fixed, and the parameter theta is what's varied."
+    },
+    {
+        "timestamp": "00:15:10",
+        "text": "So consider, for example, the Bernoulli outcome."
+    },
+    {
+        "timestamp": "00:15:20",
+        "text": "If we saw, if we had a single coin flip, and we observed that it was equal to zero, then the probability of that outcome is simply one minus theta, where theta is the probability of it getting, coming up heads."
+    },
+    {
+        "timestamp": "00:15:30",
+        "text": "So rather than regarding this as a function of x, where x could be zero and one, and they sum to one, we now regard it explicitly as a function of theta, and we fix the outcome that the first, that the coin flip came up tails."
+    },
+    {
+        "timestamp": "00:15:40",
+        "text": "If we plot this as a function of theta, it's just the one minus theta line, so it's just this red descending line."
+    },
+    {
+        "timestamp": "00:15:50",
+        "text": "Now imagine that we got, say, two observations."
+    },
+    {
+        "timestamp": "00:16:00",
+        "text": "So, our first coin flip came up tails, and our second coin flip came up heads."
+    },
+    {
+        "timestamp": "00:16:10",
+        "text": "And suppose these are independent coin flips, then the probability of these two outcomes is 1 minus theta for the tails times theta for the heads."
+    },
+    {
+        "timestamp": "00:16:20",
+        "text": "If we plot this function as a function of theta, we get this blue curve here."
+    },
+    {
+        "timestamp": "00:16:30",
+        "text": "Similarly, if we observed another heads, we would now have 2, the product of 2 theta terms times 1, 1 minus theta term, and so we get theta squared times 1 minus theta, and that would be this green curve here as you trace out theta between 0 and 1."
+    },
+    {
+        "timestamp": "00:16:40",
+        "text": "What you notice is that all of these functions have their maximal value at the empirical estimate of P."
+    },
+    {
+        "timestamp": "00:16:50",
+        "text": "So, for instance, the maximum of this function is simply at 0, and the empirical estimate is that we've gotten 1 tails for our only shot."
+    },
+    {
+        "timestamp": "00:17:00",
+        "text": "here is at a half, and we've seen exactly half of the outcomes be heads."
+    },
+    {
+        "timestamp": "00:17:06",
+        "text": "The maximum of this function, the green one, is at two-thirds, and we've seen exactly two out of three of the outcomes be heads."
+    },
+    {
+        "timestamp": "00:17:13",
+        "text": "So in fact, the maximum likelihood estimator for a Bernoulli random variable is simply the empirical estimate."
+    },
+    {
+        "timestamp": "00:17:20",
+        "text": "A histogram, which is a nice way of visualizing data, is also, in some sense, an empirical estimate of probabilities."
+    },
+    {
+        "timestamp": "00:17:26",
+        "text": "Histograms estimate a probability mass function of a variable by binning the outcomes up, so it estimates the probability of the value falling within some bin region, so a particular interval."
+    },
+    {
+        "timestamp": "00:17:33",
+        "text": "And you could think of this, again, as a maximum likelihood estimate of a probability."
+    },
+    {
+        "timestamp": "00:17:40",
+        "text": "This is the fraction of data that fell within that interval."
+    },
+    {
+        "timestamp": "00:17:46",
+        "text": "Histograms are very easy to do in MATLAB."
+    },
+    {
+        "timestamp": "00:17:53",
+        "text": "You can simply define the bin position."
+    },
+    {
+        "timestamp": "00:18:00",
+        "text": "and call the function HIST in order to construct it."
+    },
+    {
+        "timestamp": "00:18:08",
+        "text": "Continuous random variables are a bit more subtle."
+    },
+    {
+        "timestamp": "00:18:17",
+        "text": "Again, consider a disjoint and exhaustive partitioning of S, but now create one that's of some increasingly fine-detailed delta."
+    },
+    {
+        "timestamp": "00:18:25",
+        "text": "So each bin is going to be of size delta, and there will be some large number of bins out of all the possible outcomes."
+    },
+    {
+        "timestamp": "00:18:34",
+        "text": "So we know that since we've constructed this disjoint and exhaustive partitioning, if we want the probability of any outcome of a set, say some interval of this variable, then what we should do is sum together all of the bins that make up that interval and add together their probabilities."
+    },
+    {
+        "timestamp": "00:18:42",
+        "text": "But we have this effect that as the bin size starts to go to zero, the probability of falling within any particular bin also decreases to zero."
+    },
+    {
+        "timestamp": "00:18:51",
+        "text": "So bins that are becoming infinitesimally thin have incredible..."
+    },
+    {
+        "timestamp": "00:19:00",
+        "text": "probability of ending up in that bin."
+    },
+    {
+        "timestamp": "00:19:06",
+        "text": "So instead of computing something like the probability mass function, which would list out the probabilities of each outcome."
+    },
+    {
+        "timestamp": "00:19:13",
+        "text": "We instead define a density function p of x."
+    },
+    {
+        "timestamp": "00:19:20",
+        "text": "And this is just the ratio of the probability of falling in bin i of size delta, divided by the size of delta."
+    },
+    {
+        "timestamp": "00:19:26",
+        "text": "And as delta goes to zero, this ratio will not go to zero."
+    },
+    {
+        "timestamp": "00:19:33",
+        "text": "It will converge to a relative scale value, which is the probability mass function, excuse me, probability density function."
+    },
+    {
+        "timestamp": "00:19:40",
+        "text": "Then we can define the probabilities of outcomes or events A, which are sets of values, the same as before."
+    },
+    {
+        "timestamp": "00:19:46",
+        "text": "So if A is some interval or set of intervals of x, the probability of falling within region A is simply the integral of the probability density function over that region."
+    },
+    {
+        "timestamp": "00:19:53",
+        "text": "A subtle"
+    },
+    {
+        "timestamp": "00:20:00",
+        "text": "point here is that the density function P of X is not restricted in quite the same ways that the probability mass function is."
+    },
+    {
+        "timestamp": "00:20:07",
+        "text": "In particular, it can have values that are greater than 1."
+    },
+    {
+        "timestamp": "00:20:15",
+        "text": "Still all be non-negative, of course."
+    },
+    {
+        "timestamp": "00:20:22",
+        "text": "What happens is P of X can be greater than 1 on a region with a very small area, so that the integral of P of X over that region will still be less than 1."
+    },
+    {
+        "timestamp": "00:20:30",
+        "text": "The restriction of the axioms of probability was on the probability of an outcome, and so we just need for this integral of the mass function to be always less than 1."
+    },
+    {
+        "timestamp": "00:20:37",
+        "text": "So for example, a Gaussian distribution with a very thin variance can rise to a high value."
+    },
+    {
+        "timestamp": "00:20:45",
+        "text": "So here the peak value is something like 4, but if I actually integrated this function, I would find that its area was still 1."
+    },
+    {
+        "timestamp": "00:20:52",
+        "text": "The Gaussian distribution is, of course, the most classic form of a continuous..."
+    },
+    {
+        "timestamp": "00:21:00",
+        "text": "random variable and probability density function."
+    },
+    {
+        "timestamp": "00:21:10",
+        "text": "The Gaussian, or sometimes the normal distribution in one dimension, so over a single scalar random variable X, is parameterized by two numbers, the mean and the standard deviation, sigma, or sometimes the variance, sigma squared."
+    },
+    {
+        "timestamp": "00:21:20",
+        "text": "And it's just written in this form."
+    },
+    {
+        "timestamp": "00:21:30",
+        "text": "So it's an exponential e to the minus x minus the mean squared divided by sigma squared."
+    },
+    {
+        "timestamp": "00:21:40",
+        "text": "The mean tells us the center point of this symmetric bell-shaped curve and the standard deviation, sigma, tells us something about the width of that curve."
+    },
+    {
+        "timestamp": "00:21:50",
+        "text": "Perhaps not surprisingly, if you write down the likelihood function as a function of mu and sigma and find its maximum given some observations, x1 through xn, you'll find that the maximum likelihood estimate of the mean is simply the empirical mean."
+    },
+    {
+        "timestamp": "00:22:00",
+        "text": "of the data."
+    },
+    {
+        "timestamp": "00:22:06",
+        "text": "So if you want the maximum likelihood estimate, just take the empirical mean."
+    },
+    {
+        "timestamp": "00:22:12",
+        "text": "And the maximum likelihood estimate of the variance is the empirical variance."
+    },
+    {
+        "timestamp": "00:22:18",
+        "text": "So take each data point, subtract the empirical mean, and square it, and then average over those data points."
+    },
+    {
+        "timestamp": "00:22:24",
+        "text": "The Gaussian distribution can also be extended to multivariate distributions fairly easily."
+    },
+    {
+        "timestamp": "00:22:30",
+        "text": "So in this case, we define a distribution over a vector X, and it also is parameterized by mean, and now by a covariance."
+    },
+    {
+        "timestamp": "00:22:36",
+        "text": "The mean is a vector of the same size as X."
+    },
+    {
+        "timestamp": "00:22:42",
+        "text": "The covariance is a symmetric matrix that's square, and of the same size as X on each side."
+    },
+    {
+        "timestamp": "00:22:48",
+        "text": "And it's defined quite similar."
+    },
+    {
+        "timestamp": "00:22:54",
+        "text": "It's e to the minus something, where instead of X minus mu squared over sigma squared, it now becomes the vector X minus mu, times the inverse covariance"
+    },
+    {
+        "timestamp": "00:23:00",
+        "text": "matrix times the vector x minus mu."
+    },
+    {
+        "timestamp": "00:23:07",
+        "text": "So this is a dot product defined by matrix inverse sigma squared."
+    },
+    {
+        "timestamp": "00:23:15",
+        "text": "Just like in 1D, where it has a familiar bell-shaped curve, the Gaussian is also still unimodal and has a nice bell-shaped curve, but in this case, it will be a 2D function rather than a 1D function."
+    },
+    {
+        "timestamp": "00:23:22",
+        "text": "In summary, the axioms of probability give us a concrete way to represent uncertainty and reason about it as we observe information, update our beliefs."
+    },
+    {
+        "timestamp": "00:23:30",
+        "text": "Random variables define variables whose outcome is potentially known."
+    },
+    {
+        "timestamp": "00:23:37",
+        "text": "For variables with discrete numbers of outcomes, we can use probability mass functions to represent our probability distributions."
+    },
+    {
+        "timestamp": "00:23:45",
+        "text": "These will be vectors of numbers whose values will be positive and whose total will be 1, with one value for each possible outcome of the variable."
+    },
+    {
+        "timestamp": "00:23:52",
+        "text": "Examples."
+    },
+    {
+        "timestamp": "00:24:00",
+        "text": "include the Bernoulli random variables, which are coin tosses, and discrete or categorical random variables, which are things like rolling dice."
+    },
+    {
+        "timestamp": "00:24:12",
+        "text": "We also saw the concepts of joint distributions over more than one variable, say x and y."
+    },
+    {
+        "timestamp": "00:24:24",
+        "text": "The law of total probability taught us how to calculate the probability of just one outcome, say p of x, by summing over all possible values of y in the joint probability p of x and y together."
+    },
+    {
+        "timestamp": "00:24:36",
+        "text": "We also saw the chain rule, which defined conditional probability, by telling us how to calculate it in terms of the joint distribution p of x and y, and the marginal distribution p of x."
+    },
+    {
+        "timestamp": "00:24:48",
+        "text": "For continuous variables, similar concepts apply, but in this case they form probability density functions, which tell us the limiting ratio of the probability to the size of the area, the most common example of which is the Gaussian."
+    },
+    {
+        "timestamp": "00:25:00",
+        "text": "distribution, a simple bell-shaped curve."
+    }
+]

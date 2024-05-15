@@ -1,0 +1,186 @@
+[
+    {
+        "timestamp": "00:00:00",
+        "text": "Decision trees are another flexible class of functions, or learners, that are commonly used in machine learning."
+    },
+    {
+        "timestamp": "00:00:07",
+        "text": "A decision tree represents a function consisting of a series of comparisons, or if-then-else statements."
+    },
+    {
+        "timestamp": "00:00:15",
+        "text": "Each branch may lead to another comparison in branch, or to an output value."
+    },
+    {
+        "timestamp": "00:00:22",
+        "text": "We can draw this as a tree, where the outputs are the leaf nodes."
+    },
+    {
+        "timestamp": "00:00:30",
+        "text": "I'll draw true values going to the right, and false values going to the left."
+    },
+    {
+        "timestamp": "00:00:37",
+        "text": "For example, this decision tree corresponds to a function that outputs class red if feature 1 compares to greater than 0.5. If it compares to less than 0.5, we move to another decision node, where we compare feature 2 to another threshold, say in this case 0.5 again."
+    },
+    {
+        "timestamp": "00:00:45",
+        "text": "If that comparison is false, we output class blue."
+    },
+    {
+        "timestamp": "00:00:52",
+        "text": "If its output is true, we continue to yet another branch in comparison, where we look at feature 1 again, compared to a threshold 0.5."
+    },
+    {
+        "timestamp": "00:01:00",
+        "text": "And if that's true, we output red."
+    },
+    {
+        "timestamp": "00:01:06",
+        "text": "If it's false, we output blue."
+    },
+    {
+        "timestamp": "00:01:13",
+        "text": "The output for this function is given over on the right, where the first comparison, x1 greater than 0.5, leads us to determine that this entire region will predict red."
+    },
+    {
+        "timestamp": "00:01:20",
+        "text": "The second comparison, x2 greater than 0.5, leads us to make a decision in this region."
+    },
+    {
+        "timestamp": "00:01:26",
+        "text": "If x2 is less than 0.5, we decide blue, leading to blue in that entire region."
+    },
+    {
+        "timestamp": "00:01:33",
+        "text": "And finally, we compare x1 to 0.1 in the remaining region."
+    },
+    {
+        "timestamp": "00:01:40",
+        "text": "If x1 is less than 0.1, we predict blue, thus blue in that region."
+    },
+    {
+        "timestamp": "00:01:46",
+        "text": "If it's red, if it's greater, we predict red, thus red in this region here."
+    },
+    {
+        "timestamp": "00:01:53",
+        "text": "For features that have discrete values, we can do one of several things."
+    },
+    {
+        "timestamp": "00:02:00",
+        "text": "since the notion of threshold is not very meaningful."
+    },
+    {
+        "timestamp": "00:02:07",
+        "text": "Instead, we typically have a few possible options."
+    },
+    {
+        "timestamp": "00:02:15",
+        "text": "First, we could branch on all possible values of the feature."
+    },
+    {
+        "timestamp": "00:02:22",
+        "text": "So if we compare a discrete feature, x1, that has four possible values, a, b, c, and d, then perhaps we make a branch for each of those."
+    },
+    {
+        "timestamp": "00:02:30",
+        "text": "On the other hand, we may prefer to have a binary tree."
+    },
+    {
+        "timestamp": "00:02:37",
+        "text": "In that case, we might compare feature x1 and branch, say, to the left only if it equals a, and branch to the right if it equals any other value."
+    },
+    {
+        "timestamp": "00:02:45",
+        "text": "Or we might have a more general comparison where we say if x1 is in some set, say a and d, branch left, and if it's not, if it's in any other value, branch right."
+    },
+    {
+        "timestamp": "00:02:52",
+        "text": "The advantages and disadvantages of this in the left-hand case, that since everything down the far left path"
+    },
+    {
+        "timestamp": "00:03:00",
+        "text": "we'll have x1 equal to a."
+    },
+    {
+        "timestamp": "00:03:07",
+        "text": "There's never any advantage to comparing x1 to any other value below that point, because x1 will always equal a in that branch."
+    },
+    {
+        "timestamp": "00:03:15",
+        "text": "On the other hand, in the right-hand branch, many of these branches correspond to multiple possible values of x1, and thus x1 might appear again and need to be split."
+    },
+    {
+        "timestamp": "00:03:22",
+        "text": "However, in that case, we'll have a binary tree, and that may be easier for us to represent."
+    },
+    {
+        "timestamp": "00:03:30",
+        "text": "The complexity of the function of a decision tree depends on the depth of the tree."
+    },
+    {
+        "timestamp": "00:03:37",
+        "text": "For example, a depth one decision tree, which is often called a decision stump, since it's cut off at the root, is an extremely simple classifier."
+    },
+    {
+        "timestamp": "00:03:45",
+        "text": "Here we could look at only one feature, we compare to some threshold, and if the comparison is false, we output one value, and if the comparison is true, we output another value."
+    },
+    {
+        "timestamp": "00:03:52",
+        "text": "So in, for example, a two-dimensional feature space, x1, x2, this would lead to functions which partition the space up."
+    },
+    {
+        "timestamp": "00:04:00",
+        "text": "either left-right or top-bottom into two different classes."
+    },
+    {
+        "timestamp": "00:04:06",
+        "text": "Extending our decision tree to two levels leads to a more complex set of functions, since we can now compare x1 to some threshold."
+    },
+    {
+        "timestamp": "00:04:13",
+        "text": "And then within each of those domains, we can further compare x1 or x2 to another threshold."
+    },
+    {
+        "timestamp": "00:04:20",
+        "text": "And thus, we'll be partitioning our space up to four different output regions, each of which can have its own class assigned to it."
+    },
+    {
+        "timestamp": "00:04:26",
+        "text": "In general, for a tree of depth d, we can end up with up to 2 to the d regions, each of which has their own prediction in it."
+    },
+    {
+        "timestamp": "00:04:33",
+        "text": "Decision trees can be used for regression in almost exactly the same way."
+    },
+    {
+        "timestamp": "00:04:40",
+        "text": "Here, instead of outputting a discrete class value, we output a real-valued number at the leaf nodes, since our prediction y is over some real-valued set."
+    },
+    {
+        "timestamp": "00:04:46",
+        "text": "Again, the functions look essentially the same."
+    },
+    {
+        "timestamp": "00:04:53",
+        "text": "So here, we're drawing pictures with a single."
+    },
+    {
+        "timestamp": "00:05:00",
+        "text": "feature X, single feature X to predict a real value target Y."
+    },
+    {
+        "timestamp": "00:05:08",
+        "text": "And if we have a single depth, we partition that X feature space up into two parts, left and right, each of which has its own real value prediction associated with it."
+    },
+    {
+        "timestamp": "00:05:16",
+        "text": "For a depth 2 tree, we divide the feature space up into up to four regions based on thresholds."
+    },
+    {
+        "timestamp": "00:05:24",
+        "text": "So here we might have four different real value predictions."
+    }
+]

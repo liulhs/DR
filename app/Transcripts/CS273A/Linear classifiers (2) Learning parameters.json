@@ -1,0 +1,774 @@
+[
+    {
+        "timestamp": "00:00:00",
+        "text": "Now, let's turn our attention to some methods for learning the parameters for a linear classifier."
+    },
+    {
+        "timestamp": "00:00:07",
+        "text": "In learning, we're given a collection of training data, or labeled examples that show the desired relationship between the observed features and the target."
+    },
+    {
+        "timestamp": "00:00:15",
+        "text": "Our goal will be to find a set of parameters that predict well, both in training error, the performance on the training examples, and in the future, on unseen data."
+    },
+    {
+        "timestamp": "00:00:22",
+        "text": "To do this, we'll define an objective function, J of theta, for example, the classifier accuracy, which is a function of the data set and a specific value of the parameters."
+    },
+    {
+        "timestamp": "00:00:30",
+        "text": "Then we'll maximize this objective, or equivalently, we'll define a loss function such as the error rate and minimize that."
+    },
+    {
+        "timestamp": "00:00:37",
+        "text": "This is then simply an optimization procedure over the parameter space defined by theta."
+    },
+    {
+        "timestamp": "00:00:45",
+        "text": "A natural and commonly selected goal is to measure our performance in terms of the fraction of examples we get wrong, the error rate."
+    },
+    {
+        "timestamp": "00:00:52",
+        "text": "For any value of theta, we can define the impedance."
+    },
+    {
+        "timestamp": "00:01:00",
+        "text": "empirical error rate by just running over all the data points and checking whether the true target, yi, equals our prediction, y-hat."
+    },
+    {
+        "timestamp": "00:01:08",
+        "text": "In the equation, this is represented with a Kronecker delta function, which takes a value 1 if the condition is satisfied and 0 otherwise."
+    },
+    {
+        "timestamp": "00:01:17",
+        "text": "In MATLAB, this is simple to compute."
+    },
+    {
+        "timestamp": "00:01:25",
+        "text": "We take our prediction, y-hat, the sign of the linear response, and compute the average of a binary indicator, checking whether the two values are equal."
+    },
+    {
+        "timestamp": "00:01:34",
+        "text": "The main problem with this approach is that it's then difficult to optimize theta using standard tools, such as gradient descent."
+    },
+    {
+        "timestamp": "00:01:42",
+        "text": "The empirical error is a discontinuous and locally constant function."
+    },
+    {
+        "timestamp": "00:01:51",
+        "text": "As the decision boundary moves, for instance, moving slightly left or right here, the error rate stays exactly the same until the decision boundary reaches some data point, at which point the loss will change."
+    },
+    {
+        "timestamp": "00:01:59",
+        "text": "abruptly discontinuously to a new value."
+    },
+    {
+        "timestamp": "00:02:05",
+        "text": "So there's no real local information in the error rate to tell us which direction we should be evolving theta."
+    },
+    {
+        "timestamp": "00:02:10",
+        "text": "A very simple approach we could contemplate is to use our tools from regression."
+    },
+    {
+        "timestamp": "00:02:16",
+        "text": "Let's define the two classes as plus 1 and minus 1."
+    },
+    {
+        "timestamp": "00:02:21",
+        "text": "Then we could simply choose theta so that a linear regression theta of x is close to the target values."
+    },
+    {
+        "timestamp": "00:02:27",
+        "text": "And then take that function and threshold it to produce our classifier."
+    },
+    {
+        "timestamp": "00:02:32",
+        "text": "In some cases, this may work, but often we'll be unsatisfied with its behavior."
+    },
+    {
+        "timestamp": "00:02:38",
+        "text": "Consider, for example, adding this extra data point over here."
+    },
+    {
+        "timestamp": "00:02:43",
+        "text": "In some sense, this point is actually very easy to predict."
+    },
+    {
+        "timestamp": "00:02:49",
+        "text": "It would be predicted correctly by our previous values of theta."
+    },
+    {
+        "timestamp": "00:02:54",
+        "text": "But using linear regression, the parameters will be greatly distorted so that our linear response at that point will be closer to its."
+    },
+    {
+        "timestamp": "00:03:00",
+        "text": "value plus one, even though all we actually care about is that its sign is positive."
+    },
+    {
+        "timestamp": "00:03:06",
+        "text": "The mismatch between the predictions of regression and classification and of the losses, mean squared error versus error rate, lead to poor selection of the parameter values in this case."
+    },
+    {
+        "timestamp": "00:03:13",
+        "text": "Here's another historical algorithm called the Perceptron algorithm that will fix some of these issues."
+    },
+    {
+        "timestamp": "00:03:20",
+        "text": "The Perceptron algorithm is a stochastic gradient descent-like algorithm."
+    },
+    {
+        "timestamp": "00:03:26",
+        "text": "For each iteration, we run through all the data points, one at a time, and perform an update of the parameter vector for each one."
+    },
+    {
+        "timestamp": "00:03:33",
+        "text": "For each data point, we compute our prediction, y-hat, and then we take an update to the parameter theta."
+    },
+    {
+        "timestamp": "00:03:40",
+        "text": "An interesting interpretation of this algorithm comes by comparing it to linear regression."
+    },
+    {
+        "timestamp": "00:03:46",
+        "text": "The online update is almost exactly that of stochastic gradient descent for linear regression."
+    },
+    {
+        "timestamp": "00:03:53",
+        "text": "We update the parameter theta by a step alpha times a direction comprised of an error term, the difference between..."
+    },
+    {
+        "timestamp": "00:04:00",
+        "text": "between y and our prediction times the feature vector x."
+    },
+    {
+        "timestamp": "00:04:05",
+        "text": "To contrast with the linear regression gradient, instead of using the linear response theta times x in this error term, we use the thresholded class output y hat."
+    },
+    {
+        "timestamp": "00:04:10",
+        "text": "So the points that are more wrong don't get a larger update."
+    },
+    {
+        "timestamp": "00:04:16",
+        "text": "In fact, this term is just a sign."
+    },
+    {
+        "timestamp": "00:04:21",
+        "text": "So if our prediction is correct, if the class y equals the class y hat, this update is 0."
+    },
+    {
+        "timestamp": "00:04:27",
+        "text": "And if the term is incorrect, then that becomes a signed value, some signed constant."
+    },
+    {
+        "timestamp": "00:04:32",
+        "text": "So if y is plus 1 and y hat is minus 1, this is plus 2."
+    },
+    {
+        "timestamp": "00:04:38",
+        "text": "And if they're reversed, it becomes minus 2."
+    },
+    {
+        "timestamp": "00:04:43",
+        "text": "Thus, points that are already right get no update at all."
+    },
+    {
+        "timestamp": "00:04:49",
+        "text": "Intuitively, you can imagine something like performing a sequence of regressions, each of which pays attention only to the points that it's currently getting wrong."
+    },
+    {
+        "timestamp": "00:04:54",
+        "text": "This makes the procedure a bit immune to the very."
+    },
+    {
+        "timestamp": "00:04:59",
+        "text": "data error that we saw just a moment ago."
+    },
+    {
+        "timestamp": "00:05:04",
+        "text": "As the process gets more points right, it starts to focus exclusively on the data near the boundary, and eventually it will stop if it gets them all right."
+    },
+    {
+        "timestamp": "00:05:09",
+        "text": "Here's a visualization of this procedure."
+    },
+    {
+        "timestamp": "00:05:13",
+        "text": "We select a data point here and compute our prediction."
+    },
+    {
+        "timestamp": "00:05:18",
+        "text": "In this example, we get this predicted point incorrect."
+    },
+    {
+        "timestamp": "00:05:23",
+        "text": "The true class is minus 1, blue, but we predict plus 1."
+    },
+    {
+        "timestamp": "00:05:27",
+        "text": "So our error term here is minus 2."
+    },
+    {
+        "timestamp": "00:05:32",
+        "text": "If we made the opposite mistake, the error term would be plus 2."
+    },
+    {
+        "timestamp": "00:05:36",
+        "text": "So this tells us we need to update the model to try to get things that are close to this area more correct, and we'll perform this update and shift the model, which shifts the decision boundary."
+    },
+    {
+        "timestamp": "00:05:41",
+        "text": "In the next step, we choose another point to update, say over here."
+    },
+    {
+        "timestamp": "00:05:46",
+        "text": "Here, the true class y equals our prediction y hat."
+    },
+    {
+        "timestamp": "00:05:50",
+        "text": "The point is predicted correctly."
+    },
+    {
+        "timestamp": "00:05:55",
+        "text": "This error term is"
+    },
+    {
+        "timestamp": "00:06:00",
+        "text": "zero, and our update has no effect on the parameter value."
+    },
+    {
+        "timestamp": "00:06:04",
+        "text": "We continue until no data point produces an update to theta."
+    },
+    {
+        "timestamp": "00:06:09",
+        "text": "In other words, all data points are predicted correctly."
+    },
+    {
+        "timestamp": "00:06:13",
+        "text": "Interestingly, if the data are linearly separable, this will eventually happen for any choice of the step size constant alpha."
+    },
+    {
+        "timestamp": "00:06:18",
+        "text": "However, in practice, this perceptron algorithm doesn't work very well."
+    },
+    {
+        "timestamp": "00:06:23",
+        "text": "The data are not separable, its behavior is unstable and unpredictable."
+    },
+    {
+        "timestamp": "00:06:27",
+        "text": "This means it's rarely used in practice."
+    },
+    {
+        "timestamp": "00:06:32",
+        "text": "A more typical way to learn theta is to use a surrogate loss function."
+    },
+    {
+        "timestamp": "00:06:36",
+        "text": "In essence, the problem with optimizing the error rate was that it was non-smooth."
+    },
+    {
+        "timestamp": "00:06:41",
+        "text": "The problem with using linear regression was that it was too different from the cost that we care about."
+    },
+    {
+        "timestamp": "00:06:46",
+        "text": "Instead, we can try to design smooth losses that would be more similar to the error rate."
+    },
+    {
+        "timestamp": "00:06:50",
+        "text": "For example, instead of outputting just the class value, we could also compute a smooth prediction that varies smoothly between minus one and one."
+    },
+    {
+        "timestamp": "00:06:55",
+        "text": "Because such a function is..."
+    },
+    {
+        "timestamp": "00:07:00",
+        "text": "shaped like an S, it's often called a sigmoid function."
+    },
+    {
+        "timestamp": "00:07:07",
+        "text": "Now, instead of counting the errors, we can measure, for example, the mean squared error between our soft prediction and the true class."
+    },
+    {
+        "timestamp": "00:07:15",
+        "text": "This has the nice property that if we're very far from the decision boundary, our output is nearly minus 1 or plus 1."
+    },
+    {
+        "timestamp": "00:07:22",
+        "text": "And so we have small MSE."
+    },
+    {
+        "timestamp": "00:07:30",
+        "text": "But near the boundary, we transition smoothly between those two values, and the error will smoothly increase."
+    },
+    {
+        "timestamp": "00:07:37",
+        "text": "We then add up all of these soft errors, shown here in this figure, and use it to assess our prediction quality."
+    },
+    {
+        "timestamp": "00:07:45",
+        "text": "As we'll see, this will be much easier to optimize, since small variations in the parameters will actually induce a change into the mean squared error, unlike what we found for the error rate."
+    },
+    {
+        "timestamp": "00:07:52",
+        "text": "But having a loss"
+    },
+    {
+        "timestamp": "00:08:00",
+        "text": "that smoothly increases near the decision boundary is useful for another reason as well."
+    },
+    {
+        "timestamp": "00:08:06",
+        "text": "Consider these two examples of classifiers on the same data, each of which has zero error."
+    },
+    {
+        "timestamp": "00:08:12",
+        "text": "So here's one linear boundary that correctly decides all the data points, and here's a different linear boundary that correctly decides all the data points."
+    },
+    {
+        "timestamp": "00:08:18",
+        "text": "Intuitively, out of these two, we'd prefer this one over on the right."
+    },
+    {
+        "timestamp": "00:08:24",
+        "text": "Even though it has the same error, it seems safer."
+    },
+    {
+        "timestamp": "00:08:30",
+        "text": "If we were to perturb the data or move it very slightly, it will still get those points right because it's gotten them right by a more substantial margin."
+    },
+    {
+        "timestamp": "00:08:36",
+        "text": "A smooth loss function will promote this type of boundary naturally, since usually being close to the decision boundary will lead to a non-zero loss."
+    },
+    {
+        "timestamp": "00:08:42",
+        "text": "So once we have our smooth loss function, choosing theta just becomes a simple optimization problem."
+    },
+    {
+        "timestamp": "00:08:48",
+        "text": "Again, we can visualize this in both the feature space and in the parameter space."
+    },
+    {
+        "timestamp": "00:08:54",
+        "text": "A point in the parameter space corresponds to a particular."
+    },
+    {
+        "timestamp": "00:09:00",
+        "text": "value of theta, which corresponds to a decision boundary."
+    },
+    {
+        "timestamp": "00:09:07",
+        "text": "The loss function can be evaluated for that decision boundary and parameter values, producing a value over here."
+    },
+    {
+        "timestamp": "00:09:15",
+        "text": "Then we can plot the loss function or optimize it over in parameter space."
+    },
+    {
+        "timestamp": "00:09:22",
+        "text": "As we evolve the parameter theta, we change the decision boundary, we find a new point in parameter space and get a new loss, hopefully smaller than the previous value."
+    },
+    {
+        "timestamp": "00:09:30",
+        "text": "Eventually, we'll find a minimum of our loss J at some value of theta, and this will correspond to a model or decision boundary that hopefully does a good job of classifying the training data."
+    },
+    {
+        "timestamp": "00:09:37",
+        "text": "As we saw in linear regression, this is now just a standard optimization problem in the parameter space."
+    },
+    {
+        "timestamp": "00:09:45",
+        "text": "We can use whatever algorithms we like."
+    },
+    {
+        "timestamp": "00:09:52",
+        "text": "Gradient and stochastic gradient descent methods are useful and very all-purpose, but we could also substitute whatever..."
+    },
+    {
+        "timestamp": "00:10:00",
+        "text": "whatever alternatives we prefer, like coordinate descent algorithms, stochastic search, genetic algorithms, or others."
+    },
+    {
+        "timestamp": "00:10:07",
+        "text": "To do gradient descent, we'll need to calculate the gradient of the loss with respect to the parameters."
+    },
+    {
+        "timestamp": "00:10:15",
+        "text": "Let's work that out quickly."
+    },
+    {
+        "timestamp": "00:10:22",
+        "text": "Our loss function J here calculates the squared error between our sigmoid nonlinearity and our target Y."
+    },
+    {
+        "timestamp": "00:10:30",
+        "text": "The first entry in the gradient is the derivative with respect to the first parameter, let's say A."
+    },
+    {
+        "timestamp": "00:10:37",
+        "text": "Just like in regression, the derivative of a squared error is just two times that error itself, so the signed error, error residual."
+    },
+    {
+        "timestamp": "00:10:45",
+        "text": "Continuing to apply the chain rule, we get the derivative of the interior, since Y is constant, this is just the derivative of the sigma function at that point, times the derivative of its argument, which is just the feature, X1."
+    },
+    {
+        "timestamp": "00:10:52",
+        "text": "Here this D sigma term is the slope of the sigmoid at this point, theta times X1."
+    },
+    {
+        "timestamp": "00:11:00",
+        "text": "Interpreting the derivative again, we have one term measuring the amount of error and its sign, and a second term measuring our sensitivity of our prediction to changes in the parameters."
+    },
+    {
+        "timestamp": "00:11:10",
+        "text": "If for this particular data point, say, feature X1 is small, then changing the parameter A won't help our prediction very much."
+    },
+    {
+        "timestamp": "00:11:20",
+        "text": "Similarly, if for this particular data point, our output is highly saturated, either very close to the negative value or the positive value, then changing the parameters will also not change the output very much."
+    },
+    {
+        "timestamp": "00:11:30",
+        "text": "So the derivatives with respect to the other parameters are identical, except that instead of feature X1, this term will be whichever feature corresponds to that parameter, so feature X2 or the constant feature."
+    },
+    {
+        "timestamp": "00:11:40",
+        "text": "We could choose any saturating function for our sigmoid, but a very common one to pick is the logistic function."
+    },
+    {
+        "timestamp": "00:11:50",
+        "text": "The logistic function"
+    },
+    {
+        "timestamp": "00:12:00",
+        "text": "is usually defined as the function 1 over 1 plus e to the minus z, which ranges between the values of 0 and 1."
+    },
+    {
+        "timestamp": "00:12:06",
+        "text": "When z is very large and negative, this term is large and positive."
+    },
+    {
+        "timestamp": "00:12:13",
+        "text": "It dominates, and this output becomes nearly 0."
+    },
+    {
+        "timestamp": "00:12:20",
+        "text": "On the other hand, when z is large and positive, the exponential term is nearly 0, and the output becomes 1."
+    },
+    {
+        "timestamp": "00:12:26",
+        "text": "At z equals 0, these are equal, we get 1 half."
+    },
+    {
+        "timestamp": "00:12:33",
+        "text": "So if we want to use this to predict, we can either continue to threshold the z value, the linear output theta times x at 0, or we can calculate the sigma of z and threshold it at 1 half."
+    },
+    {
+        "timestamp": "00:12:40",
+        "text": "The logistic function has a nice property that its derivative is just the product of itself, sigma of z, times 1 minus itself."
+    },
+    {
+        "timestamp": "00:12:46",
+        "text": "In MATLAB, the implementation is quite simple."
+    },
+    {
+        "timestamp": "00:12:53",
+        "text": "So here's a logistic sigmoid."
+    },
+    {
+        "timestamp": "00:13:00",
+        "text": "function implemented and here's its derivative."
+    },
+    {
+        "timestamp": "00:13:06",
+        "text": "Note that in the perceptron we use classes plus 1 and minus 1."
+    },
+    {
+        "timestamp": "00:13:13",
+        "text": "If we prefer we can also scale the logistic sigmoid to match."
+    },
+    {
+        "timestamp": "00:13:20",
+        "text": "So we can define a rescaled sigmoid as say the function rho which is now scaled to be between minus 1 and 1."
+    },
+    {
+        "timestamp": "00:13:26",
+        "text": "As Z goes toward minus infinity approaches minus 1 for Z large and positive plus 1."
+    },
+    {
+        "timestamp": "00:13:33",
+        "text": "Its derivative will be nearly identical to sigma's except rescaled by the constant 2."
+    },
+    {
+        "timestamp": "00:13:40",
+        "text": "Another very common and closely related linear classifier goes by the name of logistic regression."
+    },
+    {
+        "timestamp": "00:13:46",
+        "text": "In logistic regression we again use the logistic function sigma to convert our linear response to a value between 0 and 1 but this time we interpret that output as the probability that our model associates with the true label being positive."
+    },
+    {
+        "timestamp": "00:13:53",
+        "text": "Then as is common for probability models we can optimize the log likelihood of the data."
+    },
+    {
+        "timestamp": "00:14:00",
+        "text": "we tend to minimize J, so we'll minimize the negative log likelihood."
+    },
+    {
+        "timestamp": "00:14:06",
+        "text": "The log likelihood measures the probability of our observations under the current model."
+    },
+    {
+        "timestamp": "00:14:12",
+        "text": "So if the true label is positive, y equal 1, we have a reward equal to its log probability."
+    },
+    {
+        "timestamp": "00:14:18",
+        "text": "So log sigma of x, sorry, log sigma of theta x."
+    },
+    {
+        "timestamp": "00:14:24",
+        "text": "If our model is very sure that y should be positive, this probability is nearly 1 and we get score 0."
+    },
+    {
+        "timestamp": "00:14:30",
+        "text": "If it's very sure and wrong, this probability is near 0 and we get a score of minus infinity."
+    },
+    {
+        "timestamp": "00:14:36",
+        "text": "Again, since we usually minimize, we'll negate this."
+    },
+    {
+        "timestamp": "00:14:42",
+        "text": "And similarly, for when y equals 0, our model now uses 1 minus sigma as the probability of that event."
+    },
+    {
+        "timestamp": "00:14:48",
+        "text": "As usual, we may want to write this as a single succinct equation."
+    },
+    {
+        "timestamp": "00:14:54",
+        "text": "We'll write it as a sum of two terms, 1 when y equals 1."
+    },
+    {
+        "timestamp": "00:15:00",
+        "text": "and 1 when y equals 0."
+    },
+    {
+        "timestamp": "00:15:06",
+        "text": "So if y equals 1, this first term will be non-zero, and the second one will be 0, since 1 minus y will be 0."
+    },
+    {
+        "timestamp": "00:15:12",
+        "text": "On the other hand, when the true class y is 0, this first term will be 0, and the second one will be non-zero."
+    },
+    {
+        "timestamp": "00:15:18",
+        "text": "Now this is just another loss function."
+    },
+    {
+        "timestamp": "00:15:24",
+        "text": "Again, it's a soft loss."
+    },
+    {
+        "timestamp": "00:15:30",
+        "text": "When a data point is close to the decision boundary, its cost increases smoothly, so we'll be able to get local gradient information about which way to evolve our parameters."
+    },
+    {
+        "timestamp": "00:15:36",
+        "text": "In this case, each data point is associated with a loss, which is the log probability that our model assigns to its true value."
+    },
+    {
+        "timestamp": "00:15:42",
+        "text": "So here's, for instance, this data point."
+    },
+    {
+        "timestamp": "00:15:48",
+        "text": "It's very nearly predicted exactly correctly, so its loss might be something like log 0.99, something very small."
+    },
+    {
+        "timestamp": "00:15:54",
+        "text": "As we move toward the decision boundary, the cost will increase, and it's greatest for things that are on the wrong side of the boundary."
+    },
+    {
+        "timestamp": "00:16:00",
+        "text": "A very nice property of logistic negative log-likelihood loss is that it's convex."
+    },
+    {
+        "timestamp": "00:16:06",
+        "text": "Convex functions are nicely behaved, and in particular, a convex function has no local optima."
+    },
+    {
+        "timestamp": "00:16:13",
+        "text": "So any optimum is also a global optimum."
+    },
+    {
+        "timestamp": "00:16:19",
+        "text": "If the function is strongly convex, it also only has one optimum."
+    },
+    {
+        "timestamp": "00:16:26",
+        "text": "This is very helpful, since it means that we don't have to worry very much about initialization, and optimization becomes simpler."
+    },
+    {
+        "timestamp": "00:16:33",
+        "text": "Just as with our mean-squared error-based loss, we can take the derivative with respect to each parameter to compute the gradient vector."
+    },
+    {
+        "timestamp": "00:16:39",
+        "text": "Taking the derivative of this loss function with respect to, say, parameter A, we again follow the chain rule."
+    },
+    {
+        "timestamp": "00:16:46",
+        "text": "We get 1 over sigma from the derivative of the log times the derivative of the interior, so d sigma times the derivative of its interior, which is feature 1."
+    },
+    {
+        "timestamp": "00:16:53",
+        "text": "There's another corresponding term for this class."
+    },
+    {
+        "timestamp": "00:16:59",
+        "text": "equals zero term."
+    },
+    {
+        "timestamp": "00:17:06",
+        "text": "Since d sigma here for the logistic function is just sigma times 1 minus sigma, we can simplify the expression a bit further."
+    },
+    {
+        "timestamp": "00:17:13",
+        "text": "Again, for different parameters, all that will change is the feature involved."
+    },
+    {
+        "timestamp": "00:17:19",
+        "text": "So we can compute the gradient vector by using this scalar and the feature vector."
+    },
+    {
+        "timestamp": "00:17:26",
+        "text": "We've now seen two methods of optimizing the parameters, and both follow the same general theme."
+    },
+    {
+        "timestamp": "00:17:33",
+        "text": "While we may be interested in doing well under the error rate, also sometimes called the counting loss or 0-1 loss, that counts up the number of wrong predictions we make, this error rate is hard to optimize because it's not smooth."
+    },
+    {
+        "timestamp": "00:17:40",
+        "text": "A simple way to visualize this loss is to draw a cost as a function of the linear response z."
+    },
+    {
+        "timestamp": "00:17:46",
+        "text": "So this axis is the z-axis."
+    },
+    {
+        "timestamp": "00:17:53",
+        "text": "Assuming the true label is positive."
+    },
+    {
+        "timestamp": "00:18:00",
+        "text": "For the 0-1 loss, when z is positive, we have 0 loss because we've predicted correctly."
+    },
+    {
+        "timestamp": "00:18:07",
+        "text": "As soon as z becomes negative, our cost jumps to 1."
+    },
+    {
+        "timestamp": "00:18:15",
+        "text": "The negative features of this choice can easily be seen here."
+    },
+    {
+        "timestamp": "00:18:22",
+        "text": "It's discontinuous, and even for mispredicted points, say when the loss is over here, the derivative is still 0, so we have no local information about how we should evolve the decision boundary."
+    },
+    {
+        "timestamp": "00:18:30",
+        "text": "For these reasons, we instead optimize the surrogate loss, a loss function that's similar to what we want but has nicer properties."
+    },
+    {
+        "timestamp": "00:18:37",
+        "text": "The first of these that we saw was the logistic mean-squared error loss, where the loss increased smoothly from 0 if we were heavily in the positive region, predicting correctly, increasing as we approach the decision boundary, and finally saturating to some large value."
+    },
+    {
+        "timestamp": "00:18:45",
+        "text": "Here I've scaled this to make a point."
+    },
+    {
+        "timestamp": "00:18:52",
+        "text": "With proper scaling, this loss is always greater than the 0-1 loss."
+    },
+    {
+        "timestamp": "00:19:00",
+        "text": "and so it's an upper bound on the true loss."
+    },
+    {
+        "timestamp": "00:19:07",
+        "text": "It's common to try to minimize upper bounds on difficult losses, since at least it means that if we manage to obtain a small value of our surrogate loss, that must imply a similarly small value of the true loss."
+    },
+    {
+        "timestamp": "00:19:15",
+        "text": "Our other surrogate loss was the logistic negative log likelihood."
+    },
+    {
+        "timestamp": "00:19:22",
+        "text": "If we plot its value, we find that also, for very positive values, we get loss zero, and as we increase toward the decision boundary, we again increase smoothly."
+    },
+    {
+        "timestamp": "00:19:30",
+        "text": "It also bounds the zero-one loss with an appropriate scaling."
+    },
+    {
+        "timestamp": "00:19:37",
+        "text": "As z becomes very large and negative, it approaches a constant slope."
+    },
+    {
+        "timestamp": "00:19:45",
+        "text": "So compared to the logistic mean squared error, a loss like this, the logistic negative log likelihood, will tend to penalize very wrong examples much more than something like the mean squared error where the loss saturates."
+    },
+    {
+        "timestamp": "00:19:52",
+        "text": "We can also see from its shape that it's a convex loss."
+    },
+    {
+        "timestamp": "00:20:00",
+        "text": "So, the sum or average of these shapes will also be convex."
+    },
+    {
+        "timestamp": "00:20:07",
+        "text": "In contrast, the logistic MSE is a non-convex loss."
+    },
+    {
+        "timestamp": "00:20:15",
+        "text": "There are many other possible choices of surrogate losses, and we'll see some in later modules."
+    },
+    {
+        "timestamp": "00:20:22",
+        "text": "In this section, we turn to learning the parameters of a Perceptron model."
+    },
+    {
+        "timestamp": "00:20:30",
+        "text": "While we're most likely interested in minimizing something like our error rate, we saw that to train the model, we may want to turn to regression-like techniques and surrogate losses."
+    },
+    {
+        "timestamp": "00:20:37",
+        "text": "These included using a sigmoid nonlinearity and measuring mean squared error, and also interpreting its output as a probability and using logistic regression."
+    },
+    {
+        "timestamp": "00:20:45",
+        "text": "Either approach gives us a smooth loss that's easier to optimize with standard techniques like gradient descent."
+    },
+    {
+        "timestamp": "00:20:52",
+        "text": "We described several algorithms, including the historic Perceptron algorithm and the use of standard gradient descent techniques."
+    },
+    {
+        "timestamp": "00:21:00",
+        "text": "to derive the gradient for them using either of the surrogate losses that we discussed."
+    }
+]

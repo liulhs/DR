@@ -1,0 +1,358 @@
+[
+    {
+        "timestamp": "00:00:00",
+        "text": "One of the most popular types of linear classifier is the support vector machine."
+    },
+    {
+        "timestamp": "00:00:04",
+        "text": "Suppose we're training a linear classifier for a set of data."
+    },
+    {
+        "timestamp": "00:00:09",
+        "text": "There may be a number of classifiers that all separate the data, in other words, have no training error."
+    },
+    {
+        "timestamp": "00:00:13",
+        "text": "How can we choose among these?"
+    },
+    {
+        "timestamp": "00:00:18",
+        "text": "If we look at these two examples, we see that although the one on the left correctly classifies all the data, it does not look safe."
+    },
+    {
+        "timestamp": "00:00:23",
+        "text": "Small perturbations in the data or the decision boundary could cause an incorrect prediction."
+    },
+    {
+        "timestamp": "00:00:27",
+        "text": "So we may not trust it on test data, which would differ slightly from our training dataset."
+    },
+    {
+        "timestamp": "00:00:32",
+        "text": "The one on the right, by contrast, looks more stable."
+    },
+    {
+        "timestamp": "00:00:36",
+        "text": "There's a margin around the decision boundary in which no data are located."
+    },
+    {
+        "timestamp": "00:00:41",
+        "text": "We already saw a bit of this with surrogate losses."
+    },
+    {
+        "timestamp": "00:00:46",
+        "text": "Using a smooth loss, we'll prefer to move data away from the boundary."
+    },
+    {
+        "timestamp": "00:00:50",
+        "text": "But in some sense, this was an accidental side effect."
+    },
+    {
+        "timestamp": "00:00:55",
+        "text": "If a margin is what's desirable, how can we..."
+    },
+    {
+        "timestamp": "00:00:59",
+        "text": "create an optimization that explicitly tries to maximize it."
+    },
+    {
+        "timestamp": "00:01:07",
+        "text": "To optimize the margin of our classifier, we'll have to relate it directly to the parameter vector."
+    },
+    {
+        "timestamp": "00:01:14",
+        "text": "Here, instead of our usual theta parameters, I'll usually use w to indicate the weights associated with each feature, one through n, and to denote the constant term by b without listing the constant feature."
+    },
+    {
+        "timestamp": "00:01:22",
+        "text": "It'll become clear shortly why it's useful to treat the constant term separately."
+    },
+    {
+        "timestamp": "00:01:29",
+        "text": "To define the margin, we'll start by assuming that our parameters get all the data correct, and we'll enforce this point later."
+    },
+    {
+        "timestamp": "00:01:37",
+        "text": "Another thing to note, for any setting of the parameters, the decision boundary is invariant to rescaling."
+    },
+    {
+        "timestamp": "00:01:44",
+        "text": "For example, if this region is defined by the linear response being positive, then multiplying the parameters by 10 doesn't change the decision."
+    },
+    {
+        "timestamp": "00:01:52",
+        "text": "For this reason, let's"
+    },
+    {
+        "timestamp": "00:01:59",
+        "text": "define the margin using an additional property that is not scale invariant."
+    },
+    {
+        "timestamp": "00:02:06",
+        "text": "We'll define that not only are the positive class a region with positive response, they're in a region with positive response at least plus 1."
+    },
+    {
+        "timestamp": "00:02:13",
+        "text": "Similarly, the negative data are in a region with response at most minus 1."
+    },
+    {
+        "timestamp": "00:02:19",
+        "text": "Since these are isosurfaces of a linear response, they're also hyperplanes, just like and parallel to the decision boundary."
+    },
+    {
+        "timestamp": "00:02:26",
+        "text": "Then we can define this margin explicitly in terms of these hyperplanes."
+    },
+    {
+        "timestamp": "00:02:33",
+        "text": "Since no data are inside them, we'll define the margin as the distance between them."
+    },
+    {
+        "timestamp": "00:02:39",
+        "text": "I've drawn this with data on the hyperplanes, but since we're going to maximize the margin, if there are no data on the plus and minus 1 hyperplanes, we'll simply end up changing the parameters to expand the margin until this is true."
+    },
+    {
+        "timestamp": "00:02:46",
+        "text": "So you can also think of the margin as twice the distance from the decision boundary to the nearest training point."
+    },
+    {
+        "timestamp": "00:02:53",
+        "text": "The points on the margin are referred to as the support vectors."
+    },
+    {
+        "timestamp": "00:02:59",
+        "text": "Now, we can compute the margin geometrically in terms of the parameters."
+    },
+    {
+        "timestamp": "00:03:08",
+        "text": "The first thing to note is that the vector, defined by the weights w, the coefficients and the features, is perpendicular to the decision boundary."
+    },
+    {
+        "timestamp": "00:03:17",
+        "text": "To see this quickly, just note for any two points x and x' that are both on the boundary, the linear response is zero."
+    },
+    {
+        "timestamp": "00:03:25",
+        "text": "So rearranging these equations, we see that w and the vector x'-x, which lies along the boundary, are perpendicular."
+    },
+    {
+        "timestamp": "00:03:34",
+        "text": "Now let's pick any point x- that's in the part of the space where the negative data are allowed to lie, specifically on the minus one hyperplane."
+    },
+    {
+        "timestamp": "00:03:42",
+        "text": "This is any point, not necessarily a data point."
+    },
+    {
+        "timestamp": "00:03:51",
+        "text": "Take x-plus to be a point as close as possible to x-minus in the plus one space."
+    },
+    {
+        "timestamp": "00:04:00",
+        "text": "orthogonal to these planes, the vector from x-minus to x-plus is some scalar multiple r of the vector w."
+    },
+    {
+        "timestamp": "00:04:12",
+        "text": "We also know that, since x-minus is on the negative hyperplane, and x-plus is on the positive hyperplane, their linear responses are minus 1 and plus 1, respectively."
+    },
+    {
+        "timestamp": "00:04:24",
+        "text": "Some simple geometry will complete the analysis."
+    },
+    {
+        "timestamp": "00:04:36",
+        "text": "We can compute the value of this scalar r by plugging our definition x-plus equals x-minus plus r times w into the positive hyperplane equation, giving this, then rearranging and plugging in the negative hyperplane equation here, giving the value of r."
+    },
+    {
+        "timestamp": "00:04:48",
+        "text": "And the margin is just the distance from x-minus to x-plus."
+    },
+    {
+        "timestamp": "00:05:00",
+        "text": "In other words, the length of r times w."
+    },
+    {
+        "timestamp": "00:05:07",
+        "text": "Evaluating this is just 2 times the length of the vector w."
+    },
+    {
+        "timestamp": "00:05:15",
+        "text": "So, for any parameters w and b satisfying our assumptions, in other words, all the positive data in the plus 1 region, all the negative data in the minus 1 region, the margin of w can be defined as 2 over its length."
+    },
+    {
+        "timestamp": "00:05:22",
+        "text": "So, now let's go about actually optimizing the parameters."
+    },
+    {
+        "timestamp": "00:05:30",
+        "text": "This is a constrained optimization problem."
+    },
+    {
+        "timestamp": "00:05:37",
+        "text": "We want to maximize our margin equation, subject to the constraints that all our data lie in the specified region, in other words, on the correct side of their respective margin."
+    },
+    {
+        "timestamp": "00:05:45",
+        "text": "Finding the value of w that maximizes 1 over w's length, we can equivalently find the value of w that minimizes w's length."
+    },
+    {
+        "timestamp": "00:05:52",
+        "text": "The vector w with smallest length will also be the w that has the largest inverse length."
+    },
+    {
+        "timestamp": "00:06:00",
+        "text": "Similarly, minimizing squared length instead doesn't change the location of the minimizer."
+    },
+    {
+        "timestamp": "00:06:06",
+        "text": "So we'll reform our maximization as a minimization of the sum of Wj squared."
+    },
+    {
+        "timestamp": "00:06:13",
+        "text": "To enforce the data constraints, we have one constraint per data point."
+    },
+    {
+        "timestamp": "00:06:20",
+        "text": "If a point i is positive, then we need that the linear response be greater than plus one."
+    },
+    {
+        "timestamp": "00:06:26",
+        "text": "If a point i is negative, we need for the linear response to be less than minus one."
+    },
+    {
+        "timestamp": "00:06:33",
+        "text": "Framed this way, the margin problem is an example of a classic optimization problem called a quadratic program."
+    },
+    {
+        "timestamp": "00:06:40",
+        "text": "We're minimizing a quadratic function of the parameters, the sum of W squared, subject to a collection of m linear constraints on the parameters, one for each data point that it lies in the correct region."
+    },
+    {
+        "timestamp": "00:06:46",
+        "text": "Framing it this way makes it easy to apply a suite of optimization techniques and algorithms designed for quadratic programs."
+    },
+    {
+        "timestamp": "00:06:53",
+        "text": "For reference, we call this formula."
+    },
+    {
+        "timestamp": "00:07:00",
+        "text": "our max margin classifier, the primal problem, a point we'll contrast with later."
+    },
+    {
+        "timestamp": "00:07:07",
+        "text": "It will also be convenient to compact these constraints into a single phrase that will work for both positive and negative data."
+    },
+    {
+        "timestamp": "00:07:15",
+        "text": "Here, the target y is either plus 1 or minus 1."
+    },
+    {
+        "timestamp": "00:07:22",
+        "text": "If it's plus 1, the linear response should also be positive and greater than 1, so the product will be also."
+    },
+    {
+        "timestamp": "00:07:30",
+        "text": "If y is minus 1, then the linear response should be negative and large, so the product will, again, be greater than 1."
+    },
+    {
+        "timestamp": "00:07:37",
+        "text": "In other words, our linear response should be larger than 1 in magnitude and match the sign of y."
+    },
+    {
+        "timestamp": "00:07:45",
+        "text": "Let's see a simple example, small enough that we can plot both the feature and parameter spaces."
+    },
+    {
+        "timestamp": "00:07:52",
+        "text": "Let's say we have one scalar feature x and three data points from the negative class at x equals minus 3 and minus 1 and the positive class at x equals minus 3."
+    },
+    {
+        "timestamp": "00:08:00",
+        "text": "x equals 2."
+    },
+    {
+        "timestamp": "00:08:06",
+        "text": "We can see that these data are easily separable, in fact, there are many linear classifiers that will separate them, with different weights a and constant or biased terms b."
+    },
+    {
+        "timestamp": "00:08:13",
+        "text": "For example, here's one, here's another, here's a third."
+    },
+    {
+        "timestamp": "00:08:20",
+        "text": "In fact, any classifier that transitions sign, crosses zero, between the blue and red points will predict all three points correctly."
+    },
+    {
+        "timestamp": "00:08:26",
+        "text": "So let's find the classifier with largest margin."
+    },
+    {
+        "timestamp": "00:08:33",
+        "text": "We can write our margin constraints, one for each data point, and visualize them in the two-dimensional parameter space, A and B."
+    },
+    {
+        "timestamp": "00:08:40",
+        "text": "Rearranging these constraints, we have that the point at minus 3 constrains our parameter B to lie below this line."
+    },
+    {
+        "timestamp": "00:08:46",
+        "text": "Our second point, at minus 1, to lie below this line."
+    },
+    {
+        "timestamp": "00:08:53",
+        "text": "And our third point..."
+    },
+    {
+        "timestamp": "00:09:00",
+        "text": "constraint at 2 to lie above this line."
+    },
+    {
+        "timestamp": "00:09:10",
+        "text": "So the set of parameters that satisfy our margin constraints is shown in shaded green."
+    },
+    {
+        "timestamp": "00:09:20",
+        "text": "Notice that, as one would expect, the constraint here for x equals minus 3 is superseded by the constraint here for x equals minus 1."
+    },
+    {
+        "timestamp": "00:09:30",
+        "text": "Any point within this shaded region corresponds to a valid perceptron with a margin."
+    },
+    {
+        "timestamp": "00:09:40",
+        "text": "For example, setting A equals 1, B equals 0, this point here, corresponds to a linear classifier in the feature space, here, with a margin, meaning the region between response minus 1 and plus 1, shown between these dashed vertical lines."
+    },
+    {
+        "timestamp": "00:09:50",
+        "text": "The SVM problem is now to minimize the non-constant weight magnitude."
+    },
+    {
+        "timestamp": "00:10:00",
+        "text": "It's just the parameter a."
+    },
+    {
+        "timestamp": "00:10:07",
+        "text": "The closest point in our constraint set to the a equals 0 line is this vertex here, with a equals 4 3rds and b equals minus 1 3rd."
+    },
+    {
+        "timestamp": "00:10:15",
+        "text": "Notice that two constraints, here and here, are tight in the sense that our parameters lie on the constraint."
+    },
+    {
+        "timestamp": "00:10:23",
+        "text": "This means that our solution would change if those constraints were not present."
+    },
+    {
+        "timestamp": "00:10:31",
+        "text": "These are exactly the constraints due to points that lie on the margin."
+    },
+    {
+        "timestamp": "00:10:38",
+        "text": "For example, if the negative example here were not present, the solution would change to widen the margin."
+    },
+    {
+        "timestamp": "00:10:46",
+        "text": "In the next lecture, we'll see more about optimizing the support vector machine, including its dual form and a formulation for non-separable data."
+    }
+]

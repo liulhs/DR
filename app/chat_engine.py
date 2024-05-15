@@ -10,7 +10,7 @@ Settings.embed_model = HuggingFaceEmbedding(
 )
 storage_context = StorageContext.from_defaults(persist_dir="./app/index")
 index = load_index_from_storage(storage_context)
-memory = ChatMemoryBuffer.from_defaults(token_limit=50000)
+memory = ChatMemoryBuffer.from_defaults(token_limit=5000000)
 
 chat_engine = index.as_chat_engine(
     chat_mode="context",

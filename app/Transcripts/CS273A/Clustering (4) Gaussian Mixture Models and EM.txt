@@ -1,0 +1,139 @@
+00:00:00 Another common and important clustering technique is based on probability density estimation using Gaussian mixture models and a procedure called expectation maximization, or EM, to fit the model parameters.
+00:00:10 If you recall the k-means algorithm, we described each cluster center using just a single point in feature space, the cluster center, and assigned each data point to its nearest cluster.
+00:00:20 But what if our concept of the grouping of the data have groups that overlap in the feature space?
+00:00:30 So then first of all, it's hard to know which assignment is right, since both are plausible.
+00:00:40 And secondly, in k-means, we always use Euclidean distance to the center, but what if our cluster is defined by some non-circular shape?
+00:00:50 So for example, in these data over here, the data can be seen as forming two groups, one of which has a lot of spread in x2 here, and the other of which has a lot of spread in x1.
+00:01:00 one.
+00:01:06 Both are centered at the same place.
+00:01:13 So it's easy mentally to see these as falling into two groups and to cluster these data in one and these data in the other, but something like k-means won't be able to discover that assignment.
+00:01:20 Gaussian mixture models are an extension of the k-means model in which clusters are modeled with Gaussian distributions.
+00:01:26 So we have not only their mean, but also a covariance that describes their ellipsoidal shape.
+00:01:33 So then we can fit the model by maximizing the likelihood of the observed data.
+00:01:40 We do so with an algorithm called EM.
+00:01:46 It'll be very reminiscent of k-means, except it'll assign data to each cluster with some soft probability.
+00:01:53 As a positive side effect, after clustering, we're actually creating a generative model for the data X, a probability model, which means we can do a lot of useful tasks like sampling new examples that we think are like the data that we measured or
+00:02:00 comparing two collections of data, like the training and test set, to see if they differ, or imputing missing data values from some of our data.
+00:02:06 In fact, often k-means is actually viewed as a special case of a Gaussian mixture model to derive some of these benefits.
+00:02:13 A Gaussian mixture model is a useful probability distribution model.
+00:02:20 We begin with several mixture components indexed by c, each of which is described by a Gaussian distribution.
+00:02:26 So each has a mean, mu c, a variance or covariance, sigma c, and a size, pi c.
+00:02:33 For example, in this figure, we have three Gaussian components with means here, here, and here.
+00:02:40 Each of these components has a different variance and a different height or area.
+00:02:46 So the joint probability distribution has been defined by the weighted average of these individual components.
+00:02:53 So pi c.
+00:02:59 times the Gaussian defined by mu c and sigma c.
+00:03:06 We can interpret this joint probability distribution over X in a simple generative way.
+00:03:13 To draw a sample from X, from P of X, we first select one of the components with discrete probability pi.
+00:03:19 So components with large pi are selected more often.
+00:03:26 As in k-means, we'll view this as the assignment of that sample to one of the components and denote it by Z.
+00:03:33 Then given the component assignment Z equals C, we can draw a value from X from the corresponding Gaussian distribution.
+00:03:39 So together these two distributions make a joint model over X and Z.
+00:03:46 Discarding the value of Z gives a sample from the marginal P of X defined above.
+00:03:53 Models like this are sometimes called latent variable models.
+00:03:59 are modeled jointly with an additional variable, z, that we don't get to observe.
+00:04:08 It's hidden.
+00:04:17 The presence of the unknown value of z helps explain patterns in the values of x.
+00:04:25 For example, in this case, groups or clusters.
+00:04:34 Usually, our features are multivariate, even high-dimensional.
+00:04:42 So, we'll typically use a multivariate Gaussian, which has the same quadratic form, but now involves a vector mean, mu, of length n, the same size as the number of features in a data point x, and an n by n covariance matrix, sigma.
+00:04:51 Recall that if we were given data from a multivariate Gaussian, the maximum likelihood estimate for the model parameters were simply the mean of the data, so the first moment of the data, and the covariance estimate was the mean of the n by n matrices formed by the outer product.
+00:04:59 of X minus mu with itself.
+00:05:07 So this is the centered second moment of the data.
+00:05:14 EM then proceeds iteratively in two steps.
+00:05:22 The first, the expectation or E-step, treats the Gaussian parameters mu, sigma, and pi as fixed.
+00:05:29 Then for each data point, i, and each cluster, c, we compute a responsibility value, R sub i, c, that measures the relative probability that data point xi belongs to cluster c.
+00:05:37 To do this, we just compute the probability of x under model component c, a weighted Gaussian, and normalize by the total over all the values of c.
+00:05:44 So here, we evaluate a data point x under component 1, so pi 1 times the Gaussian defined by mean mu 1 and covariance sigma 1.
+00:05:52 We then also evaluate its probability under component 2.
+00:05:59 So pi 2 times the Gaussian defined by mu 2 and sigma 2.
+00:06:08 If a particular component C is not a very good explanation for x, it will typically have a small RIC value.
+00:06:17 Conversely, if it's by far the best possible explanation for x, it will have RIC approximately equal to 1.
+00:06:25 Here, component 2 is about twice as good an explanation as component 1 for that data point.
+00:06:34 So component 2 gets responsibility two-thirds, and component 1 gets responsibility one-third.
+00:06:42 Practically speaking, RIC is a number of data by number of clusters, so m by k matrix, that sums to 1 over the index C.
+00:06:51 Then, in the second step of EM, the maximization or M step, we fix these assignment responsibilities RIC and update the parameters of the clusters.
+00:06:59 mu, sigma, and pi.
+00:07:07 Then for each cluster C, we update its parameters using an estimate weighted by the probabilities RIC, as if it observed some fraction RIC of data point I.
+00:07:14 So cluster C sees some total number of data points MC that's the sum of these soft memberships, or fractional weights assigned to cluster C.
+00:07:22 Then pi C is just this value normalized by the total number of data M.
+00:07:29 So this is the fraction of data point probabilities that's assigned to cluster C.
+00:07:37 The weighted mean, mu C, is just the weighted average of the data.
+00:07:44 So each point Xi is given weight RIC, and we divide by the total MC.
+00:07:52 So if a point Xi was poorly explained by some cluster C, its RIC will be small.
+00:07:59 and that point won't influence this average very much.
+00:08:07 But on the other hand, if C was the best explanation for X, then RIC will be large, and Xi will influence the mean more.
+00:08:14 The covariance is similarly just a weighted average of the n by n matrices formed by taking the outer product of Xi minus its cluster C's mean.
+00:08:22 Again, they're weighted by RIC, so that if Xi is a strong member of cluster C, this weight will be nearly 1.
+00:08:29 If Xi is not very well explained by cluster C, then it won't enter into this average very much.
+00:08:37 It's straightforward to prove, although I won't do it here, that these iterations strictly increase the log likelihood of the model, increasing its fit to the data.
+00:08:44 The log likelihood is just the log probability of the data points under the mixture model.
+00:08:52 So it's a sum over data points of log of the probability.
+00:08:59 P of X from before, where that probability is a mixture of Gaussians.
+00:09:06 In fact, EM is interpretable as a form of coordinate ascent, just like our previous k-means algorithm.
+00:09:13 So thus, we're again guaranteed to converge.
+00:09:19 However, convergence here won't typically be as abrupt as it was in k-means.
+00:09:26 So in practice, one usually stops once the parameters or the likelihood objective have stopped changing very much.
+00:09:33 Note that like in k-means, convergence is not guaranteed to be to a global optimum.
+00:09:39 So we may have to start from several initializations and use the log likelihood to select the best.
+00:09:46 One quick point, the result of this algorithm is a description of a collection of clusters, so centers and covariances and so on, and soft membership probabilities for each data point.
+00:09:53 If we want to identify our data points with a single cluster, like in k-means, we could actually just choose the most probable cluster, so the cluster C that has largest value RIC for data points.
+00:09:59 point i.
+00:10:07 Just like in k-means, the view of clusters is easily applied to new out-of-sample data points as well.
+00:10:14 So, these points can be given either a soft cluster membership RIC using an E-step or a hard membership assignment ZI by, again, taking the largest RIC.
+00:10:22 Also like k-means, selecting the number of clusters is important and can't be done using the cluster data themselves.
+00:10:29 So, like k-means, one option is to use a complexity penalty in our score.
+00:10:37 An analog to the mean squared error cost in k-means is the negative log-likelihood of the data in our mixture model.
+00:10:44 And we can then include a complexity penalty like BIC just like before.
+00:10:52 Alternatively, since the Gaussian mixture model is a true probability model, we can use the log-likelihood of a validation or test set to assess the model fit as well by evaluating the mixture probability on the new data points.
+00:10:59 Here's a demonstration of YAM, courtesy of some slides by Professor Poric Smith here at UC Irvine, run on data measuring properties of patients' red blood cells.
+00:11:07 The data include both a group of normal patients and a group of anemic patients, but the diagnosis is actually hidden from us, so we only see the feature measurements themselves.
+00:11:14 Probably you can see the two groups of patients already in the data.
+00:11:22 Up here, with high red blood cell volume and high hemoglobin are the normals, and then this long dispersed group with lower volume and lower hemoglobin are the anemics.
+00:11:29 Let's see how YAM identifies these two groups automatically.
+00:11:37 We initialize our two clusters randomly.
+00:11:44 In this case, they're actually quite similar, but the means and covariances of the green cluster and the red cluster are slightly different, and that'll actually be enough.
+00:11:52 During the E-step, these points over here will be slightly more probable under the red model than the green, while these
+00:11:59 These points will be about equally explained, and these points will be slightly more probable under green.
+00:12:07 Given these soft assignments or responsibilities, when we update our model parameters to compute the weighted mean and covariances, we'll find that the red model shifts slightly to better accommodate the data down here that were given higher probability under the red model.
+00:12:14 And similarly, green shifts to better accommodate the data that were given slightly higher probability under its component.
+00:12:22 Then re-computing the probabilities in the E-step makes these data even more likely under red and these data even more likely under green.
+00:12:29 Another M-step evolves the components even further away to help explain their respective data points better.
+00:12:37 Repeating, we see that the clusters are continuing to separate.
+00:12:44 By iteration 10, they're explaining very different groups of data.
+00:12:52 And by iteration 15, red is almost entirely...
+00:12:59 for the dispersed data and the green cluster for the tight grouping of normals.
+00:13:08 Eventually this process converges, the models cease to change very much, and we can stop.
+00:13:17 Note that the model doesn't know which of these two groups is normal or anemic, just that it can find two distinct groups or clusters in the data that behave differently, and a description of what the data in each cluster look like.
+00:13:25 If we look at the log likelihood of the data over the course of the algorithm, we find that each iteration strictly increases the log likelihood score.
+00:13:34 So after about 15 iterations, the score plateaus and doesn't increase any further, indicating, again, that the model has converged.
+00:13:42 The EM algorithm is actually quite general and can be used for many models or problems involving partially observed data.
+00:13:51 From this viewpoint, here the complete data are the feature values and the cluster assignments, but unfortunately for us the assignments to the eye are more important.
+00:13:59 missing.
+00:14:05 Then EM corresponds to first computing the distribution over the hidden variable zi, given the current parameters of the model, and then maximizing the complete log-likelihood over x and z together in expectation over the distribution of z.
+00:14:11 In Gaussian mixture models, this gives us this elegant algorithm that we saw, where we compute soft assignments for each data point and then plug those soft assignments into the maximum likelihood estimates.
+00:14:17 But in more general models, it may be procedurally a bit more complex.
+00:14:23 Two simple alternatives are often used when EM is difficult to implement.
+00:14:29 There's a stochastic version of EM or a hard version of EM.
+00:14:35 In stochastic EM, instead of taking the expectation over z, we just sample its value and then fix it.
+00:14:41 In hard EM, we select the most probable value and fix it.
+00:14:47 Often it's easier to work with a fixed value of z than maximizing the expectation.
+00:14:53 This process of
+00:14:59 of plugging a value into z is often called imputing the value of z.
+00:15:05 Both variants, stochastic and hard EM, are quite similar to regular EM.
+00:15:10 Hard EM, as you might imagine, is a little less smooth in its optimization, since the best value of z might change discontinuously.
+00:15:16 And it's often prone to more local optima, since once we have a hard assignment, we'll move the parameters to explain it, which then reinforces that hard assignment.
+00:15:21 Hard EM is very closely related to k-means with this best assignment update.
+00:15:27 Stochastic EM is less prone to local optima, but has more randomness built in, making it harder to gauge convergence.
+00:15:32 In summary, Gaussian mixture models are a useful and flexible class of probability distributions.
+00:15:38 And here, we're using them for clustering.
+00:15:43 They explain the distribution of the data x using a latent variable framework.
+00:15:49 So we posit that there's some hidden grouping, or clustering, that explains a lot of the variation in the data.
+00:15:54 Our model then contains a.
+00:15:59 latent membership or assignment variable Zi, and then the actual feature values Xi are Gaussian given that cluster assignment Zi. We can learn the parameters of a Gaussian mixture model using expectation maximization, or EM.
+00:16:09 EM applied to Gaussian mixture models has a simple and elegant form.
+00:16:19 We just iterate between computing soft membership or assignment probabilities, which we call the responsibilities, R sub IC, and updating the parameters of the mixture model components, so the cluster centers, covariances, and so on, using these soft memberships.
+00:16:29 This procedure is guaranteed to strictly increase the log likelihood, decrease the negative log likelihood of the model on training data, which ensures that it's convergent.
+00:16:39 But it's non-convex, so it may have local optima, which makes initialization potentially very important.
+00:16:49 We also discussed how we can set the number of clusters using either a complexity penalty like BIC, just like we did in k-means, or...
+00:16:59 Since the Gaussian mixture model is a true probability model over X, we can actually use the log-likelihood score on held-out validation or test data as well.

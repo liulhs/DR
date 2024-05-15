@@ -1,0 +1,234 @@
+[
+    {
+        "timestamp": "00:00:00",
+        "text": "Welcome to our introductory course on machine learning here at UC Irvine."
+    },
+    {
+        "timestamp": "00:00:10",
+        "text": "My name is Professor Alexander Eiler, and I created these lectures for our introductory courses for undergraduates CS178 and graduates CS273."
+    },
+    {
+        "timestamp": "00:00:20",
+        "text": "Machine learning is generally considered to be a subfield of artificial intelligence."
+    },
+    {
+        "timestamp": "00:00:30",
+        "text": "As a general field, artificial intelligence is focused on building so-called intelligent agents, which are often typified by various tasks, including games like chess, now a classic man versus machine kind of scenario, autonomous behavior, such as autonomously driving vehicles, and multi-agent dynamics, such as robotic soccer competitions."
+    },
+    {
+        "timestamp": "00:00:40",
+        "text": "Machine learning is both more specific and more broadly applied than typical artificial intelligence."
+    },
+    {
+        "timestamp": "00:00:50",
+        "text": "Machine learning is focused on making predictions or decisions"
+    },
+    {
+        "timestamp": "00:01:00",
+        "text": "and specifically on those getting better with experience."
+    },
+    {
+        "timestamp": "00:01:04",
+        "text": "It is fundamentally a data analysis science and combines parts of computer science and computational thinking with traditional areas of mathematics like statistics and optimization."
+    },
+    {
+        "timestamp": "00:01:09",
+        "text": "This is intended as an introductory class with an emphasis on the practical."
+    },
+    {
+        "timestamp": "00:01:13",
+        "text": "Some theories included, of course, but mainly to understand the principles of what works and what doesn't and how to make it work better."
+    },
+    {
+        "timestamp": "00:01:18",
+        "text": "Machine learning is often typified by problems whose solutions are hard to describe explicitly."
+    },
+    {
+        "timestamp": "00:01:23",
+        "text": "For instance, consider face detection by a camera autofocus."
+    },
+    {
+        "timestamp": "00:01:27",
+        "text": "What makes a face?"
+    },
+    {
+        "timestamp": "00:01:32",
+        "text": "How can we describe to a program that this patch of the image contains a face while this patch doesn't?"
+    },
+    {
+        "timestamp": "00:01:36",
+        "text": "It's hard to describe that in a set of rules."
+    },
+    {
+        "timestamp": "00:01:41",
+        "text": "Similarly, Netflix predicting how much you'll like a movie."
+    },
+    {
+        "timestamp": "00:01:46",
+        "text": "What kinds of movies do you like?"
+    },
+    {
+        "timestamp": "00:01:50",
+        "text": "What kind of movie is this?"
+    },
+    {
+        "timestamp": "00:01:55",
+        "text": "Again, very hard to write down in an explicit set of."
+    },
+    {
+        "timestamp": "00:01:59",
+        "text": "Instead, we'll need the computer to learn through examples."
+    },
+    {
+        "timestamp": "00:02:06",
+        "text": "Both these tasks are examples of so-called supervised learning, in which we're given training data with the correct answers already tagged."
+    },
+    {
+        "timestamp": "00:02:13",
+        "text": "We can then design a program to try to reproduce these correct answers."
+    },
+    {
+        "timestamp": "00:02:19",
+        "text": "In general, these problems come in two flavors."
+    },
+    {
+        "timestamp": "00:02:26",
+        "text": "Classification problems, in which the thing we must predict is a discrete value, for instance, deciding that a square contains a face or does not, a binary decision, or whether an email is a spam email or not."
+    },
+    {
+        "timestamp": "00:02:33",
+        "text": "In contrast, regression problems, we're predicting a real value number."
+    },
+    {
+        "timestamp": "00:02:39",
+        "text": "For example, Netflix may guess that you will rate a movie 3.8 stars."
+    },
+    {
+        "timestamp": "00:02:46",
+        "text": "Note that the discreteness is in the prediction."
+    },
+    {
+        "timestamp": "00:02:53",
+        "text": "In Netflix, for example, you can only rate a movie 3 or 4 stars, but because Netflix can predict a real value number like 3.8, it would be called a regression."
+    },
+    {
+        "timestamp": "00:02:59",
+        "text": "Another type of problem, unsupervised learning, refers to problems in which there's no specific signal to predict."
+    },
+    {
+        "timestamp": "00:03:08",
+        "text": "Instead, we simply want to understand the data, the structure, notions of similarity, how they relate to one another."
+    },
+    {
+        "timestamp": "00:03:17",
+        "text": "Often the term data mining refers to this kind of data exploration or data understanding problem."
+    },
+    {
+        "timestamp": "00:03:25",
+        "text": "On the left is one such unsupervised framework, this time applied to the Netflix data again, where now the data have been used to understand the notion of similarity between movies."
+    },
+    {
+        "timestamp": "00:03:34",
+        "text": "We can use the ratings to organize and group them by similarity, summarize them, or even improve some kind of prediction problem."
+    },
+    {
+        "timestamp": "00:03:42",
+        "text": "On the right are images of a hand as it explores two degrees of freedom, opening and closing and rotating."
+    },
+    {
+        "timestamp": "00:03:51",
+        "text": "The computer only observes image patches."
+    },
+    {
+        "timestamp": "00:04:00",
+        "text": "consisting of hundreds of grayscale values."
+    },
+    {
+        "timestamp": "00:04:08",
+        "text": "Using only these kinds of image patches, unsupervised learning techniques can organize the images automatically, such that, for example, closed hands are here on the bottom, open hands are organized onto the top, and left to right shows vertical to horizontal rotation."
+    },
+    {
+        "timestamp": "00:04:17",
+        "text": "Note that in both cases, the computer doesn't so much understand the semantic meaning behind this, as it does understand the similarity between the data."
+    },
+    {
+        "timestamp": "00:04:25",
+        "text": "So this is an automatic organization, but the semantic meaning is then usually imposed by humans later."
+    },
+    {
+        "timestamp": "00:04:34",
+        "text": "Many other variants of learning problems also exist."
+    },
+    {
+        "timestamp": "00:04:42",
+        "text": "A few of note include semi-supervised learning, which is really a supervised learning problem in that there's a signal, a specific signal to predict, but not all of the examples have the correct answer already given."
+    },
+    {
+        "timestamp": "00:04:51",
+        "text": "Typically, unsupervised-like methods can then be used to support and improve on the supervised decision."
+    },
+    {
+        "timestamp": "00:04:59",
+        "text": "These kinds of problems are increasingly common since we now have a lot of data, but not very much time to hand label it."
+    },
+    {
+        "timestamp": "00:05:05",
+        "text": "In medical data, for example, we might have a lot of patient information, but very few examples in which we know the actual outcome or the best action to take."
+    },
+    {
+        "timestamp": "00:05:11",
+        "text": "On the web, on the other hand, we might have millions of photos, but we can't expect users to label or tag all of them."
+    },
+    {
+        "timestamp": "00:05:17",
+        "text": "Users will only label a small subset."
+    },
+    {
+        "timestamp": "00:05:23",
+        "text": "So we have a vast trove of unsupervised data to go along with a small collection of supervised data."
+    },
+    {
+        "timestamp": "00:05:29",
+        "text": "Finally, reinforcement learning involves learning when there's only indirect feedback on quality."
+    },
+    {
+        "timestamp": "00:05:35",
+        "text": "Rather than actually knowing the correct answer or what a human would have done, as in supervised learning, here we only get a relative quality score telling us whether we're doing better or worse."
+    },
+    {
+        "timestamp": "00:05:41",
+        "text": "Moreover, this feedback might be delayed."
+    },
+    {
+        "timestamp": "00:05:47",
+        "text": "It might reflect many actions or predictions in sequence."
+    },
+    {
+        "timestamp": "00:05:53",
+        "text": "It might be noisy."
+    },
+    {
+        "timestamp": "00:05:59",
+        "text": "just consider the game of poker."
+    },
+    {
+        "timestamp": "00:06:08",
+        "text": "In poker, we take a sequence of actions, betting, raising, but at the end, we don't even find out the correct answer to those actions."
+    },
+    {
+        "timestamp": "00:06:16",
+        "text": "We just find out whether we won or lost in the end."
+    },
+    {
+        "timestamp": "00:06:24",
+        "text": "Much of robotics and other kinds of sequential action planning rely on reinforcement learning techniques for developing their behaviors."
+    },
+    {
+        "timestamp": "00:06:32",
+        "text": "In summary, machine learning is a computational study of data, including many types of subproblems."
+    },
+    {
+        "timestamp": "00:06:40",
+        "text": "In this course, we'll start with supervised learning, which are prediction problems in which we're given examples of what our function should output in a number of instances, taken in the form of training data with input features and labeled desired output values."
+    }
+]

@@ -1,0 +1,150 @@
+00:00:00 Boosting uses ensemble techniques to create a sequence of increasingly complex predictors out of building blocks made out of very simple predictors.
+00:00:10 Boosting trains models by sequentially training a new simple model based on the errors of the previous model.
+00:00:20 So we start off by learning a very simple predictor and then evaluate its errors and focus the next predictor on getting these examples right.
+00:00:30 So this procedure tends to discover the examples and data points that are hard to predict and focuses later classifiers on predicting these examples better.
+00:00:40 In the end we combine the whole set uses some weighted combination and this is a way of scaling up complexity.
+00:00:50 So each individual predictor tends to be very simple and by combining many of these weak learners that are not able to learn complex functions we can convert them all into an overall much more complex classifier.
+00:01:00 So, here's an example of boosting for classification.
+00:01:06 Suppose we have the following data set, which has some plus one class entries in red, some minus one class entries in blue.
+00:01:12 We learn a classifier for these data, but we restrict ourselves to an extremely simple kind of classifier, let's say a decision stump, so a one-level decision tree.
+00:01:18 So, we learn this decision stump, which splits on X2 at this point.
+00:01:24 This gets most of the points right, but it gets these two negative points wrong and this positive point wrong.
+00:01:30 So what we'll do is we'll focus the next trainer on those.
+00:01:36 The best such classifier in this extremely simple class is the following.
+00:01:42 So we split on X2 at this point, and this gets many of the data right, but not all of them.
+00:01:48 In particular, it makes three mistakes, two minuses over here, and one plus right there.
+00:01:54 These are the data we'll focus on next for the next
+00:02:00 classifier.
+00:02:06 We increase the weights of these points, the importance of getting them right in the classifier.
+00:02:12 Now we have a new training data set which consists of the same points as originally, but now we have weights assigned to these points.
+00:02:18 So here I've indicated those visually by the size of the indicators.
+00:02:24 So these smaller pluses and smaller minuses are less important for us to get right, while the larger points, the large plus and the larger minuses, are more important.
+00:02:30 We now train another classifier of the same kind, so a very simple decision stump, but we train it to try to get the weighted error to be low.
+00:02:36 So here's the best decision stump that we find.
+00:02:42 Again, we see that it gets a lot of points right.
+00:02:48 In particular, it tries to get these weighted points more right.
+00:02:54 So here we've learned something that, unlike the first data set, the first prediction over here is now focused on getting...
+00:03:00 say, those three points correct.
+00:03:08 It also happens to get all of those correct, but is willing to make a mistake on three small minuses, as opposed to the, say, two large minuses that we got wrong in the first step.
+00:03:17 Again, we identify the data points where we've made a mistake, and we increase their weight for the next round, decreasing the weights of the ones we get right.
+00:03:25 Since we got these points correct, their weight's gone down.
+00:03:34 Since we got these pluses correct, their weight's gone down even further, and these points, which got smaller in the first step, have now gotten larger again.
+00:03:42 We now train another model of the same simple type to try to predict these weighted data points with low weighted error.
+00:03:51 Again, this classifier is focused primarily on getting the larger data points right, and thus it will be slightly different than the previous ones, focusing on getting, say, this red plus and those three minuses correct, and being willing to perhaps make a mistake on these.
+00:04:00 for very small red pluses.
+00:04:12 Although we haven't talked about minimizing weighted error, it's not particularly different than the unweighted error we've minimized in the past.
+00:04:24 In particular, for algorithms that directly minimize a cost function, like linear classifiers and others, instead of an unweighted sum, where each term Ji corresponds to some cost function on data point I, and we sum those up and take their average, we might have a weighted average where we have weights Wi, which in the unweighted case, simply correspond to one over N for all I, but in this case might correspond to different values of W.
+00:04:36 And these terms weight the cost function for point I, and tell us which data points are more important to minimize error or less important.
+00:04:48 For algorithms that are not direct minimizations, like decision trees, so forth, we can simply modify the techniques.
+00:05:00 had before to now take weights.
+00:05:08 So for instance, in the decision tree, we might use a weighted impurity score where we still calculate the entropy, but instead of calculating the entropy of the unweighted fraction of data in one class or another, we define, for instance, the probability of a class plus 1 to be the total weight of data in class plus 1, and class minus 1 have the total weight of data in class minus 1.
+00:05:17 And that will still define a probability distribution over classes as long as the weights are forced to sum to 1.
+00:05:25 And we can still take that as a probability and define an impurity score, h of p, which we can then use to score information gain and so forth.
+00:05:34 In the end, each of these classifiers is assigned a weight, which we'll describe in a moment.
+00:05:42 And their weighted combination becomes an overall combined predictor.
+00:05:51 Since we're predicting plus or minus 1, we simply.
+00:06:00 add up the weighted sum of the predictions and we check its sign.
+00:06:07 So if the sign of the weighted sum is positive, we predict plus one.
+00:06:15 If the sign is negative, we predict minus one.
+00:06:22 When we do this, we find that the combination of several extremely simple models, decision stumps, produces an overall decision region that is more complex.
+00:06:30 So here, this weighted combination has managed to carve out a shape, a region to predict plus one and minus one in, that is more complex than any simple decision stump could have.
+00:06:37 The classic example of boosting for classification is the AdaBoost, or adaptive boosting algorithm.
+00:06:45 AdaBoost trains a series of models, say n-boost models sequentially, using a weighted trainer.
+00:06:52 So we can use any black box machine learning algorithm that we would like, as long as it's able to accept.
+00:07:00 a weighted collection of training points and try to minimize the weighted error.
+00:07:06 So here, when we train classifier I, we train it on not just a data set X with targets Y, but we have a vector of weights that tell us how important it is to get that particular data point right.
+00:07:13 When we start off, we set all the weights to uniform.
+00:07:20 And as we go on, these weights evolve to tell us which points should be focused on by the next learner.
+00:07:26 We train our model to try to minimize the weighted error, and then we compute what that model predicts for us.
+00:07:33 So Y hat is the predictions of model I, and then we check to see which data points have been gotten wrong by this predictor.
+00:07:40 So we check for all the data points where Y is not equal to Y hat, and we compute an error vector that's the weighted sum error.
+00:07:46 So weights is a vector of weights on the data points.
+00:07:53 This is a vector of zeros and ones
+00:08:00 us whether we got that point wrong.
+00:08:06 And so e will be the sum, the vector product of those things.
+00:08:13 So the sum of the weighted errors.
+00:08:20 We compute our weight alpha i to be one half times the log odds ratio of that error.
+00:08:26 And we compute a new weight vector.
+00:08:33 So we update the weight vector for the data by multiplying it by e to the minus alpha i times y times y hat.
+00:08:40 So y times y hat, since these classes are plus and minus one, if we've gotten the data correct, we've made a correct prediction, y and y hat will be the same sign, and this will be positive.
+00:08:46 And so e to the minus alpha i, alpha will be a, will be a positive number as well.
+00:08:53 So e to the minus alpha i will be, alpha i, y, y hat will be.
+00:09:00 be a positive number and e to the minus it will be a small number.
+00:09:10 On the other hand if y and y hat are of different classes their sign will be opposite and so this will be a positive number and so e to the positive number will be a large number so we'll up weight things.
+00:09:20 So we update the weights increasing the weights of anything where y is not equal to y hat and decreasing the weight of things where y does equal y hat and then we normalize the weights to sum to one because we want to have a normalized collection of weights.
+00:09:30 We repeat this procedure over and over until we've learned however many classifiers we want and our final classifier is just the weighted sum of our predictions.
+00:09:40 So again these are signs plus and minus one so the weighted sum of them will be above zero and we'll predict positive one or below zero and we'll predict negative one.
+00:09:50 A few things about this algorithm...
+00:10:00 might seem a bit mysterious, like why that choice of alpha or why that choice of weights.
+00:10:06 And although I'm not going to go into very many details, it has a nice theoretical justification.
+00:10:13 It turns out that this algorithm, AdaBoost, corresponds to minimizing a surrogate loss function of our error.
+00:10:20 In particular, AdaBoost minimizes something called the exponential loss.
+00:10:26 So the sum over the data points of e to the minus class times our linear predictor, or our prediction function, rather.
+00:10:33 So again, if these two things have the same sign, this is a positive number, e to the minus, a positive number, will be small.
+00:10:39 If they have a different sign, it'll grow.
+00:10:46 So this is a smooth, convex surrogate for the 0, 1 loss, and thus is fairly easier to optimize.
+00:10:53 And it turns out this AdaBoost procedure is iteratively minimizing this exponential loss.
+00:10:59 One example where Adaboost was really applied with tremendous success is to the face detection problem and a classic algorithm called the Viola-Jones face detector.
+00:11:07 The idea here is that we can, well, again, combine a collection of many very weak and easy-to-compute classifiers.
+00:11:14 In particular, Viola-Jones uses decision stumps with thresholds on single feature, just like my example earlier.
+00:11:22 And we'll do this by defining lots and lots of features, but using very simple classifiers of those features.
+00:11:29 So the number of features will make us prone to overfitting.
+00:11:37 The choice of an extremely simple classifier function will make us less prone to overfitting.
+00:11:44 And then we'll use Adaboost to slowly build up a more complex function and fit well.
+00:11:52 So the idea of face detection is we're going to build a classifier that looks at a single patch of an image.
+00:11:59 and decides whether or not that image patch has a face.
+00:12:07 So, cameras do this all the time, they look at a single patch and they decide whether that looks more like a natural background or whether it actually has a human face in it, meaning that probably it's something that the camera should focus on.
+00:12:14 To do this well, you want the model to be extremely accurate and also extremely fast.
+00:12:22 In any computer vision or image processing problem, the feature representation turns out to be critically important.
+00:12:29 It turns out that there's very little to be told about a particular pixel being a particular shade of gray.
+00:12:37 It's not very helpful in recognizing visual phenomena.
+00:12:44 And so, computer vision researchers have done a lot of work to try to find feature representations that are evocative of actual phenomena in the visual image.
+00:12:52 The basis chosen here is called the Haar wavelet basis.
+00:12:59 and consists of image responses to patches of filters.
+00:13:05 So there are four basic types.
+00:13:11 There's a vertical response and a horizontal response and some more.
+00:13:17 And the way that you interpret this is this is a region which will be used to extract out an appearance of a particular piece of this image.
+00:13:23 So over here is a patch which may or may not contain a face.
+00:13:29 And each feature in our new representation will consist of a sum, a weighted sum, of many of these pixels in the image.
+00:13:35 So for instance, here is a HAR wavelet that's a horizontal response.
+00:13:41 It's got black region above a white region.
+00:13:47 And so what we do is we add together all the pixels under the black region and then we subtract from that the sum of all the pixels under the white region.
+00:13:53 So.
+00:13:59 A patch like this, a filter like this, is going to have a high response when there's a light region, say over the eyes, and a dark region, so small values, right beneath it.
+00:14:11 Similarly, here's another type, so another type has a black or a white in the interior and then the opposite color on the exteriors, so sort of a three-bar pattern.
+00:14:23 And so, something like that here, this is going to have a response when there's a large intensity on the outer and some dark patch in the interior.
+00:14:35 So in this case, something like the eyes, which might have dark on the outside and the nose causing a bright patch in the middle, might have a large negative response to this filter.
+00:14:47 And so that might be useful in recognizing faces, because we would see that spike in a particular area of the image, and we would know that the...
+00:14:59 that might correspond to eyes and a nose in that piece.
+00:15:09 They're also not too inefficient to calculate, because you can pre-process the image to compute something called the integral image.
+00:15:19 And what this is, is you compute the partial sum of the image up to a particular pixel, so in a rectangle to, say, the up and left of that point.
+00:15:29 And then the integral over some region, let's say over this white region that I want to subtract, I can compute by just using the four points at the corners of the pixels.
+00:15:39 And that will tell me what the sum in a number of regions are, and I can just calculate it by the difference of those points.
+00:15:49 So if you look over these four shapes and all of the different sizes, so lengths and scales that one could look at, it turns out that for a fairly simple, small image, say a 28 by 28 image patch like the one I showed.
+00:15:59 there are about 140,000, maybe 180,000 features of this wavelet type.
+00:16:05 So 180,000 features is quite a lot, and so already we're probably in danger of perhaps overfitting.
+00:16:11 And so we'll choose an extremely simple classifier, a decision stump.
+00:16:17 So we'll look at only one feature and perform some thresholding.
+00:16:23 So each of these features is going to be one possible classifiers.
+00:16:29 And so to train, we'll train a sequence of classifiers.
+00:16:35 We'll train a classifier on, each of these classifiers will be trained by learning one classifier per feature using whatever our weights are.
+00:16:41 Then we pick only the best one.
+00:16:47 We find where it makes its errors and we reweight the data.
+00:16:53 So this can take a long, long time to train.
+00:16:59 because there are hundreds of thousands of features to test, and we have to test each one of them for each of our sequence of boosted classifiers.
+00:17:07 So one thing you could do is to make this classifier even weaker by simply not training it very well.
+00:17:14 So instead of finding the best decision stump, you could just find a quick decision stump.
+00:17:22 So this is fairly easy to do.
+00:17:29 You can do something like choose the weighted midpoint between the means of the plus 1 class and the means of the minus 1 class or something.
+00:17:37 So any procedure that doesn't directly optimize and thus spend a lot of time.
+00:17:44 I'm also glossing over a lot of tricks in the real Viola-Jones paper that were really used to make this an effective and practical technique.
+00:17:52 So in particular, the actual Viola-Jones method used a cascade of decisions.
+00:17:59 of just a weighted combination.
+00:18:09 So, if earlier classifiers had rejected a data point as having a face, it would be immediately discarded and not considered further.
+00:18:19 And that allowed them to process many more patches quickly than if all of the boosted predictors need to be applied to every patch.
+00:18:29 So, that makes it more computationally efficient, particularly since it also needs to be applied at multiple scales of the image, since the face might be very large in the picture, taking up most of the frame, or it might be small somewhere in the background.
+00:18:39 Overall, though, this boosted technique produced an extremely good facial recognition or facial detection process and is one of the baselines of facial detection to this day.
+00:18:49 So, in summary, ensemble methods try to combine multiple classifiers to make a better one, and boosting in particular tries to train
+00:18:59 a sequence of models, each of which is trained using the errors of the previous models.
+00:19:11 This makes later predictors able to focus on the mistakes of the earlier ones and focus on getting hard examples right.
+00:19:23 The example of boosting for classification in this case is AdaBoost or adaptive boosting, and this uses the result of earlier classifiers to up-weight training examples, and then in the classification process the black box classifier tries to minimize the weighted errors.

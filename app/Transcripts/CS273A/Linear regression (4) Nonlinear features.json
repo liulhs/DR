@@ -1,0 +1,226 @@
+[
+    {
+        "timestamp": "00:00:00",
+        "text": "Now let's look at the impact of features on our linear regression problem and how using nonlinear features can extend our class of predictors."
+    },
+    {
+        "timestamp": "00:00:06",
+        "text": "In a multidimensional feature space, our linear regression remains a linear function."
+    },
+    {
+        "timestamp": "00:00:12",
+        "text": "So if we have two features, x1 and x2, and y is a linear function of those, we'll have a plane."
+    },
+    {
+        "timestamp": "00:00:18",
+        "text": "We'll be predicting on a plane."
+    },
+    {
+        "timestamp": "00:00:24",
+        "text": "If we have three features, a hyperplane, and so on."
+    },
+    {
+        "timestamp": "00:00:30",
+        "text": "Otherwise, everything about the procedure remains essentially the same."
+    },
+    {
+        "timestamp": "00:00:36",
+        "text": "We have a parameter vector theta, a feature vector for each data point, and our predictor is the dot product between those vectors."
+    },
+    {
+        "timestamp": "00:00:42",
+        "text": "So what if we want to learn regression functions that aren't lines?"
+    },
+    {
+        "timestamp": "00:00:48",
+        "text": "For example, perhaps a cubic or other polynomial regression function."
+    },
+    {
+        "timestamp": "00:00:54",
+        "text": "From this viewpoint, we'd like to use a scalar x to predict y, and we'd like to use a polynomial function."
+    },
+    {
+        "timestamp": "00:01:00",
+        "text": "function of x, so that y-hat will be, say, theta 0 plus theta 1 x plus theta 2 x-squared plus theta 3 x-cubed."
+    },
+    {
+        "timestamp": "00:01:07",
+        "text": "So we have a data set consisting of that scalar feature and our target."
+    },
+    {
+        "timestamp": "00:01:15",
+        "text": "But now let's pretend that instead of observing one feature, we observe three."
+    },
+    {
+        "timestamp": "00:01:22",
+        "text": "Denote feature 2 by x2 and set its value equal to the square of the first feature."
+    },
+    {
+        "timestamp": "00:01:30",
+        "text": "Feature 3 will be x3, and set its value equal to the cube of the first feature."
+    },
+    {
+        "timestamp": "00:01:37",
+        "text": "Rewriting our predictor, we see that now it's just a linear regression in the new features, theta 0, theta 1 times our first feature, and now theta 2 times the second and theta 3 times the third."
+    },
+    {
+        "timestamp": "00:01:45",
+        "text": "So we can solve it using exactly the same technique as before."
+    },
+    {
+        "timestamp": "00:01:52",
+        "text": "It's often helpful to think of this feature augmentation process as a feature transform phi."
+    },
+    {
+        "timestamp": "00:02:00",
+        "text": "converts our original input features x into some new set of features that will be more useful and be used by our algorithm."
+    },
+    {
+        "timestamp": "00:02:07",
+        "text": "To avoid confusion, sometimes we'll explicitly reference such a transform phi, in which case our linear regression function would be theta times the feature transform of x."
+    },
+    {
+        "timestamp": "00:02:15",
+        "text": "So notice that this is just the same equation as before, except we've replaced the input features x by some post-processed features phi of x."
+    },
+    {
+        "timestamp": "00:02:22",
+        "text": "We can then directly fit these polynomial functions using exactly the same framework and plot the prediction phi of x, where, for example, here our features phi of x are just the constant 1 and the input feature x."
+    },
+    {
+        "timestamp": "00:02:30",
+        "text": "Here it's those plus x squared."
+    },
+    {
+        "timestamp": "00:02:37",
+        "text": "Here it's those and x cubed as well."
+    },
+    {
+        "timestamp": "00:02:45",
+        "text": "In our prediction step, whenever we want to predict a value of x, we just put it through this feature map phi."
+    },
+    {
+        "timestamp": "00:02:52",
+        "text": "So here we put x through and we get the constant x at x squared and x cubed."
+    },
+    {
+        "timestamp": "00:03:00",
+        "text": "before predicting."
+    },
+    {
+        "timestamp": "00:03:06",
+        "text": "More generally, including more features can often be very helpful."
+    },
+    {
+        "timestamp": "00:03:13",
+        "text": "In addition to collecting more information about each data example to produce new features, we can also use transforms of the features we've already observed."
+    },
+    {
+        "timestamp": "00:03:19",
+        "text": "So if we observed some input features, we might define a feature transform that will give us polynomial features to learn more complex functions."
+    },
+    {
+        "timestamp": "00:03:26",
+        "text": "Or other non-linear transforms as well."
+    },
+    {
+        "timestamp": "00:03:33",
+        "text": "Whatever we think will be useful and have a direct linear relationship to the target."
+    },
+    {
+        "timestamp": "00:03:39",
+        "text": "In general, the concept of linear regression, we mean linear in the parameters."
+    },
+    {
+        "timestamp": "00:03:46",
+        "text": "Since the features were allowed to do whatever transforms we like."
+    },
+    {
+        "timestamp": "00:03:53",
+        "text": "The most useful transforms will give us features that do, in fact, have a linear relationship with the target variable."
+    },
+    {
+        "timestamp": "00:03:59",
+        "text": "to generate more features such as polynomials, the question is should we and where should we stop?"
+    },
+    {
+        "timestamp": "00:04:07",
+        "text": "Note that increasing the polynomial degree of our fit creates a nested sequence of models."
+    },
+    {
+        "timestamp": "00:04:14",
+        "text": "For example, out of all lines like this, the constant feature is one such line, so the best line fit will always be at least as good or better than the best constant fit."
+    },
+    {
+        "timestamp": "00:04:22",
+        "text": "Similarly, all cubic functions include all lines, so the best cubic will be at least as good as the best line and so on."
+    },
+    {
+        "timestamp": "00:04:29",
+        "text": "As we increase the number of features, we always will get some improvement in fit quality."
+    },
+    {
+        "timestamp": "00:04:37",
+        "text": "At an extreme, given enough features, we'll actually hit all of the points exactly since we'll have m equations and m unknowns."
+    },
+    {
+        "timestamp": "00:04:44",
+        "text": "But this kind of extreme is not such a good thing."
+    },
+    {
+        "timestamp": "00:04:52",
+        "text": "Remember our example where we could explain the data with just a line plus noise or as an extremely complex function that hit all of the data."
+    },
+    {
+        "timestamp": "00:04:59",
+        "text": "data."
+    },
+    {
+        "timestamp": "00:05:08",
+        "text": "Even though more complex models will always fit the training examples better, they may not perform as well in the future, since they may overfit and learn patterns that aren't really present in the real system."
+    },
+    {
+        "timestamp": "00:05:17",
+        "text": "To gauge our real performance once we've learned a model, we need additional data to see what the error rate will be once we go out and test on new examples."
+    },
+    {
+        "timestamp": "00:05:25",
+        "text": "So, in this case, once we collect more examples, we can see that the linear fit is actually much better than the high-order polynomial."
+    },
+    {
+        "timestamp": "00:05:34",
+        "text": "One way we can assess this is by holding out a set of validation data, here the green dots, or doing some kind of cross-validation to test for the performance of the model on data that it has not seen."
+    },
+    {
+        "timestamp": "00:05:42",
+        "text": "We explicitly hide some of the data from our learning algorithm, and then we can use those points to estimate its performance on future data."
+    },
+    {
+        "timestamp": "00:05:51",
+        "text": "When we plot performance as a function"
+    },
+    {
+        "timestamp": "00:05:59",
+        "text": "of features, in this case, polynomial order, we find the following trends."
+    },
+    {
+        "timestamp": "00:06:07",
+        "text": "As we increase the polynomial order, so the number of features, we find that the performance on the training data, the red points that the algorithm sees as it optimizes data, gets better and better, it decreases."
+    },
+    {
+        "timestamp": "00:06:15",
+        "text": "But if we look at the performance of new data that the model's not able to see when it selects data, we find that for a short period of time, as the model becomes more complex, our performance improves."
+    },
+    {
+        "timestamp": "00:06:23",
+        "text": "So here, from constant to first order, linear, it gets better."
+    },
+    {
+        "timestamp": "00:06:31",
+        "text": "But then, as we increase still further to second order, third order, and so forth, our performance on the test data may actually start to get worse."
+    },
+    {
+        "timestamp": "00:06:39",
+        "text": "This is the overfitting phenomenon."
+    }
+]

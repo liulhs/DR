@@ -1,0 +1,110 @@
+00:00:00 Our first ensemble technique is called bagging, and is a classic technique for generating lots of predictors and combining them together in a simple way to do a better job.
+00:00:07 Ensemble methods try to use a collection of predictors to do a better job than any single predictor would alone.
+00:00:15 Our first instance of this is called bagging, which stands for bootstrap aggregation.
+00:00:22 Bagging is a technique for learning many classifiers, each using only portions of the data, and then combining them through a model averaging technique.
+00:00:30 The idea behind this is to reduce overfitting of a class of models.
+00:00:37 So recall that when we overfit, we would memorize the data set, and we would get a far lower training error on that training data set than we would see on, say, a new validation or test data.
+00:00:45 So we did techniques like cross-validation to try to test or check to see whether we had overfit.
+00:00:52 In cross-validation, we would take our data set
+00:01:00 and we would repeatedly split it up into one part, which would train a model with a given complexity level, and another part which would check to see whether we had overfit.
+00:01:12 So this was a way to use the entire training set, but still do some kind of verification of whether or not we were beginning to overfit on the data.
+00:01:24 So the idea behind bagging is to do a similar kind of data splitting or resampling technique, but instead of using them to check to see whether we overfit, we instead try to combine them so that we produce a better classifier or predictor.
+00:01:36 Bagging relies on a classical statistical technique called the bootstrap, which creates a random new subset of data by sampling from a given data set.
+00:01:48 So the idea is that we have a particular data set, and we'd like to generate a similar data set by sampling from it with replacement.
+00:02:00 confidence values, or confidence intervals of estimates, and understand what the variation due to the particular realization of the data set is.
+00:02:10 To do it, we take a collection of N data points, and we can generate a new imaginary data set of size N prime by simply drawing those N prime data points from our collection using replacement.
+00:02:20 There are variants of this that use without replacement, but we won't really focus on those.
+00:02:30 Bagging, then, uses Bootstrap as a subroutine of its learners.
+00:02:40 So it creates K learners, each of which is created independently.
+00:02:50 We take the original training set, and each learner generates its own training data set, so data set sub I, by drawing N prime data points from the original full training set using replacement.
+00:03:00 a classifier on these data.
+00:03:07 Now these data will were drawn with replacement so some of them will be repeated and other data points will be left out.
+00:03:15 We just learn all of these in parallel and then to test we predict on all K of the predictors and we have them do an unweighted combination.
+00:03:22 So a classifier would do a majority vote and a regressor would do say an unweighted average.
+00:03:30 So this technique is used to reduce the complexity or reduce overfitting and you can see why it might reduce complexity to some degree.
+00:03:37 It has some complexity control.
+00:03:45 It's harder for any particular bag classifier to memorize the data since each one is seeing its own individually generated training data set and that training data set was sampled from the original one so it's left some points out.
+00:03:52 So those points won't be seen by that particular classifier and even if it really is a
+00:04:00 overfitting type of classifier, even if it memorizes its training set, it will be missing some data from the original training data, and so it won't be able to memorize the full training set.
+00:04:10 So it should control complexity to some degree because every element of it will be unable to fully memorize the data.
+00:04:20 So I should say that this doesn't work on predictors that are linear functions of the input data, since the average of a linear function will just be another linear function, so it doesn't really do very much.
+00:04:30 It does work with anything that has non-linearity, so things like perceptrons, where we have a linear function but it's thresholded, so the actual prediction is not a linear function of the inputs, it's fine.
+00:04:40 Bagging is fundamentally trading off on the bias-variance balance that we find in under and overfitting.
+00:04:50 The idea behind bias and variance was that...
+00:05:00 The two effects that we were worried about in our training were, one, bias, which represents our inability to represent the true function in the class of functions that we're willing to tolerate.
+00:05:10 So bias tends to be something that pulls us toward a particular function or class of functions, regardless of the data.
+00:05:20 And this might be something simple like only looking at a certain class of functions like linear or quadratic functions, or it might be something softer like a strong regularization, which will force us toward models that tend to have zeros in the parameters or have small parameter values.
+00:05:30 On the other hand, when we didn't invoke any such bias, we ended up with models that were quite complex.
+00:05:40 They could fit very complex functions, but they had high variance.
+00:05:50 So they were extremely dependent on the exact data that they
+00:06:00 were trained on.
+00:06:08 So, in particular, if we had, let's say, a hundred training examples and we trained one of these very complex models, it would be able to fit whatever function explained those data, but it would be quite likely that if we drew a hundred new examples from the same concept, that the model we trained on the new data would be very different than the first model.
+00:06:17 And so, any particular realization of the data set produces a high degree of variation in the predictor.
+00:06:25 So, the model itself has high variance.
+00:06:34 Bagging works on the high-variance end of the spectrum by taking a collection of low-bias, high-variance models and averaging them together.
+00:06:42 So, the averaging works to reduce variance, but without significantly increasing the bias.
+00:06:51 So, it simply tries to move this curve downward.
+00:06:59 Here's an example of bootstrap and of bagging using decision trees on the iris data.
+00:07:11 So here, up in the upper right, is the actual iris data with three classes, blue, green, and red, being plotted, and a decision tree with full depth and no complexity control and the function that it learns on those data being plotted as well.
+00:07:23 So the bootstrap procedure takes these data and it draws a new set of data, in this case of the same size, using replacement to try to simulate some equally likely data set that we could have seen in a different universe.
+00:07:35 So here's that data set.
+00:07:47 It's on a slightly different scale, so it's a little hard to compare, but you can see if you stare that a few data points are missing, in particular, this red.
+00:07:59 point here has vanished from this data set.
+00:08:06 It's particularly hard to tell.
+00:08:13 Oh, and this red point here also has vanished.
+00:08:19 It's particularly hard to tell data that have been sampled twice since those points are right on top of each other, but they're present as well.
+00:08:26 So this is a new data set of the same size simulated from the original data set, and being slightly different, it learns a slightly different decision tree model.
+00:08:33 Here's yet another data set sampled in exactly the same way.
+00:08:39 Again, being slightly different, it learns a slightly different decision tree model.
+00:08:46 Here's a third, again slightly different, a fourth, and a fifth.
+00:08:53 The randomness created in the bootstrap data generation process produces five equally likely models.
+00:08:59 in some sense that we could have gotten from the same data had we just been, say, differently lucky.
+00:09:06 So now we take that collection and combine it into an overall average with an unweighted sum.
+00:09:13 So in this case, we're classifying, so I mean we take a majority vote.
+00:09:19 So if the majority of classifiers picks a particular class, we predict that one.
+00:09:26 This reduces the memorization effect, since not every predictor can see each data point.
+00:09:33 In particular, a region will only be predicted to a class if it has enough support among all of the data points that in most of the decision trees we learn, that region is still assigned to the class.
+00:09:39 So this will lower the complexity of the overall predictor and typically lead us to better generalization performance than the single predictor we learned at first.
+00:09:46 So here's an example where we've learned the five trees shown on the previous slide and averaged them together.
+00:09:53 And you can see already region.
+00:09:59 regions like this that were assigned to green by the influence of a single data point have now been overwhelmed by some of the other predictors that did not perhaps have that data point in it.
+00:10:11 By 25 trees, we're starting to see what I think a human would start to assign.
+00:10:23 So blue is taking a more oblong region in the upper left, red in the right-hand side and green in the lower center, and we're starting to see that shape emerge from our collection of trees.
+00:10:35 By 100 trees, that shape is generally prevalent, and many of the artifacts that we saw in the single decision tree have vanished, so that now we find that green has a relatively sensible looking support in the center, and blue and red have also taken on fairly sensible looking supports as well.
+00:10:47 Practically speaking, bagging is an easy procedure.
+00:10:59 to implement.
+00:11:08 So here's MATLAB code just showing how easy.
+00:11:17 The first thing we do is we create a container for our set of classifiers, in this case a cell array.
+00:11:25 Cell arrays in MATLAB can represent collections of arbitrary types of objects, although in this case we'll probably just be using the same type of classifier.
+00:11:34 We then iterate over the number of classifiers we'd like to learn and we do a procedure to generate our bootstrap data sample.
+00:11:42 So if we'd like to generate unused data points valued between 1 and n with replacement, we just generate unused random numbers between 1 and n, and so we can do that just by uniformly generating random numbers, multiplying them by n, and then rounding them up using the ceiling function.
+00:11:51 We select out those data points that'll contain several values that are the same, so we'll get some repetition in our data just by extracting data.
+00:11:59 data set I to be X of those indices, and we extract out the targets as well.
+00:12:08 And then we call our classifier function, so this is some black box function that trains a classifier on the new bootstrap data set XI with targets YI.
+00:12:17 We store the result in our set of classifiers.
+00:12:25 When we go to test, we just create a collection of predictions, so we need the number of data that we're testing on times the number of classifiers that we've trained.
+00:12:34 We predict on that vector of test data for each classifier in turn, and then at the end we do a procedure to do a majority vote, so this is a simple one-line majority vote between outputs one and two.
+00:12:42 If you have a multiclass classifier, you need to do a slightly more complex procedure.
+00:12:51 A particularly common application of bagging is the use of them using decision trees, and an algorithm called random porous.
+00:12:59 So one problem that arises when you apply bagging to decision trees is that if you have a large enough amount of data, often the decision trees that you learn aren't very different.
+00:13:08 So if you have enough data, for example, the root node, even if you resample those data with replacement, will look generally the same.
+00:13:17 And so the first variable selected, the first feature, and the first split point will be fairly similar.
+00:13:25 And so the class of trees that you learn in your bagging procedure is not really different enough.
+00:13:34 It's not really diverse enough to help.
+00:13:42 The solution is to introduce some extra variability in the learner and inject some extra randomness into this procedure.
+00:13:51 And so the way random forests do that is at every step of the decision tree training process, instead of searching over all features, we just search over some subset of features.
+00:13:59 So, this is going to create diversity among our trees, because at any particular node, in one tree versus another, the same set of features will not be available.
+00:14:09 And so, in one tree, the best feature among its allowed set will be different than the best feature among a different tree's allowed set.
+00:14:19 That'll produce a larger variability in our collection of trees, and then we just average over them in the same way.
+00:14:29 This is, again, extremely simple to implement, so in our decision tree recursive data splitting function, instead of searching over every possible features in every possible split, we first generate a random subset of the features of some size, and search only over that set and all splits.
+00:14:39 Otherwise, the procedure works exactly the same way as before.
+00:14:49 In summary, bagging is a classic ensemble technique for...
+00:14:59 better predictors than any single predictor.
+00:15:07 It stands for bootstrap aggregation and it's a technique that tries to reduce the complexity of a model class.
+00:15:14 So you choose a model class that's very prone to overfitting and apply bagging to provide a collection of learners in that class that are less complex and less prone to overfitting.
+00:15:22 In practice, it's quite simple to implement.
+00:15:29 We just re-sample the data once for each learner.
+00:15:37 Each learner is trained on an individual re-sampling, and we create a predictor that might overfit on that sample, but then by averaging them together produces something that's robust to small variations in the data.
+00:15:44 It essentially plays on the bias-variance tradeoff, choosing something that's prone to overfitting and thus has low bias, but reducing its variance through model averaging.
+00:15:52 The price of this, of course, is the computational cost, which if we learn K bagged predictors.
+00:15:59 our prediction time computation becomes k times larger than it would have been before.

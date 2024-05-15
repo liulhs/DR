@@ -1,0 +1,56 @@
+00:00:00 Now let's look at the impact of features on our linear regression problem and how using nonlinear features can extend our class of predictors.
+00:00:06 In a multidimensional feature space, our linear regression remains a linear function.
+00:00:12 So if we have two features, x1 and x2, and y is a linear function of those, we'll have a plane.
+00:00:18 We'll be predicting on a plane.
+00:00:24 If we have three features, a hyperplane, and so on.
+00:00:30 Otherwise, everything about the procedure remains essentially the same.
+00:00:36 We have a parameter vector theta, a feature vector for each data point, and our predictor is the dot product between those vectors.
+00:00:42 So what if we want to learn regression functions that aren't lines?
+00:00:48 For example, perhaps a cubic or other polynomial regression function.
+00:00:54 From this viewpoint, we'd like to use a scalar x to predict y, and we'd like to use a polynomial function.
+00:01:00 function of x, so that y-hat will be, say, theta 0 plus theta 1 x plus theta 2 x-squared plus theta 3 x-cubed.
+00:01:07 So we have a data set consisting of that scalar feature and our target.
+00:01:15 But now let's pretend that instead of observing one feature, we observe three.
+00:01:22 Denote feature 2 by x2 and set its value equal to the square of the first feature.
+00:01:30 Feature 3 will be x3, and set its value equal to the cube of the first feature.
+00:01:37 Rewriting our predictor, we see that now it's just a linear regression in the new features, theta 0, theta 1 times our first feature, and now theta 2 times the second and theta 3 times the third.
+00:01:45 So we can solve it using exactly the same technique as before.
+00:01:52 It's often helpful to think of this feature augmentation process as a feature transform phi.
+00:02:00 converts our original input features x into some new set of features that will be more useful and be used by our algorithm.
+00:02:07 To avoid confusion, sometimes we'll explicitly reference such a transform phi, in which case our linear regression function would be theta times the feature transform of x.
+00:02:15 So notice that this is just the same equation as before, except we've replaced the input features x by some post-processed features phi of x.
+00:02:22 We can then directly fit these polynomial functions using exactly the same framework and plot the prediction phi of x, where, for example, here our features phi of x are just the constant 1 and the input feature x.
+00:02:30 Here it's those plus x squared.
+00:02:37 Here it's those and x cubed as well.
+00:02:45 In our prediction step, whenever we want to predict a value of x, we just put it through this feature map phi.
+00:02:52 So here we put x through and we get the constant x at x squared and x cubed.
+00:03:00 before predicting.
+00:03:06 More generally, including more features can often be very helpful.
+00:03:13 In addition to collecting more information about each data example to produce new features, we can also use transforms of the features we've already observed.
+00:03:19 So if we observed some input features, we might define a feature transform that will give us polynomial features to learn more complex functions.
+00:03:26 Or other non-linear transforms as well.
+00:03:33 Whatever we think will be useful and have a direct linear relationship to the target.
+00:03:39 In general, the concept of linear regression, we mean linear in the parameters.
+00:03:46 Since the features were allowed to do whatever transforms we like.
+00:03:53 The most useful transforms will give us features that do, in fact, have a linear relationship with the target variable.
+00:03:59 to generate more features such as polynomials, the question is should we and where should we stop?
+00:04:07 Note that increasing the polynomial degree of our fit creates a nested sequence of models.
+00:04:14 For example, out of all lines like this, the constant feature is one such line, so the best line fit will always be at least as good or better than the best constant fit.
+00:04:22 Similarly, all cubic functions include all lines, so the best cubic will be at least as good as the best line and so on.
+00:04:29 As we increase the number of features, we always will get some improvement in fit quality.
+00:04:37 At an extreme, given enough features, we'll actually hit all of the points exactly since we'll have m equations and m unknowns.
+00:04:44 But this kind of extreme is not such a good thing.
+00:04:52 Remember our example where we could explain the data with just a line plus noise or as an extremely complex function that hit all of the data.
+00:04:59 data.
+00:05:08 Even though more complex models will always fit the training examples better, they may not perform as well in the future, since they may overfit and learn patterns that aren't really present in the real system.
+00:05:17 To gauge our real performance once we've learned a model, we need additional data to see what the error rate will be once we go out and test on new examples.
+00:05:25 So, in this case, once we collect more examples, we can see that the linear fit is actually much better than the high-order polynomial.
+00:05:34 One way we can assess this is by holding out a set of validation data, here the green dots, or doing some kind of cross-validation to test for the performance of the model on data that it has not seen.
+00:05:42 We explicitly hide some of the data from our learning algorithm, and then we can use those points to estimate its performance on future data.
+00:05:51 When we plot performance as a function
+00:05:59 of features, in this case, polynomial order, we find the following trends.
+00:06:07 As we increase the polynomial order, so the number of features, we find that the performance on the training data, the red points that the algorithm sees as it optimizes data, gets better and better, it decreases.
+00:06:15 But if we look at the performance of new data that the model's not able to see when it selects data, we find that for a short period of time, as the model becomes more complex, our performance improves.
+00:06:23 So here, from constant to first order, linear, it gets better.
+00:06:31 But then, as we increase still further to second order, third order, and so forth, our performance on the test data may actually start to get worse.
+00:06:39 This is the overfitting phenomenon.

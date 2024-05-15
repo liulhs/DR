@@ -1,0 +1,202 @@
+[
+    {
+        "timestamp": "00:00:00",
+        "text": "Clustering is one of the most common forms of unsupervised learning, and often helpful in understanding the characteristics of our data."
+    },
+    {
+        "timestamp": "00:00:06",
+        "text": "Unsupervised learning tasks are quite different from supervised prediction tasks."
+    },
+    {
+        "timestamp": "00:00:12",
+        "text": "In supervised learning, we have something in particular we'd like to predict, for example, whether an email is spam or the price of a stock tomorrow."
+    },
+    {
+        "timestamp": "00:00:18",
+        "text": "This prediction variable is called the target, y."
+    },
+    {
+        "timestamp": "00:00:24",
+        "text": "In order to predict it, we observe a number of features, x, that we think will be helpful."
+    },
+    {
+        "timestamp": "00:00:30",
+        "text": "The learning task, then, is to learn a mapping from x to y."
+    },
+    {
+        "timestamp": "00:00:36",
+        "text": "In unsupervised learning, in contrast, we have no particular target variable, y."
+    },
+    {
+        "timestamp": "00:00:42",
+        "text": "Instead, the task is just to understand the data, identify patterns, and so on."
+    },
+    {
+        "timestamp": "00:00:48",
+        "text": "Thus, we assume we have only the set of features, x, that we'd like to use to understand these patterns."
+    },
+    {
+        "timestamp": "00:00:54",
+        "text": "Unsupervised learning is useful in many situations, most commonly to find patterns in the data and explain how the data came about in a way that a human can understand."
+    },
+    {
+        "timestamp": "00:01:00",
+        "text": "However, even if our ultimate task is something like a more supervised predictive problem, unsupervised learning can be helpful."
+    },
+    {
+        "timestamp": "00:01:08",
+        "text": "For example, if some of our data are missing features, so meaning we couldn't observe that feature's value, then unsupervised learning models can be used to fill in these missing values in a process called imputation."
+    },
+    {
+        "timestamp": "00:01:17",
+        "text": "Similarly, unsupervised model information could be used as features, either to augment the original features or replace them with our simplified explanation of the data."
+    },
+    {
+        "timestamp": "00:01:25",
+        "text": "In these slides, we'll look at the concept of clustering, or understanding the data by automatically organizing them into groups with shared characteristics."
+    },
+    {
+        "timestamp": "00:01:34",
+        "text": "For example, in these data, we can readily recognize that there are three groups to the data and summarize the data set in some sense by just describing these groups."
+    },
+    {
+        "timestamp": "00:01:42",
+        "text": "Clustering models group the data, partitioning the data points and placing similar data together in each group."
+    },
+    {
+        "timestamp": "00:01:51",
+        "text": "Clustering models group the data, partitioning the data points and placing similar data together "
+    },
+    {
+        "timestamp": "00:01:59",
+        "text": "and dissimilar data in different groups."
+    },
+    {
+        "timestamp": "00:02:08",
+        "text": "However, the concept of grouping is a product of our human understanding of the world and often a holistic understanding of the entire dataset."
+    },
+    {
+        "timestamp": "00:02:17",
+        "text": "So what makes a sensible grouping might vary by the dataset."
+    },
+    {
+        "timestamp": "00:02:25",
+        "text": "For example, when we look at these two-dimensional points, we immediately see an explanation that the data are organized into about three groups, like so, and these groups share similarity in their general location in this feature space."
+    },
+    {
+        "timestamp": "00:02:34",
+        "text": "So points over here belong to this group, points over here belong to this group, and so on."
+    },
+    {
+        "timestamp": "00:02:42",
+        "text": "A different set of data, however, might not vary by location exactly, but our brains can still see patterns that define the similarity which we can turn into groupings or clusters."
+    },
+    {
+        "timestamp": "00:02:51",
+        "text": "So these clusters are not defined by location in the space precisely but by some holistic property."
+    },
+    {
+        "timestamp": "00:03:00",
+        "text": "of a collection of points."
+    },
+    {
+        "timestamp": "00:03:07",
+        "text": "In the third example, we might see that the data have different properties in different parts of the space, for example, a different density in one part of the space than another."
+    },
+    {
+        "timestamp": "00:03:15",
+        "text": "That density, then, might suggest a grouping of the data into two sets, one of which has sparse data and one of which has dense data."
+    },
+    {
+        "timestamp": "00:03:22",
+        "text": "Complex learning is closely related to data compression concepts."
+    },
+    {
+        "timestamp": "00:03:30",
+        "text": "In particular, clustering is related to vector quantization, a staple of lossy compression algorithms."
+    },
+    {
+        "timestamp": "00:03:37",
+        "text": "Suppose we need to transmit a large data set, for example, a large image with many pixels."
+    },
+    {
+        "timestamp": "00:03:45",
+        "text": "We can chunk the image into vectors of some fixed size, for example, grouping all the pixels into 2x2 squares, and then we can interpret those as length-4 vectors and transmit them in some order."
+    },
+    {
+        "timestamp": "00:03:52",
+        "text": "Now, some of these squares may be very similar."
+    },
+    {
+        "timestamp": "00:04:00",
+        "text": "For example, this patch and this one are nearly identical."
+    },
+    {
+        "timestamp": "00:04:06",
+        "text": "So instead of sending the pixel values twice, we can simply say, use patch 13, or whatever, and send fewer data."
+    },
+    {
+        "timestamp": "00:04:13",
+        "text": "Equivalently, we could first transmit all the patches we plan to use first, as a dictionary, and then we'd send a sequence of patches in the image by listing the index of the closest entry in our dictionary."
+    },
+    {
+        "timestamp": "00:04:20",
+        "text": "So this process is called vector quantization."
+    },
+    {
+        "timestamp": "00:04:26",
+        "text": "Each 4D feature vector is quantized into one entry of the dictionary."
+    },
+    {
+        "timestamp": "00:04:33",
+        "text": "Over here is a 2D visualization of that procedure."
+    },
+    {
+        "timestamp": "00:04:40",
+        "text": "So each data point, a dot, is being approximated by its closest dictionary entry, a plus."
+    },
+    {
+        "timestamp": "00:04:46",
+        "text": "So each dictionary entry claim all the data that are nearer to it than to any other plus."
+    },
+    {
+        "timestamp": "00:04:53",
+        "text": "The process of selecting good dictionary vectors, so where to locate the pluses in the sequence,"
+    },
+    {
+        "timestamp": "00:05:00",
+        "text": "space, give a collection of data vectors that we plan to transmit, and that's just clustering."
+    },
+    {
+        "timestamp": "00:05:06",
+        "text": "We're grouping the data by visual similarity, usually just Euclidean similarity, and each partition is assigned one entry in the dictionary."
+    },
+    {
+        "timestamp": "00:05:13",
+        "text": "Here's a more trivial version, working with just one-dimensional or scalar data values."
+    },
+    {
+        "timestamp": "00:05:19",
+        "text": "Each pixel, then, is considered a data point."
+    },
+    {
+        "timestamp": "00:05:26",
+        "text": "It takes on one of 256 values."
+    },
+    {
+        "timestamp": "00:05:32",
+        "text": "And then to compress the data, we'd like to transmit fewer values."
+    },
+    {
+        "timestamp": "00:05:39",
+        "text": "So we group the data by their value."
+    },
+    {
+        "timestamp": "00:05:46",
+        "text": "We might divide the space up into eight parts, or four parts, or only two parts."
+    },
+    {
+        "timestamp": "00:05:52",
+        "text": "This quantizes the values of the data, the levels of gray, in the recovered image, so that we send fewer bits over here, giving us compression, but end up with only an approximation to the original data."
+    }
+]

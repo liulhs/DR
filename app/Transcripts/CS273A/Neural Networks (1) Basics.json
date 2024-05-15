@@ -1,0 +1,446 @@
+[
+    {
+        "timestamp": "00:00:00",
+        "text": "Next, let's talk about an extension of the basic linear perceptron model called multi-layer perceptrons, which also commonly go by the name of neural networks."
+    },
+    {
+        "timestamp": "00:00:10",
+        "text": "If you recall, a perceptron simply refers to a binary linear classifier, which partitions the space into parts using linear function features."
+    },
+    {
+        "timestamp": "00:00:20",
+        "text": "Its decision boundary is a linear n-1 dimensional hyperplane, so for example, for two features, the decision boundary is just a line."
+    },
+    {
+        "timestamp": "00:00:30",
+        "text": "Practically speaking, we associate a set of parameters, or weights, here I'll use w for weights, one with each feature, and one with a constant feature."
+    },
+    {
+        "timestamp": "00:00:40",
+        "text": "We compute a linear response, w0 plus w1 x1 plus w2 x2 and so on, and then binarize the output by thresholding, for example, taking a sine of our linear response."
+    },
+    {
+        "timestamp": "00:00:50",
+        "text": "So for illustration, if we had only one feature, x1, our output functions would look like"
+    },
+    {
+        "timestamp": "00:01:00",
+        "text": "like this, dividing a one-dimensional feature space into two parts, negative and positive, with a single transition point."
+    },
+    {
+        "timestamp": "00:01:07",
+        "text": "If we would like to design a more complex classifier, in other words one with a more complex decision boundary, one way to accomplish this is to augment our original feature set by using new transformed features, just as we did in linear regression."
+    },
+    {
+        "timestamp": "00:01:15",
+        "text": "Here I'll illustrate with a single scalar feature x, then a basic linear perceptron thresholds a linear function of x, ax plus b."
+    },
+    {
+        "timestamp": "00:01:22",
+        "text": "The decision boundary, where the linear function changes from negative to positive, is the solution of this linear function, a single point."
+    },
+    {
+        "timestamp": "00:01:30",
+        "text": "We could then augment our features with a new transformation of x."
+    },
+    {
+        "timestamp": "00:01:37",
+        "text": "A common choice, for example, might be polynomial features, like we used in linear regression."
+    },
+    {
+        "timestamp": "00:01:45",
+        "text": "For this example, with a scalar x, we can add an additional feature x squared."
+    },
+    {
+        "timestamp": "00:01:52",
+        "text": "The decision boundary, where the linear function changes from negative to positive, is the solution of this linear function, a single point."
+    },
+    {
+        "timestamp": "00:02:00",
+        "text": "would then be the set of solutions to ax squared plus bx plus c equals 0, which could be two points instead of only one."
+    },
+    {
+        "timestamp": "00:02:06",
+        "text": "For example, on these data, we could separate the data and achieve zero training error by using a cubic function, something like this."
+    },
+    {
+        "timestamp": "00:02:13",
+        "text": "Then, thresholding at 0 would produce positive and negative regions in the desired areas."
+    },
+    {
+        "timestamp": "00:02:20",
+        "text": "In general, more artificially constructed features will yield a more complex decision boundary."
+    },
+    {
+        "timestamp": "00:02:26",
+        "text": "But we're certainly not restricted to only use polynomial features."
+    },
+    {
+        "timestamp": "00:02:33",
+        "text": "We can choose whatever kinds of features we'd like."
+    },
+    {
+        "timestamp": "00:02:39",
+        "text": "In fact, let's consider a different class of features obtained by thresholding our original feature at different points."
+    },
+    {
+        "timestamp": "00:02:46",
+        "text": "These nonlinear transforms can actually be just as useful as polynomials."
+    },
+    {
+        "timestamp": "00:02:53",
+        "text": "Suppose, again, we have only one input feature, x, and we create three new binary."
+    },
+    {
+        "timestamp": "00:02:59",
+        "text": "valued features by thresholding x at various points."
+    },
+    {
+        "timestamp": "00:03:05",
+        "text": "So f1 is positive only if x is greater than some value."
+    },
+    {
+        "timestamp": "00:03:10",
+        "text": "f2 is positive if x is greater than some other value."
+    },
+    {
+        "timestamp": "00:03:16",
+        "text": "f3 is positive if x is greater than a third value, and so on."
+    },
+    {
+        "timestamp": "00:03:21",
+        "text": "By creating a linear combination of these new features, such as f1 minus f2 plus f3, we can actually trace out exactly the same shape of classifier that we did with the cubic features from before."
+    },
+    {
+        "timestamp": "00:03:27",
+        "text": "So here, f1 becomes positive."
+    },
+    {
+        "timestamp": "00:03:32",
+        "text": "Then when f2 becomes positive, we go back down."
+    },
+    {
+        "timestamp": "00:03:38",
+        "text": "Then when f3 becomes positive again, we go back up."
+    },
+    {
+        "timestamp": "00:03:43",
+        "text": "What's particularly interesting about this view is that these simple step function features are just perceptrons themselves."
+    },
+    {
+        "timestamp": "00:03:49",
+        "text": "By using them as input features to a second perceptron, we've created a stack of two linear classifiers whose output can be more complex than a single standard perceptron."
+    },
+    {
+        "timestamp": "00:03:54",
+        "text": "This multi-layer perceptron is illustrated here."
+    },
+    {
+        "timestamp": "00:04:00",
+        "text": "We'll use the term input features to refer to the original data measurements."
+    },
+    {
+        "timestamp": "00:04:07",
+        "text": "Then there may be one or more hidden layers that compute linear combinations of the previous layer and threshold them."
+    },
+    {
+        "timestamp": "00:04:15",
+        "text": "And then the final layer is referred to as the output layer, which produces our actual class prediction."
+    },
+    {
+        "timestamp": "00:04:22",
+        "text": "Moreover, what will make this framework particularly appealing will be our ability to train the entire system, in effect, updating the definition of our hidden layer features so as to improve that performance of the later output perceptron layers."
+    },
+    {
+        "timestamp": "00:04:30",
+        "text": "For the same reason we did in the perceptron, we'll replace these hard threshold operators with something smooth and differentiable, like a logistic function or a hyperbolic tangent sigmoid function."
+    },
+    {
+        "timestamp": "00:04:37",
+        "text": "The parameters of this model encompass all the weights at any level."
+    },
+    {
+        "timestamp": "00:04:45",
+        "text": "Notationally, each node at a hidden or output layer is a perceptron, with a collection of weights defining the linear response at that node."
+    },
+    {
+        "timestamp": "00:04:52",
+        "text": "Because there are multiple nodes, we'll use a double subscript."
+    },
+    {
+        "timestamp": "00:05:00",
+        "text": "with Wij indicating the weight for node i associated with feature j at the previous layer."
+    },
+    {
+        "timestamp": "00:05:07",
+        "text": "So, for example, weight 1, 1 is the weight for node 1 associated with feature 1 at the previous layer."
+    },
+    {
+        "timestamp": "00:05:15",
+        "text": "Weight 1, 0 is the weight for node 1 associated with the constant feature, and so on."
+    },
+    {
+        "timestamp": "00:05:22",
+        "text": "We'll also need superscripts to distinguish between layers when necessary."
+    },
+    {
+        "timestamp": "00:05:30",
+        "text": "So, for example, W superscript 1 refers to the first layer of weights, which we can assemble as a matrix like so."
+    },
+    {
+        "timestamp": "00:05:37",
+        "text": "W superscript 2 refers to the second layer of weights, and so on."
+    },
+    {
+        "timestamp": "00:05:45",
+        "text": "We can use this kind of functional structure for classification problems or for regression."
+    },
+    {
+        "timestamp": "00:05:52",
+        "text": "For regression, since we want a real-valued output that might not be bounded, we usually discard the saturating nonlinearity activation function on the output nodes."
+    },
+    {
+        "timestamp": "00:06:00",
+        "text": "Viewed from this perspective, a multilayer perceptron is an overall function made up of small, simple building blocks, each element of which is just a perceptron function."
+    },
+    {
+        "timestamp": "00:06:06",
+        "text": "As we build layers upon layers, our representational complexity increases."
+    },
+    {
+        "timestamp": "00:06:13",
+        "text": "With only one layer, for example, we just get a standard perceptron with a linear decision boundary."
+    },
+    {
+        "timestamp": "00:06:20",
+        "text": "With a two-layer model, these outputs become our input features to the next layer."
+    },
+    {
+        "timestamp": "00:06:26",
+        "text": "So the features are simple, they're soft thresholds of linear combinations of the input, but then by combining them, we can get more complex outputs, like the ones we saw before."
+    },
+    {
+        "timestamp": "00:06:33",
+        "text": "If we add a third layer on top of that, now these complex outputs become the new features for the next layer, leading to even more potentially complex outputs, and so on."
+    },
+    {
+        "timestamp": "00:06:40",
+        "text": "Internet cutting-edge research focuses on so-called deep networks, with many layers."
+    },
+    {
+        "timestamp": "00:06:46",
+        "text": "Training these deep networks can be very challenging in and of itself."
+    },
+    {
+        "timestamp": "00:06:53",
+        "text": "We will"
+    },
+    {
+        "timestamp": "00:07:00",
+        "text": "focus on it too much here, but it's a very hot topic right now."
+    },
+    {
+        "timestamp": "00:07:08",
+        "text": "It's easy enough to show that given enough hidden nodes, even a two-layer network can actually represent any output function arbitrarily closely."
+    },
+    {
+        "timestamp": "00:07:17",
+        "text": "To see this, you can just think of each hidden node firing or activating, turning on, in a particular region of space."
+    },
+    {
+        "timestamp": "00:07:25",
+        "text": "So in 1D, for example, say when x becomes greater than a threshold."
+    },
+    {
+        "timestamp": "00:07:34",
+        "text": "Then differences between these hidden values will just select out regions of space between ci and ci plus 1."
+    },
+    {
+        "timestamp": "00:07:42",
+        "text": "So for example, I can select out this region as being h1 minus h2."
+    },
+    {
+        "timestamp": "00:07:51",
+        "text": "To approximate any function, we can just choose weights that will reproduce those values, effectively discretizing the function into those small regions."
+    },
+    {
+        "timestamp": "00:08:00",
+        "text": "While multilayer perceptrons, I think, is a fairly descriptive term for these learners, they're also commonly called neural networks."
+    },
+    {
+        "timestamp": "00:08:07",
+        "text": "Again, like with the perceptron, the simple sum of inputs with a nonlinear activation function can be thought of as a pretty trivial model of a neuron."
+    },
+    {
+        "timestamp": "00:08:15",
+        "text": "When inputs from the previous layer are activated, if you squint really hard, it's a little bit like dendrites, the neurons sensing the activity of neighboring neurons, with the weights of those determining the strength of the connection."
+    },
+    {
+        "timestamp": "00:08:22",
+        "text": "And when the observed activity gets strong enough, then the node will itself turn on or activate, a bit like a neuron firing."
+    },
+    {
+        "timestamp": "00:08:30",
+        "text": "Hence, this is an alternative name, neural networks."
+    },
+    {
+        "timestamp": "00:08:37",
+        "text": "The nonlinear function used at each node is called the activation function."
+    },
+    {
+        "timestamp": "00:08:45",
+        "text": "And so far, I've been mostly using the same logistic function that we found useful in training a linear classifier before."
+    },
+    {
+        "timestamp": "00:08:52",
+        "text": "But there are many other possible choices."
+    },
+    {
+        "timestamp": "00:09:00",
+        "text": "that people use in practice."
+    },
+    {
+        "timestamp": "00:09:08",
+        "text": "For example, the hyperbolic tangent curve here is also shaped like a sigmoid S, but instead of saturating at 0 and 1 like the logistic, it saturates at minus 1 and plus 1, with the middle crossing being at z equals 0."
+    },
+    {
+        "timestamp": "00:09:17",
+        "text": "So, this is a bit like the rescale logistic function we discussed with perceptrons."
+    },
+    {
+        "timestamp": "00:09:25",
+        "text": "A strictly positive function like the standard logistic can be a bit awkward in multilayer models, since if the outlayer's outputs are all positive, then the next layer's transition point being at 0, it can put a lot of pressure on the bias term to compensate, and so this can lead to slow learning."
+    },
+    {
+        "timestamp": "00:09:34",
+        "text": "So, sometimes hyperbolic tangents are preferred for that reason."
+    },
+    {
+        "timestamp": "00:09:42",
+        "text": "Gaussian or radial basis responses like this one are sometimes also used."
+    },
+    {
+        "timestamp": "00:09:51",
+        "text": "Even a simple linear response like this could be used, usually for the output of the regression model, so that the last layer"
+    },
+    {
+        "timestamp": "00:10:00",
+        "text": "looks like a linear regression with the previous layer's features with no non-linearity attached."
+    },
+    {
+        "timestamp": "00:10:07",
+        "text": "Moreover, different activation functions can actually be used at different layers."
+    },
+    {
+        "timestamp": "00:10:15",
+        "text": "Usually it's pretty homogeneous, except for the output layer, which might be different."
+    },
+    {
+        "timestamp": "00:10:22",
+        "text": "But sometimes in deep models, the activation functions might alternate or change from layer to layer."
+    },
+    {
+        "timestamp": "00:10:30",
+        "text": "We'll focus only on feed-forward models, in which the information and the computation flows from left to right in our drawings."
+    },
+    {
+        "timestamp": "00:10:37",
+        "text": "From the input, the observed feature values X, through some hidden layers to the output or prediction."
+    },
+    {
+        "timestamp": "00:10:45",
+        "text": "So, for example, in this two-layer model, the input features X are used to compute the responses of the first linear layer."
+    },
+    {
+        "timestamp": "00:10:52",
+        "text": "So here we compute a linear response T, which is a weighted linear combination of the input features X, which we can represent as a matrix with one row for each hidden node,"
+    },
+    {
+        "timestamp": "00:11:00",
+        "text": "nonlinearity sig."
+    },
+    {
+        "timestamp": "00:11:06",
+        "text": "The values at that hidden node then become inputs for the next layer in exactly the same way."
+    },
+    {
+        "timestamp": "00:11:13",
+        "text": "So, S becomes the linear response of the next node."
+    },
+    {
+        "timestamp": "00:11:20",
+        "text": "Passing it through an activation function gives you the output response."
+    },
+    {
+        "timestamp": "00:11:26",
+        "text": "Notice that at each level, the nodes' responses at that level, so each node in H1, for example, are independent of one another given the previous layer."
+    },
+    {
+        "timestamp": "00:11:33",
+        "text": "So, it's trivial to compute their values, so the matrix product, W1 times X1, in parallel if we want."
+    },
+    {
+        "timestamp": "00:11:39",
+        "text": "A contrast to feedforward networks are so-called recurrent neural networks, in which the output of one layer may actually be fed back into some earlier layer, creating a complex system with many self-dependencies."
+    },
+    {
+        "timestamp": "00:11:46",
+        "text": "Such systems are considerably harder to analyze and to train than feedforward models, and we won't focus on them here."
+    },
+    {
+        "timestamp": "00:11:53",
+        "text": "One point to mention here, in many of my drawings, we have multiple output nodes."
+    },
+    {
+        "timestamp": "00:11:59",
+        "text": "So, for example, here there are two."
+    },
+    {
+        "timestamp": "00:12:07",
+        "text": "In regression, for example, we may want to predict a vector-valued target Y."
+    },
+    {
+        "timestamp": "00:12:14",
+        "text": "Predicting the vector jointly, like in this neural network, allows the two coordinates predictions to share their parameters, and specifically to share the features that are developed by the earlier layers of the network."
+    },
+    {
+        "timestamp": "00:12:22",
+        "text": "This parameter sharing can decrease the complexity of the model and reduces the potential for overfitting."
+    },
+    {
+        "timestamp": "00:12:29",
+        "text": "It's also extremely useful in classification for non-binary targets."
+    },
+    {
+        "timestamp": "00:12:37",
+        "text": "Multiple output nodes can be used to predict a binary vector instead of a single binary value."
+    },
+    {
+        "timestamp": "00:12:44",
+        "text": "This can be used for simple multi-class prediction problems by encoding a non-binary class using a 1 of k binary vector, in which the value of Y determines which unique entry of the vector will be 1, and the others are 0."
+    },
+    {
+        "timestamp": "00:12:52",
+        "text": "So perhaps if Y can take on values 0, 1, 2, and so on, if we observe Y equals 2, we turn on the entry of the vector associated with Y equals 2."
+    },
+    {
+        "timestamp": "00:12:59",
+        "text": "It can also be useful in so-called structured prediction problems to predict an arbitrary binary vector."
+    },
+    {
+        "timestamp": "00:13:10",
+        "text": "These are used in systems like image tagging, where an image might be tagged with multiple labels depending on its content, but the prediction of those labels is usually coupled."
+    },
+    {
+        "timestamp": "00:13:20",
+        "text": "For simplicity, often such multi-output classifiers are actually trained as if they were a nonlinear regression task to predict a binary target vector, in a similar way to our logistic mean squared error method of training a linear classifier."
+    },
+    {
+        "timestamp": "00:13:31",
+        "text": "A classification decision can then be obtained by, for example, just selecting the most activated output node."
+    },
+    {
+        "timestamp": "00:13:41",
+        "text": "In the next section, we'll discuss training of neural networks using gradient descent."
+    }
+]

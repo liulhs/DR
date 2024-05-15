@@ -1,0 +1,542 @@
+[
+    {
+        "timestamp": "00:00:00",
+        "text": "We've seen several examples of how the complexity of our model affects performance, but without creating a clear definition of complexity."
+    },
+    {
+        "timestamp": "00:00:08",
+        "text": "One quantitative definition that captures much of what we mean by complexity is a quantity called the VC dimension."
+    },
+    {
+        "timestamp": "00:00:17",
+        "text": "Note that many of these slides are based on Andrew Moore's slides from CMU."
+    },
+    {
+        "timestamp": "00:00:25",
+        "text": "When we talk about the complexity of a learner, we usually mean its representational power, both its ability to learn a wide variety of input-output relationships, and at an extreme, its ability to memorize or overfit to the data."
+    },
+    {
+        "timestamp": "00:00:34",
+        "text": "Different learners define different classes of possible behavior."
+    },
+    {
+        "timestamp": "00:00:42",
+        "text": "For example, our standard perceptron learner is a classifier here in two dimensions, features X1 and X2, with a coefficient for each feature, theta 1, theta 2, and a constant theta 0."
+    },
+    {
+        "timestamp": "00:00:51",
+        "text": "The types of functions it can learn are predictions, in which the two classes of predictions, so the blue prediction, and the red prediction, can be used to predict the behavior of the "
+    },
+    {
+        "timestamp": "00:00:59",
+        "text": "predictions and the red predictions are separated by an arbitrary line."
+    },
+    {
+        "timestamp": "00:01:07",
+        "text": "But choosing a different form for the classifier would choose a different set of possible functions."
+    },
+    {
+        "timestamp": "00:01:15",
+        "text": "For example, suppose we chose to use a class of learners that were thresholding a linear equation, but this time we did not include a constant feature."
+    },
+    {
+        "timestamp": "00:01:22",
+        "text": "So we have only two parameters, theta 1 times feature 1 and theta 2 times feature 2."
+    },
+    {
+        "timestamp": "00:01:30",
+        "text": "Then it's easy to see that the decision boundary of this classifier must pass through the origin."
+    },
+    {
+        "timestamp": "00:01:37",
+        "text": "So this defines a more restrictive class of functions where we divide the space into blue predictions and red predictions through a line, but that line is now restricted."
+    },
+    {
+        "timestamp": "00:01:45",
+        "text": "Another different functional form might be, for example, to take the sign of the norm of x minus some constant theta 0."
+    },
+    {
+        "timestamp": "00:01:52",
+        "text": "If we think about what kinds of functions this form can produce..."
+    },
+    {
+        "timestamp": "00:02:00",
+        "text": "we find that if the value of the point x is farther from the origin than theta 0, then this function will predict class plus 1."
+    },
+    {
+        "timestamp": "00:02:10",
+        "text": "If it's closer to the origin than theta 0, then predict minus 1."
+    },
+    {
+        "timestamp": "00:02:20",
+        "text": "So we can think of this set of all possible functions learnable by this particular classifier as any function where the negative class lives in some sphere centered around the origin."
+    },
+    {
+        "timestamp": "00:02:30",
+        "text": "The usual tradeoff we expect from any kind of model is that the more representational power our class of functions has, the more chance it will include the real feature-to-target relationship, but also the more chance it may overfit to random variations in the data."
+    },
+    {
+        "timestamp": "00:02:40",
+        "text": "If we provide less power to the learner, we won't overfit, but we may not find the best possible function."
+    },
+    {
+        "timestamp": "00:02:50",
+        "text": "It's not easy to try to quantify this notion of representational power, but it's not easy to quantify this notion of representational power."
+    },
+    {
+        "timestamp": "00:03:00",
+        "text": "But one very useful formulation is the VC or Vapnik-Chervenenko's dimension of the learner."
+    },
+    {
+        "timestamp": "00:03:07",
+        "text": "First, some preliminaries."
+    },
+    {
+        "timestamp": "00:03:15",
+        "text": "Let's assume that our training and our future test data are all independent and identically distributed from some distribution P of X."
+    },
+    {
+        "timestamp": "00:03:22",
+        "text": "We'll define the risk as the long-term test error, so the expected error rate of our predictions over that distribution P."
+    },
+    {
+        "timestamp": "00:03:30",
+        "text": "The empirical risk we'll define as the training error, so it's the risk on our finite collection of M data points, which is the average error rate."
+    },
+    {
+        "timestamp": "00:03:37",
+        "text": "The relationship, as we've seen, between the risk and the empirical risk depends on whether we're overfitting."
+    },
+    {
+        "timestamp": "00:03:45",
+        "text": "If the model is very simple and we happen to be in the underfitting regime, their performance will be quite similar."
+    },
+    {
+        "timestamp": "00:03:52",
+        "text": "But if our model becomes more and more complex,"
+    },
+    {
+        "timestamp": "00:04:00",
+        "text": "it becomes too complex, the test error might actually be far worse than just the training error would suggest."
+    },
+    {
+        "timestamp": "00:04:08",
+        "text": "We'll actually define the VC dimension in a minute, but first let's see what the VC dimension tells us about the error."
+    },
+    {
+        "timestamp": "00:04:17",
+        "text": "Suppose we know the VC dimension of our learner and call it h."
+    },
+    {
+        "timestamp": "00:04:25",
+        "text": "Then we can show that with high probability 1 minus eta, where eta is a small number, the test error will be upper bounded by our training error plus an additional term that depends on the VC dimension h, the number of data points m, and also on that probability eta."
+    },
+    {
+        "timestamp": "00:04:34",
+        "text": "Notice that if h is very small or m is very large, this additional bounding term will be small."
+    },
+    {
+        "timestamp": "00:04:42",
+        "text": "So low VC dimension compared to the number of data will suggest that the training and test error will be quite similar."
+    },
+    {
+        "timestamp": "00:04:51",
+        "text": "This is in some sense an amazing result."
+    },
+    {
+        "timestamp": "00:04:59",
+        "text": "result, we can actually make a strong statement about what our test performance will be on data we haven't seen using only a property of the model, the VC dimension, and also the assumption that our data are IID from the same distribution."
+    },
+    {
+        "timestamp": "00:05:09",
+        "text": "So once we understand this, let's now start to define the VC dimension."
+    },
+    {
+        "timestamp": "00:05:19",
+        "text": "We'll need one more concept first."
+    },
+    {
+        "timestamp": "00:05:29",
+        "text": "We say a classifier f of x can shatter a collection of points x1 to xh if for every possible target label for those h points, our model f of x can achieve zero training error on that collection of labeled data."
+    },
+    {
+        "timestamp": "00:05:39",
+        "text": "In other words, however we assign the labels, there's some value of the parameters of the model that can achieve that labeling."
+    },
+    {
+        "timestamp": "00:05:49",
+        "text": "So for example, let's consider the linear classifier on two features, a standard perceptron given by theta."
+    },
+    {
+        "timestamp": "00:05:59",
+        "text": "Theta 0 plus Theta 1 times feature 1 plus Theta 2 times feature 2."
+    },
+    {
+        "timestamp": "00:06:07",
+        "text": "Given the following two positions of data points X1 and X2, can we shatter them with this learner?"
+    },
+    {
+        "timestamp": "00:06:14",
+        "text": "Yes, we can, which we can verify just by going through all possible labelings."
+    },
+    {
+        "timestamp": "00:06:22",
+        "text": "So one point blue, one point red, the reverse, one point red, one point blue, both red and both blue."
+    },
+    {
+        "timestamp": "00:06:29",
+        "text": "For the first pattern, we just choose Theta such that the decision boundary passes between the two points, and the negative side is over here to the left."
+    },
+    {
+        "timestamp": "00:06:37",
+        "text": "For the reverse labeling, we just negate all the parameters."
+    },
+    {
+        "timestamp": "00:06:44",
+        "text": "That will make the left side of that line positive and the other side negative."
+    },
+    {
+        "timestamp": "00:06:52",
+        "text": "For the all red or all blue, we just choose lines that have them both on the same side, and so on."
+    },
+    {
+        "timestamp": "00:06:59",
+        "text": "two points, and a different learner."
+    },
+    {
+        "timestamp": "00:07:05",
+        "text": "So here we'll take the sine of the radius minus theta."
+    },
+    {
+        "timestamp": "00:07:11",
+        "text": "In this case, no."
+    },
+    {
+        "timestamp": "00:07:17",
+        "text": "Again, let's just run through the patterns."
+    },
+    {
+        "timestamp": "00:07:23",
+        "text": "So there are four possible patterns for these two points."
+    },
+    {
+        "timestamp": "00:07:29",
+        "text": "And several of them can be predicted."
+    },
+    {
+        "timestamp": "00:07:35",
+        "text": "For instance, if both data points are blue, we just make theta large enough so that they're both within that radius."
+    },
+    {
+        "timestamp": "00:07:41",
+        "text": "If they're both red, we take theta very small so that they're outside of the radius."
+    },
+    {
+        "timestamp": "00:07:47",
+        "text": "If the inner point is blue, then we make the radius such that it falls between the two points, and we can predict them correctly."
+    },
+    {
+        "timestamp": "00:07:53",
+        "text": "But the last case, where the nearer of the two points is red and the further one is blue, there's no circle that we can create such that this classifier will predict plus 1 in the interior region and minus 1 in the outer region, on the farther away point."
+    },
+    {
+        "timestamp": "00:07:59",
+        "text": "So, this particular classifier cannot shatter these two points."
+    },
+    {
+        "timestamp": "00:08:07",
+        "text": "The VC dimension, then, is defined as the maximum number of points that can be arranged so that the classifier f of x can shatter them."
+    },
+    {
+        "timestamp": "00:08:14",
+        "text": "I think it's helpful to think of this process as a kind of game."
+    },
+    {
+        "timestamp": "00:08:22",
+        "text": "So we fix the definition of our learner, f of x, beforehand, and then we alternate between two players."
+    },
+    {
+        "timestamp": "00:08:29",
+        "text": "So Player 1 gets to choose the locations of the feature space of the points x1 to xh."
+    },
+    {
+        "timestamp": "00:08:37",
+        "text": "Then Player 2 chooses a label for each of them in an attempt to make them as hard to reproduce as possible."
+    },
+    {
+        "timestamp": "00:08:45",
+        "text": "Player 1 then tries to pick a value for the parameters of the learner that will actually reproduce that target labeling."
+    },
+    {
+        "timestamp": "00:08:52",
+        "text": "If Player 1 succeeds, then the points can be shattered."
+    },
+    {
+        "timestamp": "00:09:00",
+        "text": "is at least H."
+    },
+    {
+        "timestamp": "00:09:06",
+        "text": "If player 1 fails, then the VC dimension must be less than H."
+    },
+    {
+        "timestamp": "00:09:13",
+        "text": "Mathematically, we have the definition that there exists a collection of H points X1 to XH, such that for all possible labelings Y1 to YH, there exists a setting of the parameters so that all the training labels can be produced by the classifier."
+    },
+    {
+        "timestamp": "00:09:19",
+        "text": "Okay, so with that definition in hand, another example."
+    },
+    {
+        "timestamp": "00:09:26",
+        "text": "Using the same model as before that predicts plus 1 outside of radius square root of theta, what is the VC dimension of this learner?"
+    },
+    {
+        "timestamp": "00:09:33",
+        "text": "Well, we can prove that it's 1."
+    },
+    {
+        "timestamp": "00:09:39",
+        "text": "So we will do this just exhaustively, just by looking at the two cases."
+    },
+    {
+        "timestamp": "00:09:46",
+        "text": "If we have one point, we can certainly select a parameter to predict either of the two patterns."
+    },
+    {
+        "timestamp": "00:09:53",
+        "text": "If the data point is colored"
+    },
+    {
+        "timestamp": "00:09:59",
+        "text": "blue, we select the radius large."
+    },
+    {
+        "timestamp": "00:10:06",
+        "text": "If the data point is colored red, we select the radius small."
+    },
+    {
+        "timestamp": "00:10:13",
+        "text": "But from our previous example, we found that we could not shatter these two points."
+    },
+    {
+        "timestamp": "00:10:19",
+        "text": "It was a case that we could not reproduce the labeling."
+    },
+    {
+        "timestamp": "00:10:26",
+        "text": "So it remains to be shown that one cannot shatter any two points, but since in general one point will always be closer to the origin than the other, the argument holds."
+    },
+    {
+        "timestamp": "00:10:33",
+        "text": "Note that you might think we could make both points equidistant from the origin, but then that would mean that both points would always be predicted with the same label."
+    },
+    {
+        "timestamp": "00:10:39",
+        "text": "And since player one determines the locations of those points and wants to be able to predict arbitrary patterns, in general she will not position the points in such a way."
+    },
+    {
+        "timestamp": "00:10:46",
+        "text": "Okay, so another example with the Perceptron model now on two features, three parameters."
+    },
+    {
+        "timestamp": "00:10:53",
+        "text": "Again, checking all possible cases,"
+    },
+    {
+        "timestamp": "00:10:59",
+        "text": "is it's easy to see that three points can be shattered."
+    },
+    {
+        "timestamp": "00:11:05",
+        "text": "Either all three points are the same color, in which case it's easy, or two of them are one color, and one is a different color, and that's illustrated in diagram."
+    },
+    {
+        "timestamp": "00:11:10",
+        "text": "We place a line between them and color them correctly."
+    },
+    {
+        "timestamp": "00:11:16",
+        "text": "What about four points?"
+    },
+    {
+        "timestamp": "00:11:21",
+        "text": "Can we shatter, say, these four points?"
+    },
+    {
+        "timestamp": "00:11:27",
+        "text": "It turns out we cannot."
+    },
+    {
+        "timestamp": "00:11:32",
+        "text": "A quick argument to see this is geometric."
+    },
+    {
+        "timestamp": "00:11:38",
+        "text": "For the following pattern, looks basically like an XOR pattern that we saw could not be learned by a linear classifier before."
+    },
+    {
+        "timestamp": "00:11:43",
+        "text": "We can try to predict these two points, with these colored red and these colored blue."
+    },
+    {
+        "timestamp": "00:11:49",
+        "text": "In that case, we must have the decision boundary passed between this red point and this blue point, and also between this red point and this blue point."
+    },
+    {
+        "timestamp": "00:11:54",
+        "text": "But, in order to get both red points correct, that line cannot pass."
+    },
+    {
+        "timestamp": "00:11:59",
+        "text": "through the line connecting the two reds."
+    },
+    {
+        "timestamp": "00:12:06",
+        "text": "So since there's no line that passes between this area without splitting the reds, at least one point must be incorrectly predicted."
+    },
+    {
+        "timestamp": "00:12:13",
+        "text": "It turns out that for the perceptron, we can make a very general statement."
+    },
+    {
+        "timestamp": "00:12:19",
+        "text": "In d dimensions, with a constant term, the VC dimension is exactly d plus 1."
+    },
+    {
+        "timestamp": "00:12:26",
+        "text": "Note that this is easy to remember because this is also the number of parameters of the model."
+    },
+    {
+        "timestamp": "00:12:33",
+        "text": "One for the constant plus D for each of the features."
+    },
+    {
+        "timestamp": "00:12:39",
+        "text": "And as we know, adding more parameters tends to make a more complex classifier."
+    },
+    {
+        "timestamp": "00:12:46",
+        "text": "In general, the VC dimension may not exactly equal the number of parameters."
+    },
+    {
+        "timestamp": "00:12:53",
+        "text": "The VC dimension is an existential measure of the ability of the learner to memorize arbitrary patterns in the data, which is much more difficult to analyze than just a simple."
+    },
+    {
+        "timestamp": "00:12:59",
+        "text": "parameter count, but one can construct a somewhat convoluted examples of cases where the parameter account is very different from the VC dimension."
+    },
+    {
+        "timestamp": "00:13:11",
+        "text": "For example, you can create a classifier with a lot of parameters, but designing those parameters so that most of them don't have any real effect, then counting the number of parameters will overestimate the complexity of the actual learner."
+    },
+    {
+        "timestamp": "00:13:23",
+        "text": "It's harder to do the opposite, but you can compact all the variability in the learner's behavior into one parameter, and then you can get a very complex function that appears to only have one parameter."
+    },
+    {
+        "timestamp": "00:13:35",
+        "text": "Luckily, legions of machine learning researchers have given the VC dimension a lot of thought, and for many of the learners that you might want to think about, you can simply look up in the literature what the VC dimension is."
+    },
+    {
+        "timestamp": "00:13:47",
+        "text": "So now let's consider how to use the VC dimension and its associated test error bound in practice."
+    },
+    {
+        "timestamp": "00:13:59",
+        "text": "So recall we had a fundamental problem of model selection between models with varying degrees of complexity."
+    },
+    {
+        "timestamp": "00:14:09",
+        "text": "If we slowly ratchet up the representational power from simple to more complex, for example, maybe a constant predictor, a linear predictor, a quadratic predictor, and so on, our optimized training performance can only get better as the model increases."
+    },
+    {
+        "timestamp": "00:14:19",
+        "text": "So large error for simple models, small error for more complex models."
+    },
+    {
+        "timestamp": "00:14:29",
+        "text": "But if we actually estimate the test performance, either using a validation set or a cross-validation procedure, we find that although the error might decrease at first, at some point the error will start to increase and will degrade."
+    },
+    {
+        "timestamp": "00:14:39",
+        "text": "And so what we should do is try to choose the model with the best estimated test performance."
+    },
+    {
+        "timestamp": "00:14:49",
+        "text": "We can use the VC dimension risk bound in a similar manner."
+    },
+    {
+        "timestamp": "00:14:59",
+        "text": "number of training data points, as the complexity of the model increases, the training error will get smaller."
+    },
+    {
+        "timestamp": "00:15:08",
+        "text": "But the second term in the upper bound we saw that depends on the VC dimension will increase because the VC dimension will increase."
+    },
+    {
+        "timestamp": "00:15:17",
+        "text": "So when you look at the sum of these two, which is the upper bound on our test risk, we find that the sum will decrease for a bit and then increase again as complexity grows."
+    },
+    {
+        "timestamp": "00:15:25",
+        "text": "So one possible model selection procedure is to choose the model that minimizes our VC upper bound on risk."
+    },
+    {
+        "timestamp": "00:15:34",
+        "text": "This technique is called structural risk minimization, and it's an alternative to trying to estimate the test error through some validation process."
+    },
+    {
+        "timestamp": "00:15:42",
+        "text": "Notice that as the number of data M increase, the bound term will get smaller."
+    },
+    {
+        "timestamp": "00:15:51",
+        "text": "So assuming that the training error stays the same, as you might expect, the more data you have, the more able you are to support higher and higher complexity."
+    },
+    {
+        "timestamp": "00:15:59",
+        "text": "models."
+    },
+    {
+        "timestamp": "00:16:08",
+        "text": "This general theme of selecting the right complexity of model using a penalized score on training data is common to a number of different techniques."
+    },
+    {
+        "timestamp": "00:16:17",
+        "text": "In probabilistic models, our training score is usually the log-likelihood of the data instead of an error rate."
+    },
+    {
+        "timestamp": "00:16:25",
+        "text": "But similarly, techniques like the Akkakei information criterion and the Bayesian information criterion use an extra penalty term to try to penalize for high-complexity models."
+    },
+    {
+        "timestamp": "00:16:34",
+        "text": "Then, even though the more complex model will always have a higher likelihood than the simpler model, it may not be enough higher to compensate for the penalty which will increase with complexity."
+    },
+    {
+        "timestamp": "00:16:42",
+        "text": "AIC and BIC differ mainly in the degree to which they penalize the complexity measured in the number of parameters."
+    },
+    {
+        "timestamp": "00:16:51",
+        "text": "And there are also other probabilistic methods of doing model selection that are commonly chosen."
+    },
+    {
+        "timestamp": "00:16:59",
+        "text": "like using marginal likelihood comparisons, and those implicitly penalized for complexity instead of explicitly adding a penalty term."
+    },
+    {
+        "timestamp": "00:17:10",
+        "text": "In practice, my feeling is that many of these methods are very conservative."
+    },
+    {
+        "timestamp": "00:17:20",
+        "text": "Structural risk minimization is considered very conservative and may really not be as effective as just simply using a holdout set or a cross-validation set."
+    },
+    {
+        "timestamp": "00:17:30",
+        "text": "However, the concept of VC dimension is certainly very useful in understanding the role of complexity in learning and the degree to which a more flexible class of learners can lead to overfitting and how."
+    }
+]
