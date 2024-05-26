@@ -1,0 +1,318 @@
+[
+    {
+        "timestamp": "00:00:00",
+        "text": "We'll begin with supervised learning problems, including classification and regression problems."
+    },
+    {
+        "timestamp": "00:00:07",
+        "text": "As I mentioned, machine learning may be unlike much of the programming that you might have done in the past."
+    },
+    {
+        "timestamp": "00:00:15",
+        "text": "Here, we can't simply tell the computer how to solve the problem, give it a precise algorithm to follow."
+    },
+    {
+        "timestamp": "00:00:22",
+        "text": "Instead, we'll tell it how to figure out how to solve the problem, a kind of metaprogramming task."
+    },
+    {
+        "timestamp": "00:00:30",
+        "text": "To do so, we design a flexible program called the learner, whose behavior can be modified by changing aspects of its operation, called the parameters."
+    },
+    {
+        "timestamp": "00:00:37",
+        "text": "The learner is a deterministic function that takes in the features of a new example and spits out a prediction for its target."
+    },
+    {
+        "timestamp": "00:00:45",
+        "text": "This input-output behavior is a function of these internal parameters."
+    },
+    {
+        "timestamp": "00:00:52",
+        "text": "We can then write a second program, the learning algorithm, which sets or modifies the parameters of the learner."
+    },
+    {
+        "timestamp": "00:01:00",
+        "text": "until it's doing a good job at predicting the training points that we've seen in the past, as measured by some score or cost function."
+    },
+    {
+        "timestamp": "00:01:05",
+        "text": "Some notation is useful."
+    },
+    {
+        "timestamp": "00:01:10",
+        "text": "The input features X will constitute all the information we have to make our prediction."
+    },
+    {
+        "timestamp": "00:01:15",
+        "text": "For example, if I want to predict whether you'll need to go to the hospital in the next year, I might use all the information I have about you, your age, your weight, height, the outcomes of recent medical tests, etc."
+    },
+    {
+        "timestamp": "00:01:20",
+        "text": "These are all available to me beforehand."
+    },
+    {
+        "timestamp": "00:01:25",
+        "text": "I input them into my learner and it outputs a prediction, yes or no, whether you'll be hospitalized."
+    },
+    {
+        "timestamp": "00:01:30",
+        "text": "Then later, I'll find out the answer."
+    },
+    {
+        "timestamp": "00:01:35",
+        "text": "Did you actually go to the hospital?"
+    },
+    {
+        "timestamp": "00:01:40",
+        "text": "That's the true target value Y."
+    },
+    {
+        "timestamp": "00:01:45",
+        "text": "I call my prediction Y-hat, the estimate of Y, and by comparing Y and Y-hat, I can use it to determine my score."
+    },
+    {
+        "timestamp": "00:01:50",
+        "text": "I pay some penalty or cost if I'm wrong."
+    },
+    {
+        "timestamp": "00:01:55",
+        "text": "We'll denote the generic parameter"
+    },
+    {
+        "timestamp": "00:02:00",
+        "text": "of our learner by theta."
+    },
+    {
+        "timestamp": "00:02:06",
+        "text": "Since data play a fundamental role in machine learning, we'll need some way of visualizing the training data along with the results of our learning algorithm."
+    },
+    {
+        "timestamp": "00:02:13",
+        "text": "Our training data consists of pairs of features and their associated target value."
+    },
+    {
+        "timestamp": "00:02:20",
+        "text": "So you can imagine plotting those data."
+    },
+    {
+        "timestamp": "00:02:26",
+        "text": "Since we can never really plot more than two dimensions, when we plot, we'll pretend that we have only one real valued x, and then the purpose of our learner is to map the feature value x into this target value y."
+    },
+    {
+        "timestamp": "00:02:33",
+        "text": "In other words, given a new feature, x new, we're supposed to predict what the y value associated with that feature would be."
+    },
+    {
+        "timestamp": "00:02:39",
+        "text": "Hopefully something that's reasonably similar to the training data."
+    },
+    {
+        "timestamp": "00:02:46",
+        "text": "Since it outputs a value for any x, our learner, whatever it is, defines a function from x to y."
+    },
+    {
+        "timestamp": "00:02:53",
+        "text": "And by evaluating every possible x,"
+    },
+    {
+        "timestamp": "00:02:59",
+        "text": "We can trace out that function to see what our learner thinks is the actual relationship between X and Y."
+    },
+    {
+        "timestamp": "00:03:07",
+        "text": "In some cases, the shape or functional form of this function may be explicitly stated by the model, or it might be implicitly defined by the prediction program."
+    },
+    {
+        "timestamp": "00:03:14",
+        "text": "Let's see some simple examples of this."
+    },
+    {
+        "timestamp": "00:03:22",
+        "text": "An extremely simple predictor that we'll discuss in more detail soon is the nearest neighbor predictor."
+    },
+    {
+        "timestamp": "00:03:29",
+        "text": "Nearest neighbor is defined in a very simple rule."
+    },
+    {
+        "timestamp": "00:03:37",
+        "text": "Store the data, the red points in the scatter plot, in a database, and when asked to predict a new point X new, just find the most similar point in the database, looking only at the feature values, and predict whatever that closest point's value Y is."
+    },
+    {
+        "timestamp": "00:03:44",
+        "text": "So this is basically a memorize and regurgitate kind of procedure."
+    },
+    {
+        "timestamp": "00:03:52",
+        "text": "If we follow that procedure for every possible X, we'll trace out a set of predictions."
+    },
+    {
+        "timestamp": "00:03:59",
+        "text": "implicitly defines a function mapping X to Y."
+    },
+    {
+        "timestamp": "00:04:08",
+        "text": "You can notice the properties of this function."
+    },
+    {
+        "timestamp": "00:04:17",
+        "text": "It's flat, constant, near any training example, since that example is the nearest point, and it continues to predict that Y, and then it abruptly changes the moment that X becomes closer to the next training example, so halfway between the two points."
+    },
+    {
+        "timestamp": "00:04:25",
+        "text": "In contrast, here's another predictor we'll spend more time on, the linear predictor."
+    },
+    {
+        "timestamp": "00:04:34",
+        "text": "Here, the predictor evaluates a linear function of the feature, computing some value, say theta zero, and adding theta one times X, and then outputting that prediction."
+    },
+    {
+        "timestamp": "00:04:42",
+        "text": "Tracing out the values of this prediction on various values of X exactly shows this equation."
+    },
+    {
+        "timestamp": "00:04:51",
+        "text": "The functional form of f of X is explicitly defined within this procedure."
+    },
+    {
+        "timestamp": "00:04:59",
+        "text": "It's then quite easy to see what the effect of changing the parameters theta is."
+    },
+    {
+        "timestamp": "00:05:07",
+        "text": "It changes f of x within some parametric family of possible functions such as lines here."
+    },
+    {
+        "timestamp": "00:05:14",
+        "text": "The goal of the learning algorithm is then to modify these parameters until it finds a good function f of x within that family."
+    },
+    {
+        "timestamp": "00:05:22",
+        "text": "Obviously our predictions may not perfectly match the data points."
+    },
+    {
+        "timestamp": "00:05:29",
+        "text": "For any data point i, we can measure the difference between the observed target value yi and our prediction y-hat-i, and we just measure this difference and we can call it the error residual."
+    },
+    {
+        "timestamp": "00:05:37",
+        "text": "For an accurate predictor, these residuals should be small."
+    },
+    {
+        "timestamp": "00:05:44",
+        "text": "A common way to measure the total amount of error is the mean squared error, which just averages the square of the error residuals on the data."
+    },
+    {
+        "timestamp": "00:05:52",
+        "text": "So the squaring makes them all positive, averaging tells me overall"
+    },
+    {
+        "timestamp": "00:05:59",
+        "text": "how I'm doing."
+    },
+    {
+        "timestamp": "00:06:07",
+        "text": "Again, since we're restricted to looking at 2D plots when we actually visualize things, we'll only be able to draw very simple examples for visualization."
+    },
+    {
+        "timestamp": "00:06:14",
+        "text": "For regression, we're essentially forced to look at one feature x versus the real value target y, even though in practice, of course, we'll probably use many more than one feature."
+    },
+    {
+        "timestamp": "00:06:22",
+        "text": "For classification, however, we're predicting a discrete valued y, often, say, a binary one, y equals 0 versus y equals 1, spam or not spam, say."
+    },
+    {
+        "timestamp": "00:06:29",
+        "text": "We can similarly plot x and y just like we did in regression, but since y is discrete, this makes for a pretty boring plot."
+    },
+    {
+        "timestamp": "00:06:37",
+        "text": "Instead, we can just use colors or symbols on the data points to indicate their y value, and then we only need to plot x."
+    },
+    {
+        "timestamp": "00:06:44",
+        "text": "We don't actually need to plot y at all."
+    },
+    {
+        "timestamp": "00:06:52",
+        "text": "So this means we can get away with plotting two."
+    },
+    {
+        "timestamp": "00:06:59",
+        "text": "features instead of just one."
+    },
+    {
+        "timestamp": "00:07:08",
+        "text": "We can plot a scatter plot of feature one versus feature two, and we indicate the class, the value of y, using a symbol or a color, here again, blue or red."
+    },
+    {
+        "timestamp": "00:07:17",
+        "text": "Again, any learner should learn a map, a way to map locations, x1, x2, into a prediction."
+    },
+    {
+        "timestamp": "00:07:25",
+        "text": "Now a discrete class, say 0 or 1, if we do that for every possible x1, x2 place on the plane, we'll now get a three-dimensional function whose value we can indicate with color."
+    },
+    {
+        "timestamp": "00:07:34",
+        "text": "Where now red shows all the points where we predict class 1, and blue, all those where we decide the other class, say minus 1."
+    },
+    {
+        "timestamp": "00:07:42",
+        "text": "An important concept for classification is that the function transitions immediately from one value to the other."
+    },
+    {
+        "timestamp": "00:07:51",
+        "text": "And this means that there's a set of points at which the function changes."
+    },
+    {
+        "timestamp": "00:07:59",
+        "text": "abruptly from one value to the other."
+    },
+    {
+        "timestamp": "00:08:07",
+        "text": "This is called the decision boundary."
+    },
+    {
+        "timestamp": "00:08:14",
+        "text": "In some sense, the learner, the classifier, can be characterized completely by the decision boundaries it's able to represent."
+    },
+    {
+        "timestamp": "00:08:22",
+        "text": "Note again that this is a function, y hat, of two variables, x1 and x2, whose value is visualized with color."
+    },
+    {
+        "timestamp": "00:08:29",
+        "text": "Again, in classification, it may be that our predictions don't necessarily match all of the observed data."
+    },
+    {
+        "timestamp": "00:08:37",
+        "text": "For classification problems, the most common method of assessing accuracy is called the error rate, which is the probability of making an incorrect prediction."
+    },
+    {
+        "timestamp": "00:08:44",
+        "text": "The empirical error rate is just given by the fraction of data points, i, at which our predictor, y hat, makes an incorrect prediction, i.e., a prediction that differs from the observed value, y."
+    },
+    {
+        "timestamp": "00:08:52",
+        "text": "So here, we have a blue point where we're predicting red, a red point where we're."
+    },
+    {
+        "timestamp": "00:08:59",
+        "text": "we're predicting blue, so we're making two out of 10 errors."
+    },
+    {
+        "timestamp": "00:09:12",
+        "text": "In summary, we started with supervised learning, which are prediction problems in which we're given examples of what our function should output in the form of training data with input features X and a labeled desired output value Y."
+    },
+    {
+        "timestamp": "00:09:25",
+        "text": "We saw two examples of these types of problems, regression problems, where we predict real valued numbers, and we'll visualize these as a function mapping a single feature X to its predicted Y value."
+    },
+    {
+        "timestamp": "00:09:38",
+        "text": "Classification problems, on the other hand, predict discrete valued targets, and so we'll usually visualize them using two input features, X1 and X2, and drawing the output Y values using colors or symbols or the decision boundary transitioning from one prediction value to another."
+    }
+]
