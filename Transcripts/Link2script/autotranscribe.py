@@ -65,3 +65,6 @@ def transcribe_to_file(input_file_path, output_folder_path, model_name="whisper-
     
     # Clean up temp audio file
     temp_audio_path.unlink()
+
+
+transcribe_to_file(input_file_path="/home/jason/coursistant/DR/Transcripts/Link2script/Coursistant Demo Draft3.mp4", output_folder_path='./')

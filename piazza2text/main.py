@@ -9,7 +9,7 @@ def main():
     # Hardcoded values
     email = ""
     password = ""
-    course_id = "llqyd5tpdcq34o"
+    course_id = "llqyd5tpdcq34o" # EE540
 
     # Use the session/token to fetch and process the posts
     try:
