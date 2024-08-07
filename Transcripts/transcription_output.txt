@@ -1,0 +1,358 @@
+[0:00:00]  Welcome to Introduction of Coassistent, a revolutionary virtual teaching assistant designed
+
+[0:00:13]  to transform the way we learn, we teach and interact online.
+
+[0:00:19]  Coassistent is a cutting edge platform that leverages the power of AI, document embeddings,
+
+[0:00:25]  to learn from instructional videos like lecture videos and past form discussions like
+
+[0:00:31]  piata.
+
+[0:00:33]  Navigating traditional Q&A platforms like piata often leads to troubles and problems for
+
+[0:00:38]  students and TAs alike.
+
+[0:00:40]  Issues like delayed responses and repetitive queries can hinder learning.
+
+[0:00:45]  To dive deeper into these challenges, let's jump into a live interview with some students
+
+[0:00:49]  and TAs who experience these first hands.
+
+[0:00:53]  Thank you for joining me with this interview today.
+
+[0:00:57]  So just quickly I want to ask you how user experience
+
+[0:01:00]  with using the PRS platform?
+
+[0:01:03]  Well, it's all right.
+
+[0:01:05]  But to be honest, it can be a bit slow sometimes.
+
+[0:01:08]  When it really needs help, the response time
+
+[0:01:12]  isn't always ideal.
+
+[0:01:14]  It's being OK, but I've run into some issues
+
+[0:01:17]  with T as availability.
+
+[0:01:20]  Honestly, I'd like to start my assignments early
+
+[0:01:23]  to stay ahead.
+
+[0:01:26]  But sometimes it feels like I'm panellized for that,
+
+[0:01:29]  because the tea is off very active early on.
+
+[0:01:32]  How do you handle questions as a graduate TA on Fiatza?
+
+[0:01:36]  Well, so it's pretty hectic sometimes.
+
+[0:01:38]  We get a ton of repeat questions, which
+
+[0:01:40]  can really let things out.
+
+[0:01:42]  It's like seeing the scene and Instagram boost
+
+[0:01:43]  all within one again.
+
+[0:01:45]  I can tell, how does it affect your study?
+
+[0:01:50]  It's a free-to-have, actually, especially when
+
+[0:01:54]  the deadline are closed.
+
+[0:01:56]  If it's DAC and can't get a quick answer in time,
+
+[0:02:00]  it probably doesn't.
+
+[0:02:02]  probably let me make me hold up everything else.
+
+[0:02:06]  When I post questions early in the week,
+
+[0:02:08]  they often go on answer for days.
+
+[0:02:11]  And maybe that here is just more responsive
+
+[0:02:14]  as the deadline approaches.
+
+[0:02:17]  I'm not sure.
+
+[0:02:18]  Does it make harder to keep up with every student?
+
+[0:02:21]  Yeah, exactly.
+
+[0:02:23]  I'm also trying to keep up with my own classes.
+
+[0:02:25]  So it's tough to respond quickly when the same stuff
+
+[0:02:29]  keeps popping up.
+
+[0:02:30]  It's late by the time I get to the new questions,
+
+[0:02:32]  I'm already behind.
+
+[0:02:33]  OK.
+
+[0:02:34]  It makes me hesitate to start work very, you know,
+
+[0:02:38]  which is very ideal.
+
+[0:02:40]  I just feel like I'm forced to adapt to your last minute rush.
+
+[0:02:44]  When responses do come in, they are sometimes rushed
+
+[0:02:48]  because the TAs are dealing with a bunch of last minute
+
+[0:02:52]  questions for everyone else.
+
+[0:02:53]  OK.
+
+[0:02:54]  How about the questions?
+
+[0:02:56]  A lot of times questions come in a super vague
+
+[0:02:59]  or don't have enough info.
+
+[0:03:01]  end up having to ask what they actually mean, what just drags everything out even more.
+
+[0:03:07]  Okay. What would your ideal academic support be like?
+
+[0:03:10]  Ideally, it would be great to have more consistent years of process throughout the week.
+
+[0:03:16]  Being able to move quickly from one question to another will maybe smooth out my study session
+
+[0:03:24]  and consistency could be a huge plus too.
+
+[0:03:28]  After hearing all these pain points provided by students and TA's,
+
+[0:03:32]  it's clear that something needed to be done to the system.
+
+[0:03:35]  Coorsis and is a tool designed to provide real-time, immediate answers to students' questions.
+
+[0:03:41]  Learning directly from the course materials and enforced by their own instructors and TA's who teach the courses,
+
+[0:03:47]  so that it will provide accurate information and answers.
+
+[0:03:51]  Now, let me invite you to see courseis in in action.
+
+[0:03:56]  What you now see is the main control panel of courseisent.
+
+[0:04:01]  Here you can access the web check bot directly using the context embedded to the bot.
+
+[0:04:07]  You can also train the embeddings using two methods.
+
+[0:04:11]  One is by typing your Piazza associated email address, and courses enable automatically grab all the courses you register on Piazza.
+
+[0:04:20]  Here we're showcasing by selecting a brand new course chat bot that has not been trained using the course material as context.
+
+[0:04:28]  Let's try asking course specific questions to the chat bot.
+
+[0:04:38]  As we can see, no answer is given because the context of the course has not been embedded and trained to the chat bot.
+
+[0:04:45]  Now let's try training the embeddings with the course Piazza website using all the questions in answers.
+
+[0:04:54]  To access all the Piazza posts, you need to enter the Piazza email and password.
+
+[0:04:59]  Then select the course you want for the course.
+
+[0:05:01]  chatbot to learn. This process can take at most two minutes.
+
+[0:05:14]  Once all the PSPOS are done processed and the chatbot will answer the questions according
+
+[0:05:19]  to the questions and answers in all PSPOS. Furthermore, courses send will automatically
+
+[0:05:25]  refresh the embeddings for the registered course every hour to keep the database up to date.
+
+[0:05:33]  Let's see the result and changes to the database. As we can see, now the database has been
+
+[0:05:40]  populated with all the questions and answers pairs of the selected course registered on PSPOS.
+
+[0:05:46]  Specifically, the questioner trying to ask previously can also be found in the database.
+
+[0:05:56]  Now we can invoke the chatbot again to see the result by asking the same question again.
+
+[0:06:04]  And as we can see, Horsescent answered according to the original Piazza Post.
+
+[0:06:17]  Horsescent can do more than just text content.
+
+[0:06:21]  These structures can also upload lecture slides onto Horsescent to give their students
+
+[0:06:26]  a more straightforward response.
+
+[0:06:29]  Of course, other PDF-based course mystery work can also be uploaded onto Horsescent.
+
+[0:06:34]  This can include syllabuses, assignments, course logistics, and more.
+
+[0:06:43]  Let me demonstrate how Horsescent can respond with content on the lecture slides and other
+
+[0:06:47]  provided files.
+
+[0:06:50]  Here are some lecture slides already uploaded on the course assistant.
+
+[0:06:54]  First,
+
+[0:06:55]  Go to courses and chat and select the course you are asking the question about.
+
+[0:07:04]  Let me ask some general questions about the course syllabus.
+
+[0:07:08]  I am asking what is the main goal of this course?
+
+[0:07:20]  As we can see, courses can be spawned with the natural answer and also a lecture slide
+
+[0:07:25]  page that has been related to the question.
+
+[0:07:28]  Now let me ask something specific now.
+
+[0:07:32]  Like here, what is the due date for not four?
+
+[0:07:46]  As we can see, courses can be able to find the answer to this very course specific question
+
+[0:07:52]  and respond with image up to related.
+
+[0:07:56]  lecture slide or PDF page. What's more exciting is if you have a link to
+
+[0:08:01]  instructional video you can simply train your chatbot with a URL to your video.
+
+[0:08:06]  Here's how we do it. Here we're using a demo lecture video about supervised
+
+[0:08:10]  learning in an introductory machine learning course. We'll begin with supervised learning problems,
+
+[0:08:16]  including classification and regression problems. As I mentioned machine learning may be unlike
+
+[0:08:24]  much of the programming that you might have done in the past.
+
+[0:08:33]  Once you've acquired the URL to your video go ahead and input it into the system.
+
+[0:08:39]  Here's what's happening in the back. Course assistant will automatically transcribe your full
+
+[0:08:43]  video and detect and the timestamp information will be included as well.
+
+[0:08:48]  To do so we design a flexible program called the
+
+[0:08:55]  Learner.
+
+[0:08:56]  The learner, whose behavior can be modified by changing aspects of its operation called the parameters.
+
+[0:09:03]  The learner is a deterministic function that takes in the features of a new example and spits out a prediction for its target.
+
+[0:09:11]  This input output behavior is the function of these internal parameters.
+
+[0:09:18]  Here's what it looks like if you put all of the lecture videos together into a comprehensive Q&A chatbot with video clip feedback.
+
+[0:09:28]  Welcome to our introductory course on machine learning here at UC Irvine.
+
+[0:09:32]  My name is Professor Alexander Eiler and I created these lectures for our introductory courses.
+
+[0:09:37]  For undergraduates, CS178 and graduates, CS273.
+
+[0:09:43]  Machine learning is generally considered to be a subfield.
+
+[0:09:48]  Now, the assistant is able to pinpoint and find the answer wherever it is in any of the video uploading onto the system.
+
+[0:09:56]  providing almost instant feedback and answers that the sources can be traced
+
+[0:10:01]  inside this video.
+
+[0:10:03]  We'll begin with supervised learning problems including classification and
+
+[0:10:08]  regression problems.
+
+[0:10:12]  As I mentioned machine learning may be unlike much of the programming that you
+
+[0:10:16]  might have done in the past.
+
+[0:10:18]  Another main feature of Corsistent is the Piazza Virtual TA integration.
+
+[0:10:24]  This allows Corsistent to automatically reply to any new Piazza questions.
+
+[0:10:29]  Let's see how it happens.
+
+[0:10:32]  Here are three unanswered Piazza questions before the Virtual TA is enabled.
+
+[0:10:38]  Now we enable the Virtual TA by training Corsistent with this course Piazza Posts.
+
+[0:10:48]  Once the Piazza Posts are done processing we can see Corsistent is answering the
+
+[0:10:52]  questions in real time.
+
+[0:10:54]  Efficiently.
+
+[0:10:55]  inaccurately.
+
+[0:11:09]  However, some questions are not answered because their database lacks enough relevant information.
+
+[0:11:16]  We can go to the database page.
+
+[0:11:18]  Another great feature course system offers is a great flexibility of editing the embeddings.
+
+[0:11:24]  The TA's and instructors can edit or add this new questions and its answer to the database.
+
+[0:11:32]  This also allows the TA's to monitor and reinforce the answers provided by CoSistent.
+
+[0:11:38]  After updating and adding the questions, we can see CoSistent is able to answer the
+
+[0:11:42]  previous question.
+
+[0:11:45]  And if student posts new questions, we can see CoSistent is able to continuously answer
+
+[0:11:51]  the new questions in real time.
+
+[0:11:54]  Reducing the time to wait for the next question.
+
+[0:11:55]  an answered Jurassic Park.
+
+[0:11:58]  Here's a breakdown of course, Assistant.
+
+[0:12:00]  We used our custom Piazza API and video transcription
+
+[0:12:03]  suctionality to acquire our text-based data.
+
+[0:12:07]  Then we feed our structure data into Google
+
+[0:12:10]  Espert and Lama Index, paired with our custom embedding
+
+[0:12:14]  models to get the context of the entirety of the course.
+
+[0:12:18]  Then we provide the context to GPT 3.5 Turbo
+
+[0:12:22]  to help us formulate the speedy, friendly, readable,
+
+[0:12:26]  and accurate response.
+
+[0:12:28]  We then send this response to either a web UI chatbot
+
+[0:12:32]  or back to the Piazza platform questions.
+
+[0:12:35]  The response will only take seconds.
+
+[0:12:39]  Cursistence sets its health apart from general purpose
+
+[0:12:42]  AI chatbots, which is unparalleled customizability.
+
+[0:12:47]  Unlike one size patrol solution,
+
+[0:12:49]  Cursistence allows the creation of highly specialized
+
+[0:12:52]  Q&A environments.
+
+[0:12:54]  K-2N not just.
+
+[0:12:55]  to students but also field experts and researchers. This platform ensures that the knowledge
+
+[0:13:02]  days is not static, instructors and TAs can easily intervene by updating and editing the
+
+[0:13:09]  embedding dataways and context. This feature guarantees that the information remains accurate,
+
+[0:13:16]  relevant and up-to-date, reflecting the dynamic nature of highly field-specific content
+
+[0:13:23]  and research.
+
+[0:13:25]  Thank you so much for watching. And stay tuned for a course in the platform.
+
+[0:13:30]  you
+
+[0:14:00]  you
+
+[0:14:02]  you
+

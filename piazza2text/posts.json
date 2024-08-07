@@ -1,0 +1,1060 @@
+[
+    {
+        "detail": {
+            "content": "Please try to make your question clear so that we may be able to help you more quickly. Please tell us what you have done, what environment you are using and what the error message is. I will appreciate it if you would like to post public questions that are visible to other students so that the same questions will not be asked again.",
+            "subject": "How to ask your questions"
+        },
+        "folders": [
+            "logistics"
+        ],
+        "id": "llqyshi3l5e23a",
+        "id_c": 6,
+        "time": "2023-08-25T19:07:11Z",
+        "type": "note",
+        "vote": 0
+    },
+    {
+        "answers": [
+            {
+                "content": "Yes.",
+                "type": "i_answer",
+                "vote": 1
+            }
+        ],
+        "detail": {
+            "content": "for the VyOS in Step 3, I should set up the VyOS as a DHCP server, not a static IP server right?",
+            "subject": "HW1 Step 3 Server Type for VyOS"
+        },
+        "folders": [
+            "hw1"
+        ],
+        "id": "llqzkpgfuzl79d",
+        "id_c": 7,
+        "time": "2023-08-25T19:29:08Z",
+        "type": "question",
+        "vote": 0
+    },
+    {
+        "detail": {
+            "content": "How to apply for taking a laptop on loan from the university for an entire semester\n-----------------------------------------------------------------------------------\n\nIf you want to loan a laptop for an entire semester, please make use of Long Term Laptop Loan Service (Loaner Laptops) provided by SAL Lab. Below are the steps you need for the application:\n\n1.  Get an approval from Prof. Young Cho through mail (There is no fixed template for this, just mention you need an approval for taking a loaner laptop)\n    \n2.  Write a mail to : John Ng [johnng@usc.edu](mailto:johnng@usc.edu) and An Pham [apham011@usc.edu](mailto:apham011@usc.edu) describing the specifications you need in your laptop and mention that you have received an approval from the professor. Also it\u2019s important to attach the approval mail (received from Prof. Young Cho) with this mail.\n    \n3.  They reply pretty quickly so you can expect a reply in 2-3 hrs on a working day with the instructions for collecting the laptop.\n    \n\nThey do not charge you anything for this loaner laptop unless you cross the deadline(which is end of semester date) indicated by them in the final mail.",
+            "subject": "Laptop Loan Service"
+        },
+        "folders": [
+            "logistics"
+        ],
+        "id": "llqzl03labe5x4",
+        "id_c": 8,
+        "time": "2023-08-25T19:29:22Z",
+        "type": "note",
+        "vote": 0
+    },
+    {
+        "detail": {
+            "content": "- Please use Ubuntu 18.04 as everything is tested to work on it. There is no guarantee if you want to try a newer version.\n\n- If you are using MacBook, everthing should be expected still to work (use UTM instead of VBox). But if it's not, you may borrow a Windows laptop from CS department for this semester. See **@8**.",
+            "subject": "FAQ for Lab1"
+        },
+        "folders": [
+            "hw1"
+        ],
+        "id": "llqzmaeq5wh6wv",
+        "id_c": 9,
+        "time": "2023-08-25T19:30:22Z",
+        "type": "note",
+        "vote": 0
+    },
+    {
+        "answers": [
+            {
+                "content": "No, that's not necessary.",
+                "type": "i_answer",
+                "vote": 0
+            }
+        ],
+        "detail": {
+            "content": "Hi, I am using VM for ubuntu. Could you please let me know if I need to follow the step of installing virtualbox guest addition or not? Thank you",
+            "subject": "Unclear about from which step am I suppose to proceed for while using UTM instead of VB"
+        },
+        "folders": [
+            "hw1"
+        ],
+        "id": "llr27rbbxf16zf",
+        "id_c": 10,
+        "time": "2023-08-25T20:43:03Z",
+        "type": "question",
+        "vote": 1
+    },
+    {
+        "answers": [
+            {
+                "content": "You can put what you have done step by step like the command you used, and some screenshots of the outputs of your operation in your lab reports.",
+                "type": "i_answer",
+                "vote": 0
+            }
+        ],
+        "detail": {
+            "content": "What should we submit as the report for the lab assignment since the demo video has its own submission?",
+            "subject": "LAB1 report"
+        },
+        "folders": [
+            "hw1"
+        ],
+        "id": "llr2sm5fc5g75j",
+        "id_c": 11,
+        "time": "2023-08-25T20:59:16Z",
+        "type": "question",
+        "vote": 0
+    },
+    {
+        "answers": [
+            {
+                "content": "I had the same issue and this is what worked for me, I don't know if this is how we are supposed to do it.Assuming your devices are in the following networks:192.168.1.0/24 (PC1 and R1)192.168.2.0/24 (R1 and PC2)All packets generated from PC1 with the destination address belonging to 192.168.1.0/24 will go through to the interface on PC1 connected to R1 (because PC1 knows that this network is connected to this interface and the default router can be reached through this interface) but PC1 has no idea on where to send packets belonging to 192.168.2.0/24 which is where you are pinging to reach PC2, So I ran PC1 script with only the routing information present (you need to find the specific lines in script containing the routing path and to restart networking, I am not sure if I am allowed to copy paste it here), after I did this I am able to run traceroute and ping to both the PCs",
+                "type": "s_answer",
+                "vote": 2
+            },
+            {
+                "content": "Remeber the DHCP should provide you a default gateway.",
+                "type": "i_answer",
+                "vote": 0
+            }
+        ],
+        "detail": {
+            "content": "for step 3, I have successfully setup the VyOS and two networks with DHCP. Each PC host can connect its assigned DHCP server. However, when I try to ping from one host to another host, the terminal returns \"Destination Host Unreachable\". It seems the ethernets are not connected by the VyOS device.May I have any insight on how to resolve this problem?",
+            "subject": "Lab1 Step 3 Unable to connect two ethernet of the VyOS"
+        },
+        "folders": [
+            "hw1"
+        ],
+        "id": "llr4pu91gch7m0",
+        "id_c": 12,
+        "time": "2023-08-25T21:53:05Z",
+        "type": "question",
+        "vote": 0
+    },
+    {
+        "answers": [
+            {
+                "content": "copying from the tutorial, then editing according to the lab instr. helped me solve this problem.",
+                "type": "s_answer",
+                "vote": 1
+            },
+            {
+                "content": "Ingore the lines containing EOF/EOF2. Execute line by line.",
+                "type": "i_answer",
+                "vote": 0
+            }
+        ],
+        "detail": {
+            "content": "On running this on Ubuntu 18.04:Error msg is:Anyone else facing a similar error? I deleted the extra space after the EOF line but the same error is seen.Thanks in advance.",
+            "subject": "Script file error"
+        },
+        "folders": [
+            "hw1"
+        ],
+        "id": "llr81us4fny14l",
+        "id_c": 13,
+        "time": "2023-08-25T23:26:25Z",
+        "type": "question",
+        "vote": 0
+    },
+    {
+        "answers": [
+            {
+                "content": "LMK if it's not solved yet.",
+                "type": "i_answer",
+                "vote": 0
+            }
+        ],
+        "detail": {
+            "content": "hi everyone, I just have problem with creating new ethernet in vyos. I use the following command to create a new ethernet named eth1 and give address to it, but it doesn't work.My vyos version is 1.2.9-S1set interfaces ethernet eth1 address '192.168.2.1/24'error: vyos interface ethernet eth1 does not exist.",
+            "subject": "lab1 step3 create new ethernet"
+        },
+        "folders": [
+            "hw1"
+        ],
+        "id": "llrhbhnalj96ej",
+        "id_c": 14,
+        "time": "2023-08-26T03:45:51Z",
+        "type": "question",
+        "vote": 0
+    },
+    {
+        "answers": [
+            {
+                "content": "The two files shoud run on the network you created in step 3",
+                "type": "i_answer",
+                "vote": 0
+            }
+        ],
+        "detail": {
+            "content": "for step 4, can we run client and server on one PC, or these two files must be run on the network just constructed in step 3",
+            "subject": "Lab1 Step 4 running server and client on the same PC"
+        },
+        "folders": [
+            "hw1"
+        ],
+        "id": "llrj60j6typ7p",
+        "id_c": 15,
+        "time": "2023-08-26T04:37:35Z",
+        "type": "question",
+        "vote": 0
+    },
+    {
+        "answers": [
+            {
+                "content": "Use the default settings -- shared network.",
+                "type": "i_answer",
+                "vote": 0
+            }
+        ],
+        "detail": {
+            "content": "Hey Yude!\n\nI followed your advice to use UTM to follow Assignment 1. I was able to get my Ubuntu Server 18.04 installations to work, but I am having trouble setting up the network topology.\n\nThe \"Internal Network\" in Virtualbox does not seem to have an equivalent in UTM? My google searches point me to using UTM's \"Host Only\" option, but their is no option to make the Point to Point connections.\n\nDo you know how we can set up these Point to Point connections in UTM?\n\nThanks!",
+            "subject": "Virtualbox Internal Network in UTM"
+        },
+        "folders": [
+            "hw1"
+        ],
+        "id": "llrk4zahqbs4k7",
+        "id_c": 16,
+        "time": "2023-08-26T05:04:46Z",
+        "type": "question",
+        "vote": 1
+    },
+    {
+        "detail": {
+            "content": "Professor was right, there is a lot going on for this lab and I definitely don't have the time or bandwidth this semester to be able to do these labs effectively.Class seems super interesting and I am dissapointed to quit, but good luck everyone. You all are beasts.",
+            "subject": "I dropped"
+        },
+        "folders": [
+            "hw1"
+        ],
+        "id": "llrmxr6pxw12vj",
+        "id_c": 17,
+        "time": "2023-08-26T06:23:08Z",
+        "type": "note",
+        "vote": 4
+    },
+    {
+        "answers": [
+            {
+                "content": "Don't write code. Just download the files from **[here](https://www.linuxhowtos.org/C_C++/socket.htm)** and run them.\n\n![image.png](/redirect/s3?bucket=uploads&prefix=paste%2Fkyd81nfqg5f76c%2F270a9287db7e7414f586a766729178d226ee718c3a0aff921e53e5183d56d1e1%2Fimage.png)",
+                "type": "i_answer",
+                "vote": 1
+            }
+        ],
+        "detail": {
+            "content": "Are the hyperlinks for the U_server.c and U_Client.c active in the document? Or are we supposed to write the code ourselves",
+            "subject": "U_server.c and U_Client.c"
+        },
+        "folders": [
+            "hw1"
+        ],
+        "id": "llrnpyaiij81hd",
+        "id_c": 18,
+        "time": "2023-08-26T06:45:03Z",
+        "type": "question",
+        "vote": 0
+    },
+    {
+        "answers": [
+            {
+                "content": "Yes, you should.\n\nThe socket communication has 3 parts.\n\n1. original TCP client and original TCP server.\n2. original TCP client and enhanced TCP server.\n3. UDP client and UDP server.\n\neverything is here: [https://www.linuxhowtos.org/C_C++/socket.htm](https://www.linuxhowtos.org/C_C++/socket.htm)\n\nJust follow the instructions to run everything.",
+                "type": "i_answer",
+                "vote": 0
+            }
+        ],
+        "detail": {
+            "content": "Hello Mr. Yude Wei,I am doing my lab assignment-1 on Mac using UTM for that purpose. I was successfully able to run the programs (client.c and server.c) on my machine. However, I am unsure if I am supposed to follow step 2 and step 3 for that, as I can run the program without doing those changes. Could you please guide me and let me know if I am doing something wrong? (I am able to run the programs and get the output required without following\u00a0step 2 and 3 as I don't\u00a0have VirtualBox)Also, could you please give some idea on what we are supposed to submit in the powerpoint presentation?Thank you.",
+            "subject": "Submission of lab assignment 1"
+        },
+        "folders": [
+            "hw1"
+        ],
+        "id": "llsge0pjql75ws",
+        "id_c": 19,
+        "time": "2023-08-26T20:07:35Z",
+        "type": "question",
+        "vote": 0
+    },
+    {
+        "answers": [
+            {
+                "content": "I was having trouble with the terminal, so I used Putty (https://putty.org/) to SSH into the network devices.",
+                "type": "s_answer",
+                "vote": 1
+            },
+            {
+                "content": "Another possible reason might be you are actually using a wrong format (and it's very likely to happen). It will be helpfult if you could post what you typed and the error message within a screenshot as well. See @6.",
+                "type": "i_answer",
+                "vote": 0
+            }
+        ],
+        "detail": {
+            "content": "When I try to use ssh command on my windows terminal, this message prompts.",
+            "subject": "SSH protocol v.1 is no longer supported"
+        },
+        "folders": [
+            "hw1"
+        ],
+        "id": "llsgffciqxq2dt",
+        "id_c": 20,
+        "time": "2023-08-26T20:08:41Z",
+        "type": "question",
+        "vote": 0
+    },
+    {
+        "answers": [
+            {
+                "content": "The new versions of VyOS has renamed this api to name-server instead of dns-server.",
+                "type": "s_answer",
+                "vote": 2
+            }
+        ],
+        "detail": {
+            "content": "Hi class,Does anyone know why I cannot successfully excute this in conguration mode in vyos : \"set service dhcp-server shared-network-name enp0s8 subnet 192.168.1.0/24 dns-server 192.168.1.254\", the cli error for this : \"configuration path : service dhcp-server shared-network-name enp0s8 subnet 192.168.1.0/24 [dns-server] is not valid\", but i can successfully use this one : \"set service dhcp-server shared-network-name enp0s8 subnet 192.168.1.0/24 default-router 192.168.1.254\", so I think it is probably the problem of dns-server? Thanks!",
+            "subject": "vyos: dns-server not valid when set service dhcp-server in vyos"
+        },
+        "folders": [
+            "hw1"
+        ],
+        "id": "llsh3nydrrxwb",
+        "id_c": 21,
+        "time": "2023-08-26T20:27:32Z",
+        "type": "question",
+        "vote": 0
+    },
+    {
+        "answers": [
+            {
+                "content": "We don't have very strict restrictions on the format of assignment submissions, and you just need to do your best to submit your output and experimental steps (what you have done) according to the submission requirements.",
+                "type": "i_answer",
+                "vote": 0
+            }
+        ],
+        "detail": {
+            "content": "For submission the Lab, it says that we need to submit a Archive of the lab results, and says we should submit internet accessible link to the archive of all.I am assuming we can upload the code and the zip file to github. Is my understanding correct?",
+            "subject": "Homework Submission - Internet Accessible Link to ZIP file"
+        },
+        "folders": [
+            "hw1"
+        ],
+        "id": "llsmo9yldcr4ve",
+        "id_c": 22,
+        "time": "2023-08-26T23:03:32Z",
+        "type": "question",
+        "vote": 1
+    },
+    {
+        "answers": [
+            {
+                "content": "@13",
+                "type": "i_answer",
+                "vote": 0
+            }
+        ],
+        "detail": {
+            "content": "6FB60C80-E1B0-4AAC-A499-EAEA017CD1C2.heic",
+            "subject": "Error after pasting scripts from documents"
+        },
+        "folders": [
+            "hw1"
+        ],
+        "id": "llso0s0hcaj3ix",
+        "id_c": 23,
+        "time": "2023-08-26T23:41:15Z",
+        "type": "question",
+        "vote": 0
+    },
+    {
+        "answers": [
+            {
+                "content": "The `auto enp0s8` is not a command you should type in the terminal. You need to put the interface settings in the file `/etc/network/interfaces`. See @13.",
+                "type": "i_answer",
+                "vote": 0
+            }
+        ],
+        "detail": {
+            "content": "The error message is",
+            "subject": "auto enp0s8"
+        },
+        "folders": [
+            "hw1"
+        ],
+        "id": "llsolopw4151hn",
+        "id_c": 24,
+        "time": "2023-08-26T23:57:30Z",
+        "type": "question",
+        "vote": 0
+    },
+    {
+        "answers": [
+            {
+                "content": "Hi. They are already connected via the Hypervisor based on your settings. Please remember to use the default settings -- \"shared network\" for the adapters on your VMs.",
+                "type": "i_answer",
+                "vote": 1
+            }
+        ],
+        "detail": {
+            "content": "Hello, could you please help me know how I can establish connection between the two VMs on UTM on Mac. Is there any guide which I can refer to similar as given for the virtualBox? Would be really happy to get my query resolved. Thanks!",
+            "subject": "Establishing communication between two VMS on UTM"
+        },
+        "folders": [
+            "hw1"
+        ],
+        "id": "llsp9kvmnnl3dz",
+        "id_c": 25,
+        "time": "2023-08-27T00:16:05Z",
+        "type": "question",
+        "vote": 0
+    },
+    {
+        "detail": {
+            "content": "**Sorry about my ignorance as I just realized that some of you were just enrolled officially in the class and did not receive the email I sent you via Blackboard on Tuesday. FYI, here is the email:**\n\n\nHi everyone,\n\nI am Yude Wei. I am privileged to be your course mentor for EE542 in Fall 2023. This is a brief note that may give you some tips on how to succeed in this class.\n\n**Your First Week**\n\nAs mentioned in yesterday's lecture, EE542 should be a lab based course and you may have to spend much time on your labs even from the first week.\n\nThe lab for the first week is mainly about Network Testing and Simulation between Virtual Machines to help you better understand Network Communication. You need to set up a bunch of Virtual Machine Instances to let them communicate with each other in different situations using Hypervisor. See\u00a0[https://blackboard.usc.edu/webapps/assignment/uploadAssignment?content\\_id=\\_9847668\\_1&course\\_id=\\_323861\\_1](https://blackboard.usc.edu/webapps/assignment/uploadAssignment?content_id=_9847668_1&course_id=_323861_1)\u00a0.\n\nThis is a quite easy lab where you can just follow the instructions and finish everything, especially if you just took EE450 recently and still remember what we did in the final project to set up the environment. But there may still be many miscellaneous issues while proceeding, and please feel free to reach out to me if so.\n\nAlso, as learning how to set up the environment is not quite a negligible part in the first week's lab, I want to remind you that please\u00a0**choose the command-line version of Linux system to install**\u00a0instead of the one with GUI (as we don't need the GUI), or else your laptop could be a little stuck or running out of memory.\n\n**My Office Hours**\n\n**My open office hours this week dedicated to EE542 are from 4:00 p.m. to 5:00 p.m. on Tuesday (today), and from 3:00 p.m. to 4:00 p.m. on Wednesday at SSL 208 in person.**\u00a0FYI, see\u00a0[https://libraries.usc.edu/locations/science-engineering-library](https://libraries.usc.edu/locations/science-engineering-library)\u00a0.\n\nPlease be noticed that this is just a\u00a0**tentative**\u00a0arrangement and it may change based on your other course selection. I should be in the same room from 3:00 p.m. to 5:00 p.m., on Monday, Tuesday and Wednesday, and you can come at any time you want, but I will be mainly focusing on severing the students from EE599 (Monday session) and EE538 during other time slots as I am also working as one of the course staff for those two classes.\n\nIf the time above is still conflicted with your other classes, please always feel free to send me emails at\u00a0**[yudewei@usc.edu](mailto:yudewei@usc.edu)**\u00a0for any questions or Zoom meeting appointment. But please also understand that I may not be able to reply very soon as I could also need some time to debug your situation, so please\u00a0**do not wait until the last minute to ask your questions**.\n\n**Miscellaneous**\n\nThough the first lab should be done by your own (without teammates), you may start to find your teammates even from now so that you could know if he/she will suit you well as you will be working together on so many labs through the whole semester and you will get\u00a0**overwhelmed**\u00a0if your teammates never do anything.\n\nIf you plan to register for 2 classes during this semester, I would like to remind you to select a relatively easier course to be the other one, and what I did is to select\u00a0**EE555**\u00a0last year. That is a course mainly talking about the theory in detail like Hypervisor, EGP, Tunneling and Queuing Model, etc. and\u00a0**very well complements the lab based EE542**. EE538 is also a relatively easier class where you can learn some programming basics that are helpful in EE542. EE599 (by Prof. Arash Saifhashemi) is also a good choice for you to learn about ML. Anyways, EE542 is a rather worth taking class where you should put in enough effort and will learn a lot of things and hopefully you could spend your time well.\n\nI was working as a mentor for EE538 and a grader for EE552 last semester and also working as a DR student under Prof. Young Cho on an IIoT project based on what I learned from EE542 last year. I think I am trained well to work as a course staff and be familiar with the course materials, so please do feel free to come to me if you have any questions even on the final project.\n\nHope you will enjoy the class and have a fruitful semester.\n\nBest regards,\n\nYude Wei",
+            "subject": "First Week Announcement"
+        },
+        "folders": [
+            "hw1"
+        ],
+        "id": "llss42o4jw01z7",
+        "id_c": 26,
+        "time": "2023-08-27T01:35:47Z",
+        "type": "note",
+        "vote": 0
+    },
+    {
+        "answers": [
+            {
+                "content": "You may want so search the error on Google.\n\nFYI, [https://www.errorsolutions.tech/error/job-for-network-service-failed-because-the-control-process-exited-with-error-code/](https://www.errorsolutions.tech/error/job-for-network-service-failed-because-the-control-process-exited-with-error-code/)\n\nHave you tried the tips in your error message? I guess you are having duplicate settings for the network interface now.",
+                "type": "i_answer",
+                "vote": 0
+            }
+        ],
+        "detail": {
+            "content": "Even after I set the SSH terminal with root access, I still encounter similar issue when I try to simply copy paste example commands.",
+            "subject": "Command script error"
+        },
+        "folders": [
+            "hw1"
+        ],
+        "id": "llt4aum89oo6vz",
+        "id_c": 27,
+        "time": "2023-08-27T07:16:58Z",
+        "type": "question",
+        "vote": 0
+    },
+    {
+        "answers": [
+            {
+                "content": "Hopefully by tomorrow.",
+                "type": "i_answer",
+                "vote": 0
+            }
+        ],
+        "detail": {
+            "content": "Hi,May I know when will the lab2 released? I have already done the reading and demo video assignment and get ready for the following labs. It would be really nice if I can start soon.",
+            "subject": "when will the lab2 released?"
+        },
+        "folders": [
+            "hw2"
+        ],
+        "id": "llv52snoz1r3ch",
+        "id_c": 28,
+        "time": "2023-08-28T17:14:15Z",
+        "type": "question",
+        "vote": 0
+    },
+    {
+        "answers": [
+            {
+                "content": "No exams. But there are some pop quizzes that will make sure you should attend the lectures. The pop quizzes are rather easy and will not take a huge part in your final grade.",
+                "type": "i_answer",
+                "vote": 0
+            }
+        ],
+        "detail": {
+            "content": "Hello guys,I would like to know if there is any exams like midterm or final of this course? If there is, could you please describe the outline of those exams? Thank you.",
+            "subject": "Is there any exams of this course?"
+        },
+        "folders": [
+            "exam"
+        ],
+        "id": "llv5y5yw8cc4hx",
+        "id_c": 29,
+        "time": "2023-08-28T17:38:38Z",
+        "type": "question",
+        "vote": 0
+    },
+    {
+        "answers": [
+            {
+                "content": "No video needed. Just a report pdf or ppt file.",
+                "type": "i_answer",
+                "vote": 0
+            }
+        ],
+        "detail": {
+            "content": "For the reading due tomorrow, do we need to submit a video as well, or just a PPT summarizing the paper is enough?",
+            "subject": "Reading Submission - Method of Presentation"
+        },
+        "folders": [
+            "hw1",
+            "logistics"
+        ],
+        "id": "llvaywpqhlhlq",
+        "id_c": 30,
+        "time": "2023-08-28T19:59:11Z",
+        "type": "question",
+        "vote": 0
+    },
+    {
+        "answers": [
+            {
+                "content": "I confirm this with the professor. The correct due date is Sept 2.",
+                "type": "i_answer",
+                "vote": 0
+            }
+        ],
+        "detail": {
+            "content": "Hello I just want to make sure that I turn in the lab by the correct due date, the assignment says that the lab2 due September 1 just before midnight, but the lab instructions say that the lab is due on September 2 just before midnight. I was wondering which of these is correct?",
+            "subject": "Lab2 Due Date"
+        },
+        "folders": [
+            "hw2"
+        ],
+        "id": "llvx4k6sl2c6fa",
+        "id_c": 31,
+        "time": "2023-08-29T06:19:26Z",
+        "type": "question",
+        "vote": 0
+    },
+    {
+        "answers": [
+            {
+                "content": "I think the instruction is out-of-date. And I am using VyOS (HVM) 1.3-rolling-202208231231. It should offer you a 30-day free trial.",
+                "type": "i_answer",
+                "vote": 1
+            }
+        ],
+        "detail": {
+            "content": "I am trying to select the VyOS free (HVM) AMI for the EC2 instance but don't see that image listed in the community AMIs. I am not sure which image to use that would be free, if you could let me know how to find if an option is free or not for AWS that would be appreciated.",
+            "subject": "VyOS free"
+        },
+        "folders": [
+            "hw2"
+        ],
+        "id": "llwqyw2aiur3gt",
+        "id_c": 32,
+        "time": "2023-08-29T20:14:50Z",
+        "type": "question",
+        "vote": 0
+    },
+    {
+        "detail": {
+            "content": "Monday (12/04): 3:00 pm - 5:00 pm (Science and Engineering Library Room 209)\n\nWednesday (12/06): 8:00 pm - 10:00 pm (Science and Engineering Library Room 209) (Final OHs)",
+            "subject": "Yude&#39;s OHs"
+        },
+        "folders": [
+            "logistics"
+        ],
+        "id": "lly8jbp0bfc462",
+        "id_c": 33,
+        "time": "2023-08-30T21:14:23Z",
+        "type": "note",
+        "vote": 0
+    },
+    {
+        "answers": [
+            {
+                "content": "Yes, you are correct. These are the typos in Lab2 instructions. Please use 10.0.x.0/24 instead.",
+                "type": "i_answer",
+                "vote": 1
+            }
+        ],
+        "detail": {
+            "content": "Hi TA and class,where is the subnet 16.0.1.0/24 and 16.0.2.0/24? should they be 10.0.1.0/24 and 10.0.2.0/24? Because we only created 4 subnet 10.0.1.0/24 to 10.0.4.0/24, there are no 16.0.1.0/24.",
+            "subject": "ec2 console launch instance"
+        },
+        "folders": [
+            "hw2"
+        ],
+        "id": "llyaabpv34p5y7",
+        "id_c": 34,
+        "time": "2023-08-30T22:03:22Z",
+        "type": "question",
+        "vote": 1
+    },
+    {
+        "answers": [
+            {
+                "content": "No.",
+                "type": "i_answer",
+                "vote": 0
+            }
+        ],
+        "detail": {
+            "content": "As this lab does not require us to write any code, do we have to submit a README or source code?",
+            "subject": "Lab2 Code Submission"
+        },
+        "folders": [
+            "hw2"
+        ],
+        "id": "llym35bqx3k49c",
+        "id_c": 35,
+        "time": "2023-08-31T03:33:43Z",
+        "type": "question",
+        "vote": 0
+    },
+    {
+        "answers": [
+            {
+                "content": "You may try directly copying the ssh command from the aws ec2 instance webpage to make sure your command is correct.",
+                "type": "i_answer",
+                "vote": 0
+            }
+        ],
+        "detail": {
+            "content": "Hi class,did anyone meet this problem when use ssh to connect instance before ping ip? Thanks.",
+            "subject": "use ssh to connect instance with key pair fail"
+        },
+        "folders": [
+            "hw2"
+        ],
+        "id": "llyp3iwqb3g49a",
+        "id_c": 36,
+        "time": "2023-08-31T04:57:59Z",
+        "type": "question",
+        "vote": 0
+    },
+    {
+        "answers": [
+            {
+                "content": "Can you provide more information? First, you should test whether you can ping this IP.",
+                "type": "i_answer",
+                "vote": 0
+            }
+        ],
+        "detail": {
+            "content": "Hi Class,I have create all the instances needed for lab2 and have use ssh to connect to the vyos instance which works well on my computer. However, when I tried to use ssh to connect to the other ubuntu instance, it will show error: \"ssh: connect to host ip port 22: Connection timed out\". I have checked the security rules and the routes of the route table which should be fine. But for ubuntu instance I still cannot connect them using ssh. What should I do to deal with this problem?",
+            "subject": "Failed when using ssh to connect to instances"
+        },
+        "folders": [
+            "hw2"
+        ],
+        "id": "llzd5thrbqv6an",
+        "id_c": 37,
+        "time": "2023-08-31T16:11:37Z",
+        "type": "question",
+        "vote": 0
+    },
+    {
+        "answers": [
+            {
+                "content": "dhclient is a command to configure dhcp",
+                "type": "i_answer",
+                "vote": 0
+            }
+        ],
+        "detail": {
+            "content": "What is a dhclient in the following question: \"What can be used in vyos Vm to start dhclient in Vyos VM?\"",
+            "subject": "Lab 2 Typo in Question"
+        },
+        "folders": [
+            "hw2"
+        ],
+        "id": "llzw9hpgtav51i",
+        "id_c": 38,
+        "time": "2023-09-01T01:06:21Z",
+        "type": "question",
+        "vote": 0
+    },
+    {
+        "answers": [
+            {
+                "content": "Here are a few suggestions:1. You should check if the router table of your VPC is set to \"main\" (create a new route table, adding 0.0.0.0, and in \"actions\", click set main route table).2. If you change your configuration anytime, you might need to try re-binding the elastic IP to another n/i on vyOS.3. If you want to ssh vyOS, you should use \"vyos\" as the username instead of \"root\" (e.g., ssh -i *.perm vyos@x.x.x.x).",
+                "type": "i_answer",
+                "vote": 1
+            }
+        ],
+        "detail": {
+            "content": "Hi everyone,I am trying to set elastic ip for client/server/vyos. For Ubuntu, it works. I can ping the ip and use ssh connection. However, when I try to do the same for vyos, it doesn't work.I use the same security rule , so I think it is not the problem. I can also see the public ip I set in instance's detail. So I am just wondering is there some special settings for vyos when trying to ping its ip and get ssh connection? Thanks.",
+            "subject": "Elastic IP for vyos"
+        },
+        "folders": [
+            "hw2"
+        ],
+        "id": "lm02i9je6jd5mi",
+        "id_c": 39,
+        "time": "2023-09-01T04:01:08Z",
+        "type": "question",
+        "vote": 0
+    },
+    {
+        "answers": [
+            {
+                "content": "Here are a few suggestions:1. You should check if the router table of your VPC is set to \"main\" (create a new route table, adding 0.0.0.0, and in \"actions\", click set main route table).2. If you change your configuration anytime, you might need to try re-binding the elastic IP to another n/i on vyOS.3. If you want to ssh vyOS, you should use \"vyos\" as the username instead of \"root\" (e.g., ssh -i *.permvyos@x.x.x.x).4. You do not need to set the statical/primary IP when you create your network interface.",
+                "type": "i_answer",
+                "vote": 0
+            }
+        ],
+        "detail": {
+            "content": "Hey class,I have been trying to get my elastic IP address to work on eth1 for my ubuntu server and client VMs. I've been able to associate the elastic IP with eth0 and SSH to it from there. I then statically assigned eth1 the local IP address given by the AWS instance. However, when I associate the the elastic IP with eth1 I am not able to ping or SSH it. Do I have to edit the routing/gateway for eth1? Has anyone else ran into a similar issue?",
+            "subject": "Can&#39;t ping/ssh eth1"
+        },
+        "folders": [
+            "hw2"
+        ],
+        "id": "lm08gautqew3vb",
+        "id_c": 40,
+        "time": "2023-09-01T06:47:34Z",
+        "type": "question",
+        "vote": 0
+    },
+    {
+        "detail": {
+            "content": "Dear all,\n\nIt appears that many of you are experiencing connectivity issues with instances deployed on AWS. As you may have already guessed, any misconfiguration within the series of complex settings from the creation of your remote instances to the ssh can lead to connection failures. Here are some potential reasons I've identified, including issues that previous students encountered during my office hours, which I hope will assist you:\n\n*   Ensure that you are using Ubuntu 20 and the VyOS rolling version (I used rolling 1.3, but version 1.3.3 should work as well).\n    \n*   Verify that your VPC's route tables are set to \"main\" and the target is set to \"any (0.0.0.0/0)\"\n    \n*   Check if your security rules allow TCP requests from any network.\n    \n*   Review the network (subnet) topology to ensure that each instance is configured correctly.\n    \n*   Confirm whether the Elastic IP is correctly associated with the intended interface.\n    \n*   Double-check your SSH key and the connection method (use the connection command copied from the \"Connect\" page on the website).\n    \n*   **If you suspect that you cannot connect to the remote host due to issues with the remote operating system, there's a way to confirm your suspicion. Instead of using an Elastic IP, assign a public IP directly to a specific port when creating the EC2 instance, and then check if you can SSH/ping into it. If you can, it suggests that the issue is not related to the system.**\n    \n*   **If you cannot SSH into the software router using a public IP, you can try connecting to the software router (10.0.2.x?) using an internal SSH connection from either the client or server side to troubleshoot your connectivity issues. For example, if you cannot ssh vyos@PublicIP from your laptop, then try ssh vyos@PrivateIP from client or server using nested ssh.**\n    \n\nI appreciate your persistence so far. In the first week, we familiarized ourselves with using local virtual machines to simulate network communication with the help of a Hypervisor. This week, we are attempting to deploy the core elements of Experiment 1 onto AWS. AWS's EC2 is an excellent and typical example of Infrastructure as a Service (IaaS) in cloud computing (EE555 will cover related theories). Although we are essentially doing the same thing in these two experiments, the AWS configuration introduces various miscellaneous issues (perhaps the AWS internal software router is similar to VyOS). I'm sorry that I cannot individually review and debug for each person, but all I can do is speculate on potential issues, and I apologize for that. You are encouraged to check your settings with each other.\n\nDue to these challenges, personally, I prefer Oracle Cloud, which is both free and user-friendly. It lacks many features I rarely use and is easier to configure. However, large companies are primarily using AWS now, so perhaps familiarity with AWS is more beneficial for job prospects? In the first two experiments, we learned how to configure virtual machines proficiently (maybe that's all we did?). In the upcoming experiments, we will make the most of them, as AWS can provide much more computational power than local setups. This will allow us to embark on more meaningful projects, with fewer of the miscellaneous issues we encountered in the first two experiments.",
+            "subject": "Second Week Announcement"
+        },
+        "folders": [
+            "hw2"
+        ],
+        "id": "lm0cvqmecq06rz",
+        "id_c": 41,
+        "time": "2023-09-01T08:51:33Z",
+        "type": "note",
+        "vote": 1
+    },
+    {
+        "answers": [
+            {
+                "content": "Try vyos@ instead of root@ may help?",
+                "type": "i_answer",
+                "vote": 0
+            }
+        ],
+        "detail": {
+            "content": "Hi Yude,When I use ssh to connect vyos system from host, this error message pops up:Where I have make sure the private key is correct because I use the same for client and server, and I am not sure why this happened.However, I find another way to connect to it by using putty. Since we all know the default usrname and password of vyos system is \"vyos\". I just wonder am I going to be deduct points if I continue my lab by using putty remote login.Thank you,Xiaofeng",
+            "subject": "Private key error for vyos system and alternative solution"
+        },
+        "folders": [
+            "hw2"
+        ],
+        "id": "lm0xjoeicsx43k",
+        "id_c": 42,
+        "time": "2023-09-01T18:30:02Z",
+        "type": "question",
+        "vote": 0
+    },
+    {
+        "answers": [
+            {
+                "content": "Yes, you can add another submission.",
+                "type": "i_answer",
+                "vote": 1
+            }
+        ],
+        "detail": {
+            "content": "I found some mistakes in my previous submissions, can I resubmit it? If so, is there any limitation on the submission time?\n\nThank you for answering.",
+            "subject": "Can we submit multiple times for the assignment?"
+        },
+        "folders": [
+            "hw2"
+        ],
+        "id": "lm1juwrvid05dx",
+        "id_c": 43,
+        "time": "2023-09-02T04:54:38Z",
+        "type": "question",
+        "vote": 0
+    },
+    {
+        "answers": [
+            {
+                "content": "I wasn't able to connect to the router with everything configured correctly. Sometimes shutting down the instance and starting it again helps",
+                "type": "s_answer",
+                "vote": 2
+            },
+            {
+                "content": "And wait for some time after the instances are up.",
+                "type": "i_answer",
+                "vote": 0
+            }
+        ],
+        "detail": {
+            "content": "Dear instructors and class,I can't ping/SSH router and client but can SSH vyos server.if I do ping, it showsRequest timeout for icmp_seq 0if I do SSH, it showsssh: connect to host 35.160.243.240 port 22: Operation timed outHere is my configurationsame security rules for client, server, and vyos router.Ubuntu 20 and the VyOS rolling versionroute table is set to \u201cmain\u201d and the target is set to \u201cany (0.0.0.0/0)\u201dcorrect topologythe Elastic IP is correctly associated with the intended interface.no problem with SSH key because I can SSH vyos routerthe connection method is copied from the \u201cConnect\u201d page, like \"ssh -I \"./Desktop/lab2.pem\" ubuntu@35.160.243.240\"I've stuck for the SSH problem for several hours and appreciate your help!",
+            "subject": "can&#39;t SSH server and client"
+        },
+        "folders": [
+            "hw2"
+        ],
+        "id": "lm1p9vfwwky3jq",
+        "id_c": 44,
+        "time": "2023-09-02T07:26:14Z",
+        "type": "question",
+        "vote": 0
+    },
+    {
+        "answers": [],
+        "detail": {
+            "content": "Hey guys,I just found something interesting about iperf3. when I change the bandwidth iperf3 -u -c 10.0.1.31 -b 1000000 to iperf3 -u -c 10.0.1.31 -b 1000, the outcome become 0 bits/sec. I thought that would due to the way iperf3 measure bandwidth between client and server. If the bandwidth is too small, client would not be able to send packet to the server. So the result turned out to be 0.In addition, if we add delay to the interface, there will be smaller speed. That is because additional delay on the interface speed down returning bandwidth.\n\nIf there is anything wrong above, please correct me.",
+            "subject": "observations about iperf3"
+        },
+        "folders": [
+            "hw2"
+        ],
+        "id": "lm2g9rzp6qi3o9",
+        "id_c": 45,
+        "time": "2023-09-02T20:01:59Z",
+        "type": "question",
+        "vote": 0
+    },
+    {
+        "answers": [
+            {
+                "content": "This is the one we used before in this class:\n\nSee **[here](https://www.mouser.com/ProductDetail/MultiTech/MTMDK-XDOT-NA1-A00?qs=7MVldsJ5Uaz6qXKUrPbj1A%3D%3D&countryCode=US&currencyCode=USD)**.\n\nBut the professor also told me very recently that he has updated the whole design and I thus am not sure if we will use something other than that this year. Anyway, it's not urgent as we will not start to use it until week 10, probably. You could buy it later after some weeks.",
+                "type": "i_answer",
+                "vote": 0
+            }
+        ],
+        "detail": {
+            "content": "I know professor had mentioned a board that we needed to buy for the class but had said the the slides were the wrong version. What exact version do we need to buy of the xdot kit?",
+            "subject": "XDot Version"
+        },
+        "folders": [
+            "project"
+        ],
+        "id": "lm2ue51qty91c7",
+        "id_c": 46,
+        "time": "2023-09-03T02:37:17Z",
+        "type": "question",
+        "vote": 0
+    },
+    {
+        "answers": [
+            {
+                "content": "The assignment on blackboard has an incorrect due date of Sept 1, so anything submitted today was marked as late. @31 The TA says that Sept 2 is the actual due date so it should be fine,",
+                "type": "s_answer",
+                "vote": 1
+            }
+        ],
+        "detail": {
+            "content": "Hi Prof/TAs,I submitted the Lab2 on time, but it says late submission, can you please help.Thanks!Mithun,USC ID: 2862112962.",
+            "subject": "Submitted the Lab2 on time, but it says late submission."
+        },
+        "folders": [
+            "hw2"
+        ],
+        "id": "lm33x99sjfy17",
+        "id_c": 47,
+        "time": "2023-09-03T07:04:06Z",
+        "type": "question",
+        "vote": 0
+    },
+    {
+        "answers": [
+            {
+                "content": "Yes.",
+                "type": "i_answer",
+                "vote": 1
+            }
+        ],
+        "detail": {
+            "content": "Hi,I would like to know if the due dates of the lab 2 demo video and reading assignment have been shifted to Tuesday and Wednesday instead of Monday and Tuesday as I see it on Blackboard.Thank you!",
+            "subject": "Lab2 Demo video and Reading Assignment due date confirmation"
+        },
+        "folders": [
+            "hw2"
+        ],
+        "id": "lm5i2cb8ysh6qs",
+        "id_c": 48,
+        "time": "2023-09-04T23:15:30Z",
+        "type": "question",
+        "vote": 4
+    },
+    {
+        "answers": [
+            {
+                "content": "No video demo needed. This is a rather easy lab that will get you prepared for Lab4.\n\nNo need to submit any video for Lab3 on Blackboard.",
+                "type": "i_answer",
+                "vote": 1
+            }
+        ],
+        "detail": {
+            "content": "The lab instructions say that there is no video for this lab, but there is a assignment in blackboard for a video. What should we turn in for that video assignment?",
+            "subject": "Lab 3 Video Demo"
+        },
+        "folders": [
+            "hw3"
+        ],
+        "id": "lm80tgm65dj4u6",
+        "id_c": 49,
+        "time": "2023-09-06T17:36:01Z",
+        "type": "question",
+        "vote": 1
+    },
+    {
+        "answers": [
+            {
+                "content": "Based on your context, you use 'tc' to put traffic limitations on the router, which will only limit the incoming data rate of the router. But you are measuring the sending rate on your client side, which will still be sending data at full speed (UDP mode).",
+                "type": "i_answer",
+                "vote": 0
+            }
+        ],
+        "detail": {
+            "content": "The measurement is tested under the condition where both interfaces of the router have been added a 10Mbps link rate limitation.\u00a0 The result of TCP test through iperf3 seems to measure the bandwidth correctly, which is approximately 10 Mbps.\u00a0 However, the measurement of UDP is 1.7 Gbps, which is similar as the maximum bandwidth when there's no changes made to the interface.I am wondering whether the wrong measurement of bandwidth has anything to do with the parameter \"-u 10G\"?\u00a0 How can iperf3 tool accurately measure the real bandwidth in UDP mode ?",
+            "subject": "inaccurate max Bandwidth measurement when using iperf3 UDP mode"
+        },
+        "folders": [
+            "hw3"
+        ],
+        "id": "lm8sgdh3su83fr",
+        "id_c": 51,
+        "time": "2023-09-07T06:29:40Z",
+        "type": "question",
+        "vote": 0
+    },
+    {
+        "answers": [
+            {
+                "content": "Please put as much as you can in your slides and video. Taking screenshots is enough.",
+                "type": "i_answer",
+                "vote": 0
+            }
+        ],
+        "detail": {
+            "content": "For submitting the final project materials?for the node-red, can we export the entire flow in json format?for the AWS lambda function I think we can copy them to a py file, but what about the other AWS components such as the API Gateway and the DynamoDB setup? I am not sure how should we explain them in the readme file",
+            "subject": "How to submit the final project materials"
+        },
+        "folders": [
+            "project"
+        ],
+        "id": "lpz35egzkya3la",
+        "id_c": 131,
+        "time": "2023-12-10T06:10:11Z",
+        "type": "question",
+        "vote": 0
+    },
+    {
+        "answers": [
+            {
+                "content": "The building should be PHE, but Professor Goodney seems not in his office this morning. You can try to return to CS front desk at SAL. But for returning at SAL, you may need to contact Professor Goodney first.",
+                "type": "s_answer",
+                "vote": 1
+            }
+        ],
+        "detail": {
+            "content": "Hi, I'm wondering if this is the correct place to return the gateway?Or if I want to return the gateway to the University, where do I go to?Much appreciated!",
+            "subject": "Correct room to return the gateway"
+        },
+        "folders": [
+            "logistics"
+        ],
+        "id": "lq1kdtgpzvg55i",
+        "id_c": 132,
+        "time": "2023-12-11T23:48:09Z",
+        "type": "question",
+        "vote": 0
+    },
+    {
+        "detail": {
+            "content": "Dear all,\n\nAll of your submissions of labs, assignments and final projects have been graded on Blackboard. Please let me know if you have any concern as soon as possible before your final letter grades can be posted. Thanks!\n\nBest regards,Yude",
+            "subject": "Grades Posted"
+        },
+        "folders": [
+            "other"
+        ],
+        "id": "lq7o63i4z2o4he",
+        "id_c": 133,
+        "time": "2023-12-16T06:20:45Z",
+        "type": "note",
+        "vote": 1
+    },
+    {
+        "detail": {
+            "content": "Dear all,\n\nJust FYI, if you have taken EE457/EE533 or relevant classes before, or if you are interested in compiler or applications, you could be interested in joining the USC **acorn** team that is hiring students. Here is their website: [https://sites.usc.edu/acorn-research/join/](https://sites.usc.edu/acorn-research/join/)\n\nBest regards,Yude",
+            "subject": "DR opportunities at USC-acorn"
+        },
+        "folders": [
+            "other"
+        ],
+        "id": "lq7rs399ptn2i0",
+        "id_c": 134,
+        "time": "2023-12-16T08:01:50Z",
+        "type": "note",
+        "vote": 0
+    },
+    {
+        "detail": {
+            "content": "Dear all,\n\nAll the final projects grades are withdrawn. Please stay tuned for regrading. Thanks.\n\nBest regards,Yude",
+            "subject": "Final Project Ungraded"
+        },
+        "folders": [
+            "other"
+        ],
+        "id": "lq7twqt4y482gp",
+        "id_c": 135,
+        "time": "2023-12-16T09:01:26Z",
+        "type": "note",
+        "vote": 1
+    },
+    {
+        "answers": [
+            {
+                "content": "Wonderful!!!",
+                "type": "s_answer",
+                "vote": 1
+            }
+        ],
+        "detail": {
+            "content": "Mario is here for testing.",
+            "subject": "[DR test] hello"
+        },
+        "folders": [
+            "hw1"
+        ],
+        "id": "lskrqpvx14h720",
+        "id_c": 137,
+        "time": "2024-02-13T19:41:11Z",
+        "type": "question",
+        "vote": 2
+    },
+    {
+        "answers": [
+            {
+                "content": "-",
+                "type": "s_answer",
+                "vote": 1
+            }
+        ],
+        "detail": {
+            "content": "What is a difference between tcp and udp",
+            "subject": "What is a difference between tcp and udp"
+        },
+        "folders": [
+            "hw1"
+        ],
+        "id": "lt4qomjze361d",
+        "id_c": 143,
+        "time": "2024-02-27T19:06:57Z",
+        "type": "question",
+        "vote": 1
+    },
+    {
+        "answers": [
+            {
+                "content": "-",
+                "type": "s_answer",
+                "vote": 0
+            }
+        ],
+        "detail": {
+            "content": "",
+            "subject": "Test"
+        },
+        "folders": [
+            "hw5"
+        ],
+        "id": "lusk9u87h8u2vp",
+        "id_c": 150,
+        "time": "2024-04-09T15:53:40Z",
+        "type": "question",
+        "vote": 0
+    }
+]
